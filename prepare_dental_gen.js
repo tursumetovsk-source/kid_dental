@@ -114,6 +114,8 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   [data-framer-name="Hero Screens"],
   [data-framer-name="Intro"] img,
   [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
+  [data-framer-name="CTA"],
+  [data-framer-name="Footer"] [data-framer-name="Bottom"] { visibility: hidden !important; pointer-events: none !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Left"] { gap: clamp(20px, 1.6vw, 36px) !important; }
   [data-framer-name="Intro"] *,
   [data-framer-name="Our Story"] *,
@@ -125,6 +127,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     min-width: 220px;
   }
   .dg-simple-cta { width: 220px !important; }
+  body:has(.dg-floating-actions) .dg-simple-cta { visibility: hidden !important; pointer-events: none !important; }
   .dg-simple-cta [data-framer-name="Button Shape"] > :not(.dg-button-label) { display: none !important; }
   .dg-button-label {
     position: relative;
@@ -208,7 +211,74 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   .dg-contact__actions { display: grid; gap: 14px; }
   .dg-contact a:last-child { background: #e9dcff; }
 
+  .dg-floating-actions {
+    position: fixed;
+    z-index: 2147483000;
+    left: max(16px, env(safe-area-inset-left));
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "social record contact";
+    align-items: end;
+    gap: 14px;
+    pointer-events: none;
+    isolation: isolate;
+    transition: opacity .2s ease;
+  }
+  body:has(.framer-6mir23-container [data-framer-name^="Default"]) .dg-floating-actions { opacity: 0; }
+  .dg-floating-actions a {
+    pointer-events: auto;
+    color: #2f2076;
+    text-decoration: none;
+    border: 2px solid #2f2076;
+    box-shadow: -4px 4px 0 #2f2076;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .dg-floating-actions a:hover { transform: translate(1px, -1px); box-shadow: -5px 5px 0 #2f2076; }
+  .dg-floating-actions a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .dg-floating-socials { grid-area: social; justify-self: start; display: flex; gap: 10px; }
+  .dg-floating-social { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 999px; }
+  .dg-floating-social:first-child { background: #ffe0ed; }
+  .dg-floating-social:last-child { background: #dff4ff; }
+  .dg-floating-social svg { width: 22px; height: 22px; }
+  .dg-floating-record {
+    grid-area: record;
+    justify-self: center;
+    width: 228px;
+    min-height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: #ffe59a;
+    font: 800 17px/1 "Montserrat", "Rubik", sans-serif;
+    letter-spacing: .01em;
+  }
+  .dg-floating-contact {
+    grid-area: contact;
+    justify-self: end;
+    min-width: 132px;
+    min-height: 50px;
+    display: grid;
+    place-items: center;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: #ffe59a;
+    font: 700 14px/1 "Montserrat", "Rubik", sans-serif;
+  }
+
   @media (max-width: 809px) {
+    .dg-floating-actions {
+      left: max(12px, env(safe-area-inset-left));
+      right: max(12px, env(safe-area-inset-right));
+      bottom: max(12px, env(safe-area-inset-bottom));
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "record record" "social contact";
+      row-gap: 12px;
+    }
+    .dg-floating-record { width: min(228px, calc(100vw - 32px)); }
+    .dg-floating-social { width: 46px; height: 46px; }
+    .dg-floating-contact { min-width: 116px; min-height: 46px; padding: 0 18px; font-size: 13px; }
     [data-framer-name="Header Nav"] [data-framer-name="Logo"]::after { font-size: 10px; }
     .dg-programs { padding: 58px 18px 70px; }
     .dg-programs h2 { font-size: clamp(42px, 13vw, 68px); }
@@ -433,6 +503,15 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       }
     };
 
+    const addFloatingActions = () => {
+      if (document.querySelector(".dg-floating-actions")) return;
+      const actions = document.createElement("nav");
+      actions.className = "dg-floating-actions";
+      actions.setAttribute("aria-label", "Быстрые действия DENTAL GEN");
+      actions.innerHTML = '<div class="dg-floating-socials"><a class="dg-floating-social" href="https://dentalgen.pro" target="_blank" rel="noopener" aria-label="Instagram DENTAL GEN" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></a><a class="dg-floating-social" href="https://dentalgen.pro" target="_blank" rel="noopener" aria-label="TikTok DENTAL GEN" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a4.5 4.5 0 1 1-4-4.47"></path><path d="M14 4c.8 2.4 2.5 3.8 5 4"></path></svg></a></div><a class="dg-floating-record" href="tel:+79109900060">ЗАПИСАТЬСЯ</a><a class="dg-floating-contact" href="#contacts">КОНТАКТЫ</a>';
+      document.body.appendChild(actions);
+    };
+
     const apply = () => {
       for (const [name, map] of Object.entries(scopedText)) replaceTextNodes(document.querySelector('[data-framer-name="' + name + '"]'), map);
 
@@ -465,6 +544,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       rewriteImages();
       rewriteLoader();
       addLandingSections();
+      addFloatingActions();
     };
 
     let scheduled = false;
