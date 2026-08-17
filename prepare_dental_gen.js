@@ -50,6 +50,12 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   body * { cursor: default !important; }
   a, button, [role="button"] { cursor: pointer !important; }
   input, textarea { cursor: text !important; }
+  html, body, #main, [data-framer-root],
+  html body [data-framer-cursor],
+  html body [data-framer-cursor] * { cursor: auto !important; }
+  html body a, html body button, html body [role="button"],
+  html body .dg-safe-arrow { cursor: pointer !important; }
+  html body input, html body textarea { cursor: text !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"] img { opacity: 0 !important; }
   .framer-6mir23-container [data-framer-name="Logo"] img[src*="framerusercontent"] { opacity: 0 !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"]::after {
@@ -64,24 +70,41 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     text-align: center;
   }
   .framer-6mir23-container [data-framer-name="Logo"] {
+    opacity: 0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 94vw !important;
+    height: auto !important;
+    min-height: clamp(110px, 20vw, 380px) !important;
+    transform: translate(-50%, -50%) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: visible !important;
   }
   .framer-6mir23-container [data-framer-name="Logo"] > * { visibility: hidden !important; }
-  .framer-6mir23-container [data-framer-name="Logo"]::after {
+  .framer-6mir23-container::after {
     content: "DENTAL GEN";
-    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
     white-space: nowrap;
     color: #2f2076;
     font-family: "BN Dime Display Regular", "Arial Black", sans-serif;
-    font-size: clamp(64px, 17vw, 400px);
+    font-size: clamp(42px, 14vw, 360px);
     font-weight: 900;
     line-height: .78;
     letter-spacing: -.035em;
     text-align: center;
+    pointer-events: none;
+    transition: opacity .22s ease;
   }
+  .framer-6mir23-container:has([data-framer-name^="Hidden"])::after { opacity: 0; }
   [data-framer-name="App Store"] svg,
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
@@ -293,20 +316,43 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     const wireAnchors = () => {
       if (document.documentElement.dataset.dgAnchors === "ready") return;
       document.documentElement.dataset.dgAnchors = "ready";
-      document.addEventListener("click", (event) => {
+      const followAnchor = (event) => {
         const link = event.target.closest?.('a[href^="#"]');
         if (!link) return;
+        if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
         const target = document.querySelector(link.getAttribute("href"));
         if (!target) return;
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
         target.scrollIntoView({ behavior: "auto", block: "start" });
+      };
+      window.addEventListener("click", followAnchor, true);
+      window.addEventListener("pointerdown", (event) => {
+        if (!event.target.closest?.("a.dg-safe-arrow")) return;
+        followAnchor(event);
+      }, true);
+      window.addEventListener("keydown", (event) => {
+        if (!event.target.closest?.("a.dg-safe-arrow")) return;
+        followAnchor(event);
       }, true);
     };
 
     const simplifyControls = () => {
       document.body?.classList.remove("framer-cursor-none");
+      document.documentElement.style.cursor = "auto";
+      for (const element of document.querySelectorAll("[data-framer-cursor]")) {
+        element.removeAttribute("data-framer-cursor");
+      }
+      for (const link of document.querySelectorAll("a")) {
+        const href = (link.getAttribute("href") || "").trim();
+        const isArrow = Boolean(link.querySelector('[data-framer-name="Icon"] svg'));
+        if (!isArrow || (href && href !== "." && href !== "./")) continue;
+        link.setAttribute("href", "#programs");
+        link.removeAttribute("target");
+        link.classList.add("dg-safe-arrow");
+        link.setAttribute("aria-label", "Перейти к программам");
+      }
       for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
         const link = google.closest("a");
         const wrapper = link?.closest('[data-framer-name="Android"]') || link?.parentElement?.parentElement;
