@@ -1,0 +1,12 @@
+{
+  "name": "kid_dental",
+  "version": "1.0.0",
+  "description": "Maggie App website - kid_dental",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
