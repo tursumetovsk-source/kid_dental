@@ -22,6 +22,9 @@ const dictionary = [
   ['Policies', 'Политика'],
   ['JOIN', 'ВСТУПИТЬ'],
   ['REACH OUT', 'НАПИСАТЬ НАМ'],
+  ['READ MORE', 'ПОДРОБНЕЕ'],
+  ['Read More', 'Подробнее'],
+  ['Read more', 'Подробнее'],
 
   // Form Fields & Labels
   ["What's your name?", 'Как вас зовут?'],
@@ -125,7 +128,7 @@ const dictionary = [
   ['MADE BY MUMS, POWERED BY TECH, BUILT FOR REAL LIFE.', 'СОЗДАНО МАМАМИ, РАБОТАЕТ НА ТЕХНОЛОГИЯХ, ДЛЯ РЕАЛЬНОЙ ЖИЗНИ.'],
   ['made by mums, powered by tech, built for real life.', 'создано мамами, работает на технологиях, создано для реальной жизни.'],
   ["Liv Luker (left) and Eimear Colleran (right) met in 2017 at a tech startup — Liv’s a whiz with numbers, operations and finance, while Eimear’s all things marketing, brand and storytelling. Different strengths, same goal. What they share is a deep love of tech, clever apps, and finding smart solutions to everyday problems. \n\nThey entered motherhood around the same time and quickly realised: You can have it all just not at once and that's ok.\n\nBetween park hangs and late-night texts, they kept circling the same question:", "Лив Люкер (слева) и Эймир Коллеран (справа) познакомились в 2017 году в технологическом стартапе: Лив — эксперт в цифрах, операциях и финансах, а Эймир — специалист по маркетингу, брендингу и сторителлингу. Разные сильные стороны, единая цель: искренняя любовь к технологиям, удобным приложениям и простым решениям повседневных задач.\n\nОни стали мамами примерно в одно время и быстро поняли: можно успевать всё, но не сразу, и это нормально.\n\nГуляя по паркам и переписываясь по ночам, они постоянно возвращались к одному вопросу:"],
-  ['Liv Luker (left) and Eimear Colleran (right) met in 2017 at a tech startup — Liv’s a whiz with numbers, operations and finance, while Eimear’s all things marketing, brand and storytelling. Different strengths, same goal. What they share is a deep love of tech, clever apps, and finding smart solutions to everyday problems.', 'Лив Люкер (слева) и Эймир Коллеран (справа) познакомились в 2017 году в технологическом стартапе: Лив — эксперт в цифрах, операциях и финансах, а Эймир — специалист по маркетингу, брендингу и сторителлингу. Разные сильные стороны, единая цель: искренняя любовь к технологиям, удобным приложениям и простым решениям повседневных задач.'],
+  ['Liv Luker (left) and Eimear Colleran (right) met in 2017 at a tech startup — Liv’s a whiz with numbers, operations and finance, while Eimear’s all things marketing, brand and storytelling. Different strengths, same goal. What they share is a deep love of tech, clever apps, and finding smart solutions to everyday problems.', 'Лив Люкер (слева) и Эймир Коллеран (справа) познакомились в 2017 году в технологическом стартапе: Лив — эксперт в цифрах, operations и финансах, а Эймир — специалист по маркетингу, брендингу и сторителлингу. Разные сильные стороны, единая цель: искренняя любовь к технологиям, удобным приложениям и простым решениям повседневных задач.'],
   ["They entered motherhood around the same time and quickly realised: You can have it all just not at once and that's ok.", "Они стали мамами примерно в одно время и быстро поняли: можно успевать всё, но не сразу, и это нормально."],
   ['Between park hangs and late-night texts, they kept circling the same question:', 'Гуляя по паркам и переписываясь по ночам, они постоянно возвращались к одному вопросу:'],
   ['WHY IS IT SO HARD TO FIND FREE, FUN THINGS TO DO WITH KIDS?', 'ПОЧЕМУ ТАК СЛОЖНО НАЙТИ БЕСПЛАТНЫЕ И ИНТЕРЕСНЫЕ ЗАНЯТИЯ ДЛЯ ДЕТЕЙ?'],
@@ -237,7 +240,7 @@ const dictionary = [
 dictionary.sort((a, b) => b[0].length - a[0].length);
 
 const localizationBundle = `
-<!-- Russian Localization & Typography -->
+<!-- Russian Localization & Mobile Responsive Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Caveat:wght@600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
@@ -263,6 +266,65 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   font-family: 'Caveat', cursive !important;
   font-weight: 700 !important;
   font-size: 1.25em !important;
+}
+
+/* Mobile Responsiveness & Adaptive Scaling */
+@media (max-width: 809.98px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    max-width: 100% !important;
+  }
+  
+  .framer-fit-text,
+  foreignObject {
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  svg:has(foreignObject) {
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  h1, [data-framer-component-type="RichTextContainer"] h1, [data-framer-component-type="Text"] h1 {
+    font-size: clamp(22px, 6.5vw, 36px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+
+  h2, [data-framer-component-type="RichTextContainer"] h2, [data-framer-component-type="Text"] h2 {
+    font-size: clamp(18px, 5.2vw, 26px) !important;
+    line-height: 1.15 !important;
+    word-break: break-word !important;
+  }
+
+  h3, [data-framer-component-type="RichTextContainer"] h3, [data-framer-component-type="Text"] h3 {
+    font-size: clamp(15px, 4.2vw, 20px) !important;
+    line-height: 1.2 !important;
+  }
+
+  h1 span, h2 span, h3 span {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+
+  /* Form & inputs on mobile */
+  input, textarea {
+    font-size: 16px !important; /* Prevents iOS auto-zoom on input focus */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Header & Navigation buttons */
+  .framer-1a48cst, .framer-6wuhh2 {
+    touch-action: manipulation;
+  }
 }
 </style>
 <script>
@@ -394,17 +456,22 @@ for (const f of htmlFiles) {
   const p = path.join(rootDir, f);
   let html = fs.readFileSync(p, 'utf8');
 
+  // Ensure proper responsive viewport meta tag
+  if (!html.includes('viewport')) {
+    html = html.replace('<head>', '<head>\n<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">');
+  }
+
   // Set lang="ru"
   html = html.replace(/<html[^>]*>/, '<html lang="ru">');
 
   // Strip previous localization tags if any
   html = html.replace(/<!-- Russian Localization[\s\S]*?<\/script>\n?/gi, '');
 
-  // Inject updated localization
+  // Inject updated localization & mobile responsiveness
   html = html.replace('</head>', localizationBundle + '\n</head>');
 
   fs.writeFileSync(p, html);
-  console.log('Updated HTML:', f);
+  console.log('Updated HTML with mobile responsiveness:', f);
 }
 
-console.log('All files updated with complete Russian localization!');
+console.log('All files updated with complete mobile adaptation!');
