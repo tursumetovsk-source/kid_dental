@@ -27,6 +27,9 @@ const sourceReplacements = [
 
 for (const [from, to] of sourceReplacements) html = html.split(from).join(to);
 html = html.replace(/\s*<!-- Start of HubSpot Embed Code -->[\s\S]*?<!-- End of HubSpot Embed Code -->\s*/g, "\n");
+if (!html.includes('rel="preload" href="https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2"')) {
+  html = html.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n\t<link rel="preload" href="https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2" as="font" type="font/woff2" crossorigin>');
+}
 
 if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   const enhancement = String.raw`
@@ -58,6 +61,25 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     color: #2f2076;
     font: 900 12px/1 "Montserrat", "Rubik", sans-serif;
     letter-spacing: -0.1em;
+    text-align: center;
+  }
+  .framer-6mir23-container [data-framer-name="Logo"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  .framer-6mir23-container [data-framer-name="Logo"] > * { visibility: hidden !important; }
+  .framer-6mir23-container [data-framer-name="Logo"]::after {
+    content: "DENTAL GEN";
+    display: block;
+    white-space: nowrap;
+    color: #2f2076;
+    font-family: "BN Dime Display Regular", "Arial Black", sans-serif;
+    font-size: clamp(64px, 17vw, 400px);
+    font-weight: 900;
+    line-height: .78;
+    letter-spacing: -.035em;
     text-align: center;
   }
   [data-framer-name="App Store"] svg,

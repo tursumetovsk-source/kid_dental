@@ -39,8 +39,28 @@
 			content-visibility: auto;
 			contain-intrinsic-size: auto 900px;
 		}
+		.framer-6mir23-container [data-framer-name="Logo"] {
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			overflow: visible !important;
+		}
+		.framer-6mir23-container [data-framer-name="Logo"] > * { visibility: hidden !important; }
+		.framer-6mir23-container [data-framer-name="Logo"]::after {
+			content: "DENTAL GEN";
+			display: block;
+			white-space: nowrap;
+			color: #2f2076;
+			font-family: "BN Dime Display Regular", "Arial Black", sans-serif;
+			font-size: clamp(64px, 17vw, 400px);
+			font-weight: 900;
+			line-height: .78;
+			letter-spacing: -.035em;
+			text-align: center;
+		}
 	</style>
 	<meta charset="utf-8">
+	<link rel="preload" href="https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2" as="font" type="font/woff2" crossorigin>
 	
 	
 	<script>try{if(localStorage.get("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
@@ -411,6 +431,25 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     color: #2f2076;
     font: 900 12px/1 "Montserrat", "Rubik", sans-serif;
     letter-spacing: -0.1em;
+    text-align: center;
+  }
+  .framer-6mir23-container [data-framer-name="Logo"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  .framer-6mir23-container [data-framer-name="Logo"] > * { visibility: hidden !important; }
+  .framer-6mir23-container [data-framer-name="Logo"]::after {
+    content: "DENTAL GEN";
+    display: block;
+    white-space: nowrap;
+    color: #2f2076;
+    font-family: "BN Dime Display Regular", "Arial Black", sans-serif;
+    font-size: clamp(64px, 17vw, 400px);
+    font-weight: 900;
+    line-height: .78;
+    letter-spacing: -.035em;
     text-align: center;
   }
   [data-framer-name="App Store"] svg,
