@@ -48,6 +48,7 @@ const dictionary = [
   ['We’ll get back to you faster than a toddler can spill a drink.', 'Мы ответим быстрее, чем малыш успеет пролить сок.'],
 
   // Home Hero & Banner
+  ['ВАШ POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.', 'ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.'],
   ['meet maggie', 'знакомьтесь с maggie'],
   ['Meet Maggie', 'Знакомьтесь с Maggie'],
   ['YOUR POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.', 'ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.'],
@@ -291,7 +292,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
 
   h1, [data-framer-component-type="RichTextContainer"] h1, [data-framer-component-type="Text"] h1 {
-    font-size: clamp(22px, 6.5vw, 36px) !important;
+    font-size: clamp(20px, 5.8vw, 32px) !important;
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
     text-align: center !important;
@@ -299,13 +300,13 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
 
   h2, [data-framer-component-type="RichTextContainer"] h2, [data-framer-component-type="Text"] h2 {
-    font-size: clamp(18px, 5.2vw, 26px) !important;
+    font-size: clamp(17px, 4.8vw, 24px) !important;
     line-height: 1.15 !important;
     word-break: break-word !important;
   }
 
   h3, [data-framer-component-type="RichTextContainer"] h3, [data-framer-component-type="Text"] h3 {
-    font-size: clamp(15px, 4.2vw, 20px) !important;
+    font-size: clamp(14px, 3.8vw, 18px) !important;
     line-height: 1.2 !important;
   }
 
