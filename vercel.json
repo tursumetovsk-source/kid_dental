@@ -28,6 +28,15 @@
           "value": "1; mode=block"
         }
       ]
+    },
+    {
+      "source": "/kids-game",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     }
   ]
 }
