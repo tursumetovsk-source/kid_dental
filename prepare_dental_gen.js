@@ -91,6 +91,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   [data-framer-name="Hero Screens"],
   [data-framer-name="Intro"] img,
   [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
+  [data-framer-name="Header Nav"] [data-framer-name="Left"] { gap: clamp(20px, 1.6vw, 36px) !important; }
   [data-framer-name="Intro"] *,
   [data-framer-name="Our Story"] *,
   [data-framer-name^="Feature"] * { will-change: auto !important; }
