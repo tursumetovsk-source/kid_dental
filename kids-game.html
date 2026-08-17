@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Что любит зубик?</title>
+  <style>
+    @font-face{font-family:"Dime";src:url("https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2") format("woff2");font-display:swap}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#dff4ff;color:#2f2076;font-family:"Dime","Arial Rounded MT Bold",Arial,sans-serif}
+    body{padding:clamp(74px,8vw,118px) 24px clamp(92px,9vw,132px)}
+    .shell{width:min(1120px,100%);margin:auto}
+    .intro{max-width:860px;margin:0 auto 46px;text-align:center}
+    .eyebrow{margin:0 0 12px;color:#7048c4;font-size:20px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:0;font-size:clamp(48px,7vw,88px);font-weight:900;line-height:.9;letter-spacing:-.045em}
+    .lead{max-width:720px;margin:24px auto 0;font-size:clamp(20px,2.2vw,28px);font-weight:700;line-height:1.35}
+    .panel{padding:clamp(24px,4vw,48px);border:3px solid #2f2076;border-radius:38px;background:#fffdf5;box-shadow:-8px 9px 0 #2f2076}
+    .top{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-bottom:34px}
+    .tooth{width:82px;height:82px;display:grid;place-items:center;border-radius:26px;background:#ffe59a;font-size:48px}
+    .prompt{margin:0;font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.12}
+    .score{min-width:112px;padding:14px 18px;border-radius:999px;background:#e9dcff;font-size:19px;font-weight:900;text-align:center}
+    .score span{display:none}.score .n0{display:inline}
+    .panel:has(#brush:checked):not(:has(#water:checked)):not(:has(#apple:checked)) .n1,.panel:has(#water:checked):not(:has(#brush:checked)):not(:has(#apple:checked)) .n1,.panel:has(#apple:checked):not(:has(#brush:checked)):not(:has(#water:checked)) .n1{display:inline}
+    .panel:has(#brush:checked):has(#water:checked):not(:has(#apple:checked)) .n2,.panel:has(#brush:checked):has(#apple:checked):not(:has(#water:checked)) .n2,.panel:has(#water:checked):has(#apple:checked):not(:has(#brush:checked)) .n2{display:inline}
+    .panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .n3{display:inline}.panel:has(.good:checked) .n0{display:none}
+    .progress{height:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:30px;overflow:hidden;border:2px solid #2f2076;border-radius:999px;background:#fff}
+    .progress span{background:transparent;transition:background-color .18s ease}.panel:has(#brush:checked) .progress span:nth-child(1),.panel:has(#water:checked) .progress span:nth-child(2),.panel:has(#apple:checked) .progress span:nth-child(3){background:#7048c4}
+    .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .choice{position:relative;min-height:142px;display:grid;grid-template-rows:auto auto;place-items:center;gap:8px;padding:18px 14px;border:2px solid #2f2076;border-radius:25px;background:#fff;box-shadow:-4px 5px 0 #2f2076;cursor:pointer;transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease}
+    .choice:hover{transform:translateY(-2px);box-shadow:-5px 7px 0 #2f2076}.choice:focus-within{outline:4px solid #ffbf35;outline-offset:3px}
+    .choice input{position:absolute;inset:0;z-index:2;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+    .choice span:nth-of-type(1){font-size:46px;line-height:1}.choice span:nth-of-type(2){font-size:19px;font-weight:900;line-height:1.12;text-align:center}
+    .choice:has(.good:checked){border-color:#278a4b;background:#c8f3d0;color:#185f34;box-shadow:-4px 5px 0 #278a4b}.choice:has(.bad:checked){border-color:#e84d72;background:#ffe0ed;color:#8c2441;box-shadow:-4px 5px 0 #e84d72}
+    .feedback{min-height:32px;margin:28px 0 0;font-size:22px;font-weight:900;line-height:1.35;text-align:center}.feedback span{display:none}.feedback .start{display:inline}.panel:has(.good:checked) .start{display:none}.panel:has(.good:checked) .right{display:inline}.panel:has(.bad:checked) .start,.panel:has(.bad:checked) .right{display:none}.panel:has(.bad:checked) .wrong{display:inline}
+    .finish{display:none;margin-top:24px;padding:24px;border-radius:26px;background:#fff0a8;text-align:center}.panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .finish{display:block}.panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .feedback{display:none}
+    .finish strong{display:block;margin-bottom:8px;font-size:30px}.finish p{margin:0;font-size:19px;font-weight:700}.reset{margin-top:20px;padding:15px 24px;border:2px solid #2f2076;border-radius:999px;background:#ffe59a;color:#2f2076;box-shadow:-3px 4px 0 #2f2076;font:900 17px/1 "Dime",Arial,sans-serif;cursor:pointer}
+    @media(max-width:809px){body{padding:58px 16px 100px}h1{font-size:clamp(46px,13vw,64px)}.intro{margin-bottom:32px}.panel{padding:22px 16px 26px;border-radius:28px;box-shadow:-5px 6px 0 #2f2076}.top{grid-template-columns:58px minmax(0,1fr);gap:12px;margin-bottom:22px}.tooth{width:58px;height:58px;border-radius:18px;font-size:34px}.prompt{font-size:23px}.score{grid-column:1/-1;width:max-content;min-width:0;justify-self:center;padding:10px 16px;font-size:17px}.progress{margin-bottom:22px}.choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choice{min-height:126px;padding:15px 10px;border-radius:21px}.choice span:nth-of-type(1){font-size:39px}.choice span:nth-of-type(2){font-size:16px}.feedback{margin-top:22px;font-size:18px}.finish{padding:20px 16px}.finish strong{font-size:25px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="intro"><p class="eyebrow">Мини-игра для детей</p><h1>Что любит зубик?</h1><p class="lead">Найди три вещи, которые помогают зубам оставаться крепкими и здоровыми.</p></header>
+    <form class="panel">
+      <div class="top"><div class="tooth" aria-hidden="true">🦷</div><p class="prompt">Выбирай полезные привычки</p><div class="score">Найдено: <span class="n0">0</span><span class="n1">1</span><span class="n2">2</span><span class="n3">3</span> / 3</div></div>
+      <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="choices">
+        <label class="choice"><input class="good" id="brush" type="checkbox"><span aria-hidden="true">🪥</span><span>Чистить зубы</span></label>
+        <label class="choice"><input class="bad" id="candy" type="checkbox"><span aria-hidden="true">🍭</span><span>Есть много леденцов</span></label>
+        <label class="choice"><input class="good" id="water" type="checkbox"><span aria-hidden="true">💧</span><span>Пить воду</span></label>
+        <label class="choice"><input class="bad" id="soda" type="checkbox"><span aria-hidden="true">🥤</span><span>Часто пить газировку</span></label>
+        <label class="choice"><input class="good" id="apple" type="checkbox"><span aria-hidden="true">🍎</span><span>Есть яблоки</span></label>
+        <label class="choice"><input class="bad" id="night" type="checkbox"><span aria-hidden="true">🌙</span><span>Не чистить зубы на ночь</span></label>
+      </div>
+      <p class="feedback" aria-live="polite"><span class="start">Нажми на первую полезную привычку</span><span class="right">Верно! Найди ещё одну полезную привычку</span><span class="wrong">Почти! Это зубик любит только изредка. Попробуй ещё</span></p>
+      <div class="finish" aria-live="polite"><strong>Ура! Зубик улыбается! 🎉</strong><p>Ты нашёл все полезные привычки.</p><button class="reset" type="reset">Сыграть ещё раз</button></div>
+    </form>
+  </main>
+</body>
+</html>
