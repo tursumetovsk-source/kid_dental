@@ -122,6 +122,71 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   [data-framer-name="Intro"] *,
   [data-framer-name="Our Story"] *,
   [data-framer-name^="Feature"] * { will-change: auto !important; }
+  [data-framer-name="Intro"].dg-parent-story-section {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(72px, 8vw, 124px) 24px clamp(110px, 11vw, 168px) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    background: #ffe9ed !important;
+    color: #17184f !important;
+  }
+  .dg-parent-story {
+    position: relative;
+    width: min(1160px, 100%);
+    margin: 0 auto;
+    font-family: "BN Dime Display Regular", "Rubik", sans-serif;
+  }
+  .dg-story-questions { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 42px); }
+  .dg-story-question {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 22px;
+    align-items: center;
+    min-height: 126px;
+    padding: 28px 42px;
+    box-sizing: border-box;
+    border: 3px solid currentColor;
+    border-radius: 34px;
+    background: #fff;
+    color: #17184f;
+  }
+  .dg-story-question:nth-child(1) { width: 76%; align-self: flex-start; border-style: dashed; border-color: #8c5cff; transform: rotate(-1.2deg); }
+  .dg-story-question:nth-child(2) { width: 78%; align-self: flex-end; border-color: #04b8d4; transform: rotate(1.4deg); }
+  .dg-story-question:nth-child(3) { width: 78%; margin-left: 6%; border-color: #ff3f62; transform: rotate(-0.8deg); }
+  .dg-story-question__mark { color: #8c5cff; font: 900 62px/.8 "BN Dime Display Regular", "Arial Black", sans-serif; }
+  .dg-story-question:nth-child(2) .dg-story-question__mark { color: #04b8d4; }
+  .dg-story-question:nth-child(3) .dg-story-question__mark { color: #ff3f62; }
+  .dg-story-question p { margin: 0; font-size: clamp(22px, 2.05vw, 31px); font-weight: 800; line-height: 1.25; letter-spacing: .005em; }
+  .dg-story-copy { width: min(1030px, 92%); margin: clamp(74px, 8vw, 112px) auto 0; }
+  .dg-story-copy p { margin: 0; font-size: clamp(21px, 2.15vw, 30px); font-weight: 650; line-height: 1.65; letter-spacing: .005em; }
+  .dg-story-copy p + p { margin-top: 36px; }
+  .dg-story-copy strong { color: #7048c4; font-weight: 900; }
+  .dg-story-heart { display: inline-block; margin-right: 8px; color: #9a42e8; font-size: 1.4em; vertical-align: -.08em; }
+  .dg-story-actions { display: flex; justify-content: center; gap: 22px; margin-top: 56px; }
+  .dg-story-actions a {
+    min-width: 280px;
+    padding: 22px 30px;
+    border: 2px solid #e3e3f2;
+    border-radius: 28px;
+    background: #fff;
+    color: #17184f;
+    box-shadow: 0 18px 28px rgba(89, 54, 151, .14);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .dg-story-actions a:first-child { border-color: #7048c4; background: #7048c4; color: #fff; }
+  .dg-story-actions a:hover { transform: translateY(-2px); box-shadow: 0 20px 32px rgba(89, 54, 151, .2); }
+  .dg-story-spark { position: absolute; z-index: 0; font-size: clamp(30px, 4vw, 52px); line-height: 1; pointer-events: none; }
+  .dg-story-spark--left { top: -28px; left: -22px; }
+  .dg-story-spark--right { top: 6px; right: 4%; }
+  .dg-story-spark--bottom { right: 2%; bottom: -34px; }
   .dg-simple-cta [data-framer-name="Button Shape"] {
     display: flex !important;
     align-items: center !important;
@@ -289,6 +354,23 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     .dg-contact { padding: 46px 18px 56px; }
     .dg-contact__inner { grid-template-columns: 1fr; align-items: start; }
     .dg-contact h2 { font-size: clamp(42px, 14vw, 64px); }
+    [data-framer-name="Intro"].dg-parent-story-section { padding: 54px 16px 126px !important; }
+    .dg-story-questions { gap: 22px; }
+    .dg-story-question,
+    .dg-story-question:nth-child(1),
+    .dg-story-question:nth-child(2),
+    .dg-story-question:nth-child(3) { width: 100%; margin-left: 0; padding: 22px 20px; border-radius: 25px; transform: none; }
+    .dg-story-question { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; min-height: 0; }
+    .dg-story-question__mark { font-size: 48px; }
+    .dg-story-question p { font-size: clamp(18px, 5.3vw, 22px); line-height: 1.24; }
+    .dg-story-copy { width: 100%; margin-top: 54px; }
+    .dg-story-copy p { font-size: 19px; line-height: 1.55; }
+    .dg-story-copy p + p { margin-top: 26px; }
+    .dg-story-actions { flex-direction: column; gap: 14px; margin-top: 38px; }
+    .dg-story-actions a { min-width: 0; padding: 19px 22px; border-radius: 22px; font-size: 18px; }
+    .dg-story-spark--left { left: 2px; }
+    .dg-story-spark--right { right: 0; top: -38px; }
+    .dg-story-spark--bottom { display: none; }
   }
 </style>
 <script>
@@ -484,6 +566,14 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       }
     };
 
+    const replaceIntroStory = () => {
+      const intro = document.querySelector('[data-framer-name="Intro"]');
+      if (!intro || intro.querySelector(".dg-parent-story")) return;
+      intro.classList.add("dg-parent-story-section");
+      intro.id = "parent-story";
+      intro.innerHTML = '<div class="dg-parent-story"><span class="dg-story-spark dg-story-spark--left" aria-hidden="true">⭐</span><span class="dg-story-spark dg-story-spark--right" aria-hidden="true">🪐</span><div class="dg-story-questions"><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></article></div><div class="dg-story-copy"><p>Вопросов у родителей всегда много. Ведь здоровье ребёнка начинается с внимания к мелочам, а здоровая улыбка — с самых первых зубов. Мы создали программы <strong>«Растём с улыбкой»</strong>, чтобы вы были уверены: развитие зубов проходит правильно, а рядом всегда есть детский стоматолог, готовый поддержать и ответить на любые вопросы.</p><p><span class="dg-story-heart" aria-hidden="true">♥</span>Мы покажем, как годовые программы сопровождения помогают семьям на разных этапах взросления ребёнка. История вымышленная, а ситуации — самые настоящие.</p><div class="dg-story-actions"><a href="tel:+79109900060">Задать вопрос доктору</a><a href="#programs">Наши программы</a></div></div><span class="dg-story-spark dg-story-spark--bottom" aria-hidden="true">✨</span></div>';
+    };
+
     const addLandingSections = () => {
       const intro = document.querySelector('[data-framer-name="Intro"]');
       const footer = document.querySelector('[data-framer-name="Footer"]');
@@ -545,6 +635,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       wireAnchors();
       rewriteImages();
       rewriteLoader();
+      replaceIntroStory();
       addLandingSections();
       addFloatingActions();
     };
