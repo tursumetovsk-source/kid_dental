@@ -38,7 +38,10 @@ const dictionary = [
   ['GET IN TOUCH', 'СВЯЖИТЕСЬ С НАМИ'],
   ['Get in touch', 'Свяжитесь с нами'],
   ['VIA EMAIL', 'ПО ПОЧТЕ'],
+  ['Via email', 'По почте'],
   ['OR ENQUIRY', 'ИЛИ ЧЕРЕЗ ФОРМУ'],
+  ['Or enquiry', 'Или через форму'],
+  ['or enquiry', 'или через форму'],
   ['We’ll get back to you faster than a toddler can spill a drink.', 'Мы ответим быстрее, чем малыш успеет пролить сок.'],
 
   // Home Hero & Banner
@@ -288,13 +291,13 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
 
   function translateHeadings() {
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, [data-framer-component-type="RichTextContainer"], [data-framer-component-type="Text"]');
     for (let i = 0; i < headings.length; i++) {
       const h = headings[i];
       const text = h.innerText ? h.innerText.trim() : '';
       const translated = translateText(text);
       if (translated !== text && text.length > 2) {
-        if (h.children.length > 1) {
+        if (h.children.length > 0) {
           h.innerText = translated;
         }
       }
@@ -323,7 +326,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         const text = node.innerText ? node.innerText.trim() : '';
         const translated = translateText(text);
         if (translated !== text && text.length > 2) {
-          if (node.children.length > 1) {
+          if (node.children.length > 0) {
             node.innerText = translated;
           }
         }
@@ -374,7 +377,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     });
   });
 
-  // Polling fallback to ensure asynchronous hydrated headings translate immediately
   let count = 0;
   const timer = setInterval(() => {
     run();
