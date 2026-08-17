@@ -682,7 +682,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       game.className = "dg-kids-game";
       game.id = "kids-game";
       game.setAttribute("aria-label", "Детская игра Что любит зубик?");
-      game.innerHTML = '<iframe class="dg-kids-game__frame" src="kids-game.html" title="Детская игра Что любит зубик?" loading="lazy"></iframe>';
+      game.innerHTML = '<iframe class="dg-kids-game__frame" src="/kids-game.html" title="Детская игра Что любит зубик?" loading="lazy"></iframe>';
       intro.insertAdjacentElement("afterend", game);
     };
 
