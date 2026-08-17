@@ -251,7 +251,7 @@ const localizationBundle = `
   font-weight: 700;
   font-display: swap;
 }
-h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type="Text"] h2 {
+h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type="Text"] h2, [data-framer-component-type="RichTextContainer"] h1, [data-framer-component-type="RichTextContainer"] h2 {
   font-family: 'Rubik', 'Montserrat', sans-serif !important;
   font-weight: 900 !important;
   letter-spacing: -0.02em !important;
@@ -287,6 +287,20 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     return res;
   }
 
+  function translateHeadings() {
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    for (let i = 0; i < headings.length; i++) {
+      const h = headings[i];
+      const text = h.innerText ? h.innerText.trim() : '';
+      const translated = translateText(text);
+      if (translated !== text && text.length > 2) {
+        if (h.children.length > 1) {
+          h.innerText = translated;
+        }
+      }
+    }
+  }
+
   function processNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
       const parent = node.parentElement;
@@ -305,14 +319,12 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         }
       }
 
-      // Check letter-split headings
-      if (node.hasAttribute && node.hasAttribute('data-framer-component-type') && node.getAttribute('data-framer-component-type') === 'Text') {
+      if (node.tagName && /^(H1|H2|H3|H4|H5|H6)$/i.test(node.tagName)) {
         const text = node.innerText ? node.innerText.trim() : '';
         const translated = translateText(text);
         if (translated !== text && text.length > 2) {
-          const firstH = node.querySelector('h1, h2, h3, h4, h5, h6, p');
-          if (firstH && firstH.children.length > 2) {
-            firstH.innerText = translated;
+          if (node.children.length > 1) {
+            node.innerText = translated;
           }
         }
       }
@@ -325,6 +337,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
   function run() {
     processNode(document.body || document.documentElement);
+    translateHeadings();
   }
 
   if (document.readyState === 'loading') {
@@ -350,6 +363,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         }
       }
     }
+    translateHeadings();
   });
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -359,6 +373,14 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       characterData: true
     });
   });
+
+  // Polling fallback to ensure asynchronous hydrated headings translate immediately
+  let count = 0;
+  const timer = setInterval(() => {
+    run();
+    count++;
+    if (count > 25) clearInterval(timer);
+  }, 200);
 })();
 </script>
 `;
