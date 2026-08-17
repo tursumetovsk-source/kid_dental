@@ -48,17 +48,30 @@ const dictionary = [
   ['We’ll get back to you faster than a toddler can spill a drink.', 'Мы ответим быстрее, чем малыш успеет пролить сок.'],
 
   // Home Hero & Banner
+  ['ВАШ POCKET\nGUIDE TO\nSURVIVING\nPARENTHOOD,\nONE ACTIVITY\nAT A TIME.', 'ВАШ КАРМАННЫЙ\nГИД ПО\nРОДИТЕЛЬСТВУ:\nОДНО ЗАНЯТИЕ\nЗА\nРАЗ.'],
   ['ВАШ POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.', 'ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.'],
-  ['meet maggie', 'знакомьтесь с maggie'],
-  ['Meet Maggie', 'Знакомьтесь с Maggie'],
+  ['YOUR POCKET\nGUIDE TO\nSURVIVING\nPARENTHOOD,\nONE ACTIVITY\nAT A TIME.', 'ВАШ КАРМАННЫЙ\nГИД ПО\nРОДИТЕЛЬСТВУ:\nОДНО ЗАНЯТИЕ\nЗА\nРАЗ.'],
   ['YOUR POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.', 'ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.'],
   ['Your pocket guide to surviving parenthood, one activity at a time.', 'Ваш карманный гид по родительству: одно занятие за раз.'],
+  ['meet maggie', 'знакомьтесь с maggie'],
+  ['Meet Maggie', 'Знакомьтесь с Maggie'],
   ['Your pocket', 'Ваш карманный'],
   ['guide to', 'гид по'],
   ['surviving', 'родительству:'],
   ['parenthood,', 'одно занятие'],
   ['one activity', 'за'],
   ['at a time.', 'раз.'],
+  ['POCKET', 'КАРМАННЫЙ'],
+  ['Pocket', 'Карманный'],
+  ['pocket', 'карманный'],
+  ['GUIDE TO', 'ГИД ПО'],
+  ['SURVIVING', 'РОДИТЕЛЬСТВУ:'],
+  ['PARENTHOOD,', 'ОДНО ЗАНЯТИЕ'],
+  ['PARENTHOOD', 'РОДИТЕЛЬСТВО'],
+  ['ONE ACTIVITY', 'ЗА'],
+  ['AT A TIME.', 'РАЗ.'],
+  ['AT A TIME', 'РАЗ'],
+
   ['FIND FREE SANITY—SAVING ACTIVITIES FASTER THAN YOUR TODDLER CAN EMPTY THE TUPPERWARE DRAWER', 'НАХОДИТЕ БЕСПЛАТНЫЕ ЗАНЯТИЯ БЫСТРЕЕ, ЧЕМ МАЛЫШ ОПУСТОШИТ ЯЩИК С ПОСУДОЙ'],
   ['FIND FREE SANITY-SAVING ACTIVITIES FASTER THAN YOUR TODDLER CAN EMPTY THE TUPPERWARE DRAWER', 'НАХОДИТЕ БЕСПЛАТНЫЕ ЗАНЯТИЯ БЫСТРЕЕ, ЧЕМ МАЛЫШ ОПУСТОШИТ ЯЩИК С ПОСУДОЙ'],
   ['FIND FREE', 'НАХОДИТЕ'],
@@ -292,7 +305,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
 
   h1, [data-framer-component-type="RichTextContainer"] h1, [data-framer-component-type="Text"] h1 {
-    font-size: clamp(20px, 5.8vw, 32px) !important;
+    font-size: clamp(20px, 5.6vw, 32px) !important;
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
     text-align: center !important;
@@ -300,7 +313,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
 
   h2, [data-framer-component-type="RichTextContainer"] h2, [data-framer-component-type="Text"] h2 {
-    font-size: clamp(17px, 4.8vw, 24px) !important;
+    font-size: clamp(16px, 4.6vw, 24px) !important;
     line-height: 1.15 !important;
     word-break: break-word !important;
   }
@@ -317,7 +330,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
   /* Form & inputs on mobile */
   input, textarea {
-    font-size: 16px !important; /* Prevents iOS auto-zoom on input focus */
+    font-size: 16px !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
