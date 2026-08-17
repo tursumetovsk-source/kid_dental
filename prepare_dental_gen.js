@@ -26,6 +26,7 @@ const sourceReplacements = [
 ];
 
 for (const [from, to] of sourceReplacements) html = html.split(from).join(to);
+html = html.replace(/\s*<!-- Start of HubSpot Embed Code -->[\s\S]*?<!-- End of HubSpot Embed Code -->\s*/g, "\n");
 
 if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   const enhancement = String.raw`
@@ -40,8 +41,12 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     --token-4c81cc5a-0ef3-499f-8b97-80de09631c0a: #ffe59a !important;
     --token-3cf441d7-edfe-47fb-95dc-1899b0597681: #fffdf5 !important;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto !important; }
   body { background: #fffdf5; color: #2f2076; }
+  body, body.framer-cursor-none { cursor: auto !important; }
+  body * { cursor: default !important; }
+  a, button, [role="button"] { cursor: pointer !important; }
+  input, textarea { cursor: text !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"] img { opacity: 0 !important; }
   .framer-6mir23-container [data-framer-name="Logo"] img[src*="framerusercontent"] { opacity: 0 !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"]::after {
@@ -58,7 +63,30 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   [data-framer-name="App Store"] svg,
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
-  [data-framer-name="Hero Screens"] img { object-fit: cover !important; object-position: top center !important; }
+  [data-framer-name="Pointer"],
+  [data-framer-name="Android"],
+  .dg-remove-google,
+  [data-framer-name="Hero Screens"],
+  [data-framer-name="Intro"] img,
+  [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
+  [data-framer-name="Intro"] *,
+  [data-framer-name="Our Story"] *,
+  [data-framer-name^="Feature"] * { will-change: auto !important; }
+  .dg-simple-cta [data-framer-name="Button Shape"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 220px;
+  }
+  .dg-simple-cta { width: 220px !important; }
+  .dg-simple-cta [data-framer-name="Button Shape"] > :not(.dg-button-label) { display: none !important; }
+  .dg-button-label {
+    position: relative;
+    z-index: 1;
+    color: #2f2076;
+    font: 500 17px/1 "Montserrat", "Rubik", sans-serif;
+    letter-spacing: .01em;
+  }
 
   .dg-programs, .dg-contact {
     order: 10;
@@ -68,6 +96,8 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     box-sizing: border-box;
     color: #2f2076;
     font-family: "Rubik", sans-serif;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
   }
   .dg-programs { padding: 88px 24px 96px; background: #fffdf5; }
   .dg-shell { width: min(1180px, 100%); margin: 0 auto; }
@@ -248,8 +278,24 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.scrollIntoView({ behavior: "auto", block: "start" });
       }, true);
+    };
+
+    const simplifyControls = () => {
+      document.body?.classList.remove("framer-cursor-none");
+      for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
+        const link = google.closest("a");
+        const wrapper = link?.closest('[data-framer-name="Android"]') || link?.parentElement?.parentElement;
+        wrapper?.classList.add("dg-remove-google");
+      }
+      for (const link of document.querySelectorAll('a[href="tel:+79109900060"]')) {
+        if (link.querySelector('[data-framer-name="Google Play"]')) continue;
+        const shape = link.querySelector('[data-framer-name="Button Shape"]');
+        if (!shape || (!link.querySelector('[data-framer-name="App Store"]') && !link.classList.contains("dg-simple-cta"))) continue;
+        link.classList.add("dg-simple-cta");
+        if (!shape.querySelector(".dg-button-label")) shape.insertAdjacentHTML("beforeend", '<span class="dg-button-label">ЗАПИСАТЬСЯ</span>');
+      }
     };
 
     const imageMap = {
@@ -274,6 +320,8 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
           if (!(image.src || "").includes(hash)) continue;
           image.removeAttribute("srcset");
           image.removeAttribute("sizes");
+          image.loading = "lazy";
+          image.decoding = "async";
           image.src = local;
           break;
         }
@@ -302,7 +350,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
         const section = document.createElement("section");
         section.className = "dg-programs";
         section.id = "programs";
-        section.innerHTML = '<div class="dg-shell"><p class="dg-kicker">Растём с улыбкой</p><h2>Три программы — забота на каждом этапе</h2><div class="dg-grid"><article class="dg-card"><img src="assets/dental-gen/first-teeth.jpg" alt="Программа Первые зубки"><div class="dg-card__body"><span class="dg-age">1–3 года</span><h3>Первые зубки</h3><p>Формируем полезные привычки и основу здоровья зубов.</p></div></article><article class="dg-card"><img src="assets/dental-gen/protected-smile.jpg" alt="Программа Под защитой улыбки"><div class="dg-card__body"><span class="dg-age">3–5 лет</span><h3>Под защитой улыбки</h3><p>Вовремя лечим и сохраняем здоровые молочные зубы.</p></div></article><article class="dg-card"><img src="assets/dental-gen/straight-smile.jpg" alt="Программа Ровная улыбка"><div class="dg-card__body"><span class="dg-age">5–7 лет</span><h3>Ровная улыбка</h3><p>Следим за развитием прикуса и формируем красивую улыбку.</p></div></article></div><div class="dg-checkup" id="checkup"><img src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
+        section.innerHTML = '<div class="dg-shell"><p class="dg-kicker">Растём с улыбкой</p><h2>Три программы — забота на каждом этапе</h2><div class="dg-grid"><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/first-teeth.jpg" alt="Программа Первые зубки"><div class="dg-card__body"><span class="dg-age">1–3 года</span><h3>Первые зубки</h3><p>Формируем полезные привычки и основу здоровья зубов.</p></div></article><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/protected-smile.jpg" alt="Программа Под защитой улыбки"><div class="dg-card__body"><span class="dg-age">3–5 лет</span><h3>Под защитой улыбки</h3><p>Вовремя лечим и сохраняем здоровые молочные зубы.</p></div></article><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/straight-smile.jpg" alt="Программа Ровная улыбка"><div class="dg-card__body"><span class="dg-age">5–7 лет</span><h3>Ровная улыбка</h3><p>Следим за развитием прикуса и формируем красивую улыбку.</p></div></article></div><div class="dg-checkup" id="checkup"><img loading="lazy" decoding="async" src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
         footer.parentNode.insertBefore(section, footer);
       }
 
@@ -343,19 +391,24 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
         if (element && !element.id) element.id = id;
       }
       rewriteLinks();
+      simplifyControls();
       wireAnchors();
       rewriteImages();
       rewriteLoader();
       addLandingSections();
     };
 
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", apply);
-    else apply();
-    window.addEventListener("load", apply);
-    const observer = new MutationObserver(() => requestAnimationFrame(apply));
-    document.addEventListener("DOMContentLoaded", () => observer.observe(document.body, { childList: true, subtree: true, characterData: true }));
+    let scheduled = false;
+    const scheduleApply = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => { scheduled = false; apply(); });
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", scheduleApply, { once: true });
+    else scheduleApply();
+    window.addEventListener("load", scheduleApply, { once: true });
     let passes = 0;
-    const timer = setInterval(() => { apply(); if (++passes > 30) clearInterval(timer); }, 200);
+    const timer = setInterval(() => { scheduleApply(); if (++passes >= 10) clearInterval(timer); }, 500);
   })();
 </script>
 <!-- DENTAL_GEN_LANDING_END -->
