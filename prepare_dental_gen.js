@@ -10,6 +10,7 @@ const sourceReplacements = [
   ["https://apps.apple.com/au/app/maggie/id6744465756", "tel:+79109900060"],
   ["https://www.instagram.com/the.maggie.app/", "https://dentalgen.pro"],
   ["https://www.tiktok.com/@the.maggie.app?is_from_webapp=1&sender_device=pc", "https://dentalgen.pro"],
+  ["https://framerusercontent.com/images/cPnGqHhtwBpGrXXtBcKiQc0AK24.svg", "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"],
   ["https://framerusercontent.com/images/WxwG65LkMnPfhgxSlyow6l2YfI.webp", "assets/dental-gen/first-teeth.jpg"],
   ["https://framerusercontent.com/images/82HvwLj8KJ9opS3N2jwyEddSqU.webp", "assets/dental-gen/protected-smile.jpg"],
   ["https://framerusercontent.com/images/XCBp0qK3erxlToFfQCiUPPtpLIY.webp", "assets/dental-gen/straight-smile.jpg"],
@@ -60,6 +61,15 @@ const enhancement = String.raw`
   html body input, html body textarea { cursor: text !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"] img { opacity: 0 !important; }
   .framer-6mir23-container [data-framer-name="Logo"] img[src*="framerusercontent"] { opacity: 0 !important; }
+  .framer-6mir23-container [data-framer-name="Logo Mobile"],
+  [data-framer-name="Logo Mobile"],
+  .framer-o5vylo,
+  img[src*="cPnGqHhtwBpGrXXtBcKiQc0AK24"] {
+    opacity: 0 !important;
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
   [data-framer-name="Header Nav"] [data-framer-name="Logo"]::after {
     content: "DG";
     position: absolute;
@@ -97,8 +107,8 @@ const enhancement = String.raw`
     place-items: center;
     white-space: nowrap;
     color: #2f2076;
-    font-family: "BN Dime Display Regular", "Arial Black", sans-serif;
-    font-size: clamp(42px, 14vw, 360px);
+    font-family: "BN Dime Display Regular", "Rubik", "Arial Black", sans-serif;
+    font-size: clamp(34px, 11vw, 360px);
     font-weight: 900;
     line-height: .78;
     letter-spacing: -.035em;
@@ -579,7 +589,11 @@ const enhancement = String.raw`
 
     const rewriteLoader = () => {
       const letters = ["letter-d.svg", "letter-e.svg", "letter-n.svg", "letter-t.svg", "letter-a.svg", "letter-l-gen.svg"];
-      for (const logo of document.querySelectorAll('.framer-6mir23-container [data-framer-name="Logo"]')) {
+      for (const logo of document.querySelectorAll('.framer-6mir23-container [data-framer-name="Logo"], [data-framer-name="Logo Mobile"], .framer-o5vylo')) {
+        if (logo.getAttribute('data-framer-name') === 'Logo Mobile' || logo.classList.contains('framer-o5vylo')) {
+          logo.style.display = 'none';
+          continue;
+        }
         [...logo.children].forEach((container, index) => {
           const image = container.querySelector("img");
           const file = letters[index];
@@ -707,4 +721,4 @@ const enhancement = String.raw`
 
 html = html.replace("</body>", `${enhancement}</body>`);
 fs.writeFileSync(target, html);
-console.log("Successfully rebuilt index.html with new kids game integration!");
+console.log("Successfully rebuilt index.html without mobile MAGGIE logo!");
