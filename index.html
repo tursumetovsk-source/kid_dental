@@ -445,6 +445,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -1763,7 +1765,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       modal.classList.add("is-open");
       document.body.classList.add("dg-modal-open");
       const frame = modal.querySelector("#gameIframe");
-      if (frame && (!frame.src || frame.src === "about:blank")) {
+      if (frame && (!frame.src || frame.src.endsWith("about:blank") || !frame.src.includes("kids-game.html"))) {
         frame.src = "kids-game.html";
       }
     };

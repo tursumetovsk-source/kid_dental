@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const target = path.join(__dirname, "index.html");
+const kidsGamePath = path.join(__dirname, "kids-game.html");
+const kidsGameHtml = fs.existsSync(kidsGamePath) ? fs.readFileSync(kidsGamePath, "utf8") : "";
 let html = fs.readFileSync(target, "utf8");
 
 const sourceReplacements = [
@@ -1359,7 +1361,7 @@ const enhancement = String.raw`
       modal.classList.add("is-open");
       document.body.classList.add("dg-modal-open");
       const frame = modal.querySelector("#gameIframe");
-      if (frame && (!frame.src || frame.src === "about:blank")) {
+      if (frame && (!frame.src || frame.src.endsWith("about:blank") || !frame.src.includes("kids-game.html"))) {
         frame.src = "kids-game.html";
       }
     };
