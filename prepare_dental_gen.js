@@ -130,7 +130,24 @@ const enhancement = String.raw`
   .dg-remove-google,
   [data-framer-name="Hero Screens"],
   [data-framer-name="Intro"] img,
-  [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
+  [data-framer-name="Intro"] [data-framer-name^="Rectangle"],
+  [data-framer-name="Stickers L"],
+  [data-framer-name="Stickers R"],
+  [data-framer-name="Breakfast"],
+  [data-framer-name="Drinks"],
+  [data-framer-name="Banana"],
+  [data-framer-name="Dummy"],
+  [data-framer-name="Dress"],
+  [data-framer-name="Snaaacks"],
+  [data-framer-name*="Sticker"],
+  [data-framer-name="5000 Activities"] [data-framer-name*="Sticker"],
+  .framer-1ymkmky,
+  .framer-ymzrbp,
+  .framer-dxh1mn,
+  .framer-1pzn978,
+  .framer-1gbadff,
+  .framer-1250tq,
+  .framer-13x6f8b { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Left"],
@@ -992,6 +1009,9 @@ const enhancement = String.raw`
       document.documentElement.style.cursor = "auto";
       for (const element of document.querySelectorAll("[data-framer-cursor]")) {
         element.removeAttribute("data-framer-cursor");
+      }
+      for (const el of document.querySelectorAll('[data-framer-name*="Sticker"], [data-framer-name="Breakfast"], [data-framer-name="Drinks"], [data-framer-name="Banana"], [data-framer-name="Dummy"], [data-framer-name="Dress"], [data-framer-name="Snaaacks"], .framer-1ymkmky, .framer-ymzrbp, .framer-dxh1mn, .framer-1pzn978, .framer-1gbadff')) {
+        el.remove();
       }
       for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
         const link = google.closest("a");
