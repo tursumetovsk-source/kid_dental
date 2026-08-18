@@ -2,58 +2,981 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Что любит зубик?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Почисти Зубик! | Детская игра</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;0,900;1,900&family=Caveat:wght@700&display=swap" rel="stylesheet">
   <style>
-    @font-face{font-family:"Dime";src:url("https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2") format("woff2");font-display:swap}
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:#dff4ff;color:#2f2076;font-family:"Dime","Arial Rounded MT Bold",Arial,sans-serif}
-    body{padding:clamp(74px,8vw,118px) 24px clamp(92px,9vw,132px)}
-    .shell{width:min(1120px,100%);margin:auto}
-    .intro{max-width:860px;margin:0 auto 46px;text-align:center}
-    .eyebrow{margin:0 0 12px;color:#7048c4;font-size:20px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-    h1{margin:0;font-size:clamp(48px,7vw,88px);font-weight:900;line-height:.9;letter-spacing:-.045em}
-    .lead{max-width:720px;margin:24px auto 0;font-size:clamp(20px,2.2vw,28px);font-weight:700;line-height:1.35}
-    .panel{padding:clamp(24px,4vw,48px);border:3px solid #2f2076;border-radius:38px;background:#fffdf5;box-shadow:-8px 9px 0 #2f2076}
-    .top{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-bottom:34px}
-    .tooth{width:82px;height:82px;display:grid;place-items:center;border-radius:26px;background:#ffe59a;font-size:48px}
-    .prompt{margin:0;font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.12}
-    .score{min-width:112px;padding:14px 18px;border-radius:999px;background:#e9dcff;font-size:19px;font-weight:900;text-align:center}
-    .score span{display:none}.score .n0{display:inline}
-    .panel:has(#brush:checked):not(:has(#water:checked)):not(:has(#apple:checked)) .n1,.panel:has(#water:checked):not(:has(#brush:checked)):not(:has(#apple:checked)) .n1,.panel:has(#apple:checked):not(:has(#brush:checked)):not(:has(#water:checked)) .n1{display:inline}
-    .panel:has(#brush:checked):has(#water:checked):not(:has(#apple:checked)) .n2,.panel:has(#brush:checked):has(#apple:checked):not(:has(#water:checked)) .n2,.panel:has(#water:checked):has(#apple:checked):not(:has(#brush:checked)) .n2{display:inline}
-    .panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .n3{display:inline}.panel:has(.good:checked) .n0{display:none}
-    .progress{height:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:30px;overflow:hidden;border:2px solid #2f2076;border-radius:999px;background:#fff}
-    .progress span{background:transparent;transition:background-color .18s ease}.panel:has(#brush:checked) .progress span:nth-child(1),.panel:has(#water:checked) .progress span:nth-child(2),.panel:has(#apple:checked) .progress span:nth-child(3){background:#7048c4}
-    .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .choice{position:relative;min-height:142px;display:grid;grid-template-rows:auto auto;place-items:center;gap:8px;padding:18px 14px;border:2px solid #2f2076;border-radius:25px;background:#fff;box-shadow:-4px 5px 0 #2f2076;cursor:pointer;transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease}
-    .choice:hover{transform:translateY(-2px);box-shadow:-5px 7px 0 #2f2076}.choice:focus-within{outline:4px solid #ffbf35;outline-offset:3px}
-    .choice input{position:absolute;inset:0;z-index:2;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
-    .choice span:nth-of-type(1){font-size:46px;line-height:1}.choice span:nth-of-type(2){font-size:19px;font-weight:900;line-height:1.12;text-align:center}
-    .choice:has(.good:checked){border-color:#278a4b;background:#c8f3d0;color:#185f34;box-shadow:-4px 5px 0 #278a4b}.choice:has(.bad:checked){border-color:#e84d72;background:#ffe0ed;color:#8c2441;box-shadow:-4px 5px 0 #e84d72}
-    .feedback{min-height:32px;margin:28px 0 0;font-size:22px;font-weight:900;line-height:1.35;text-align:center}.feedback span{display:none}.feedback .start{display:inline}.panel:has(.good:checked) .start{display:none}.panel:has(.good:checked) .right{display:inline}.panel:has(.bad:checked) .start,.panel:has(.bad:checked) .right{display:none}.panel:has(.bad:checked) .wrong{display:inline}
-    .finish{display:none;margin-top:24px;padding:24px;border-radius:26px;background:#fff0a8;text-align:center}.panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .finish{display:block}.panel:has(#brush:checked):has(#water:checked):has(#apple:checked) .feedback{display:none}
-    .finish strong{display:block;margin-bottom:8px;font-size:30px}.finish p{margin:0;font-size:19px;font-weight:700}.reset{margin-top:20px;padding:15px 24px;border:2px solid #2f2076;border-radius:999px;background:#ffe59a;color:#2f2076;box-shadow:-3px 4px 0 #2f2076;font:900 17px/1 "Dime",Arial,sans-serif;cursor:pointer}
-    @media(max-width:809px){body{padding:58px 16px 100px}h1{font-size:clamp(46px,13vw,64px)}.intro{margin-bottom:32px}.panel{padding:22px 16px 26px;border-radius:28px;box-shadow:-5px 6px 0 #2f2076}.top{grid-template-columns:58px minmax(0,1fr);gap:12px;margin-bottom:22px}.tooth{width:58px;height:58px;border-radius:18px;font-size:34px}.prompt{font-size:23px}.score{grid-column:1/-1;width:max-content;min-width:0;justify-self:center;padding:10px 16px;font-size:17px}.progress{margin-bottom:22px}.choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choice{min-height:126px;padding:15px 10px;border-radius:21px}.choice span:nth-of-type(1){font-size:39px}.choice span:nth-of-type(2){font-size:16px}.feedback{margin-top:22px;font-size:18px}.finish{padding:20px 16px}.finish strong{font-size:25px}}
+    :root {
+      --bg-color: #dff4ff;
+      --panel-bg: #fffdf5;
+      --brand-color: #2f2076;
+      --accent-purple: #7048c4;
+      --accent-yellow: #ffe59a;
+      --accent-pink: #ffe0ed;
+      --accent-green: #37b24d;
+      --accent-blue: #4dabf7;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg-color);
+      color: var(--brand-color);
+      font-family: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding: clamp(24px, 4vw, 56px) 16px clamp(40px, 6vw, 72px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .game-wrapper {
+      width: min(840px, 100%);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Header & Badges */
+    .game-header {
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      width: 100%;
+    }
+
+    .game-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-purple);
+      color: #fff;
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: clamp(14px, 2.5vw, 17px);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(112, 72, 196, 0.25);
+      margin-bottom: 8px;
+    }
+
+    .game-title {
+      margin: 0;
+      font-size: clamp(32px, 7vw, 56px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--brand-color);
+      text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .sound-toggle {
+      position: absolute;
+      top: 0;
+      right: 4px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--brand-color);
+      box-shadow: -3px 4px 0 var(--brand-color);
+      font-size: 22px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+      z-index: 10;
+    }
+
+    .sound-toggle:active {
+      transform: scale(0.92);
+    }
+
+    /* Main Play Area Card */
+    .game-card {
+      width: 100%;
+      background: var(--panel-bg);
+      border: 3px solid var(--brand-color);
+      border-radius: clamp(24px, 5vw, 40px);
+      box-shadow: -6px 8px 0 var(--brand-color);
+      padding: clamp(20px, 4vw, 36px) clamp(16px, 3.5vw, 32px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Visual Indicator / Progress */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 460px;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .stars-meter {
+      display: flex;
+      gap: 8px;
+      background: #fff;
+      padding: 8px 16px;
+      border: 2px solid var(--brand-color);
+      border-radius: 999px;
+      box-shadow: -3px 3px 0 var(--brand-color);
+    }
+
+    .star-icon {
+      font-size: clamp(22px, 4.5vw, 30px);
+      opacity: 0.25;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      filter: grayscale(1);
+    }
+
+    .star-icon.active {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: scale(1.25) rotate(12deg);
+      animation: starPop 0.4s ease;
+    }
+
+    @keyframes starPop {
+      0% { transform: scale(0.5); }
+      50% { transform: scale(1.45) rotate(-15deg); }
+      100% { transform: scale(1.25) rotate(12deg); }
+    }
+
+    .hint-bubble {
+      background: var(--accent-yellow);
+      border: 2px solid var(--brand-color);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-weight: 900;
+      font-size: clamp(14px, 3.2vw, 18px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: -3px 3px 0 var(--brand-color);
+      animation: gentleBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Tooth Stage & Canvas Area */
+    .stage {
+      position: relative;
+      width: min(320px, 80vw);
+      height: min(320px, 80vw);
+      margin: 10px auto 20px;
+      display: grid;
+      place-items: center;
+      touch-action: none;
+    }
+
+    .tooth-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 10px 18px rgba(47, 32, 118, 0.12));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .tooth-svg.happy {
+      animation: toothWiggle 0.6s ease-in-out;
+    }
+
+    .tooth-svg.super-sparkle {
+      animation: toothDance 1.2s infinite alternate ease-in-out;
+    }
+
+    @keyframes toothWiggle {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-6deg) scale(1.05); }
+      75% { transform: rotate(6deg) scale(1.05); }
+    }
+
+    @keyframes toothDance {
+      0% { transform: translateY(0) rotate(-4deg) scale(1.03); }
+      100% { transform: translateY(-12px) rotate(4deg) scale(1.08); }
+    }
+
+    /* Germs / Dirty Spots */
+    .germ {
+      position: absolute;
+      width: clamp(52px, 14vw, 70px);
+      height: clamp(52px, 14vw, 70px);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: clamp(34px, 9vw, 46px);
+      cursor: pointer;
+      z-index: 5;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+      animation: germFloat 2.5s infinite ease-in-out alternate;
+      touch-action: none;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+    }
+
+    .germ:active {
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    .germ.cleaned {
+      transform: translate(-50%, -50%) scale(0) rotate(180deg);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .germ-bubble {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 3px dashed var(--accent-purple);
+      animation: rotateBorder 4s linear infinite;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes germFloat {
+      0% { margin-top: -3px; }
+      100% { margin-top: 5px; }
+    }
+
+    /* Particle / Confetti Layer */
+    .particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    /* Interactive Big Tools for Toddler Fingers */
+    .tools-palette {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(10px, 2.5vw, 18px);
+      width: 100%;
+      max-width: 520px;
+      margin-top: 6px;
+    }
+
+    .tool-btn {
+      position: relative;
+      min-height: clamp(80px, 18vw, 106px);
+      border: 3px solid var(--brand-color);
+      border-radius: clamp(18px, 4vw, 26px);
+      background: #fff;
+      box-shadow: -4px 6px 0 var(--brand-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .tool-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: -5px 8px 0 var(--brand-color);
+    }
+
+    .tool-btn:active, .tool-btn.selected {
+      transform: translateY(3px) translateX(-2px);
+      box-shadow: -1px 2px 0 var(--brand-color);
+      border-color: var(--brand-color);
+    }
+
+    .tool-btn.brush-btn { background: #ffe9f2; }
+    .tool-btn.water-btn { background: #e3f4ff; }
+    .tool-btn.apple-btn { background: #e6fcf5; }
+
+    .tool-btn.brush-btn.selected { background: #ffc9db; }
+    .tool-btn.water-btn.selected { background: #bfe7ff; }
+    .tool-btn.apple-btn.selected { background: #b2f2bb; }
+
+    .tool-icon {
+      font-size: clamp(34px, 8vw, 46px);
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .tool-label {
+      font-size: clamp(13px, 2.8vw, 16px);
+      font-weight: 900;
+      color: var(--brand-color);
+      letter-spacing: -0.01em;
+    }
+
+    /* Victory Celebration Modal / Overlay */
+    .victory-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 253, 245, 0.96);
+      border-radius: clamp(24px, 5vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.9);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .victory-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .victory-tooth {
+      font-size: clamp(70px, 18vw, 110px);
+      line-height: 1;
+      animation: victoryJump 1s infinite alternate cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 12px;
+    }
+
+    @keyframes victoryJump {
+      0% { transform: translateY(0) scale(1) rotate(-5deg); }
+      100% { transform: translateY(-20px) scale(1.12) rotate(5deg); }
+    }
+
+    .victory-title {
+      font-size: clamp(28px, 6.5vw, 46px);
+      font-weight: 900;
+      color: var(--brand-color);
+      margin: 0 0 6px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .victory-sub {
+      font-size: clamp(16px, 3.5vw, 22px);
+      font-weight: 700;
+      color: var(--accent-purple);
+      margin: 0 0 24px;
+      text-align: center;
+    }
+
+    .replay-btn {
+      min-width: clamp(200px, 60vw, 280px);
+      padding: clamp(16px, 3.5vw, 22px) 28px;
+      border: 3px solid var(--brand-color);
+      border-radius: 999px;
+      background: var(--accent-yellow);
+      color: var(--brand-color);
+      box-shadow: -4px 6px 0 var(--brand-color);
+      font: 900 clamp(20px, 4.5vw, 26px)/1 "Rubik", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .replay-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: -5px 8px 0 var(--brand-color);
+    }
+
+    .replay-btn:active {
+      transform: translateY(2px);
+      box-shadow: -2px 3px 0 var(--brand-color);
+    }
+
+    .replay-icon {
+      font-size: 1.2em;
+      animation: spinReplay 3s infinite linear;
+    }
+
+    @keyframes spinReplay {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Floating Sparkles */
+    .sparkle-pop {
+      position: absolute;
+      font-size: 28px;
+      pointer-events: none;
+      animation: floatUpFade 0.7s forwards ease-out;
+      z-index: 15;
+    }
+
+    @keyframes floatUpFade {
+      0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+      100% { transform: translate(-50%, -100px) scale(1.4); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px 10px 48px;
+      }
+      .game-card {
+        padding: 18px 12px 24px;
+        border-radius: 26px;
+      }
+      .status-bar {
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .stage {
+        margin: 4px auto 14px;
+      }
+      .tool-btn {
+        min-height: 84px;
+        padding: 8px 4px;
+        border-radius: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header class="intro"><p class="eyebrow">Мини-игра для детей</p><h1>Что любит зубик?</h1><p class="lead">Найди три вещи, которые помогают зубам оставаться крепкими и здоровыми.</p></header>
-    <form class="panel">
-      <div class="top"><div class="tooth" aria-hidden="true">🦷</div><p class="prompt">Выбирай полезные привычки</p><div class="score">Найдено: <span class="n0">0</span><span class="n1">1</span><span class="n2">2</span><span class="n3">3</span> / 3</div></div>
-      <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="choices">
-        <label class="choice"><input class="good" id="brush" type="checkbox"><span aria-hidden="true">🪥</span><span>Чистить зубы</span></label>
-        <label class="choice"><input class="bad" id="candy" type="checkbox"><span aria-hidden="true">🍭</span><span>Есть много леденцов</span></label>
-        <label class="choice"><input class="good" id="water" type="checkbox"><span aria-hidden="true">💧</span><span>Пить воду</span></label>
-        <label class="choice"><input class="bad" id="soda" type="checkbox"><span aria-hidden="true">🥤</span><span>Часто пить газировку</span></label>
-        <label class="choice"><input class="good" id="apple" type="checkbox"><span aria-hidden="true">🍎</span><span>Есть яблоки</span></label>
-        <label class="choice"><input class="bad" id="night" type="checkbox"><span aria-hidden="true">🌙</span><span>Не чистить зубы на ночь</span></label>
+  <main class="game-wrapper">
+    <header class="game-header">
+      <div class="game-badge">🌟 ИГРА ДЛЯ МАЛЫШЕЙ</div>
+      <h1 class="game-title">Почисти Зубик!</h1>
+      <button class="sound-toggle" id="soundToggle" aria-label="Включить / выключить звук" title="Звук">🔊</button>
+    </header>
+
+    <div class="game-card">
+      <div class="status-bar">
+        <div class="stars-meter" aria-label="Прогресс">
+          <span class="star-icon" id="star1">⭐</span>
+          <span class="star-icon" id="star2">⭐</span>
+          <span class="star-icon" id="star3">⭐</span>
+          <span class="star-icon" id="star4">⭐</span>
+        </div>
+        <div class="hint-bubble" id="hintBubble">
+          <span id="hintEmoji">👆</span> <span id="hintText">Тапай на пятнышки!</span>
+        </div>
       </div>
-      <p class="feedback" aria-live="polite"><span class="start">Нажми на первую полезную привычку</span><span class="right">Верно! Найди ещё одну полезную привычку</span><span class="wrong">Почти! Это зубик любит только изредка. Попробуй ещё</span></p>
-      <div class="finish" aria-live="polite"><strong>Ура! Зубик улыбается! 🎉</strong><p>Ты нашёл все полезные привычки.</p><button class="reset" type="reset">Сыграть ещё раз</button></div>
-    </form>
+
+      <!-- Tooth Stage -->
+      <div class="stage" id="stage">
+        <canvas class="particle-canvas" id="particleCanvas"></canvas>
+
+        <!-- Animated SVG Tooth Character -->
+        <svg class="tooth-svg" id="toothChar" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tooth Body Shadow & Base -->
+          <path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>
+          
+          <!-- Glossy Highlights -->
+          <path d="M60 48 C78 34, 104 30, 120 30 C136 30, 162 34, 180 48 C160 38, 132 34, 120 34 C108 34, 80 38, 60 48 Z" fill="#E3F4FF" opacity="0.9"/>
+          <ellipse cx="64" cy="74" rx="12" ry="24" transform="rotate(-25 64 74)" fill="#E3F4FF" opacity="0.8"/>
+          
+          <!-- Rosy Cheeks -->
+          <ellipse cx="62" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>
+          <ellipse cx="178" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>
+
+          <!-- Eyes -->
+          <g id="toothEyes">
+            <ellipse cx="82" cy="116" rx="10" ry="14" fill="#2F2076"/>
+            <circle cx="85" cy="111" r="4.5" fill="#FFFFFF"/>
+            <ellipse cx="158" cy="116" rx="10" ry="14" fill="#2F2076"/>
+            <circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>
+          </g>
+
+          <!-- Cute Smile -->
+          <path id="toothMouth" d="M96 142 Q120 166 144 142" stroke="#2F2076" stroke-width="7" stroke-linecap="round" fill="#FF85A1"/>
+
+          <!-- Sparkle Crown / Sunnies (hidden until win) -->
+          <g id="toothCrown" style="display: none;">
+            <path d="M80 34 L96 6 L120 28 L144 6 L160 34 Z" fill="#FFE59A" stroke="#2F2076" stroke-width="6" stroke-linejoin="round"/>
+            <circle cx="96" cy="6" r="4" fill="#FF3F62"/>
+            <circle cx="120" cy="28" r="4" fill="#04B8D4"/>
+            <circle cx="144" cy="6" r="4" fill="#8C5CFF"/>
+          </g>
+        </svg>
+
+        <!-- Germs / Spots Over the Tooth -->
+        <div class="germ" id="germ1" style="top: 26%; left: 30%;" data-id="1">
+          <div class="germ-bubble"></div>
+          <span>👾</span>
+        </div>
+        <div class="germ" id="germ2" style="top: 28%; left: 70%;" data-id="2">
+          <div class="germ-bubble"></div>
+          <span>🍭</span>
+        </div>
+        <div class="germ" id="germ3" style="top: 66%; left: 34%;" data-id="3">
+          <div class="germ-bubble"></div>
+          <span>🍫</span>
+        </div>
+        <div class="germ" id="germ4" style="top: 64%; left: 66%;" data-id="4">
+          <div class="germ-bubble"></div>
+          <span>🦠</span>
+        </div>
+      </div>
+
+      <!-- Large Toddler Tools -->
+      <div class="tools-palette" role="toolbar" aria-label="Инструменты для чистки">
+        <button class="tool-btn brush-btn selected" id="toolBrush" aria-label="Зубная щётка">
+          <span class="tool-icon">🪥</span>
+          <span class="tool-label">ЩЁТОЧКА</span>
+        </button>
+        <button class="tool-btn water-btn" id="toolWater" aria-label="Водичка">
+          <span class="tool-icon">💧</span>
+          <span class="tool-label">ВОДИЧКА</span>
+        </button>
+        <button class="tool-btn apple-btn" id="toolApple" aria-label="Яблочко">
+          <span class="tool-icon">🍎</span>
+          <span class="tool-label">ЯБЛОЧКО</span>
+        </button>
+      </div>
+
+      <!-- Victory Overlay -->
+      <div class="victory-overlay" id="victoryModal">
+        <div class="victory-tooth">✨🦷👑✨</div>
+        <h2 class="victory-title">УРА! ЗУБИК СИЯЕТ!</h2>
+        <p class="victory-sub">Ты супер-герой чистых зубок! 🎉</p>
+        <button class="replay-btn" id="replayBtn">
+          <span class="replay-icon">🔄</span>
+          <span>ЕЩЁ РАЗ!</span>
+        </button>
+      </div>
+    </div>
   </main>
+
+  <script>
+    (() => {
+      // Audio Synthesizer via Web Audio API (Zero external assets, instant 0-latency)
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            audioCtx = new AudioContext();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+          initAudio();
+          if (!audioCtx) return;
+
+          const now = audioCtx.currentTime;
+
+          if (type === 'pop') {
+            // Cute bubbly pop sound
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(450, now);
+            osc.frequency.exponentialRampToValueAtTime(900, now + 0.1);
+            gain.gain.setValueAtTime(0.35, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.12);
+          } else if (type === 'brush') {
+            // Squeaky clean brush sound
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.linearRampToValueAtTime(800, now + 0.05);
+            osc.frequency.linearRampToValueAtTime(650, now + 0.1);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.12);
+          } else if (type === 'splash') {
+            // Water splash chord
+            [520, 650, 780].forEach((freq, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, now + i * 0.03);
+              osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + i * 0.03 + 0.15);
+              gain.gain.setValueAtTime(0.2, now + i * 0.03);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.03 + 0.2);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.03);
+              osc.stop(now + i * 0.03 + 0.2);
+            });
+          } else if (type === 'apple') {
+            // Munch crunch happy chime
+            [587, 740, 880].forEach((freq, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, now + i * 0.06);
+              gain.gain.setValueAtTime(0.25, now + i * 0.06);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.06 + 0.25);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.06);
+              osc.stop(now + i * 0.06 + 0.25);
+            });
+          } else if (type === 'victory') {
+            // Happy victory fanfare
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((note, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(note, now + i * 0.12);
+              gain.gain.setValueAtTime(0.3, now + i * 0.12);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.12 + (i === 3 ? 0.6 : 0.2));
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.12);
+              osc.stop(now + i * 0.12 + (i === 3 ? 0.6 : 0.2));
+            });
+          }
+        } catch (e) {
+          console.warn('Audio play error:', e);
+        }
+      }
+
+      // Game Elements & State
+      const soundToggle = document.getElementById('soundToggle');
+      const stage = document.getElementById('stage');
+      const toothChar = document.getElementById('toothChar');
+      const toothMouth = document.getElementById('toothMouth');
+      const toothCrown = document.getElementById('toothCrown');
+      const germs = [
+        document.getElementById('germ1'),
+        document.getElementById('germ2'),
+        document.getElementById('germ3'),
+        document.getElementById('germ4')
+      ];
+      const stars = [
+        document.getElementById('star1'),
+        document.getElementById('star2'),
+        document.getElementById('star3'),
+        document.getElementById('star4')
+      ];
+      const hintEmoji = document.getElementById('hintEmoji');
+      const hintText = document.getElementById('hintText');
+      const victoryModal = document.getElementById('victoryModal');
+      const replayBtn = document.getElementById('replayBtn');
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const toolBrush = document.getElementById('toolBrush');
+      const toolWater = document.getElementById('toolWater');
+      const toolApple = document.getElementById('toolApple');
+      const tools = [toolBrush, toolWater, toolApple];
+
+      let activeTool = 'brush'; // 'brush', 'water', 'apple'
+      let cleanedCount = 0;
+      const totalGerms = germs.length;
+      let particles = [];
+      let animFrame = null;
+
+      // Resize canvas to match stage
+      function resizeCanvas() {
+        const rect = stage.getBoundingClientRect();
+        canvas.width = rect.width * (window.devicePixelRatio || 1);
+        canvas.height = rect.height * (window.devicePixelRatio || 1);
+        ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Sound Toggle Handler
+      soundToggle.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        initAudio();
+        soundEnabled = !soundEnabled;
+        soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+        if (soundEnabled) playSound('pop');
+      });
+
+      // Tool Switching
+      function selectTool(toolName) {
+        activeTool = toolName;
+        tools.forEach(btn => btn.classList.remove('selected'));
+        if (toolName === 'brush') {
+          toolBrush.classList.add('selected');
+          hintEmoji.textContent = '🪥';
+          hintText.textContent = 'Чистим щёточкой!';
+          playSound('brush');
+        } else if (toolName === 'water') {
+          toolWater.classList.add('selected');
+          hintEmoji.textContent = '💧';
+          hintText.textContent = 'Смываем водичкой!';
+          playSound('splash');
+        } else if (toolName === 'apple') {
+          toolApple.classList.add('selected');
+          hintEmoji.textContent = '🍎';
+          hintText.textContent = 'Угощаем яблочком!';
+          playSound('apple');
+        }
+      }
+
+      toolBrush.addEventListener('pointerdown', () => selectTool('brush'));
+      toolWater.addEventListener('pointerdown', () => selectTool('water'));
+      toolApple.addEventListener('pointerdown', () => selectTool('apple'));
+
+      // Particle System for Confetti, Suds, Stars & Bubbles
+      function createParticles(x, y, count = 12, type = 'star') {
+        const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#8338EC', '#3A86FF'];
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 6;
+          particles.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.5,
+            size: 4 + Math.random() * 7,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1,
+            life: 1,
+            decay: 0.02 + Math.random() * 0.03,
+            type: type
+          });
+        }
+      }
+
+      function updateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.12; // gravity
+          p.alpha -= p.decay;
+
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+
+          if (p.type === 'bubble') {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = '#E3F4FF';
+            ctx.fill();
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = '#3A86FF';
+            ctx.stroke();
+          } else if (p.type === 'star') {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size * 1.5);
+          }
+          ctx.restore();
+        }
+
+        if (particles.length > 0) {
+          animFrame = requestAnimationFrame(updateParticles);
+        } else {
+          animFrame = null;
+        }
+      }
+
+      function triggerParticles(x, y, count, type) {
+        createParticles(x, y, count, type);
+        if (!animFrame) {
+          animFrame = requestAnimationFrame(updateParticles);
+        }
+      }
+
+      // Sparkle Emoji Floater
+      function showSparkleFloat(x, y, emoji = '✨') {
+        const span = document.createElement('span');
+        span.className = 'sparkle-pop';
+        span.textContent = emoji;
+        span.style.left = x + 'px';
+        span.style.top = y + 'px';
+        stage.appendChild(span);
+        setTimeout(() => span.remove(), 750);
+      }
+
+      // Clean a Specific Germ
+      function cleanGerm(germ, event) {
+        if (germ.classList.contains('cleaned')) return;
+
+        initAudio();
+        germ.classList.add('cleaned');
+        cleanedCount++;
+
+        const rect = germ.getBoundingClientRect();
+        const stageRect = stage.getBoundingClientRect();
+        const localX = rect.left - stageRect.left + rect.width / 2;
+        const localY = rect.top - stageRect.top + rect.height / 2;
+
+        if (activeTool === 'brush') {
+          playSound('brush');
+          playSound('pop');
+          triggerParticles(localX, localY, 16, 'bubble');
+          showSparkleFloat(localX, localY, '🫧✨');
+        } else if (activeTool === 'water') {
+          playSound('splash');
+          triggerParticles(localX, localY, 18, 'bubble');
+          showSparkleFloat(localX, localY, '💦⭐');
+        } else {
+          playSound('apple');
+          playSound('pop');
+          triggerParticles(localX, localY, 18, 'star');
+          showSparkleFloat(localX, localY, '🍎💖');
+        }
+
+        // Update progress star
+        const star = stars[cleanedCount - 1];
+        if (star) {
+          star.classList.add('active');
+        }
+
+        // Tooth expression wiggle
+        toothChar.classList.remove('happy');
+        void toothChar.offsetWidth;
+        toothChar.classList.add('happy');
+
+        // Check if all germs are cleaned
+        if (cleanedCount >= totalGerms) {
+          onGameWon();
+        }
+      }
+
+      // Handle direct tap/click on germs with touch/pointer support
+      germs.forEach((germ) => {
+        const handleInteraction = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          cleanGerm(germ, e);
+        };
+        germ.addEventListener('pointerdown', handleInteraction, { passive: false });
+      });
+
+      // Also allow swiping / dragging finger over tooth to clean germs
+      let isPointerDown = false;
+      stage.addEventListener('pointerdown', (e) => {
+        initAudio();
+        isPointerDown = true;
+        checkHit(e);
+      });
+      stage.addEventListener('pointermove', (e) => {
+        if (isPointerDown) {
+          checkHit(e);
+        }
+      });
+      window.addEventListener('pointerup', () => { isPointerDown = false; });
+      window.addEventListener('pointercancel', () => { isPointerDown = false; });
+
+      function checkHit(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        germs.forEach(germ => {
+          if (germ.classList.contains('cleaned')) return;
+          const r = germ.getBoundingClientRect();
+          // Expand hit area for little toddler fingers (60px buffer)
+          if (x >= r.left - 25 && x <= r.right + 25 && y >= r.top - 25 && y <= r.bottom + 25) {
+            cleanGerm(germ, e);
+          }
+        });
+      }
+
+      // Victory Celebration Handler
+      function onGameWon() {
+        setTimeout(() => {
+          playSound('victory');
+          toothCrown.style.display = 'block';
+          toothMouth.setAttribute('d', 'M84 136 Q120 184 156 136 Z');
+          toothMouth.setAttribute('fill', '#FF3F62');
+          toothChar.classList.add('super-sparkle');
+
+          // Burst confetti
+          const stageRect = stage.getBoundingClientRect();
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              triggerParticles(
+                stageRect.width * (0.2 + Math.random() * 0.6),
+                stageRect.height * (0.2 + Math.random() * 0.6),
+                20,
+                'confetti'
+              );
+            }, i * 160);
+          }
+
+          setTimeout(() => {
+            victoryModal.classList.add('active');
+          }, 800);
+        }, 300);
+      }
+
+      // Reset Game
+      function resetGame() {
+        initAudio();
+        playSound('pop');
+        cleanedCount = 0;
+        victoryModal.classList.remove('active');
+        toothCrown.style.display = 'none';
+        toothMouth.setAttribute('d', 'M96 142 Q120 166 144 142');
+        toothMouth.setAttribute('fill', '#FF85A1');
+        toothChar.classList.remove('super-sparkle');
+        toothChar.classList.remove('happy');
+
+        stars.forEach(star => star.classList.remove('active'));
+        germs.forEach(germ => germ.classList.remove('cleaned'));
+
+        selectTool('brush');
+        resizeCanvas();
+      }
+
+      replayBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        resetGame();
+      });
+    })();
+  </script>
 </body>
 </html>

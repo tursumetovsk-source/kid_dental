@@ -31,8 +31,10 @@ if (!html.includes('rel="preload" href="https://framerusercontent.com/assets/9l4
   html = html.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n\t<link rel="preload" href="https://framerusercontent.com/assets/9l4OI1VWlPcLpOtefC36ItDWgI.woff2" as="font" type="font/woff2" crossorigin>');
 }
 
-if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
-  const enhancement = String.raw`
+// Strip existing enhancement block if present to ensure clean rebuild
+html = html.replace(/<!-- DENTAL_GEN_LANDING_BEGIN -->[\s\S]*?<!-- DENTAL_GEN_LANDING_END -->\n?/gi, "");
+
+const enhancement = String.raw`
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -191,7 +193,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
   .dg-kids-game {
     position: relative;
     width: 100%;
-    padding: 0;
+    padding: 20px 0 40px;
     box-sizing: border-box;
     overflow: hidden;
     background: #dff4ff;
@@ -199,78 +201,16 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     font-family: "BN Dime Display Regular", "Rubik", sans-serif;
   }
   .dg-kids-game__shell { width: min(1120px, 100%); margin: 0 auto; }
-  .dg-kids-game__frame { display: block; width: 100%; height: 1120px; border: 0; background: #dff4ff; }
-  .dg-kids-game__intro { max-width: 860px; margin: 0 auto 46px; text-align: center; }
-  .dg-kids-game__eyebrow { margin: 0 0 12px; color: #7048c4; font-size: 20px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-  .dg-kids-game h2 { margin: 0; font-size: clamp(48px, 7vw, 88px); font-weight: 900; line-height: .9; letter-spacing: -.045em; }
-  .dg-kids-game__lead { margin: 24px auto 0; max-width: 720px; font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; line-height: 1.35; }
-  .dg-kids-game__panel {
-    position: relative;
-    padding: clamp(24px, 4vw, 48px);
-    border: 3px solid #2f2076;
-    border-radius: 38px;
-    background: #fffdf5;
-    box-shadow: -8px 9px 0 #2f2076;
+  .dg-kids-game__frame {
+    display: block;
+    width: 100%;
+    min-height: 720px;
+    height: 760px;
+    border: 0;
+    background: #dff4ff;
+    overflow: hidden;
   }
-  .dg-kids-game__top { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; margin-bottom: 34px; }
-  .dg-kids-game__tooth { width: 82px; height: 82px; display: grid; place-items: center; border-radius: 26px; background: #ffe59a; font-size: 48px; }
-  .dg-kids-game__prompt { margin: 0; font-size: clamp(24px, 2.8vw, 36px); font-weight: 900; line-height: 1.12; }
-  .dg-kids-game__score { min-width: 112px; padding: 14px 18px; border-radius: 999px; background: #e9dcff; font-size: 19px; font-weight: 900; text-align: center; }
-  .dg-kids-game__score span { display: none; }
-  .dg-kids-game__score .dg-game-score--0 { display: inline; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked):not(:has(#dg-good-water:checked)):not(:has(#dg-good-apple:checked)) .dg-game-score--1,
-  .dg-kids-game__panel:has(#dg-good-water:checked):not(:has(#dg-good-brush:checked)):not(:has(#dg-good-apple:checked)) .dg-game-score--1,
-  .dg-kids-game__panel:has(#dg-good-apple:checked):not(:has(#dg-good-brush:checked)):not(:has(#dg-good-water:checked)) .dg-game-score--1 { display: inline; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked):has(#dg-good-water:checked):not(:has(#dg-good-apple:checked)) .dg-game-score--2,
-  .dg-kids-game__panel:has(#dg-good-brush:checked):has(#dg-good-apple:checked):not(:has(#dg-good-water:checked)) .dg-game-score--2,
-  .dg-kids-game__panel:has(#dg-good-water:checked):has(#dg-good-apple:checked):not(:has(#dg-good-brush:checked)) .dg-game-score--2 { display: inline; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked):has(#dg-good-water:checked):has(#dg-good-apple:checked) .dg-game-score--3 { display: inline; }
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--good:checked) .dg-game-score--0 { display: none; }
-  .dg-kids-game__progress { height: 12px; margin-bottom: 30px; overflow: hidden; border: 2px solid #2f2076; border-radius: 999px; background: #fff; }
-  .dg-kids-game__progress { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .dg-kids-game__progress span { display: block; height: 100%; background: transparent; transition: background-color .18s ease; }
-  .dg-kids-game__toggle { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer !important; }
-  .dg-kids-game__choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .dg-kids-game__choice {
-    position: relative;
-    min-height: 142px;
-    display: grid;
-    grid-template-rows: auto auto;
-    place-items: center;
-    gap: 8px;
-    padding: 18px 14px;
-    border: 2px solid #2f2076;
-    border-radius: 25px;
-    background: #fff;
-    color: #2f2076;
-    box-shadow: -4px 5px 0 #2f2076;
-    font: inherit;
-    cursor: pointer !important;
-    transition: transform .16s ease, background-color .16s ease, box-shadow .16s ease;
-  }
-  .dg-kids-game__choice:hover { transform: translateY(-2px); box-shadow: -5px 7px 0 #2f2076; }
-  .dg-kids-game__choice:focus-visible { outline: 4px solid #ffbf35; outline-offset: 3px; }
-  .dg-kids-game__choice span:first-child { font-size: 46px; line-height: 1; }
-  .dg-kids-game__choice span:last-child { font-size: 19px; font-weight: 900; line-height: 1.12; text-align: center; }
-  .dg-kids-game__choice:has(.dg-kids-game__toggle--good:checked) { background: #c8f3d0; box-shadow: -4px 5px 0 #278a4b; border-color: #278a4b; color: #185f34; }
-  .dg-kids-game__choice:has(.dg-kids-game__toggle--bad:checked) { background: #ffe0ed; box-shadow: -4px 5px 0 #e84d72; border-color: #e84d72; color: #8c2441; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked) .dg-kids-game__progress span:nth-child(1),
-  .dg-kids-game__panel:has(#dg-good-water:checked) .dg-kids-game__progress span:nth-child(2),
-  .dg-kids-game__panel:has(#dg-good-apple:checked) .dg-kids-game__progress span:nth-child(3) { background: #7048c4; }
-  .dg-kids-game__feedback { min-height: 32px; margin: 28px 0 0; font-size: 22px; font-weight: 900; line-height: 1.35; text-align: center; }
-  .dg-kids-game__feedback span { display: none; }
-  .dg-kids-game__feedback .dg-game-feedback--start { display: inline; }
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--good:checked) .dg-game-feedback--start { display: none; }
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--good:checked) .dg-game-feedback--right { display: inline; }
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--bad:checked) .dg-game-feedback--start,
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--bad:checked) .dg-game-feedback--right { display: none; }
-  .dg-kids-game__panel:has(.dg-kids-game__toggle--bad:checked) .dg-game-feedback--wrong { display: inline; }
-  .dg-kids-game__finish { display: none; margin-top: 24px; padding: 24px; border-radius: 26px; background: #fff0a8; text-align: center; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked):has(#dg-good-water:checked):has(#dg-good-apple:checked) .dg-kids-game__finish { display: block; }
-  .dg-kids-game__panel:has(#dg-good-brush:checked):has(#dg-good-water:checked):has(#dg-good-apple:checked) .dg-kids-game__feedback { display: none; }
-  .dg-kids-game__finish strong { display: block; margin-bottom: 8px; font-size: 30px; }
-  .dg-kids-game__finish p { margin: 0; font-size: 19px; font-weight: 700; }
-  .dg-kids-game__reset { margin-top: 20px; padding: 15px 24px; border: 2px solid #2f2076; border-radius: 999px; background: #ffe59a; color: #2f2076; box-shadow: -3px 4px 0 #2f2076; font: 900 17px/1 "BN Dime Display Regular", "Rubik", sans-serif; }
+
   .dg-simple-cta [data-framer-name="Button Shape"] {
     display: flex !important;
     align-items: center !important;
@@ -455,23 +395,8 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
     .dg-story-spark--left { left: 2px; }
     .dg-story-spark--right { right: 0; top: -38px; }
     .dg-story-spark--bottom { display: none; }
-    .dg-kids-game { padding: 0; }
-    .dg-kids-game__frame { height: 1320px; }
-    .dg-kids-game h2 { font-size: clamp(46px, 13vw, 64px); }
-    .dg-kids-game__intro { margin-bottom: 32px; }
-    .dg-kids-game__panel { padding: 22px 16px 26px; border-radius: 28px; box-shadow: -5px 6px 0 #2f2076; }
-    .dg-kids-game__top { grid-template-columns: 58px minmax(0, 1fr); gap: 12px; margin-bottom: 22px; }
-    .dg-kids-game__tooth { width: 58px; height: 58px; border-radius: 18px; font-size: 34px; }
-    .dg-kids-game__prompt { font-size: 23px; }
-    .dg-kids-game__score { grid-column: 1 / -1; width: max-content; min-width: 0; justify-self: center; padding: 10px 16px; font-size: 17px; }
-    .dg-kids-game__progress { margin-bottom: 22px; }
-    .dg-kids-game__choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .dg-kids-game__choice { min-height: 126px; padding: 15px 10px; border-radius: 21px; }
-    .dg-kids-game__choice span:first-child { font-size: 39px; }
-    .dg-kids-game__choice span:last-child { font-size: 16px; }
-    .dg-kids-game__feedback { margin-top: 22px; font-size: 18px; }
-    .dg-kids-game__finish { padding: 20px 16px; }
-    .dg-kids-game__finish strong { font-size: 25px; }
+    .dg-kids-game { padding: 10px 0 60px; }
+    .dg-kids-game__frame { min-height: 640px; height: 680px; }
   }
 </style>
 <script>
@@ -681,15 +606,17 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       const game = document.createElement("section");
       game.className = "dg-kids-game";
       game.id = "kids-game";
-      game.setAttribute("aria-label", "Детская игра Что любит зубик?");
-      game.innerHTML = '<iframe class="dg-kids-game__frame" title="Детская игра Что любит зубик?" loading="lazy"></iframe>';
+      game.setAttribute("aria-label", "Детская интерактивная игра Почисти Зубик!");
+      game.innerHTML = '<iframe class="dg-kids-game__frame" title="Детская игра Почисти Зубик!" loading="lazy" src="kids-game.html"></iframe>';
       intro.insertAdjacentElement("afterend", game);
       const frame = game.querySelector(".dg-kids-game__frame");
       fetch("/kids-game.html").then((response) => {
         if (!response.ok) throw new Error("Game module is unavailable");
         return response.text();
-      }).then((markup) => { frame.srcdoc = markup; }).catch(() => {
-        frame.srcdoc = '<!doctype html><meta charset="utf-8"><style>body{margin:0;padding:48px;background:#dff4ff;color:#2f2076;font:700 22px/1.4 sans-serif;text-align:center}</style><p>Игра временно не загрузилась. Обновите страницу, пожалуйста.</p>';
+      }).then((markup) => {
+        frame.srcdoc = markup;
+      }).catch(() => {
+        frame.src = "kids-game.html";
       });
     };
 
@@ -734,10 +661,12 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
       });
 
       const missionHeadings = document.querySelectorAll('[data-framer-name="Mission"] h1');
-      setAnimatedWords(missionHeadings[0], ["DENTAL", "GEN", "", ""]);
-      setAnimatedWords(missionHeadings[1], ["ПОМОГАЕТ", "", ""]);
-      setAnimatedWords(missionHeadings[2], ["РАСТИТЬ", ""]);
-      setAnimatedWords(missionHeadings[3], ["ЗДОРОВУЮ", "УЛЫБКУ", ""]);
+      if (missionHeadings && missionHeadings.length >= 4) {
+        setAnimatedWords(missionHeadings[0], ["DENTAL", "GEN", "", ""]);
+        setAnimatedWords(missionHeadings[1], ["ПОМОГАЕТ", "", ""]);
+        setAnimatedWords(missionHeadings[2], ["РАСТИТЬ", ""]);
+        setAnimatedWords(missionHeadings[3], ["ЗДОРОВУЮ", "УЛЫБКУ", ""]);
+      }
 
       document.title = "DENTAL GEN | Детская стоматология в Иваново";
       const metaDescription = "Детская стоматология DENTAL GEN в Иваново. Профилактика, лечение и сопровождение детей от первых зубов до школы.";
@@ -775,8 +704,7 @@ if (!html.includes("DENTAL_GEN_LANDING_BEGIN")) {
 </script>
 <!-- DENTAL_GEN_LANDING_END -->
 `;
-  html = html.replace("</body>", `${enhancement}</body>`);
-}
 
+html = html.replace("</body>", `${enhancement}</body>`);
 fs.writeFileSync(target, html);
-console.log("Prepared DENTAL GEN landing page; Framer animation definitions remain untouched.");
+console.log("Successfully rebuilt index.html with new kids game integration!");
