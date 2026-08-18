@@ -39,7 +39,7 @@
     }
 
     body {
-      padding: clamp(24px, 4vw, 56px) 16px clamp(40px, 6vw, 72px);
+      padding: clamp(16px, 3vw, 40px) 14px clamp(30px, 4vw, 56px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,7 +60,7 @@
     /* Header & Badges */
     .game-header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       position: relative;
       width: 100%;
     }
@@ -73,17 +73,17 @@
       color: #fff;
       padding: 6px 18px;
       border-radius: 999px;
-      font-size: clamp(14px, 2.5vw, 17px);
+      font-size: clamp(13px, 2.3vw, 16px);
       font-weight: 900;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       box-shadow: 0 4px 12px rgba(112, 72, 196, 0.25);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .game-title {
       margin: 0;
-      font-size: clamp(32px, 7vw, 56px);
+      font-size: clamp(30px, 6.5vw, 50px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.04em;
@@ -95,8 +95,8 @@
       position: absolute;
       top: 0;
       right: 4px;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: #fff;
       border: 3px solid var(--brand-color);
@@ -106,25 +106,20 @@
       place-items: center;
       cursor: pointer;
       transition: transform 0.15s ease, background 0.15s ease;
-      z-index: 10;
+      z-index: 20;
     }
 
-    .sound-toggle:hover {
-      transform: scale(1.05);
-    }
-
-    .sound-toggle:active {
-      transform: scale(0.92);
-    }
+    .sound-toggle:hover { transform: scale(1.06); }
+    .sound-toggle:active { transform: scale(0.92); }
 
     /* Main Play Area Card */
     .game-card {
       width: 100%;
       background: var(--panel-bg);
       border: 3px solid var(--brand-color);
-      border-radius: clamp(24px, 5vw, 40px);
+      border-radius: clamp(22px, 4.5vw, 36px);
       box-shadow: -6px 8px 0 var(--brand-color);
-      padding: clamp(20px, 4vw, 36px) clamp(16px, 3.5vw, 32px);
+      padding: clamp(16px, 3.5vw, 30px) clamp(14px, 3vw, 28px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -133,72 +128,79 @@
       z-index: 10;
     }
 
-    /* Visual Indicator / Progress */
-    .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* 3-Step Flow Indicator */
+    .step-tracker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 2vw, 14px);
       width: 100%;
-      max-width: 460px;
-      margin-bottom: 16px;
-      gap: 12px;
+      max-width: 540px;
+      margin-bottom: 12px;
     }
 
-    .stars-meter {
-      display: flex;
-      gap: 8px;
-      background: #fff;
-      padding: 8px 16px;
-      border: 2px solid var(--brand-color);
-      border-radius: 999px;
-      box-shadow: -3px 3px 0 var(--brand-color);
-    }
-
-    .star-icon {
-      font-size: clamp(22px, 4.5vw, 30px);
-      opacity: 0.25;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-      filter: grayscale(1);
-    }
-
-    .star-icon.active {
-      opacity: 1;
-      filter: grayscale(0);
-      transform: scale(1.25) rotate(12deg);
-      animation: starPop 0.4s ease;
-    }
-
-    @keyframes starPop {
-      0% { transform: scale(0.5); }
-      50% { transform: scale(1.45) rotate(-15deg); }
-      100% { transform: scale(1.25) rotate(12deg); }
-    }
-
-    .hint-bubble {
-      background: var(--accent-yellow);
-      border: 2px solid var(--brand-color);
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-weight: 900;
-      font-size: clamp(14px, 3.2vw, 18px);
+    .step-pill {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
+      padding: clamp(8px, 1.8vw, 12px) 10px;
+      background: #fff;
+      border: 2.5px solid #d4cfef;
+      border-radius: 999px;
+      font-size: clamp(13px, 2.6vw, 16px);
+      font-weight: 800;
+      color: #928ca8;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .step-pill.active {
+      background: var(--accent-yellow);
+      border-color: var(--brand-color);
+      color: var(--brand-color);
       box-shadow: -3px 3px 0 var(--brand-color);
-      animation: gentleBounce 2s infinite ease-in-out;
+      transform: scale(1.05);
+      animation: stepPulse 2s infinite ease-in-out;
     }
 
-    @keyframes gentleBounce {
+    .step-pill.completed {
+      background: #e6fcf5;
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    @keyframes stepPulse {
+      0%, 100% { transform: scale(1.05); }
+      50% { transform: scale(1.09); }
+    }
+
+    /* Instruction / Hint Banner */
+    .hint-banner {
+      background: #fff;
+      border: 2px solid var(--brand-color);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: clamp(15px, 3.2vw, 19px);
+      font-weight: 900;
+      color: var(--brand-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: -3px 3px 0 var(--brand-color);
+      margin-bottom: 10px;
+      animation: hintFloat 2s infinite ease-in-out;
+    }
+
+    @keyframes hintFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+      50% { transform: translateY(-3px); }
     }
 
-    /* Tooth Stage & Canvas Area */
+    /* Tooth Stage */
     .stage {
       position: relative;
-      width: min(320px, 80vw);
-      height: min(320px, 80vw);
-      margin: 10px auto 20px;
+      width: min(320px, 78vw);
+      height: min(320px, 78vw);
+      margin: 6px auto 14px;
       display: grid;
       place-items: center;
       touch-action: none;
@@ -213,13 +215,9 @@
       pointer-events: none;
     }
 
-    .tooth-svg.happy {
-      animation: toothWiggle 0.6s ease-in-out;
-    }
-
-    .tooth-svg.super-sparkle {
-      animation: toothDance 1.2s infinite alternate ease-in-out;
-    }
+    .tooth-svg.happy { animation: toothWiggle 0.6s ease-in-out; }
+    .tooth-svg.super-sparkle { animation: toothDance 1.2s infinite alternate ease-in-out; }
+    .tooth-svg.chewing { animation: toothChew 0.4s 4 ease-in-out; }
 
     @keyframes toothWiggle {
       0%, 100% { transform: rotate(0deg) scale(1); }
@@ -232,40 +230,39 @@
       100% { transform: translateY(-12px) rotate(4deg) scale(1.08); }
     }
 
-    /* Germs / Dirty Spots */
-    .germ {
+    @keyframes toothChew {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08, 0.92); }
+    }
+
+    /* Interactive Game Items (Germs / Foam / Apple) */
+    .game-item {
       position: absolute;
-      width: clamp(54px, 14vw, 72px);
-      height: clamp(54px, 14vw, 72px);
+      width: clamp(56px, 14vw, 76px);
+      height: clamp(56px, 14vw, 76px);
       border-radius: 50%;
       display: grid;
       place-items: center;
-      font-size: clamp(34px, 9vw, 46px);
+      font-size: clamp(34px, 8.5vw, 48px);
       cursor: pointer;
       z-index: 15;
       transform: translate(-50%, -50%) scale(1);
       transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
-      animation: germFloat 2.5s infinite ease-in-out alternate;
       touch-action: none;
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
       pointer-events: auto;
     }
 
-    .germ:hover {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
+    .game-item:hover { transform: translate(-50%, -50%) scale(1.12); }
+    .game-item:active { transform: translate(-50%, -50%) scale(0.88); }
 
-    .germ:active {
-      transform: translate(-50%, -50%) scale(0.85);
-    }
-
-    .germ.cleaned {
+    .game-item.popped {
       transform: translate(-50%, -50%) scale(0) rotate(180deg);
       opacity: 0;
       pointer-events: none;
     }
 
-    .germ-bubble {
+    .item-bubble {
       position: absolute;
       inset: -4px;
       border-radius: 50%;
@@ -275,17 +272,74 @@
       opacity: 0.6;
     }
 
+    .foam-bubble {
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 3px solid #4dabf7;
+      background: rgba(227, 244, 255, 0.6);
+      pointer-events: none;
+      animation: foamPulse 1.6s infinite alternate ease-in-out;
+    }
+
     @keyframes rotateBorder {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes germFloat {
-      0% { margin-top: -3px; }
-      100% { margin-top: 5px; }
+    @keyframes foamPulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      100% { transform: scale(1.08); opacity: 1; }
     }
 
-    /* Particle / Confetti Layer */
+    /* Big Center Apple (Step 3) */
+    .feed-apple-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 25;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: appleBounce 1.4s infinite alternate ease-in-out;
+    }
+
+    .feed-apple {
+      font-size: clamp(72px, 18vw, 100px);
+      line-height: 1;
+      filter: drop-shadow(0 8px 14px rgba(255, 63, 98, 0.35));
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feed-apple-wrapper:hover .feed-apple {
+      transform: scale(1.15) rotate(8deg);
+    }
+
+    .feed-apple-wrapper:active .feed-apple {
+      transform: scale(0.85);
+    }
+
+    .apple-tap-badge {
+      background: var(--accent-yellow);
+      border: 2px solid var(--brand-color);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: clamp(13px, 2.8vw, 16px);
+      font-weight: 900;
+      color: var(--brand-color);
+      margin-top: 4px;
+      white-space: nowrap;
+      box-shadow: -2px 3px 0 var(--brand-color);
+    }
+
+    @keyframes appleBounce {
+      0% { transform: translate(-50%, -50%) translateY(0) scale(1); }
+      100% { transform: translate(-50%, -50%) translateY(-12px) scale(1.06); }
+    }
+
+    /* Particles / Sparkles Canvas */
     .particle-canvas {
       position: absolute;
       inset: 0;
@@ -295,22 +349,22 @@
       z-index: 8;
     }
 
-    /* Interactive Big Tools for Toddler Fingers */
+    /* Step Tools at Bottom */
     .tools-palette {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(10px, 2.5vw, 18px);
+      gap: clamp(10px, 2.5vw, 16px);
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       margin-top: 6px;
       z-index: 10;
     }
 
     .tool-btn {
       position: relative;
-      min-height: clamp(80px, 18vw, 106px);
+      min-height: clamp(80px, 17vw, 102px);
       border: 3px solid var(--brand-color);
-      border-radius: clamp(18px, 4vw, 26px);
+      border-radius: clamp(18px, 4vw, 24px);
       background: #fff;
       box-shadow: -4px 6px 0 var(--brand-color);
       display: flex;
@@ -332,44 +386,43 @@
     .tool-btn:active, .tool-btn.selected {
       transform: translateY(3px) translateX(-2px);
       box-shadow: -1px 2px 0 var(--brand-color);
-      border-color: var(--brand-color);
     }
 
     .tool-btn.brush-btn { background: #ffe9f2; }
     .tool-btn.water-btn { background: #e3f4ff; }
     .tool-btn.apple-btn { background: #e6fcf5; }
 
-    .tool-btn.brush-btn.selected { background: #ffc9db; }
-    .tool-btn.water-btn.selected { background: #bfe7ff; }
-    .tool-btn.apple-btn.selected { background: #b2f2bb; }
+    .tool-btn.brush-btn.selected { background: #ffc9db; border-color: #ff3f62; }
+    .tool-btn.water-btn.selected { background: #bfe7ff; border-color: #04b8d4; }
+    .tool-btn.apple-btn.selected { background: #b2f2bb; border-color: #37b24d; }
 
     .tool-icon {
-      font-size: clamp(34px, 8vw, 46px);
+      font-size: clamp(34px, 7.5vw, 44px);
       line-height: 1;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
       pointer-events: none;
     }
 
     .tool-label {
-      font-size: clamp(13px, 2.8vw, 16px);
+      font-size: clamp(13px, 2.7vw, 15px);
       font-weight: 900;
       color: var(--brand-color);
       letter-spacing: -0.01em;
       pointer-events: none;
     }
 
-    /* Victory Celebration Modal / Overlay */
+    /* Victory Celebration Overlay */
     .victory-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(255, 253, 245, 0.96);
-      border-radius: clamp(24px, 5vw, 40px);
+      background: rgba(255, 253, 245, 0.97);
+      border-radius: clamp(22px, 4.5vw, 36px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
-      z-index: 30;
+      padding: 20px 16px;
+      z-index: 40;
       opacity: 0;
       pointer-events: none;
       transform: scale(0.9);
@@ -383,20 +436,20 @@
     }
 
     .victory-tooth {
-      font-size: clamp(70px, 18vw, 110px);
+      font-size: clamp(70px, 16vw, 100px);
       line-height: 1;
       animation: victoryJump 1s infinite alternate cubic-bezier(0.34, 1.56, 0.64, 1);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       pointer-events: none;
     }
 
     @keyframes victoryJump {
       0% { transform: translateY(0) scale(1) rotate(-5deg); }
-      100% { transform: translateY(-20px) scale(1.12) rotate(5deg); }
+      100% { transform: translateY(-16px) scale(1.12) rotate(5deg); }
     }
 
     .victory-title {
-      font-size: clamp(28px, 6.5vw, 46px);
+      font-size: clamp(26px, 6vw, 42px);
       font-weight: 900;
       color: var(--brand-color);
       margin: 0 0 6px;
@@ -406,27 +459,27 @@
     }
 
     .victory-sub {
-      font-size: clamp(16px, 3.5vw, 22px);
+      font-size: clamp(15px, 3.2vw, 20px);
       font-weight: 700;
       color: var(--accent-purple);
-      margin: 0 0 24px;
+      margin: 0 0 20px;
       text-align: center;
       pointer-events: none;
     }
 
     .replay-btn {
-      min-width: clamp(200px, 60vw, 280px);
-      padding: clamp(16px, 3.5vw, 22px) 28px;
+      min-width: clamp(200px, 55vw, 270px);
+      padding: clamp(15px, 3.2vw, 20px) 24px;
       border: 3px solid var(--brand-color);
       border-radius: 999px;
       background: var(--accent-yellow);
       color: var(--brand-color);
       box-shadow: -4px 6px 0 var(--brand-color);
-      font: 900 clamp(20px, 4.5vw, 26px)/1 "Rubik", sans-serif;
+      font: 900 clamp(19px, 4vw, 24px)/1 "Rubik", sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       touch-action: manipulation;
@@ -453,40 +506,27 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Floating Sparkles */
+    /* Floating Pop Animations */
     .sparkle-pop {
       position: absolute;
       font-size: 28px;
       pointer-events: none;
       animation: floatUpFade 0.7s forwards ease-out;
-      z-index: 25;
+      z-index: 30;
     }
 
     @keyframes floatUpFade {
       0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
-      100% { transform: translate(-50%, -100px) scale(1.4); opacity: 0; }
+      100% { transform: translate(-50%, -80px) scale(1.4); opacity: 0; }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 16px 10px 48px;
-      }
-      .game-card {
-        padding: 18px 12px 24px;
-        border-radius: 26px;
-      }
-      .status-bar {
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-      .stage {
-        margin: 4px auto 14px;
-      }
-      .tool-btn {
-        min-height: 84px;
-        padding: 8px 4px;
-        border-radius: 20px;
-      }
+      body { padding: 12px 8px 40px; }
+      .game-card { padding: 14px 10px 20px; border-radius: 24px; }
+      .step-tracker { gap: 6px; margin-bottom: 8px; }
+      .step-pill { padding: 6px 4px; font-size: 13px; }
+      .stage { margin: 2px auto 10px; }
+      .tool-btn { min-height: 80px; padding: 6px 2px; border-radius: 18px; }
     }
   </style>
 </head>
@@ -499,16 +539,22 @@
     </header>
 
     <div class="game-card">
-      <div class="status-bar">
-        <div class="stars-meter" aria-label="Прогресс">
-          <span class="star-icon" id="star1">⭐</span>
-          <span class="star-icon" id="star2">⭐</span>
-          <span class="star-icon" id="star3">⭐</span>
-          <span class="star-icon" id="star4">⭐</span>
+      <!-- 3 Steps Bar -->
+      <div class="step-tracker" role="tablist">
+        <div class="step-pill active" id="step1">
+          <span>🪥</span> <span>1. Чистим</span>
         </div>
-        <div class="hint-bubble" id="hintBubble">
-          <span id="hintEmoji">👆</span> <span id="hintText">Тапай на пятнышки!</span>
+        <div class="step-pill" id="step2">
+          <span>💧</span> <span>2. Моем</span>
         </div>
+        <div class="step-pill" id="step3">
+          <span>🍎</span> <span>3. Кормим</span>
+        </div>
+      </div>
+
+      <!-- Current Step Hint -->
+      <div class="hint-banner" id="hintBanner">
+        <span id="hintEmoji">🪥</span> <span id="hintText">1. Почисти пятнышки щёточкой!</span>
       </div>
 
       <!-- Tooth Stage -->
@@ -517,7 +563,7 @@
 
         <!-- Animated SVG Tooth Character -->
         <svg class="tooth-svg" id="toothChar" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Tooth Body Shadow & Base -->
+          <!-- Tooth Body Base -->
           <path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>
           
           <!-- Glossy Highlights -->
@@ -536,10 +582,10 @@
             <circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>
           </g>
 
-          <!-- Cute Smile -->
+          <!-- Smile / Mouth -->
           <path id="toothMouth" d="M96 142 Q120 166 144 142" stroke="#2F2076" stroke-width="7" stroke-linecap="round" fill="#FF85A1"/>
 
-          <!-- Sparkle Crown / Sunnies (hidden until win) -->
+          <!-- Sparkle Crown (Win State) -->
           <g id="toothCrown" style="display: none;">
             <path d="M80 34 L96 6 L120 28 L144 6 L160 34 Z" fill="#FFE59A" stroke="#2F2076" stroke-width="6" stroke-linejoin="round"/>
             <circle cx="96" cy="6" r="4" fill="#FF3F62"/>
@@ -548,46 +594,31 @@
           </g>
         </svg>
 
-        <!-- Germs / Spots Over the Tooth -->
-        <div class="germ" id="germ1" style="top: 26%; left: 30%;" data-id="1">
-          <div class="germ-bubble"></div>
-          <span>👾</span>
-        </div>
-        <div class="germ" id="germ2" style="top: 28%; left: 70%;" data-id="2">
-          <div class="germ-bubble"></div>
-          <span>🍭</span>
-        </div>
-        <div class="germ" id="germ3" style="top: 66%; left: 34%;" data-id="3">
-          <div class="germ-bubble"></div>
-          <span>🍫</span>
-        </div>
-        <div class="germ" id="germ4" style="top: 64%; left: 66%;" data-id="4">
-          <div class="germ-bubble"></div>
-          <span>🦠</span>
-        </div>
+        <!-- Stage Dynamic Items Container (Step 1 Germs, Step 2 Foam, Step 3 Apple) -->
+        <div id="itemsLayer"></div>
       </div>
 
-      <!-- Large Toddler Tools -->
-      <div class="tools-palette" role="toolbar" aria-label="Инструменты для чистки">
+      <!-- 3 Action Tools -->
+      <div class="tools-palette" role="toolbar" aria-label="Инструменты">
         <button class="tool-btn brush-btn selected" id="toolBrush" aria-label="Зубная щётка">
           <span class="tool-icon">🪥</span>
-          <span class="tool-label">ЩЁТОЧКА</span>
+          <span class="tool-label">1. ЩЁТКА</span>
         </button>
         <button class="tool-btn water-btn" id="toolWater" aria-label="Водичка">
           <span class="tool-icon">💧</span>
-          <span class="tool-label">ВОДИЧКА</span>
+          <span class="tool-label">2. ВОДА</span>
         </button>
         <button class="tool-btn apple-btn" id="toolApple" aria-label="Яблочко">
           <span class="tool-icon">🍎</span>
-          <span class="tool-label">ЯБЛОЧКО</span>
+          <span class="tool-label">3. ЯБЛОКО</span>
         </button>
       </div>
 
-      <!-- Victory Overlay -->
+      <!-- Victory Modal -->
       <div class="victory-overlay" id="victoryModal">
-        <div class="victory-tooth">✨🦷👑✨</div>
-        <h2 class="victory-title">УРА! ЗУБИК СИЯЕТ!</h2>
-        <p class="victory-sub">Ты супер-герой чистых зубок! 🎉</p>
+        <div class="victory-tooth">✨🦷👑🍎✨</div>
+        <h2 class="victory-title">УРА! ЗУБИК ЧИСТЫЙ И СЫТЫЙ!</h2>
+        <p class="victory-sub">Ты супер-молодец! Зубик сияет и говорит спасибо! 🎉</p>
         <button class="replay-btn" id="replayBtn">
           <span class="replay-icon">🔄</span>
           <span>ЕЩЁ РАЗ!</span>
@@ -598,16 +629,14 @@
 
   <script>
     (() => {
-      // Audio Synthesizer via Web Audio API
+      // Audio Synthesizer
       let audioCtx = null;
       let soundEnabled = true;
 
       function initAudio() {
         if (!audioCtx) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (AudioContext) {
-            audioCtx = new AudioContext();
-          }
+          if (AudioContext) audioCtx = new AudioContext();
         }
         if (audioCtx && audioCtx.state === 'suspended') {
           audioCtx.resume();
@@ -619,114 +648,127 @@
         try {
           initAudio();
           if (!audioCtx) return;
-
           const now = audioCtx.currentTime;
 
-          if (type === 'pop') {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(450, now);
-            osc.frequency.exponentialRampToValueAtTime(900, now + 0.1);
-            gain.gain.setValueAtTime(0.35, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start(now);
-            osc.stop(now + 0.12);
-          } else if (type === 'brush') {
+          if (type === 'brush') {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'triangle';
-            osc.frequency.setValueAtTime(600, now);
-            osc.frequency.linearRampToValueAtTime(800, now + 0.05);
-            osc.frequency.linearRampToValueAtTime(650, now + 0.1);
-            gain.gain.setValueAtTime(0.2, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+            osc.frequency.setValueAtTime(550, now);
+            osc.frequency.linearRampToValueAtTime(750, now + 0.04);
+            osc.frequency.linearRampToValueAtTime(600, now + 0.09);
+            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start(now);
-            osc.stop(now + 0.12);
-          } else if (type === 'splash') {
-            [520, 650, 780].forEach((freq, i) => {
+            osc.stop(now + 0.1);
+          } else if (type === 'water') {
+            [520, 680, 840].forEach((freq, i) => {
               const osc = audioCtx.createOscillator();
               const gain = audioCtx.createGain();
               osc.type = 'sine';
               osc.frequency.setValueAtTime(freq, now + i * 0.03);
-              osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + i * 0.03 + 0.15);
-              gain.gain.setValueAtTime(0.2, now + i * 0.03);
-              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.03 + 0.2);
+              osc.frequency.exponentialRampToValueAtTime(freq * 1.6, now + i * 0.03 + 0.16);
+              gain.gain.setValueAtTime(0.22, now + i * 0.03);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.03 + 0.18);
               osc.connect(gain);
               gain.connect(audioCtx.destination);
               osc.start(now + i * 0.03);
-              osc.stop(now + i * 0.03 + 0.2);
+              osc.stop(now + i * 0.03 + 0.18);
             });
-          } else if (type === 'apple') {
-            [587, 740, 880].forEach((freq, i) => {
+          } else if (type === 'crunch') {
+            // Apple crunch noise burst + tone
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(200, now + 0.12);
+            gain.gain.setValueAtTime(0.35, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.14);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.14);
+
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(950, now + 0.05);
+            osc2.frequency.exponentialRampToValueAtTime(450, now + 0.18);
+            gain2.gain.setValueAtTime(0.3, now + 0.05);
+            gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.start(now + 0.05);
+            osc2.stop(now + 0.2);
+          } else if (type === 'step_complete') {
+            [587.33, 739.99, 880.00].forEach((note, i) => {
               const osc = audioCtx.createOscillator();
               const gain = audioCtx.createGain();
               osc.type = 'sine';
-              osc.frequency.setValueAtTime(freq, now + i * 0.06);
-              gain.gain.setValueAtTime(0.25, now + i * 0.06);
-              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.06 + 0.25);
+              osc.frequency.setValueAtTime(note, now + i * 0.08);
+              gain.gain.setValueAtTime(0.28, now + i * 0.08);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.22);
               osc.connect(gain);
               gain.connect(audioCtx.destination);
-              osc.start(now + i * 0.06);
-              osc.stop(now + i * 0.06 + 0.25);
+              osc.start(now + i * 0.08);
+              osc.stop(now + i * 0.08 + 0.22);
             });
           } else if (type === 'victory') {
-            const notes = [523.25, 659.25, 783.99, 1046.50];
-            notes.forEach((note, i) => {
+            [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((note, i) => {
               const osc = audioCtx.createOscillator();
               const gain = audioCtx.createGain();
               osc.type = 'triangle';
-              osc.frequency.setValueAtTime(note, now + i * 0.12);
-              gain.gain.setValueAtTime(0.3, now + i * 0.12);
-              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.12 + (i === 3 ? 0.6 : 0.2));
+              osc.frequency.setValueAtTime(note, now + i * 0.11);
+              gain.gain.setValueAtTime(0.32, now + i * 0.11);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.11 + (i === 4 ? 0.7 : 0.22));
               osc.connect(gain);
               gain.connect(audioCtx.destination);
-              osc.start(now + i * 0.12);
-              osc.stop(now + i * 0.12 + (i === 3 ? 0.6 : 0.2));
+              osc.start(now + i * 0.11);
+              osc.stop(now + i * 0.11 + (i === 4 ? 0.7 : 0.22));
             });
           }
         } catch (e) {
-          console.warn('Audio play error:', e);
+          console.warn('Audio error:', e);
         }
       }
 
-      // Game Elements & State
+      function bindAction(el, handler) {
+        let lastTime = 0;
+        const exec = (e) => {
+          const now = Date.now();
+          if (now - lastTime < 100) return;
+          lastTime = now;
+          initAudio();
+          handler(e);
+        };
+        el.addEventListener('click', exec);
+        el.addEventListener('pointerdown', exec);
+      }
+
+      // UI Elements
       const soundToggle = document.getElementById('soundToggle');
+      const step1Pill = document.getElementById('step1');
+      const step2Pill = document.getElementById('step2');
+      const step3Pill = document.getElementById('step3');
+      const hintEmoji = document.getElementById('hintEmoji');
+      const hintText = document.getElementById('hintText');
       const stage = document.getElementById('stage');
+      const itemsLayer = document.getElementById('itemsLayer');
       const toothChar = document.getElementById('toothChar');
       const toothMouth = document.getElementById('toothMouth');
       const toothCrown = document.getElementById('toothCrown');
-      const germs = [
-        document.getElementById('germ1'),
-        document.getElementById('germ2'),
-        document.getElementById('germ3'),
-        document.getElementById('germ4')
-      ];
-      const stars = [
-        document.getElementById('star1'),
-        document.getElementById('star2'),
-        document.getElementById('star3'),
-        document.getElementById('star4')
-      ];
-      const hintEmoji = document.getElementById('hintEmoji');
-      const hintText = document.getElementById('hintText');
       const victoryModal = document.getElementById('victoryModal');
       const replayBtn = document.getElementById('replayBtn');
-      const canvas = document.getElementById('particleCanvas');
-      const ctx = canvas.getContext('2d');
 
       const toolBrush = document.getElementById('toolBrush');
       const toolWater = document.getElementById('toolWater');
       const toolApple = document.getElementById('toolApple');
       const tools = [toolBrush, toolWater, toolApple];
 
-      let activeTool = 'brush';
-      let cleanedCount = 0;
-      const totalGerms = germs.length;
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
       let particles = [];
       let animFrame = null;
 
@@ -739,67 +781,26 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
-      function bindAction(el, handler) {
-        let lastTime = 0;
-        const exec = (e) => {
-          const now = Date.now();
-          if (now - lastTime < 120) return;
-          lastTime = now;
-          initAudio();
-          handler(e);
-        };
-        el.addEventListener('click', exec);
-        el.addEventListener('pointerdown', exec);
-      }
-
-      // Sound Toggle Handler
-      bindAction(soundToggle, (e) => {
+      // Sound Toggle
+      bindAction(soundToggle, () => {
         soundEnabled = !soundEnabled;
         soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
-        if (soundEnabled) playSound('pop');
+        if (soundEnabled) playSound('step_complete');
       });
 
-      // Tool Switching
-      function selectTool(toolName) {
-        activeTool = toolName;
-        tools.forEach(btn => btn.classList.remove('selected'));
-        if (toolName === 'brush') {
-          toolBrush.classList.add('selected');
-          hintEmoji.textContent = '🪥';
-          hintText.textContent = 'Чистим щёточкой!';
-          playSound('brush');
-        } else if (toolName === 'water') {
-          toolWater.classList.add('selected');
-          hintEmoji.textContent = '💧';
-          hintText.textContent = 'Смываем водичкой!';
-          playSound('splash');
-        } else if (toolName === 'apple') {
-          toolApple.classList.add('selected');
-          hintEmoji.textContent = '🍎';
-          hintText.textContent = 'Угощаем яблочком!';
-          playSound('apple');
-        }
-      }
-
-      bindAction(toolBrush, () => selectTool('brush'));
-      bindAction(toolWater, () => selectTool('water'));
-      bindAction(toolApple, () => selectTool('apple'));
-
-      // Particle System
-      function createParticles(x, y, count = 12, type = 'star') {
-        const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#8338EC', '#3A86FF'];
+      // Particles
+      function createParticles(x, y, count = 12, type = 'bubble') {
+        const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#8338EC', '#3A86FF', '#FFB3C6'];
         for (let i = 0; i < count; i++) {
           const angle = Math.random() * Math.PI * 2;
           const speed = 2 + Math.random() * 6;
           particles.push({
-            x,
-            y,
+            x, y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed - 1.5,
             size: 4 + Math.random() * 7,
             color: colors[Math.floor(Math.random() * colors.length)],
             alpha: 1,
-            life: 1,
             decay: 0.02 + Math.random() * 0.03,
             type: type
           });
@@ -808,23 +809,19 @@
 
       function updateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         for (let i = particles.length - 1; i >= 0; i--) {
           const p = particles[i];
           p.x += p.vx;
           p.y += p.vy;
           p.vy += 0.12;
           p.alpha -= p.decay;
-
           if (p.alpha <= 0) {
             particles.splice(i, 1);
             continue;
           }
-
           ctx.save();
           ctx.globalAlpha = p.alpha;
           ctx.fillStyle = p.color;
-
           if (p.type === 'bubble') {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -833,28 +830,23 @@
             ctx.lineWidth = 1.5;
             ctx.strokeStyle = '#3A86FF';
             ctx.stroke();
-          } else if (p.type === 'star') {
+          } else if (p.type === 'water') {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.size * 0.9, 0, Math.PI * 2);
+            ctx.fillStyle = '#04B8D4';
             ctx.fill();
           } else {
             ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size * 1.5);
           }
           ctx.restore();
         }
-
-        if (particles.length > 0) {
-          animFrame = requestAnimationFrame(updateParticles);
-        } else {
-          animFrame = null;
-        }
+        if (particles.length > 0) animFrame = requestAnimationFrame(updateParticles);
+        else animFrame = null;
       }
 
       function triggerParticles(x, y, count, type) {
         createParticles(x, y, count, type);
-        if (!animFrame) {
-          animFrame = requestAnimationFrame(updateParticles);
-        }
+        if (!animFrame) animFrame = requestAnimationFrame(updateParticles);
       }
 
       function showSparkleFloat(x, y, emoji = '✨') {
@@ -867,75 +859,191 @@
         setTimeout(() => span.remove(), 750);
       }
 
-      function cleanGerm(germ, event) {
-        if (!germ || germ.classList.contains('cleaned')) return;
+      // Game Steps: 1 = Brush, 2 = Water, 3 = Apple
+      let currentStep = 1;
+      let step1ItemsLeft = 4;
+      let step2ItemsLeft = 4;
+      let appleBites = 0;
 
-        initAudio();
-        germ.classList.add('cleaned');
-        cleanedCount++;
-
-        const rect = germ.getBoundingClientRect();
-        const stageRect = stage.getBoundingClientRect();
-        const localX = rect.left - stageRect.left + rect.width / 2;
-        const localY = rect.top - stageRect.top + rect.height / 2;
-
-        if (activeTool === 'brush') {
-          playSound('brush');
-          playSound('pop');
-          triggerParticles(localX, localY, 16, 'bubble');
-          showSparkleFloat(localX, localY, '🫧✨');
-        } else if (activeTool === 'water') {
-          playSound('splash');
-          triggerParticles(localX, localY, 18, 'bubble');
-          showSparkleFloat(localX, localY, '💦⭐');
-        } else {
-          playSound('apple');
-          playSound('pop');
-          triggerParticles(localX, localY, 18, 'star');
-          showSparkleFloat(localX, localY, '🍎💖');
-        }
-
-        const star = stars[cleanedCount - 1];
-        if (star) {
-          star.classList.add('active');
-        }
-
-        toothChar.classList.remove('happy');
-        void toothChar.offsetWidth;
-        toothChar.classList.add('happy');
-
-        if (cleanedCount >= totalGerms) {
-          onGameWon();
-        }
+      function highlightTool(name) {
+        tools.forEach(t => t.classList.remove('selected'));
+        if (name === 'brush') toolBrush.classList.add('selected');
+        if (name === 'water') toolWater.classList.add('selected');
+        if (name === 'apple') toolApple.classList.add('selected');
       }
 
-      germs.forEach((germ) => {
-        bindAction(germ, (e) => cleanGerm(germ, e));
-      });
+      bindAction(toolBrush, () => { if (currentStep === 1) startStep1(); });
+      bindAction(toolWater, () => { if (currentStep === 2) startStep2(); });
+      bindAction(toolApple, () => { if (currentStep === 3) startStep3(); });
 
-      let isDown = false;
-      function checkHit(x, y) {
-        germs.forEach(germ => {
-          if (germ.classList.contains('cleaned')) return;
-          const r = germ.getBoundingClientRect();
-          if (x >= r.left - 25 && x <= r.right + 25 && y >= r.top - 25 && y <= r.bottom + 25) {
-            cleanGerm(germ);
+      // STEP 1: BRUSH GERMS
+      function startStep1() {
+        currentStep = 1;
+        step1ItemsLeft = 4;
+        highlightTool('brush');
+
+        step1Pill.className = 'step-pill active';
+        step2Pill.className = 'step-pill';
+        step3Pill.className = 'step-pill';
+
+        hintEmoji.textContent = '🪥';
+        hintText.textContent = '1. Почисти пятнышки щёточкой!';
+
+        itemsLayer.innerHTML = `
+          <div class="game-item" id="germ1" style="top: 26%; left: 30%;" data-id="1">
+            <div class="item-bubble"></div><span>👾</span>
+          </div>
+          <div class="game-item" id="germ2" style="top: 28%; left: 70%;" data-id="2">
+            <div class="item-bubble"></div><span>🍭</span>
+          </div>
+          <div class="game-item" id="germ3" style="top: 66%; left: 34%;" data-id="3">
+            <div class="item-bubble"></div><span>🍫</span>
+          </div>
+          <div class="game-item" id="germ4" style="top: 64%; left: 66%;" data-id="4">
+            <div class="item-bubble"></div><span>🦠</span>
+          </div>
+        `;
+
+        document.querySelectorAll('#itemsLayer .game-item').forEach(germ => {
+          bindAction(germ, () => {
+            if (germ.classList.contains('popped')) return;
+            germ.classList.add('popped');
+            playSound('brush');
+
+            const rect = germ.getBoundingClientRect();
+            const stageRect = stage.getBoundingClientRect();
+            const lx = rect.left - stageRect.left + rect.width / 2;
+            const ly = rect.top - stageRect.top + rect.height / 2;
+
+            triggerParticles(lx, ly, 16, 'bubble');
+            showSparkleFloat(lx, ly, '🫧🪥');
+
+            toothChar.classList.remove('happy');
+            void toothChar.offsetWidth;
+            toothChar.classList.add('happy');
+
+            step1ItemsLeft--;
+            if (step1ItemsLeft <= 0) {
+              playSound('step_complete');
+              step1Pill.className = 'step-pill completed';
+              step1Pill.innerHTML = '<span>✅</span> <span>1. Почистили</span>';
+              setTimeout(() => {
+                startStep2();
+              }, 600);
+            }
+          });
+        });
+      }
+
+      // STEP 2: WASH WITH WATER
+      function startStep2() {
+        currentStep = 2;
+        step2ItemsLeft = 4;
+        highlightTool('water');
+
+        step2Pill.className = 'step-pill active';
+        step3Pill.className = 'step-pill';
+
+        hintEmoji.textContent = '💧';
+        hintText.textContent = '2. Смой пенку водичкой!';
+
+        itemsLayer.innerHTML = `
+          <div class="game-item" id="foam1" style="top: 28%; left: 32%;">
+            <div class="foam-bubble"></div><span>🫧</span>
+          </div>
+          <div class="game-item" id="foam2" style="top: 26%; left: 68%;">
+            <div class="foam-bubble"></div><span>🫧</span>
+          </div>
+          <div class="game-item" id="foam3" style="top: 64%; left: 36%;">
+            <div class="foam-bubble"></div><span>🫧</span>
+          </div>
+          <div class="game-item" id="foam4" style="top: 66%; left: 64%;">
+            <div class="foam-bubble"></div><span>🫧</span>
+          </div>
+        `;
+
+        document.querySelectorAll('#itemsLayer .game-item').forEach(foam => {
+          bindAction(foam, () => {
+            if (foam.classList.contains('popped')) return;
+            foam.classList.add('popped');
+            playSound('water');
+
+            const rect = foam.getBoundingClientRect();
+            const stageRect = stage.getBoundingClientRect();
+            const lx = rect.left - stageRect.left + rect.width / 2;
+            const ly = rect.top - stageRect.top + rect.height / 2;
+
+            triggerParticles(lx, ly, 18, 'water');
+            showSparkleFloat(lx, ly, '💦✨');
+
+            toothChar.classList.remove('happy');
+            void toothChar.offsetWidth;
+            toothChar.classList.add('happy');
+
+            step2ItemsLeft--;
+            if (step2ItemsLeft <= 0) {
+              playSound('step_complete');
+              step2Pill.className = 'step-pill completed';
+              step2Pill.innerHTML = '<span>✅</span> <span>2. Смыли</span>';
+              setTimeout(() => {
+                startStep3();
+              }, 600);
+            }
+          });
+        });
+      }
+
+      // STEP 3: FEED APPLE
+      function startStep3() {
+        currentStep = 3;
+        appleBites = 0;
+        highlightTool('apple');
+
+        step3Pill.className = 'step-pill active';
+        hintEmoji.textContent = '🍎';
+        hintText.textContent = '3. Угости зубик яблочком! (Тапай на яблоко)';
+
+        itemsLayer.innerHTML = `
+          <div class="feed-apple-wrapper" id="feedAppleBtn">
+            <div class="feed-apple" id="appleEmoji">🍎</div>
+            <div class="apple-tap-badge" id="appleBadge">👆 ХРУМ!</div>
+          </div>
+        `;
+
+        const appleBtn = document.getElementById('feedAppleBtn');
+        const appleEmoji = document.getElementById('appleEmoji');
+        const appleBadge = document.getElementById('appleBadge');
+
+        const appleStages = ['🍎', '🍏', '🍎', '✨'];
+
+        bindAction(appleBtn, () => {
+          appleBites++;
+          playSound('crunch');
+
+          const stageRect = stage.getBoundingClientRect();
+          const lx = stageRect.width / 2;
+          const ly = stageRect.height / 2 + 10;
+
+          triggerParticles(lx, ly, 18, 'confetti');
+          showSparkleFloat(lx, ly, '🍏💖');
+
+          toothChar.classList.remove('chewing');
+          void toothChar.offsetWidth;
+          toothChar.classList.add('chewing');
+
+          if (appleBites === 1) {
+            appleBadge.textContent = '👆 Ещё кусочек!';
+            appleEmoji.textContent = '🍏';
+          } else if (appleBites >= 2) {
+            appleBtn.style.display = 'none';
+            step3Pill.className = 'step-pill completed';
+            step3Pill.innerHTML = '<span>✅</span> <span>3. Накормили</span>';
+            onGameVictory();
           }
         });
       }
 
-      stage.addEventListener('mousedown', (e) => { isDown = true; checkHit(e.clientX, e.clientY); });
-      stage.addEventListener('mousemove', (e) => { if (isDown) checkHit(e.clientX, e.clientY); });
-      window.addEventListener('mouseup', () => { isDown = false; });
-
-      stage.addEventListener('touchstart', (e) => {
-        if (e.touches && e.touches[0]) checkHit(e.touches[0].clientX, e.touches[0].clientY);
-      }, { passive: true });
-      stage.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches[0]) checkHit(e.touches[0].clientX, e.touches[0].clientY);
-      }, { passive: true });
-
-      function onGameWon() {
+      function onGameVictory() {
         setTimeout(() => {
           playSound('victory');
           toothCrown.style.display = 'block';
@@ -944,15 +1052,15 @@
           toothChar.classList.add('super-sparkle');
 
           const stageRect = stage.getBoundingClientRect();
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 6; i++) {
             setTimeout(() => {
               triggerParticles(
-                stageRect.width * (0.2 + Math.random() * 0.6),
-                stageRect.height * (0.2 + Math.random() * 0.6),
-                20,
+                stageRect.width * (0.15 + Math.random() * 0.7),
+                stageRect.height * (0.15 + Math.random() * 0.7),
+                22,
                 'confetti'
               );
-            }, i * 160);
+            }, i * 140);
           }
 
           setTimeout(() => {
@@ -963,23 +1071,26 @@
 
       function resetGame() {
         initAudio();
-        playSound('pop');
-        cleanedCount = 0;
+        playSound('step_complete');
         victoryModal.classList.remove('active');
         toothCrown.style.display = 'none';
         toothMouth.setAttribute('d', 'M96 142 Q120 166 144 142');
         toothMouth.setAttribute('fill', '#FF85A1');
         toothChar.classList.remove('super-sparkle');
+        toothChar.classList.remove('chewing');
         toothChar.classList.remove('happy');
 
-        stars.forEach(star => star.classList.remove('active'));
-        germs.forEach(germ => germ.classList.remove('cleaned'));
+        step1Pill.innerHTML = '<span>🪥</span> <span>1. Чистим</span>';
+        step2Pill.innerHTML = '<span>💧</span> <span>2. Моем</span>';
+        step3Pill.innerHTML = '<span>🍎</span> <span>3. Кормим</span>';
 
-        selectTool('brush');
-        resizeCanvas();
+        startStep1();
       }
 
       bindAction(replayBtn, () => resetGame());
+
+      // Start initial Step 1
+      startStep1();
     })();
   </script>
 </body>
