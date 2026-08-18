@@ -467,6 +467,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -1719,12 +1721,12 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .tool-btn.water-btn.selected { background: #bfe7ff; border-color: #04b8d4; }
   .tool-btn.apple-btn.selected { background: #b2f2bb; border-color: #37b24d; }
 
-  .tool-btn.laser-btn { background: #fff3bf; }
-  .tool-btn.laser-btn.selected { background: #ffe066; border-color: #f08c00; }
-  .tool-btn.braces-btn { background: #f3d9fa; }
-  .tool-btn.braces-btn.selected { background: #eebefa; border-color: #ae3ec9; }
-  .tool-btn.scan-btn { background: #d0ebff; }
-  .tool-btn.scan-btn.selected { background: #a5d8ff; border-color: #1971c2; }
+  .tool-btn.puzzle-btn { background: #fff3bf; }
+  .tool-btn.puzzle-btn.selected { background: #ffe066; border-color: #f08c00; }
+  .tool-btn.memory-btn { background: #f3d9fa; }
+  .tool-btn.memory-btn.selected { background: #eebefa; border-color: #ae3ec9; }
+  .tool-btn.sorter-btn { background: #d3f9d8; }
+  .tool-btn.sorter-btn.selected { background: #b2f2bb; border-color: #2b8a3e; }
 
   .tool-icon {
     font-size: clamp(24px, 5.5vw, 32px);
@@ -1740,145 +1742,251 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     text-align: center;
   }
 
-  /* 5-7 Years Orthodontic Stage */
-  .stage-older {
+  /* 5-7 Years Educational Stage */
+  .stage-older-edu {
     position: relative;
     width: 100%;
-    min-height: 200px;
-    margin: 6px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .older-teeth-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(6px, 1.8vw, 14px);
-    width: 100%;
-    padding: 18px 4px;
-    box-sizing: border-box;
-  }
-  .older-tooth-col {
-    position: relative;
-    width: clamp(54px, 13vw, 76px);
-    height: clamp(80px, 18vw, 106px);
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-height: 220px;
+    margin: 4px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    touch-action: manipulation;
   }
-  .older-tooth-col.crooked-1 { transform: rotate(-10deg) translateY(-8px); }
-  .older-tooth-col.crooked-2 { transform: rotate(12deg) translateY(6px); }
-  .older-tooth-col.crooked-3 { transform: rotate(-8deg) translateY(5px); }
-  .older-tooth-col.crooked-4 { transform: rotate(10deg) translateY(-6px); }
-  .older-tooth-col.aligned {
-    transform: rotate(0deg) translateY(0) scale(1.05) !important;
-  }
-  .older-tooth-svg {
+
+  /* 1. Puzzle Styles */
+  .puzzle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 4px 10px rgba(47, 32, 118, 0.12));
-    pointer-events: none;
+    animation: fadeIn 0.3s ease;
   }
-  .older-monster {
-    position: absolute;
-    top: -24px;
-    font-size: clamp(26px, 6vw, 36px);
-    animation: monsterFloat 1.2s infinite alternate ease-in-out;
+  .puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: min(230px, 58vw);
+    height: min(230px, 58vw);
+    background: #eef2ff;
+    border: 3px dashed #7048c4;
+    border-radius: 20px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .puzzle-slot {
+    position: relative;
+    background: #fff;
+    border: 2.5px solid #d4cfef;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
     cursor: pointer;
-    z-index: 25;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
-    touch-action: manipulation;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: inset 0 2px 4px rgba(47, 32, 118, 0.06);
   }
-  @keyframes monsterFloat {
-    0% { transform: translateY(0) rotate(-6deg); }
-    100% { transform: translateY(-8px) rotate(8deg); }
+  .puzzle-slot.highlight {
+    border-color: #ffd43b;
+    background: #fff9db;
+    transform: scale(1.04);
+    box-shadow: 0 0 12px rgba(255, 212, 59, 0.8);
   }
-  .older-monster.defeated {
-    transform: scale(1.5) rotate(90deg);
-    opacity: 0;
-    pointer-events: none;
+  .puzzle-slot.filled {
+    background: #f8f0fc;
+    border-color: #845ef7;
+    box-shadow: -2px 3px 0 #2f2076;
+    animation: puzzleSnap 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .older-bracket {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 26px;
-    height: 26px;
-    border-radius: 7px;
+  .puzzle-slot__label {
+    font: 900 11px/1 "Rubik", sans-serif;
+    color: #928ca8;
+    margin-top: 3px;
+  }
+  .puzzle-slot.filled .puzzle-slot__label {
+    color: #7048c4;
+  }
+  @keyframes puzzleSnap {
+    0% { transform: scale(0.85) rotate(-6deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  .puzzle-tray {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .puzzle-piece-btn {
+    width: clamp(46px, 12vw, 54px);
+    height: clamp(46px, 12vw, 54px);
+    border-radius: 14px;
     background: #fff;
     border: 2px solid #2f2076;
+    box-shadow: -2px 3px 0 #2f2076;
+    font-size: 24px;
     display: grid;
     place-items: center;
-    font-size: 13px;
-    z-index: 15;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 2px 6px rgba(47, 32, 118, 0.15);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    touch-action: manipulation;
   }
-  .older-bracket.active {
-    background: #845ef7;
-    color: #fff;
-    box-shadow: 0 0 12px #845ef7;
-    transform: translate(-50%, -50%) scale(1.18);
+  .puzzle-piece-btn:hover {
+    transform: translateY(-2px);
   }
-  .ortho-archwire {
-    position: absolute;
-    top: 50%;
-    left: 8%;
-    right: 8%;
-    height: 5px;
-    background: linear-gradient(90deg, #ffe066, #ffd43b, #fcc419);
-    border: 1.5px solid #2f2076;
-    border-radius: 999px;
-    z-index: 12;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 0 12px rgba(255, 212, 59, 0.9);
+  .puzzle-piece-btn.selected {
+    background: #ffe59a;
+    transform: scale(1.12) translateY(-3px);
+    border-color: #f08c00;
+    box-shadow: -3px 4px 0 #2f2076;
   }
-  .ortho-archwire.visible {
-    transform: scaleX(1);
-  }
-  .scanner-beam {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 8px;
-    background: #04b8d4;
-    box-shadow: 0 0 20px #04b8d4, 0 0 40px #00e5ff;
-    z-index: 30;
+  .puzzle-piece-btn.placed {
+    opacity: 0.25;
     pointer-events: none;
-    border-radius: 999px;
-    opacity: 0;
-    transition: opacity 0.2s ease, left 0.15s ease-out;
+    transform: scale(0.85);
   }
-  .scanner-beam.active { opacity: 1; }
-  .scanner-badge {
+
+  /* 2. Memory Cards Styles */
+  .memory-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+  }
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(6px, 1.8vw, 10px);
+    width: min(290px, 78vw);
+    padding: 6px;
+    box-sizing: border-box;
+  }
+  .memory-card {
+    position: relative;
+    aspect-ratio: 1;
+    perspective: 800px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .memory-card__inner {
     position: absolute;
-    bottom: -18px;
-    background: #d3f9d8;
-    border: 1.5px solid #2b8a3e;
-    color: #2b8a3e;
-    font: 900 10px/1 "Rubik", sans-serif;
-    padding: 3px 6px;
-    border-radius: 999px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: all 0.25s ease;
-    z-index: 18;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    border: 2px solid #2f2076;
+    box-shadow: -2px 3px 0 #2f2076;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
   }
-  .scanner-badge.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .memory-card.flipped .memory-card__inner, .memory-card.matched .memory-card__inner {
+    transform: rotateY(180deg);
+  }
+  .memory-card__front, .memory-card__back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    display: grid;
+    place-items: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .memory-card__back {
+    background: #7048c4;
+    color: #ffe59a;
+    font: 900 16px/1 "Rubik", sans-serif;
+  }
+  .memory-card__front {
+    background: #fff;
+    font-size: clamp(22px, 5.5vw, 30px);
+    transform: rotateY(180deg);
+  }
+  .memory-card.matched .memory-card__inner {
+    border-color: #37b24d;
+    background: #d3f9d8;
+    box-shadow: 0 0 10px rgba(55, 178, 77, 0.6);
+  }
+
+  /* 3. Sorter Styles */
+  .sorter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+  }
+  .sorter-basket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: min(290px, 80vw);
+    min-height: 48px;
+    background: #e6fcf5;
+    border: 2.5px solid #0ca678;
+    border-radius: 999px;
+    padding: 6px 14px;
+    box-shadow: -2px 3px 0 #0ca678;
+    font: 900 13px/1 "Rubik", sans-serif;
+    color: #0ca678;
+    box-sizing: border-box;
+  }
+  .sorter-items-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 320px;
+  }
+  .sorter-item-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    background: #fff;
+    border: 2px solid #2f2076;
+    border-radius: 14px;
+    box-shadow: -2px 3px 0 #2f2076;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-width: 62px;
+    touch-action: manipulation;
+  }
+  .sorter-item-btn:hover {
+    transform: translateY(-2px);
+    background: #fff9db;
+  }
+  .sorter-item-btn.collected {
+    opacity: 0.3;
+    pointer-events: none;
+    transform: scale(0.85);
+  }
+  .sorter-item-btn.bad-shake {
+    animation: badShake 0.4s ease-in-out;
+    border-color: #ff3f62;
+    background: #ffe3e3;
+  }
+  @keyframes badShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .sorter-item-icon {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .sorter-item-label {
+    font: 900 10.5px/1 "Rubik", sans-serif;
+    color: #2f2076;
   }
 
   .victory-overlay {
@@ -2460,10 +2568,13 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     let gameStep2Left = 4;
     let gameAppleBites = 0;
 
-    // Older state (5-7 years)
-    let gameOlderMonstersLeft = 4;
-    let gameOlderBracketsLeft = 4;
-    let gameOlderScannedLeft = 4;
+    // Older educational state (5-7 years)
+    let selectedPuzzlePiece = null;
+    let puzzlePiecesLeft = 4;
+    let memoryFlippedCards = [];
+    let memoryMatchedPairs = 0;
+    let memoryIsLocked = false;
+    let sorterHealthyCollected = 0;
 
     let gameParticles = [];
     let gameAnimFrame = null;
@@ -2535,6 +2646,68 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
           gain2.connect(gameAudioCtx.destination);
           osc2.start(now + 0.05);
           osc2.stop(now + 0.2);
+        } else if (type === 'puzzle_snap') {
+          const osc = gameAudioCtx.createOscillator();
+          const gain = gameAudioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.14);
+          osc.connect(gain);
+          gain.connect(gameAudioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.14);
+        } else if (type === 'card_flip') {
+          const osc = gameAudioCtx.createOscillator();
+          const gain = gameAudioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.exponentialRampToValueAtTime(1000, now + 0.08);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.09);
+          osc.connect(gain);
+          gain.connect(gameAudioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } else if (type === 'match') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = gameAudioCtx.createOscillator();
+            const gain = gameAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + i * 0.06);
+            gain.gain.setValueAtTime(0.26, now + i * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.06 + 0.22);
+            osc.connect(gain);
+            gain.connect(gameAudioCtx.destination);
+            osc.start(now + i * 0.06);
+            osc.stop(now + i * 0.06 + 0.22);
+          });
+        } else if (type === 'basket') {
+          [650, 880, 1174].forEach((freq, i) => {
+            const osc = gameAudioCtx.createOscillator();
+            const gain = gameAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + i * 0.05);
+            gain.gain.setValueAtTime(0.24, now + i * 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.18);
+            osc.connect(gain);
+            gain.connect(gameAudioCtx.destination);
+            osc.start(now + i * 0.05);
+            osc.stop(now + i * 0.05 + 0.18);
+          });
+        } else if (type === 'wrong') {
+          const osc = gameAudioCtx.createOscillator();
+          const gain = gameAudioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(150, now + 0.18);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+          osc.connect(gain);
+          gain.connect(gameAudioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.2);
         } else if (type === 'laser') {
           const osc = gameAudioCtx.createOscillator();
           const gain = gameAudioCtx.createGain();
@@ -2713,7 +2886,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     function highlightGameTool(name) {
       const tools = document.querySelectorAll(".tool-btn");
       tools.forEach(t => t.classList.remove('selected'));
-      const id = name === 'brush' ? 'dgToolBrush' : (name === 'water' ? 'dgToolWater' : (name === 'apple' ? 'dgToolApple' : (name === 'laser' ? 'dgToolLaser' : (name === 'braces' ? 'dgToolBraces' : 'dgToolScan'))));
+      const id = name === 'brush' ? 'dgToolBrush' : (name === 'water' ? 'dgToolWater' : (name === 'apple' ? 'dgToolApple' : (name === 'puzzle' ? 'dgToolPuzzle' : (name === 'memory' ? 'dgToolMemory' : 'dgToolSorter'))));
       const tool = document.getElementById(id);
       if (tool) tool.classList.add('selected');
     }
@@ -2736,8 +2909,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         } else {
           tabOlder.classList.add("active");
           tabToddler.classList.remove("active");
-          if (badge) badge.textContent = "🚀 ДЛЯ СТАРШИХ (5–7 ЛЕТ)";
-          if (title) title.textContent = "Супер-Ортодонт!";
+          if (badge) badge.textContent = "🧩 РАЗВИВАЮЩИЕ ИГРЫ (5–7 ЛЕТ)";
+          if (title) title.textContent = "Умная Зубная Академия!";
         }
       }
 
@@ -2762,12 +2935,12 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       const emoji = document.getElementById("dgGameHintEmoji");
       const text = document.getElementById("dgGameHintText");
       if (emoji) emoji.textContent = '🪥';
-      if (text) text.textContent = '1. Почисти пятнышки щёточкой!';
+      if (text) text.textContent = '1. Почисти пятнышки щёточкой! (Тапай на монстриков)';
 
       const tooth = document.getElementById("dgGameToothChar");
       if (tooth) tooth.style.display = 'block';
 
-      const olderStage = document.getElementById("dgOlderStageRow");
+      const olderStage = document.getElementById("dgOlderEduStage");
       if (olderStage) olderStage.style.display = 'none';
 
       const layer = document.getElementById("dgGameItemsLayer");
@@ -2984,100 +3157,156 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     }
 
     // ==========================================
-    // 🚀 OLDER KIDS GAME (5-7 лет: Супер-Ортодонт)
+    // 🧩 OLDER KIDS EDUCATIONAL GAMES (5-7 лет: Пазлы, Мемори, Сортировка)
     // ==========================================
+    const puzzlePiecesData = [
+      { id: "p1", slot: "s1", icon: "👑", label: "Корона", hint: "Верх слева" },
+      { id: "p2", slot: "s2", icon: "👓", label: "Глазки", hint: "Верх справа" },
+      { id: "p3", slot: "s3", icon: "💎", label: "Элайнеры", hint: "Низ слева" },
+      { id: "p4", slot: "s4", icon: "🛡️", label: "Защита", hint: "Низ справа" }
+    ];
+
     function startOlderStep1() {
       gameStep = 1;
-      gameOlderMonstersLeft = 4;
-      highlightGameTool('laser');
+      puzzlePiecesLeft = 4;
+      selectedPuzzlePiece = null;
+      highlightGameTool('puzzle');
 
       const s1 = document.getElementById("dgGameStep1");
       const s2 = document.getElementById("dgGameStep2");
       const s3 = document.getElementById("dgGameStep3");
-      if (s1) { s1.className = 'step-pill active'; s1.innerHTML = '<span>⚡</span> <span>1. Бластер</span>'; }
-      if (s2) { s2.className = 'step-pill'; s2.innerHTML = '<span>📐</span> <span>2. Элайнеры</span>'; }
-      if (s3) { s3.className = 'step-pill'; s3.innerHTML = '<span>🤖</span> <span>3. ИИ-Сканер</span>'; }
+      if (s1) { s1.className = 'step-pill active'; s1.innerHTML = '<span>🧩</span> <span>1. Пазл</span>'; }
+      if (s2) { s2.className = 'step-pill'; s2.innerHTML = '<span>🧠</span> <span>2. Мемори</span>'; }
+      if (s3) { s3.className = 'step-pill'; s3.innerHTML = '<span>🍎</span> <span>3. Сортировка</span>'; }
 
       const emoji = document.getElementById("dgGameHintEmoji");
       const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '⚡';
-      if (text) text.textContent = '1. Уничтожь кариесных монстриков лазером! (Тапай на монстриков)';
+      if (emoji) emoji.textContent = '🧩';
+      if (text) text.textContent = '1. Собери кусочки пазла в рамочку! (Тапай на детальки)';
 
       const singleTooth = document.getElementById("dgGameToothChar");
       if (singleTooth) singleTooth.style.display = 'none';
 
-      const olderStage = document.getElementById("dgOlderStageRow");
-      if (olderStage) olderStage.style.display = 'flex';
+      const layer = document.getElementById("dgGameItemsLayer");
+      if (layer) layer.innerHTML = '';
 
-      const wire = document.getElementById("dgOrthoWire");
-      if (wire) wire.classList.remove("visible");
+      const olderStage = document.getElementById("dgOlderEduStage");
+      if (!olderStage) return;
+      olderStage.style.display = 'flex';
 
-      const beam = document.getElementById("dgScannerBeam");
-      if (beam) beam.classList.remove("active");
+      // Render Puzzle Stage
+      olderStage.innerHTML =
+        '<div class="puzzle-container" id="dgPuzzleContainer">' +
+          '<div class="puzzle-board" id="dgPuzzleBoard">' +
+            '<div class="puzzle-slot" id="dgSlot_s1" data-slot="s1"><span class="puzzle-slot__label">👑 1. Корона</span></div>' +
+            '<div class="puzzle-slot" id="dgSlot_s2" data-slot="s2"><span class="puzzle-slot__label">👓 2. Глазки</span></div>' +
+            '<div class="puzzle-slot" id="dgSlot_s3" data-slot="s3"><span class="puzzle-slot__label">💎 3. Элайнеры</span></div>' +
+            '<div class="puzzle-slot" id="dgSlot_s4" data-slot="s4"><span class="puzzle-slot__label">🛡️ 4. Защита</span></div>' +
+          '</div>' +
+          '<div class="puzzle-tray" id="dgPuzzleTray"></div>' +
+        '</div>';
 
-      document.querySelectorAll(".scanner-badge").forEach(b => b.classList.remove("visible"));
-      document.querySelectorAll(".older-bracket").forEach(b => b.classList.remove("active"));
+      const tray = document.getElementById("dgPuzzleTray");
+      const shuffledPieces = [...puzzlePiecesData].sort(() => Math.random() - 0.5);
 
-      const teethCols = document.querySelectorAll(".older-tooth-col");
-      teethCols.forEach((col, idx) => {
-        col.className = "older-tooth-col crooked-" + (idx + 1);
-      });
+      shuffledPieces.forEach(p => {
+        const btn = document.createElement("button");
+        btn.className = "puzzle-piece-btn";
+        btn.id = "dgPiece_" + p.id;
+        btn.dataset.pieceId = p.id;
+        btn.dataset.targetSlot = p.slot;
+        btn.textContent = p.icon;
+        btn.title = p.label;
+        btn.type = "button";
 
-      const monsters = [
-        { id: "dgMonster1", icon: "👾", label: "Кариос" },
-        { id: "dgMonster2", icon: "🦠", label: "Бактерия" },
-        { id: "dgMonster3", icon: "🍭", label: "Леденец" },
-        { id: "dgMonster4", icon: "🥤", label: "Газировка" }
-      ];
-
-      monsters.forEach((m, idx) => {
-        const col = document.getElementById("dgOlderTooth" + (idx + 1));
-        if (!col) return;
-        const oldM = col.querySelector(".older-monster");
-        if (oldM) oldM.remove();
-
-        const monsterEl = document.createElement("div");
-        monsterEl.className = "older-monster";
-        monsterEl.id = m.id;
-        monsterEl.textContent = m.icon;
-        monsterEl.title = "Победить " + m.label;
-
-        const zapHandler = (e) => {
+        const clickHandler = (e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (monsterEl.classList.contains("defeated")) return;
-          monsterEl.classList.add("defeated");
-          playGameSound('laser');
+          if (btn.classList.contains("placed")) return;
 
-          const rect = monsterEl.getBoundingClientRect();
-          const stage = document.getElementById("dgGameStage");
-          const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-          const lx = rect.left - sRect.left + (rect.width || 30) / 2;
-          const ly = rect.top - sRect.top + (rect.height || 30) / 2;
+          playGameSound('card_flip');
+          document.querySelectorAll(".puzzle-piece-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedPuzzlePiece = p;
 
-          triggerGameParticles(lx, ly, 20, 'laser');
-          showGameSparkleFloat(lx, ly, '⚡🛡️');
-
-          gameOlderMonstersLeft--;
-          if (gameOlderMonstersLeft <= 0) {
-            playGameSound('step_complete');
-            if (s1) {
-              s1.className = 'step-pill completed';
-              s1.innerHTML = '<span>✅</span> <span>1. Победили</span>';
-            }
-            setTimeout(() => { startOlderStep2(); }, 650);
+          // Highlight target slot
+          document.querySelectorAll(".puzzle-slot").forEach(s => s.classList.remove("highlight"));
+          const targetSlotEl = document.getElementById("dgSlot_" + p.slot);
+          if (targetSlotEl && !targetSlotEl.classList.contains("filled")) {
+            targetSlotEl.classList.add("highlight");
           }
         };
-        monsterEl.addEventListener('click', zapHandler);
-        monsterEl.addEventListener('pointerdown', zapHandler);
-        col.appendChild(monsterEl);
+
+        btn.addEventListener('click', clickHandler);
+        btn.addEventListener('pointerdown', clickHandler);
+        tray.appendChild(btn);
+      });
+
+      // Slot Click Handler
+      document.querySelectorAll(".puzzle-slot").forEach(slotEl => {
+        const slotHandler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (slotEl.classList.contains("filled")) return;
+
+          const slotId = slotEl.dataset.slot;
+          let pieceToPlace = selectedPuzzlePiece;
+
+          // If no piece selected yet, find the piece that belongs to this slot
+          if (!pieceToPlace || pieceToPlace.slot !== slotId) {
+            const match = puzzlePiecesData.find(p => p.slot === slotId);
+            const matchBtn = document.getElementById("dgPiece_" + match.id);
+            if (matchBtn && !matchBtn.classList.contains("placed")) {
+              pieceToPlace = match;
+            }
+          }
+
+          if (pieceToPlace && pieceToPlace.slot === slotId) {
+            const pieceBtn = document.getElementById("dgPiece_" + pieceToPlace.id);
+            if (pieceBtn) {
+              pieceBtn.classList.remove("selected");
+              pieceBtn.classList.add("placed");
+            }
+            slotEl.classList.remove("highlight");
+            slotEl.classList.add("filled");
+            slotEl.innerHTML = '<span style="font-size: 32px; line-height: 1;">' + pieceToPlace.icon + '</span><span class="puzzle-slot__label" style="color: #7048c4;">' + pieceToPlace.label + '</span>';
+
+            playGameSound('puzzle_snap');
+
+            const rect = slotEl.getBoundingClientRect();
+            const stage = document.getElementById("dgGameStage");
+            const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
+            const lx = rect.left - sRect.left + (rect.width || 60) / 2;
+            const ly = rect.top - sRect.top + (rect.height || 60) / 2;
+
+            triggerGameParticles(lx, ly, 18, 'laser');
+            showGameSparkleFloat(lx, ly, '🧩✨');
+
+            selectedPuzzlePiece = null;
+            puzzlePiecesLeft--;
+
+            if (puzzlePiecesLeft <= 0) {
+              playGameSound('step_complete');
+              if (s1) {
+                s1.className = 'step-pill completed';
+                s1.innerHTML = '<span>✅</span> <span>1. Пазл собран!</span>';
+              }
+              setTimeout(() => { startOlderStep2(); }, 750);
+            }
+          }
+        };
+
+        slotEl.addEventListener('click', slotHandler);
+        slotEl.addEventListener('pointerdown', slotHandler);
       });
     }
 
     function startOlderStep2() {
       gameStep = 2;
-      gameOlderBracketsLeft = 4;
-      highlightGameTool('braces');
+      memoryFlippedCards = [];
+      memoryMatchedPairs = 0;
+      memoryIsLocked = false;
+      highlightGameTool('memory');
 
       const s2 = document.getElementById("dgGameStep2");
       const s3 = document.getElementById("dgGameStep3");
@@ -3086,103 +3315,194 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
       const emoji = document.getElementById("dgGameHintEmoji");
       const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '📐';
-      if (text) text.textContent = '2. Установи светящиеся элайнеры на все зубки!';
+      if (emoji) emoji.textContent = '🧠';
+      if (text) text.textContent = '2. Мемори: найди все одинаковые пары карточек!';
 
-      const brackets = document.querySelectorAll(".older-bracket");
-      brackets.forEach((bracket, idx) => {
-        bracket.classList.remove("active");
-        bracket.onclick = null;
-        const clickHandler = (e) => {
+      const olderStage = document.getElementById("dgOlderEduStage");
+      if (!olderStage) return;
+
+      const memoryCards = [
+        { id: 1, sym: "tooth", icon: "🦷" },
+        { id: 2, sym: "tooth", icon: "🦷" },
+        { id: 3, sym: "brush", icon: "🪥" },
+        { id: 4, sym: "brush", icon: "🪥" },
+        { id: 5, sym: "apple", icon: "🍎" },
+        { id: 6, sym: "apple", icon: "🍎" },
+        { id: 7, sym: "align", icon: "💎" },
+        { id: 8, sym: "align", icon: "💎" }
+      ].sort(() => Math.random() - 0.5);
+
+      olderStage.innerHTML =
+        '<div class="memory-container" id="dgMemoryContainer">' +
+          '<div class="memory-grid" id="dgMemoryGrid"></div>' +
+        '</div>';
+
+      const grid = document.getElementById("dgMemoryGrid");
+
+      memoryCards.forEach((c, idx) => {
+        const card = document.createElement("div");
+        card.className = "memory-card";
+        card.dataset.sym = c.sym;
+        card.innerHTML =
+          '<div class="memory-card__inner">' +
+            '<div class="memory-card__back">?</div>' +
+            '<div class="memory-card__front">' + c.icon + '</div>' +
+          '</div>';
+
+        const cardHandler = (e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (bracket.classList.contains("active")) return;
-          bracket.classList.add("active");
-          playGameSound('align');
+          if (memoryIsLocked) return;
+          if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
 
-          const rect = bracket.getBoundingClientRect();
-          const stage = document.getElementById("dgGameStage");
-          const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-          const lx = rect.left - sRect.left + 13;
-          const ly = rect.top - sRect.top + 13;
+          card.classList.add("flipped");
+          playGameSound('card_flip');
+          memoryFlippedCards.push(card);
 
-          triggerGameParticles(lx, ly, 14, 'laser');
-          showGameSparkleFloat(lx, ly, '💎✨');
+          if (memoryFlippedCards.length === 2) {
+            memoryIsLocked = true;
+            const [c1, c2] = memoryFlippedCards;
+            if (c1.dataset.sym === c2.dataset.sym) {
+              // Match!
+              setTimeout(() => {
+                c1.classList.add("matched");
+                c2.classList.add("matched");
+                playGameSound('match');
 
-          gameOlderBracketsLeft--;
-          if (gameOlderBracketsLeft <= 0) {
-            const wire = document.getElementById("dgOrthoWire");
-            if (wire) wire.classList.add("visible");
+                const rect = c2.getBoundingClientRect();
+                const stage = document.getElementById("dgGameStage");
+                const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
+                const lx = rect.left - sRect.left + 20;
+                const ly = rect.top - sRect.top + 20;
 
-            setTimeout(() => {
-              playGameSound('align');
-              document.querySelectorAll(".older-tooth-col").forEach(col => {
-                col.className = "older-tooth-col aligned";
-              });
-              triggerGameParticles(150, 100, 25, 'laser');
-            }, 300);
+                triggerGameParticles(lx, ly, 16, 'laser');
+                showGameSparkleFloat(lx, ly, '⭐ ПАРА!');
 
-            if (s2) {
-              s2.className = 'step-pill completed';
-              s2.innerHTML = '<span>✅</span> <span>2. Выровняли</span>';
+                memoryMatchedPairs++;
+                memoryFlippedCards = [];
+                memoryIsLocked = false;
+
+                if (memoryMatchedPairs === 4) {
+                  playGameSound('step_complete');
+                  if (s2) {
+                    s2.className = 'step-pill completed';
+                    s2.innerHTML = '<span>✅</span> <span>2. Память 100%</span>';
+                  }
+                  setTimeout(() => { startOlderStep3(); }, 850);
+                }
+              }, 250);
+            } else {
+              // No match
+              setTimeout(() => {
+                c1.classList.remove("flipped");
+                c2.classList.remove("flipped");
+                playGameSound('wrong');
+                memoryFlippedCards = [];
+                memoryIsLocked = false;
+              }, 700);
             }
-            playGameSound('step_complete');
-            setTimeout(() => { startOlderStep3(); }, 1200);
           }
         };
-        bracket.addEventListener('click', clickHandler);
-        bracket.addEventListener('pointerdown', clickHandler);
+
+        card.addEventListener('click', cardHandler);
+        card.addEventListener('pointerdown', cardHandler);
+        grid.appendChild(card);
       });
     }
 
     function startOlderStep3() {
       gameStep = 3;
-      gameOlderScannedLeft = 4;
-      highlightGameTool('scan');
+      sorterHealthyCollected = 0;
+      highlightGameTool('sorter');
 
       const s3 = document.getElementById("dgGameStep3");
       if (s3) s3.className = 'step-pill active';
 
       const emoji = document.getElementById("dgGameHintEmoji");
       const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🤖';
-      if (text) text.textContent = '3. Проведи ИИ-сканером Diagnocat по зубкам!';
+      if (emoji) emoji.textContent = '🍎';
+      if (text) text.textContent = '3. Сортировка: собери 3 полезных продукта для крепких зубок!';
 
-      const beam = document.getElementById("dgScannerBeam");
-      if (beam) beam.classList.add("active");
+      const olderStage = document.getElementById("dgOlderEduStage");
+      if (!olderStage) return;
 
-      const teethCols = document.querySelectorAll(".older-tooth-col");
-      teethCols.forEach((col, idx) => {
-        const badge = col.querySelector(".scanner-badge");
-        const scanHandler = (e) => {
-          if (badge && !badge.classList.contains("visible")) {
-            badge.classList.add("visible");
-            playGameSound('scan');
+      const foods = [
+        { id: "f1", icon: "🧀", name: "Сыр (Кальций)", isHealthy: true },
+        { id: "f2", icon: "🍎", name: "Яблоко (Очищение)", isHealthy: true },
+        { id: "f3", icon: "🥕", name: "Морковь (Дёсны)", isHealthy: true },
+        { id: "f4", icon: "🍭", name: "Леденец (Сахар)", isHealthy: false, tip: "⚠️ Сахар вредит эмали!" },
+        { id: "f5", icon: "🥤", name: "Газировка (Кислота)", isHealthy: false, tip: "⚠️ Кислота разрушает зубки!" }
+      ].sort(() => Math.random() - 0.5);
 
-            const rect = col.getBoundingClientRect();
+      olderStage.innerHTML =
+        '<div class="sorter-container" id="dgSorterContainer">' +
+          '<div class="sorter-basket" id="dgSorterBasket">' +
+            '<span>🧺</span> <span id="dgBasketCount">Корзинка Здоровья: собрано 0 / 3</span>' +
+          '</div>' +
+          '<div class="sorter-items-row" id="dgSorterItemsRow"></div>' +
+        '</div>';
+
+      const row = document.getElementById("dgSorterItemsRow");
+      const basketCountEl = document.getElementById("dgBasketCount");
+
+      foods.forEach(f => {
+        const btn = document.createElement("button");
+        btn.className = "sorter-item-btn";
+        btn.id = "dgFood_" + f.id;
+        btn.type = "button";
+        btn.innerHTML =
+          '<span class="sorter-item-icon">' + f.icon + '</span>' +
+          '<span class="sorter-item-label">' + f.name + '</span>';
+
+        const foodHandler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (btn.classList.contains("collected")) return;
+
+          if (f.isHealthy) {
+            btn.classList.add("collected");
+            playGameSound('basket');
+
+            const rect = btn.getBoundingClientRect();
             const stage = document.getElementById("dgGameStage");
             const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-            const lx = rect.left - sRect.left + (rect.width || 54) / 2;
-            const ly = rect.top - sRect.top + (rect.height || 80) / 2;
+            const lx = rect.left - sRect.left + 30;
+            const ly = rect.top - sRect.top + 20;
 
-            if (beam) beam.style.left = (lx - 4) + 'px';
+            triggerGameParticles(lx, ly, 18, 'bubble');
+            showGameSparkleFloat(lx, ly, '🧺 ' + f.icon);
 
-            triggerGameParticles(lx, ly, 12, 'laser');
-            showGameSparkleFloat(lx, ly, '✅ 100%');
+            sorterHealthyCollected++;
+            if (basketCountEl) {
+              basketCountEl.textContent = 'Корзинка Здоровья: собрано ' + sorterHealthyCollected + ' / 3';
+            }
 
-            gameOlderScannedLeft--;
-            if (gameOlderScannedLeft <= 0) {
+            if (sorterHealthyCollected >= 3) {
               if (s3) {
                 s3.className = 'step-pill completed';
-                s3.innerHTML = '<span>✅</span> <span>3. Идеально!</span>';
+                s3.innerHTML = '<span>✅</span> <span>3. Эксперт!</span>';
               }
               onOlderGameVictory();
             }
+          } else {
+            btn.classList.remove("bad-shake");
+            void btn.offsetWidth;
+            btn.classList.add("bad-shake");
+            playGameSound('wrong');
+
+            const rect = btn.getBoundingClientRect();
+            const stage = document.getElementById("dgGameStage");
+            const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
+            const lx = rect.left - sRect.left + 30;
+            const ly = rect.top - sRect.top + 10;
+
+            showGameSparkleFloat(lx, ly, f.tip);
           }
         };
-        col.addEventListener('pointerenter', scanHandler);
-        col.addEventListener('pointerdown', scanHandler);
-        col.addEventListener('click', scanHandler);
+
+        btn.addEventListener('click', foodHandler);
+        btn.addEventListener('pointerdown', foodHandler);
+        row.appendChild(btn);
       });
     }
 
@@ -3207,9 +3527,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         const vicIcon = document.getElementById("dgVictoryIcon");
         const vicTitle = document.getElementById("dgVictoryTitle");
         const vicSub = document.getElementById("dgVictorySub");
-        if (vicIcon) vicIcon.textContent = "🏆✨💎🦷🥇";
-        if (vicTitle) vicTitle.textContent = "УРА! ТЫ — СУПЕР-ОРТОДОНТ!";
-        if (vicSub) vicSub.textContent = "Все зубки ровные, крепкие и защищены на 100%! Ты настоящий чемпион! 🌟";
+        if (vicIcon) vicIcon.textContent = "🏆✨🎓🦷🥇";
+        if (vicTitle) vicTitle.textContent = "УРА! ТЫ — ЗНАТОК ЗДОРОВОЙ УЛЫБКИ!";
+        if (vicSub) vicSub.textContent = "Ты решил все головоломки, развил супер-память и логику! Твои зубки под 100% защитой! 🌟";
 
         setTimeout(() => {
           if (modal) modal.classList.add('active');
@@ -3366,17 +3686,17 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
           if (gameStep === 3) startEmbeddedStep3();
           return;
         }
-        if (e.target.closest("#dgToolLaser")) {
+        if (e.target.closest("#dgToolPuzzle")) {
           e.preventDefault();
           if (gameStep === 1) startOlderStep1();
           return;
         }
-        if (e.target.closest("#dgToolBraces")) {
+        if (e.target.closest("#dgToolMemory")) {
           e.preventDefault();
           if (gameStep === 2) startOlderStep2();
           return;
         }
-        if (e.target.closest("#dgToolScan")) {
+        if (e.target.closest("#dgToolSorter")) {
           e.preventDefault();
           if (gameStep === 3) startOlderStep3();
           return;
@@ -3441,7 +3761,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         '<div class="dg-pq-bubble dg-pq-bubble--1"><span class="dg-pq-qmark">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></div>' +
         '<div class="dg-pq-bubble dg-pq-bubble--2"><span class="dg-pq-qmark">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></div>' +
         '<div class="dg-pq-bubble dg-pq-bubble--3"><span class="dg-pq-qmark">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></div>' +
-        '<button class="dg-pq-game-btn dg-open-game-btn" id="storyOpenGameBtn" data-game-mode="older" type="button"><span>🎮</span> <span>Интерактивная игра для детей «Супер-Ортодонт & Почисти зубик»</span></button>' +
+        '<button class="dg-pq-game-btn dg-open-game-btn" id="storyOpenGameBtn" data-game-mode="older" type="button"><span>🎮</span> <span>Развивающие игры для детей «Пазлы & Мемори»</span></button>' +
         '<span class="dg-pq-sparkle dg-pq-sparkle--3">✨</span>';
 
       photoContainer.appendChild(card);
@@ -3507,12 +3827,12 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
                   '<h3 class="dg-pcard__title">«Ровная улыбка»</h3>' +
                   '<p class="dg-pcard__lead">Следим за правильным развитием прикуса и естественной сменой зубов. Формируем здоровую и красивую улыбку к школе.</p>' +
                   '<ul class="dg-pcard__list">' +
+                    '<li><span class="dg-pcard__icon">🧩</span><span><strong>Развивающие игры и пазлы</strong> для познания здоровья зубок</span></li>' +
                     '<li><span class="dg-pcard__icon">📐</span><span><strong>Осмотр ортодонта</strong> и контроль развития челюстей</span></li>' +
-                    '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль смены зубов</strong> на постоянные крепкие зубки</span></li>' +
                     '<li><span class="dg-pcard__icon">🌟</span><span><strong>ИИ-диагностика Diagnocat</strong> для точной оценки прикуса</span></li>' +
                   '</ul>' +
                   '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
-                  '<button class="dg-pcard__game-btn dg-open-game-btn" data-game-mode="older" type="button"><span>🚀</span> <span>Сыграть: «Супер-Ортодонт» (5–7 лет)</span></button>' +
+                  '<button class="dg-pcard__game-btn dg-open-game-btn" data-game-mode="older" type="button"><span>🧩</span> <span>Сыграть: «Пазлы & Мемори» (5–7 лет)</span></button>' +
                 '</div>' +
               '</div>' +
             '</article>' +
@@ -3548,21 +3868,21 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
               '<div class="dg-game-teaser__left">' +
                 '<div class="dg-game-teaser__badges">' +
                   '<span class="dg-game-teaser__badge">👶 1–4 ГОДА</span>' +
-                  '<span class="dg-game-teaser__badge dg-game-teaser__badge--older">🚀 5–7 ЛЕТ</span>' +
+                  '<span class="dg-game-teaser__badge dg-game-teaser__badge--older">🧩 5–7 ЛЕТ</span>' +
                 '</div>' +
-                '<h3>Интерактивные игры для детей</h3>' +
-                '<p>Обучающие игры по возрасту: чистите зубик щёточкой для самых маленьких или побеждайте кариес и выравнивайте зубки элайнерами для будущих школьников!</p>' +
+                '<h3>Развивающие игры для детей</h3>' +
+                '<p>Обучающие игры по возрасту: чистите зубик щёточкой для самых маленьких или собирайте развивающие пазлы, тренируйте память и изучайте полезные продукты для будущих школьников!</p>' +
                 '<div class="dg-game-teaser__buttons">' +
                   '<button class="dg-game-teaser__btn dg-open-game-btn" data-game-mode="toddler" type="button"><span>👶</span> <span>1–4 года: Почисти зубик</span></button>' +
-                  '<button class="dg-game-teaser__btn dg-game-teaser__btn--older dg-open-game-btn" data-game-mode="older" type="button"><span>🚀</span> <span>5–7 лет: Супер-Ортодонт</span></button>' +
+                  '<button class="dg-game-teaser__btn dg-game-teaser__btn--older dg-open-game-btn" data-game-mode="older" type="button"><span>🧩</span> <span>5–7 лет: Пазлы и логика</span></button>' +
                 '</div>' +
               '</div>' +
               '<div class="dg-game-teaser__right dg-open-game-btn" id="openGameModalPreview" data-game-mode="older" title="Нажмите, чтобы сыграть!">' +
                 '<div class="dg-teaser-tooth-preview">' +
-                  '<span class="dg-teaser-crown">👑</span>' +
+                  '<span class="dg-teaser-crown">🧩</span>' +
                   '<span class="dg-teaser-tooth-icon">🦷</span>' +
                   '<span class="dg-teaser-sparkle">✨</span>' +
-                  '<div class="dg-teaser-braces-badge">💎 5–7 ЛЕТ</div>' +
+                  '<div class="dg-teaser-braces-badge">🧠 5–7 ЛЕТ</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
@@ -3584,23 +3904,23 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             '<button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть">✕</button>' +
             '<div class="game-wrapper">' +
               '<header class="game-header">' +
-                '<div class="game-badge">🚀 ДЛЯ СТАРШИХ (5–7 ЛЕТ)</div>' +
-                '<h2 class="game-title">Супер-Ортодонт!</h2>' +
+                '<div class="game-badge">🧩 РАЗВИВАЮЩИЕ ИГРЫ (5–7 ЛЕТ)</div>' +
+                '<h2 class="game-title">Умная Зубная Академия!</h2>' +
                 '<button class="sound-toggle" id="dgSoundToggle" aria-label="Включить / выключить звук" title="Звук">🔊</button>' +
               '</header>' +
               '<!-- Age Mode Tabs -->' +
               '<div class="game-mode-tabs" role="tablist">' +
                 '<button class="mode-tab-btn" id="dgModeTabToddler" type="button" data-mode="toddler"><span>👶 1–4 года</span></button>' +
-                '<button class="mode-tab-btn active" id="dgModeTabOlder" type="button" data-mode="older"><span>🚀 5–7 лет</span></button>' +
+                '<button class="mode-tab-btn active" id="dgModeTabOlder" type="button" data-mode="older"><span>🧩 5–7 лет (Пазлы)</span></button>' +
               '</div>' +
               '<div class="game-card">' +
                 '<div class="step-tracker" role="tablist">' +
-                  '<div class="step-pill active" id="dgGameStep1"><span>⚡</span> <span>1. Бластер</span></div>' +
-                  '<div class="step-pill" id="dgGameStep2"><span>📐</span> <span>2. Элайнеры</span></div>' +
-                  '<div class="step-pill" id="dgGameStep3"><span>🤖</span> <span>3. ИИ-Сканер</span></div>' +
+                  '<div class="step-pill active" id="dgGameStep1"><span>🧩</span> <span>1. Пазл</span></div>' +
+                  '<div class="step-pill" id="dgGameStep2"><span>🧠</span> <span>2. Мемори</span></div>' +
+                  '<div class="step-pill" id="dgGameStep3"><span>🍎</span> <span>3. Сортировка</span></div>' +
                 '</div>' +
                 '<div class="hint-banner" id="dgGameHintBanner">' +
-                  '<span id="dgGameHintEmoji">⚡</span> <span id="dgGameHintText">1. Уничтожь кариесных монстриков лазером!</span>' +
+                  '<span id="dgGameHintEmoji">🧩</span> <span id="dgGameHintText">1. Собери кусочки пазла в рамочку!</span>' +
                 '</div>' +
                 '<div class="stage" id="dgGameStage">' +
                   '<canvas class="particle-canvas" id="dgGameParticleCanvas"></canvas>' +
@@ -3625,35 +3945,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
                       '<circle cx="144" cy="6" r="4" fill="#8C5CFF"/>' +
                     '</g>' +
                   '</svg>' +
-                  '<!-- Older 4-teeth orthodontic row -->' +
-                  '<div class="older-teeth-row" id="dgOlderStageRow">' +
-                    '<div class="ortho-archwire" id="dgOrthoWire"></div>' +
-                    '<div class="scanner-beam" id="dgScannerBeam"></div>' +
-                    '<!-- Tooth 1 -->' +
-                    '<div class="older-tooth-col crooked-1" id="dgOlderTooth1">' +
-                      '<svg class="older-tooth-svg" viewBox="0 0 100 120" fill="none"><path d="M50 10 C75 10, 92 28, 90 58 C88 80, 80 112, 66 115 C58 117, 54 96, 50 96 C46 96, 42 117, 34 115 C20 112, 12 80, 10 58 C8 28, 25 10, 50 10 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="5"/><circle cx="38" cy="52" r="4" fill="#2F2076"/><circle cx="62" cy="52" r="4" fill="#2F2076"/><path d="M42 66 Q50 74 58 66" stroke="#2F2076" stroke-width="3.5" stroke-linecap="round"/></svg>' +
-                      '<div class="older-bracket" id="dgBracket1">⭐</div>' +
-                      '<div class="scanner-badge">✅ 100%</div>' +
-                    '</div>' +
-                    '<!-- Tooth 2 -->' +
-                    '<div class="older-tooth-col crooked-2" id="dgOlderTooth2">' +
-                      '<svg class="older-tooth-svg" viewBox="0 0 100 120" fill="none"><path d="M50 10 C75 10, 92 28, 90 58 C88 80, 80 112, 66 115 C58 117, 54 96, 50 96 C46 96, 42 117, 34 115 C20 112, 12 80, 10 58 C8 28, 25 10, 50 10 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="5"/><circle cx="38" cy="52" r="4" fill="#2F2076"/><circle cx="62" cy="52" r="4" fill="#2F2076"/><path d="M42 66 Q50 74 58 66" stroke="#2F2076" stroke-width="3.5" stroke-linecap="round"/></svg>' +
-                      '<div class="older-bracket" id="dgBracket2">💎</div>' +
-                      '<div class="scanner-badge">✅ 100%</div>' +
-                    '</div>' +
-                    '<!-- Tooth 3 -->' +
-                    '<div class="older-tooth-col crooked-3" id="dgOlderTooth3">' +
-                      '<svg class="older-tooth-svg" viewBox="0 0 100 120" fill="none"><path d="M50 10 C75 10, 92 28, 90 58 C88 80, 80 112, 66 115 C58 117, 54 96, 50 96 C46 96, 42 117, 34 115 C20 112, 12 80, 10 58 C8 28, 25 10, 50 10 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="5"/><circle cx="38" cy="52" r="4" fill="#2F2076"/><circle cx="62" cy="52" r="4" fill="#2F2076"/><path d="M42 66 Q50 74 58 66" stroke="#2F2076" stroke-width="3.5" stroke-linecap="round"/></svg>' +
-                      '<div class="older-bracket" id="dgBracket3">🌟</div>' +
-                      '<div class="scanner-badge">✅ 100%</div>' +
-                    '</div>' +
-                    '<!-- Tooth 4 -->' +
-                    '<div class="older-tooth-col crooked-4" id="dgOlderTooth4">' +
-                      '<svg class="older-tooth-svg" viewBox="0 0 100 120" fill="none"><path d="M50 10 C75 10, 92 28, 90 58 C88 80, 80 112, 66 115 C58 117, 54 96, 50 96 C46 96, 42 117, 34 115 C20 112, 12 80, 10 58 C8 28, 25 10, 50 10 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="5"/><circle cx="38" cy="52" r="4" fill="#2F2076"/><circle cx="62" cy="52" r="4" fill="#2F2076"/><path d="M42 66 Q50 74 58 66" stroke="#2F2076" stroke-width="3.5" stroke-linecap="round"/></svg>' +
-                      '<div class="older-bracket" id="dgBracket4">💜</div>' +
-                      '<div class="scanner-badge">✅ 100%</div>' +
-                    '</div>' +
-                  '</div>' +
+                  '<!-- Older Educational Stage (Puzzle, Memory, Sorter) -->' +
+                  '<div class="stage-older-edu" id="dgOlderEduStage"></div>' +
                   '<div id="dgGameItemsLayer"></div>' +
                 '</div>' +
                 '<!-- Toddler Tools Palette -->' +
@@ -3663,16 +3956,16 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
                   '<button class="tool-btn apple-btn" id="dgToolApple" aria-label="Яблочко"><span class="tool-icon">🍎</span><span class="tool-label">3. ЯБЛОКО</span></button>' +
                 '</div>' +
                 '<!-- Older Tools Palette -->' +
-                '<div class="tools-palette" id="dgOlderToolsPalette" role="toolbar" aria-label="Инструменты ортодонта">' +
-                  '<button class="tool-btn laser-btn selected" id="dgToolLaser" aria-label="Бластер"><span class="tool-icon">⚡</span><span class="tool-label">1. БЛАСТЕР</span></button>' +
-                  '<button class="tool-btn braces-btn" id="dgToolBraces" aria-label="Элайнеры"><span class="tool-icon">📐</span><span class="tool-label">2. ЭЛАЙНЕРЫ</span></button>' +
-                  '<button class="tool-btn scan-btn" id="dgToolScan" aria-label="ИИ-Сканер"><span class="tool-icon">🤖</span><span class="tool-label">3. ИИ-СКАНЕР</span></button>' +
+                '<div class="tools-palette" id="dgOlderToolsPalette" role="toolbar" aria-label="Развивающие игры">' +
+                  '<button class="tool-btn puzzle-btn selected" id="dgToolPuzzle" aria-label="Пазл"><span class="tool-icon">🧩</span><span class="tool-label">1. ПАЗЛ</span></button>' +
+                  '<button class="tool-btn memory-btn" id="dgToolMemory" aria-label="Мемори"><span class="tool-icon">🧠</span><span class="tool-label">2. МЕМОРИ</span></button>' +
+                  '<button class="tool-btn sorter-btn" id="dgToolSorter" aria-label="Сортировка"><span class="tool-icon">🍎</span><span class="tool-label">3. СОРТИРОВКА</span></button>' +
                 '</div>' +
                 '<!-- Victory Overlay -->' +
                 '<div class="victory-overlay" id="dgGameVictoryModal">' +
-                  '<div class="victory-tooth" id="dgVictoryIcon">🏆✨💎🦷🥇</div>' +
-                  '<h3 class="victory-title" id="dgVictoryTitle">УРА! ТЫ — СУПЕР-ОРТОДОНТ!</h3>' +
-                  '<p class="victory-sub" id="dgVictorySub">Все зубки ровные, крепкие и защищены на 100%! Ты настоящий чемпион! 🌟</p>' +
+                  '<div class="victory-tooth" id="dgVictoryIcon">🏆✨🎓🦷🥇</div>' +
+                  '<h3 class="victory-title" id="dgVictoryTitle">УРА! ТЫ — ЗНАТОК ЗДОРОВОЙ УЛЫБКИ!</h3>' +
+                  '<p class="victory-sub" id="dgVictorySub">Ты решил все головоломки, развил супер-память и логику! Твои зубки под 100% защитой! 🌟</p>' +
                   '<button class="replay-btn" id="dgReplayBtn"><span class="replay-icon">🔄</span><span>ЕЩЁ РАЗ!</span></button>' +
                 '</div>' +
               '</div>' +
