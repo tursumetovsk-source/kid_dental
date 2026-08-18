@@ -469,6 +469,10 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
+
+
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -1412,6 +1416,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     margin-bottom: 10px;
     position: relative;
     width: 100%;
+    padding: 0 46px;
+    box-sizing: border-box;
   }
   .game-badge {
     display: inline-flex;
@@ -1421,32 +1427,32 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     color: #fff;
     padding: 4px 14px;
     border-radius: 999px;
-    font-size: clamp(11.5px, 2.2vw, 13.5px);
+    font-size: clamp(11px, 2.2vw, 13px);
     font-weight: 900;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     box-shadow: 0 4px 12px rgba(112, 72, 196, 0.25);
     margin-bottom: 4px;
   }
   .game-title {
     margin: 0;
-    font-size: clamp(24px, 5vw, 36px);
+    font-size: clamp(20px, 4.4vw, 30px);
     font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     color: #2f2076;
   }
   .sound-toggle {
     position: absolute;
-    top: 0;
-    left: 4px;
-    width: 38px;
-    height: 38px;
+    top: 0px;
+    right: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: #fff;
-    border: 2.5px solid #2f2076;
-    box-shadow: -2px 3px 0 #2f2076;
-    font-size: 18px;
+    border: 2px solid #2f2076;
+    box-shadow: -2px 2px 0 #2f2076;
+    font-size: 16px;
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -1987,6 +1993,374 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .sorter-item-label {
     font: 900 10.5px/1 "Rubik", sans-serif;
     color: #2f2076;
+  }
+
+  /* =========================================
+     🎮 GAME HUB (Каталог всех детских игр)
+     ========================================= */
+  .game-hub-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+  }
+  .hub-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+  .hub-title {
+    font: 900 clamp(16px, 3.8vw, 22px)/1.1 "Rubik", sans-serif;
+    color: #2f2076;
+    margin: 0;
+  }
+  .hub-filters {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .hub-filter-btn {
+    font: 900 clamp(10px, 2.2vw, 12px)/1 "Rubik", sans-serif;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1.5px solid #2f2076;
+    background: #fff;
+    color: #2f2076;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+  }
+  .hub-filter-btn.active {
+    background: #ffe59a;
+    box-shadow: -2px 2px 0 #2f2076;
+  }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-height: min(330px, 52vh);
+    overflow-y: auto;
+    padding: 4px;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+  }
+  .hub-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 10px 8px;
+    background: #fff;
+    border: 2px solid #2f2076;
+    border-radius: 16px;
+    box-shadow: -2px 3px 0 #2f2076;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: left;
+    touch-action: manipulation;
+  }
+  .hub-card:hover {
+    transform: translateY(-2px);
+    box-shadow: -3px 5px 0 #2f2076;
+    background: #fffdf5;
+  }
+  .hub-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .hub-card-icon {
+    font-size: clamp(22px, 5vw, 28px);
+    line-height: 1;
+  }
+  .hub-card-age {
+    font: 900 9px/1 "Rubik", sans-serif;
+    padding: 3px 6px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #7048c4;
+    border: 1px solid #7048c4;
+    white-space: nowrap;
+  }
+  .hub-card-title {
+    font: 900 clamp(11.5px, 2.6vw, 13.5px)/1.15 "Rubik", sans-serif;
+    color: #2f2076;
+    margin: 2px 0 3px;
+  }
+  .hub-card-desc {
+    font: 600 clamp(9.5px, 2vw, 11px)/1.25 "Rubik", sans-serif;
+    color: #7a7593;
+    margin: 0 0 6px;
+    flex-grow: 1;
+  }
+  .hub-card-btn {
+    font: 900 10px/1 "Rubik", sans-serif;
+    color: #2f2076;
+    background: #ffe59a;
+    border: 1.5px solid #2f2076;
+    border-radius: 999px;
+    padding: 4px 8px;
+    margin-top: auto;
+    pointer-events: none;
+    align-self: flex-start;
+  }
+
+  /* Navigation in Active Game */
+  .game-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  .game-back-btn {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font: 900 11px/1 "Rubik", sans-serif;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 2px solid #2f2076;
+    background: #ffe59a;
+    color: #2f2076;
+    box-shadow: -2px 2px 0 #2f2076;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 25;
+  }
+  .game-back-btn:hover {
+    background: #ffd43b;
+    transform: scale(1.05);
+  }
+
+  /* =========================================
+     4. ⚡ КАРИЕС-БЛАСТЕР (Blaster Arcade)
+     ========================================= */
+  .blaster-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  .blaster-hud {
+    font: 900 12px/1 "Rubik", sans-serif;
+    color: #2f2076;
+    background: #fff3bf;
+    border: 1.5px solid #2f2076;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .blaster-stage-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 180px;
+  }
+  .blaster-tooth {
+    position: relative;
+    width: clamp(52px, 12vw, 68px);
+    height: clamp(74px, 16vw, 92px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blaster-monster-target {
+    position: absolute;
+    top: -24px;
+    font-size: clamp(28px, 6.5vw, 36px);
+    animation: monsterFloat 1.2s infinite alternate ease-in-out;
+    cursor: pointer;
+    z-index: 25;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    touch-action: manipulation;
+  }
+  .blaster-monster-target.defeated {
+    transform: scale(1.6) rotate(90deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* =========================================
+     5. 🎨 СМАЙЛ-СТИЛИСТ (Stylist Decorator)
+     ========================================= */
+  .stylist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+  }
+  .stylist-avatar-wrap {
+    position: relative;
+    width: min(170px, 44vw);
+    height: min(170px, 44vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stylist-accessory-crown {
+    position: absolute;
+    top: -14px;
+    font-size: 38px;
+    z-index: 20;
+    animation: bounce 1s infinite alternate;
+  }
+  .stylist-accessory-glasses {
+    position: absolute;
+    top: 42%;
+    font-size: 34px;
+    z-index: 20;
+  }
+  .stylist-accessory-braces {
+    position: absolute;
+    bottom: 24%;
+    font: 900 13px/1 "Rubik", sans-serif;
+    background: #845ef7;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1.5px solid #2f2076;
+    box-shadow: 0 0 8px #845ef7;
+    z-index: 20;
+  }
+  .stylist-categories {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .stylist-chip {
+    font: 900 10.5px/1 "Rubik", sans-serif;
+    padding: 5px 9px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1.5px solid #2f2076;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    touch-action: manipulation;
+  }
+  .stylist-chip:hover, .stylist-chip.active {
+    background: #ffe59a;
+    transform: scale(1.05);
+  }
+  .stylist-photo-btn {
+    font: 900 11px/1 "Rubik", sans-serif;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #51cf66;
+    color: #fff;
+    border: 2px solid #2f2076;
+    box-shadow: -2px 2px 0 #2f2076;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+
+  /* =========================================
+     6. 🔍 ДЕТЕКТИВ С ЛУПОЙ (Hidden Germs)
+     ========================================= */
+  .detective-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  .detective-board {
+    position: relative;
+    width: min(280px, 76vw);
+    height: 170px;
+    background: #2b254a;
+    border: 2.5px solid #2f2076;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .detective-spot {
+    position: absolute;
+    font-size: 26px;
+    cursor: pointer;
+    opacity: 0.35;
+    transition: all 0.25s ease;
+    animation: monsterFloat 1.5s infinite alternate ease-in-out;
+    padding: 8px;
+    touch-action: manipulation;
+  }
+  .detective-spot:hover, .detective-spot:active {
+    opacity: 0.95;
+    transform: scale(1.2);
+  }
+  .detective-spot.found {
+    opacity: 1 !important;
+    transform: scale(1.3) !important;
+    filter: drop-shadow(0 0 10px #51cf66);
+    pointer-events: none;
+  }
+
+  /* =========================================
+     7. 🎶 МУЗЫКАЛЬНЫЕ ЗУБКИ (Musical Teeth)
+     ========================================= */
+  .music-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+  }
+  .music-teeth-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(4px, 1.2vw, 8px);
+    width: 100%;
+  }
+  .music-tooth-btn {
+    width: clamp(42px, 10.5vw, 50px);
+    height: clamp(68px, 15vw, 86px);
+    border-radius: 14px;
+    border: 2px solid #2f2076;
+    box-shadow: -2px 3px 0 #2f2076;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    touch-action: manipulation;
+  }
+  .music-tooth-btn:active, .music-tooth-btn.jumpNote {
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 0 12px rgba(255, 212, 59, 0.9);
+  }
+  .music-note-name {
+    font: 900 11px/1 "Rubik", sans-serif;
+    color: #2f2076;
+    margin-top: 4px;
+  }
+  .music-auto-play-btn {
+    font: 900 11px/1 "Rubik", sans-serif;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #ffe59a;
+    color: #2f2076;
+    border: 1.5px solid #2f2076;
+    cursor: pointer;
+    margin-top: 4px;
   }
 
   .victory-overlay {
@@ -2555,29 +2929,135 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       }
     };
 
-
-
-    // Dual-Mode Game Audio & Particle Controller
+    // ==========================================
+    // 🎮 DENTAL GEN KIDS GAME CLUB (8 Games & Hub)
+    // ==========================================
     let gameAudioCtx = null;
     let gameSoundEnabled = true;
-    let currentGameMode = 'older'; // default to older (5-7 years) or toddler
-    let gameStep = 1;
+    let currentGameId = 'hub';
+    let currentHubFilter = 'all';
 
-    // Toddler state (1-4 years)
-    let gameStep1Left = 4;
-    let gameStep2Left = 4;
-    let gameAppleBites = 0;
+    // Game Specific States
+    let toddlerStep = 1;
+    let toddlerGermsLeft = 4;
+    let toddlerFoamsLeft = 4;
+    let toddlerBites = 0;
 
-    // Older educational state (5-7 years)
     let selectedPuzzlePiece = null;
     let puzzlePiecesLeft = 4;
+
     let memoryFlippedCards = [];
     let memoryMatchedPairs = 0;
     let memoryIsLocked = false;
+
     let sorterHealthyCollected = 0;
+
+    let blasterScore = 0;
+    const blasterTargetScore = 6;
+    let blasterInterval = null;
+
+    let stylistCrown = '👑';
+    let stylistGlasses = '🕶️';
+    let stylistBraces = '⭐ ЗОЛОТЫЕ';
+
+    let detectiveFound = 0;
+    const detectiveTarget = 4;
+
+    let musicIsAutoPlaying = false;
 
     let gameParticles = [];
     let gameAnimFrame = null;
+
+    const DG_GAMES = [
+      {
+        id: "toddler_spa",
+        category: "toddler",
+        icon: "🪥",
+        age: "1–4 года",
+        title: "Почисти зубик!",
+        desc: "Щётка, мыльные пузырьки и хрустящее яблочко",
+        badge: "👶 1–4 ГОДА: СПА ДЛЯ ЗУБИКА",
+        hintEmoji: "🪥",
+        hintText: "1. Почисти пятнышки щёточкой! (Тапай на монстриков)"
+      },
+      {
+        id: "musical_teeth",
+        category: "toddler",
+        icon: "🎶",
+        age: "1–7 лет",
+        title: "Музыкальные зубки",
+        desc: "Зубной ксилофон, звонкие нотки и песенка улыбки",
+        badge: "🎶 1–7 ЛЕТ: ЗУБНОЙ КСИЛОФОН",
+        hintEmoji: "🎹",
+        hintText: "Нажимай на цветные зубки, чтобы играть нотки!"
+      },
+      {
+        id: "puzzle",
+        category: "older",
+        icon: "🧩",
+        age: "5–7 лет",
+        title: "Зубной Пазл",
+        desc: "Собери супер-улыбку из 4 фигурных деталей",
+        badge: "🧩 5–7 ЛЕТ: ИНТЕРАКТИВНЫЙ ПАЗЛ",
+        hintEmoji: "🧩",
+        hintText: "Собери кусочки пазла в рамочку! (Тапай на детальки)"
+      },
+      {
+        id: "memory",
+        category: "older",
+        icon: "🧠",
+        age: "5–7 лет",
+        title: "Мемори: Пары",
+        desc: "Тренировка памяти и поиск парных картинок",
+        badge: "🧠 5–7 ЛЕТ: ТРЕНИРОВКА ПАМЯТИ",
+        hintEmoji: "🧠",
+        hintText: "Переворачивай карточки и находи одинаковые пары!"
+      },
+      {
+        id: "sorter",
+        category: "older",
+        icon: "🍎",
+        age: "5–7 лет",
+        title: "Умная Сортировка",
+        desc: "Выбирай кальций и витамины для крепкой эмали",
+        badge: "🍎 5–7 ЛЕТ: УМНАЯ СОРТИРОВКА",
+        hintEmoji: "🍎",
+        hintText: "Собери 3 полезных продукта в корзинку здоровья!"
+      },
+      {
+        id: "blaster",
+        category: "arcade",
+        icon: "⚡",
+        age: "4–7 лет",
+        title: "Кариес-Бластер",
+        desc: "Аркада: защити зубки лазером от кариесных монстриков",
+        badge: "⚡ 4–7 ЛЕТ: ЗАЩИТНИК ЭМАЛИ",
+        hintEmoji: "⚡",
+        hintText: "Тапай по кариесным монстрикам лазером!"
+      },
+      {
+        id: "stylist",
+        category: "arcade",
+        icon: "🎨",
+        age: "3–7 лет",
+        title: "Смайл-Стилист",
+        desc: "Примерь брекеты, корону, очки и стикеры на зубик",
+        badge: "🎨 3–7 ЛЕТ: СТИЛИСТ УЛЫБОК",
+        hintEmoji: "✨",
+        hintText: "Выбирай крутые брекеты и аксессуары для зубика!"
+      },
+      {
+        id: "detective",
+        category: "arcade",
+        icon: "🔍",
+        age: "4–7 лет",
+        title: "Детектив с лупой",
+        desc: "Найди скрытых микробов волшебным сканером",
+        badge: "🔍 4–7 ЛЕТ: ДЕТЕКТИВ ЗДОРОВЬЯ",
+        hintEmoji: "🔍",
+        hintText: "Найди 4 спрятанных микроба в зубном ряду!"
+      }
+    ];
 
     function initGameAudio() {
       if (!gameAudioCtx) {
@@ -2586,6 +3066,27 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       }
       if (gameAudioCtx && gameAudioCtx.state === 'suspended') {
         gameAudioCtx.resume();
+      }
+    }
+
+    function playMusicalNote(freq) {
+      if (!gameSoundEnabled) return;
+      try {
+        initGameAudio();
+        if (!gameAudioCtx) return;
+        const now = gameAudioCtx.currentTime;
+        const osc = gameAudioCtx.createOscillator();
+        const gain = gameAudioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.connect(gain);
+        gain.connect(gameAudioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } catch (e) {
+        console.warn('Note audio error:', e);
       }
     }
 
@@ -2720,31 +3221,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
           gain.connect(gameAudioCtx.destination);
           osc.start(now);
           osc.stop(now + 0.14);
-        } else if (type === 'align') {
-          [440, 554.37, 659.25, 880, 1108.73].forEach((freq, i) => {
-            const osc = gameAudioCtx.createOscillator();
-            const gain = gameAudioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now + i * 0.06);
-            gain.gain.setValueAtTime(0.25, now + i * 0.06);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.06 + 0.25);
-            osc.connect(gain);
-            gain.connect(gameAudioCtx.destination);
-            osc.start(now + i * 0.06);
-            osc.stop(now + i * 0.06 + 0.25);
-          });
-        } else if (type === 'scan') {
-          const osc = gameAudioCtx.createOscillator();
-          const gain = gameAudioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(880, now);
-          osc.frequency.linearRampToValueAtTime(1760, now + 0.08);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-          osc.connect(gain);
-          gain.connect(gameAudioCtx.destination);
-          osc.start(now);
-          osc.stop(now + 0.1);
         } else if (type === 'step_complete') {
           [587.33, 739.99, 880.00].forEach((note, i) => {
             const osc = gameAudioCtx.createOscillator();
@@ -2770,19 +3246,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             gain.connect(gameAudioCtx.destination);
             osc.start(now + i * 0.11);
             osc.stop(now + i * 0.11 + (i === 4 ? 0.7 : 0.22));
-          });
-        } else if (type === 'victory_older') {
-          [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98].forEach((note, i) => {
-            const osc = gameAudioCtx.createOscillator();
-            const gain = gameAudioCtx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(note, now + i * 0.07);
-            gain.gain.setValueAtTime(0.32, now + i * 0.07);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.07 + 0.35);
-            osc.connect(gain);
-            gain.connect(gameAudioCtx.destination);
-            osc.start(now + i * 0.07);
-            osc.stop(now + i * 0.07 + 0.35);
           });
         }
       } catch (e) {
@@ -2883,88 +3346,208 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       if (ctx) ctx.scale(dpr, dpr);
     }
 
-    function highlightGameTool(name) {
-      const tools = document.querySelectorAll(".tool-btn");
-      tools.forEach(t => t.classList.remove('selected'));
-      const id = name === 'brush' ? 'dgToolBrush' : (name === 'water' ? 'dgToolWater' : (name === 'apple' ? 'dgToolApple' : (name === 'puzzle' ? 'dgToolPuzzle' : (name === 'memory' ? 'dgToolMemory' : 'dgToolSorter'))));
-      const tool = document.getElementById(id);
-      if (tool) tool.classList.add('selected');
+    // ==========================================
+    // 🌟 GAME HUB ROUTER
+    // ==========================================
+    function showGameHub(filter) {
+      currentGameId = 'hub';
+      if (filter) currentHubFilter = filter;
+
+      const hubView = document.getElementById("dgGameHubView");
+      const activeView = document.getElementById("dgGameActiveView");
+      const backBtn = document.getElementById("dgBackToHubBtn");
+      const badge = document.getElementById("dgGameBadge");
+      const title = document.getElementById("dgGameTitle");
+      const victoryModal = document.getElementById("dgGameVictoryModal");
+
+      if (victoryModal) victoryModal.classList.remove('active');
+      if (hubView) hubView.style.display = 'flex';
+      if (activeView) activeView.style.display = 'none';
+      if (backBtn) backBtn.style.display = 'none';
+      if (badge) badge.textContent = "🎮 ДЕТСКИЙ ИГРОВОЙ КЛУБ";
+      if (title) title.textContent = "Выбери развивающую игру!";
+
+      // Update Filter Pills
+      document.querySelectorAll(".hub-filter-btn").forEach(btn => {
+        if (btn.dataset.filter === currentHubFilter) btn.classList.add("active");
+        else btn.classList.remove("active");
+      });
+
+      // Render Hub Grid Cards
+      const grid = document.getElementById("dgHubGrid");
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const filtered = DG_GAMES.filter(g => currentHubFilter === 'all' || g.category === currentHubFilter || (currentHubFilter === 'toddler' && g.id === 'musical_teeth'));
+
+      filtered.forEach(g => {
+        const card = document.createElement("div");
+        card.className = "hub-card";
+        card.dataset.gameId = g.id;
+        card.innerHTML =
+          '<div class="hub-card-top">' +
+            '<span class="hub-card-icon">' + g.icon + '</span>' +
+            '<span class="hub-card-age">' + g.age + '</span>' +
+          '</div>' +
+          '<h3 class="hub-card-title">' + g.title + '</h3>' +
+          '<p class="hub-card-desc">' + g.desc + '</p>' +
+          '<button class="hub-card-btn" type="button">Играть ▶️</button>';
+
+        const handler = (e) => {
+          e.preventDefault();
+          launchGame(g.id);
+        };
+        card.addEventListener('click', handler);
+        card.addEventListener('pointerdown', handler);
+        grid.appendChild(card);
+      });
     }
 
-    function setGameMode(mode) {
-      currentGameMode = mode;
-      const tabToddler = document.getElementById("dgModeTabToddler");
-      const tabOlder = document.getElementById("dgModeTabOlder");
-      const badge = document.querySelector(".game-badge");
-      const title = document.querySelector(".game-title");
-      const modal = document.getElementById("dgGameVictoryModal");
-      if (modal) modal.classList.remove("active");
+    function launchGame(gameId) {
+      initGameAudio();
+      playGameSound('step_complete');
+      currentGameId = gameId;
 
-      if (tabToddler && tabOlder) {
-        if (mode === 'toddler') {
-          tabToddler.classList.add("active");
-          tabOlder.classList.remove("active");
-          if (badge) badge.textContent = "🌟 ДЛЯ МАЛЫШЕЙ (1–4 ГОДА)";
-          if (title) title.textContent = "Почисти Зубик!";
-        } else {
-          tabOlder.classList.add("active");
-          tabToddler.classList.remove("active");
-          if (badge) badge.textContent = "🧩 РАЗВИВАЮЩИЕ ИГРЫ (5–7 ЛЕТ)";
-          if (title) title.textContent = "Умная Зубная Академия!";
+      const gameData = DG_GAMES.find(g => g.id === gameId) || DG_GAMES[0];
+      const hubView = document.getElementById("dgGameHubView");
+      const activeView = document.getElementById("dgGameActiveView");
+      const backBtn = document.getElementById("dgBackToHubBtn");
+      const badge = document.getElementById("dgGameBadge");
+      const title = document.getElementById("dgGameTitle");
+      const hintEmoji = document.getElementById("dgGameHintEmoji");
+      const hintText = document.getElementById("dgGameHintText");
+      const victoryModal = document.getElementById("dgGameVictoryModal");
+      const stage = document.getElementById("dgDynamicGameStage");
+      const itemsLayer = document.getElementById("dgGameItemsLayer");
+      const bottomBar = document.getElementById("dgBottomControlsBar");
+
+      if (victoryModal) victoryModal.classList.remove('active');
+      if (hubView) hubView.style.display = 'none';
+      if (activeView) activeView.style.display = 'block';
+      if (backBtn) backBtn.style.display = 'flex';
+      if (badge) badge.textContent = gameData.badge;
+      if (title) title.textContent = gameData.title;
+      if (hintEmoji) hintEmoji.textContent = gameData.hintEmoji;
+      if (hintText) hintText.textContent = gameData.hintText;
+      if (itemsLayer) itemsLayer.innerHTML = '';
+      if (stage) stage.innerHTML = '';
+      if (bottomBar) bottomBar.innerHTML = '';
+
+      resizeGameCanvas();
+
+      // Launch selected game engine
+      if (gameId === 'toddler_spa') startToddlerSpaGame();
+      else if (gameId === 'musical_teeth') startMusicalTeethGame();
+      else if (gameId === 'puzzle') startPuzzleGame();
+      else if (gameId === 'memory') startMemoryGame();
+      else if (gameId === 'sorter') startSorterGame();
+      else if (gameId === 'blaster') startBlasterGame();
+      else if (gameId === 'stylist') startStylistGame();
+      else if (gameId === 'detective') startDetectiveGame();
+      else startPuzzleGame();
+    }
+
+    function onGameVictory(icon, title, sub) {
+      setTimeout(() => {
+        playGameSound('victory');
+        const modal = document.getElementById("dgGameVictoryModal");
+        const vicIcon = document.getElementById("dgVictoryIcon");
+        const vicTitle = document.getElementById("dgVictoryTitle");
+        const vicSub = document.getElementById("dgVictorySub");
+
+        if (vicIcon) vicIcon.textContent = icon || "🏆✨🦷🥇";
+        if (vicTitle) vicTitle.textContent = title || "УРА! ТЫ ПОБЕДИЛ!";
+        if (vicSub) vicSub.textContent = sub || "Твои зубки здоровые, крепкие и сияют на 100%! 🌟";
+
+        const stage = document.getElementById("dgGameStage");
+        const stageRect = stage ? stage.getBoundingClientRect() : { width: 300, height: 260 };
+        for (let i = 0; i < 6; i++) {
+          setTimeout(() => {
+            triggerGameParticles(
+              stageRect.width * (0.15 + Math.random() * 0.7),
+              stageRect.height * (0.15 + Math.random() * 0.7),
+              22,
+              'confetti'
+            );
+          }, i * 140);
         }
+
+        setTimeout(() => {
+          if (modal) modal.classList.add('active');
+        }, 700);
+      }, 250);
+    }
+
+    // ==========================================
+    // 1. 🪥 GAME: TODDLER SPA (1-4 года)
+    // ==========================================
+    function startToddlerSpaGame() {
+      toddlerStep = 1;
+      toddlerGermsLeft = 4;
+      toddlerFoamsLeft = 4;
+      toddlerBites = 0;
+
+      const stage = document.getElementById("dgDynamicGameStage");
+      const bottomBar = document.getElementById("dgBottomControlsBar");
+      const hintEmoji = document.getElementById("dgGameHintEmoji");
+      const hintText = document.getElementById("dgGameHintText");
+
+      if (hintEmoji) hintEmoji.textContent = '🪥';
+      if (hintText) hintText.textContent = '1. Почисти пятнышки щёточкой! (Тапай на монстриков)';
+
+      if (stage) {
+        stage.innerHTML =
+          '<svg class="tooth-svg" id="dgSpaToothChar" viewBox="0 0 240 260" fill="none">' +
+            '<path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>' +
+            '<path d="M60 48 C78 34, 104 30, 120 30 C136 30, 162 34, 180 48 C160 38, 132 34, 120 34 C108 34, 80 38, 60 48 Z" fill="#E3F4FF" opacity="0.9"/>' +
+            '<ellipse cx="64" cy="74" rx="12" ry="24" transform="rotate(-25 64 74)" fill="#E3F4FF" opacity="0.8"/>' +
+            '<ellipse cx="62" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+            '<ellipse cx="178" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+            '<g id="dgSpaToothEyes">' +
+              '<ellipse cx="82" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+              '<circle cx="85" cy="111" r="4.5" fill="#FFFFFF"/>' +
+              '<ellipse cx="158" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+              '<circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>' +
+            '</g>' +
+            '<path id="dgSpaToothMouth" d="M96 142 Q120 166 144 142" stroke="#2F2076" stroke-width="7" stroke-linecap="round" fill="#FF85A1"/>' +
+            '<g id="dgSpaToothCrown" style="display: none;">' +
+              '<path d="M80 34 L96 6 L120 28 L144 6 L160 34 Z" fill="#FFE59A" stroke="#2F2076" stroke-width="6" stroke-linejoin="round"/>' +
+              '<circle cx="96" cy="6" r="4" fill="#FF3F62"/>' +
+              '<circle cx="120" cy="28" r="4" fill="#04B8D4"/>' +
+              '<circle cx="144" cy="6" r="4" fill="#8C5CFF"/>' +
+            '</g>' +
+          '</svg>';
       }
 
-      resetEmbeddedGame();
-    }
-
-    // ==========================================
-    // 👶 TODDLER GAME (1-4 года)
-    // ==========================================
-    function startEmbeddedStep1() {
-      gameStep = 1;
-      gameStep1Left = 4;
-      highlightGameTool('brush');
-
-      const s1 = document.getElementById("dgGameStep1");
-      const s2 = document.getElementById("dgGameStep2");
-      const s3 = document.getElementById("dgGameStep3");
-      if (s1) { s1.className = 'step-pill active'; s1.innerHTML = '<span>🪥</span> <span>1. Чистим</span>'; }
-      if (s2) { s2.className = 'step-pill'; s2.innerHTML = '<span>💧</span> <span>2. Моем</span>'; }
-      if (s3) { s3.className = 'step-pill'; s3.innerHTML = '<span>🍎</span> <span>3. Кормим</span>'; }
-
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🪥';
-      if (text) text.textContent = '1. Почисти пятнышки щёточкой! (Тапай на монстриков)';
-
-      const tooth = document.getElementById("dgGameToothChar");
-      if (tooth) tooth.style.display = 'block';
-
-      const olderStage = document.getElementById("dgOlderEduStage");
-      if (olderStage) olderStage.style.display = 'none';
+      if (bottomBar) {
+        bottomBar.innerHTML =
+          '<div class="tools-palette" role="toolbar">' +
+            '<button class="tool-btn brush-btn selected" id="dgBtnStepBrush"><span class="tool-icon">🪥</span><span class="tool-label">1. ЩЁТКА</span></button>' +
+            '<button class="tool-btn water-btn" id="dgBtnStepWater"><span class="tool-icon">💧</span><span class="tool-label">2. ВОДА</span></button>' +
+            '<button class="tool-btn apple-btn" id="dgBtnStepApple"><span class="tool-icon">🍎</span><span class="tool-label">3. ЯБЛОКО</span></button>' +
+          '</div>';
+      }
 
       const layer = document.getElementById("dgGameItemsLayer");
       if (!layer) return;
       layer.innerHTML =
-        '<div class="game-item" id="dgGerm1" style="top: 26%; left: 30%;"><div class="item-bubble"></div><span>👾</span></div>' +
-        '<div class="game-item" id="dgGerm2" style="top: 28%; left: 70%;"><div class="item-bubble"></div><span>🍭</span></div>' +
-        '<div class="game-item" id="dgGerm3" style="top: 66%; left: 34%;"><div class="item-bubble"></div><span>🍫</span></div>' +
-        '<div class="game-item" id="dgGerm4" style="top: 64%; left: 66%;"><div class="item-bubble"></div><span>🦠</span></div>';
+        '<div class="game-item" id="dgSpaGerm1" style="top: 26%; left: 30%;"><div class="item-bubble"></div><span>👾</span></div>' +
+        '<div class="game-item" id="dgSpaGerm2" style="top: 28%; left: 70%;"><div class="item-bubble"></div><span>🍭</span></div>' +
+        '<div class="game-item" id="dgSpaGerm3" style="top: 66%; left: 34%;"><div class="item-bubble"></div><span>🍫</span></div>' +
+        '<div class="game-item" id="dgSpaGerm4" style="top: 64%; left: 66%;"><div class="item-bubble"></div><span>🦠</span></div>';
 
       layer.querySelectorAll('.game-item').forEach(germ => {
         const handler = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           if (germ.classList.contains('popped')) return;
           germ.classList.add('popped');
           playGameSound('brush');
 
-          const stage = document.getElementById("dgGameStage");
-          const tooth = document.getElementById("dgGameToothChar");
+          const tooth = document.getElementById("dgSpaToothChar");
           const rect = germ.getBoundingClientRect();
-          const stageRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 250, height: 250 };
-          const lx = rect.left - stageRect.left + (rect.width || 44) / 2;
-          const ly = rect.top - stageRect.top + (rect.height || 44) / 2;
+          const stageRect = stage.getBoundingClientRect();
+          const lx = rect.left - stageRect.left + 22;
+          const ly = rect.top - stageRect.top + 22;
 
           triggerGameParticles(lx, ly, 16, 'bubble');
           showGameSparkleFloat(lx, ly, '🫧🪥');
@@ -2975,14 +3558,10 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             tooth.classList.add('happy');
           }
 
-          gameStep1Left--;
-          if (gameStep1Left <= 0) {
+          toddlerGermsLeft--;
+          if (toddlerGermsLeft <= 0) {
             playGameSound('step_complete');
-            if (s1) {
-              s1.className = 'step-pill completed';
-              s1.innerHTML = '<span>✅</span> <span>1. Почистили</span>';
-            }
-            setTimeout(() => { startEmbeddedStep2(); }, 600);
+            setTimeout(startToddlerSpaStep2, 600);
           }
         };
         germ.addEventListener('click', handler);
@@ -2990,43 +3569,40 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       });
     }
 
-    function startEmbeddedStep2() {
-      gameStep = 2;
-      gameStep2Left = 4;
-      highlightGameTool('water');
+    function startToddlerSpaStep2() {
+      toddlerStep = 2;
+      toddlerFoamsLeft = 4;
 
-      const s2 = document.getElementById("dgGameStep2");
-      const s3 = document.getElementById("dgGameStep3");
-      if (s2) s2.className = 'step-pill active';
-      if (s3) s3.className = 'step-pill';
+      const hintEmoji = document.getElementById("dgGameHintEmoji");
+      const hintText = document.getElementById("dgGameHintText");
+      if (hintEmoji) hintEmoji.textContent = '💧';
+      if (hintText) hintText.textContent = '2. Смой пенку водичкой!';
 
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '💧';
-      if (text) text.textContent = '2. Смой пенку водичкой!';
+      document.querySelectorAll(".tool-btn").forEach(t => t.classList.remove('selected'));
+      const btnWater = document.getElementById("dgBtnStepWater");
+      if (btnWater) btnWater.classList.add('selected');
 
       const layer = document.getElementById("dgGameItemsLayer");
       if (!layer) return;
       layer.innerHTML =
-        '<div class="game-item" id="dgFoam1" style="top: 28%; left: 32%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
-        '<div class="game-item" id="dgFoam2" style="top: 26%; left: 68%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
-        '<div class="game-item" id="dgFoam3" style="top: 64%; left: 36%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
-        '<div class="game-item" id="dgFoam4" style="top: 66%; left: 64%;"><div class="foam-bubble"></div><span>🫧</span></div>';
+        '<div class="game-item" id="dgSpaFoam1" style="top: 28%; left: 32%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgSpaFoam2" style="top: 26%; left: 68%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgSpaFoam3" style="top: 64%; left: 36%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgSpaFoam4" style="top: 66%; left: 64%;"><div class="foam-bubble"></div><span>🫧</span></div>';
 
       layer.querySelectorAll('.game-item').forEach(foam => {
         const handler = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           if (foam.classList.contains('popped')) return;
           foam.classList.add('popped');
           playGameSound('water');
 
-          const stage = document.getElementById("dgGameStage");
-          const tooth = document.getElementById("dgGameToothChar");
+          const tooth = document.getElementById("dgSpaToothChar");
           const rect = foam.getBoundingClientRect();
-          const stageRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 250, height: 250 };
-          const lx = rect.left - stageRect.left + (rect.width || 44) / 2;
-          const ly = rect.top - stageRect.top + (rect.height || 44) / 2;
+          const stage = document.getElementById("dgGameStage");
+          const stageRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0 };
+          const lx = rect.left - stageRect.left + 22;
+          const ly = rect.top - stageRect.top + 22;
 
           triggerGameParticles(lx, ly, 18, 'water');
           showGameSparkleFloat(lx, ly, '💦✨');
@@ -3037,14 +3613,10 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             tooth.classList.add('happy');
           }
 
-          gameStep2Left--;
-          if (gameStep2Left <= 0) {
+          toddlerFoamsLeft--;
+          if (toddlerFoamsLeft <= 0) {
             playGameSound('step_complete');
-            if (s2) {
-              s2.className = 'step-pill completed';
-              s2.innerHTML = '<span>✅</span> <span>2. Смыли</span>';
-            }
-            setTimeout(() => { startEmbeddedStep3(); }, 600);
+            setTimeout(startToddlerSpaStep3, 600);
           }
         };
         foam.addEventListener('click', handler);
@@ -3052,18 +3624,18 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       });
     }
 
-    function startEmbeddedStep3() {
-      gameStep = 3;
-      gameAppleBites = 0;
-      highlightGameTool('apple');
+    function startToddlerSpaStep3() {
+      toddlerStep = 3;
+      toddlerBites = 0;
 
-      const s3 = document.getElementById("dgGameStep3");
-      if (s3) s3.className = 'step-pill active';
+      const hintEmoji = document.getElementById("dgGameHintEmoji");
+      const hintText = document.getElementById("dgGameHintText");
+      if (hintEmoji) hintEmoji.textContent = '🍎';
+      if (hintText) hintText.textContent = '3. Угости зубик сочным яблочком! (Тапай на яблоко)';
 
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🍎';
-      if (text) text.textContent = '3. Угости зубик яблочком! (Тапай на яблоко)';
+      document.querySelectorAll(".tool-btn").forEach(t => t.classList.remove('selected'));
+      const btnApple = document.getElementById("dgBtnStepApple");
+      if (btnApple) btnApple.classList.add('selected');
 
       const layer = document.getElementById("dgGameItemsLayer");
       if (!layer) return;
@@ -3076,13 +3648,12 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       const appleBtn = document.getElementById("dgFeedAppleBtn");
       const appleEmoji = document.getElementById("dgAppleEmoji");
       const appleBadge = document.getElementById("dgAppleBadge");
-      const tooth = document.getElementById("dgGameToothChar");
+      const tooth = document.getElementById("dgSpaToothChar");
 
       if (appleBtn) {
         const handler = (e) => {
           e.preventDefault();
-          e.stopPropagation();
-          gameAppleBites++;
+          toddlerBites++;
           playGameSound('crunch');
 
           const stage = document.getElementById("dgGameStage");
@@ -3099,16 +3670,21 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             tooth.classList.add('chewing');
           }
 
-          if (gameAppleBites === 1) {
+          if (toddlerBites === 1) {
             if (appleBadge) appleBadge.textContent = '👆 Ещё кусочек!';
             if (appleEmoji) appleEmoji.textContent = '🍏';
-          } else if (gameAppleBites >= 2) {
+          } else if (toddlerBites >= 2) {
             appleBtn.style.display = 'none';
-            if (s3) {
-              s3.className = 'step-pill completed';
-              s3.innerHTML = '<span>✅</span> <span>3. Накормили</span>';
+            const crown = document.getElementById("dgSpaToothCrown");
+            const mouth = document.getElementById("dgSpaToothMouth");
+            if (crown) crown.style.display = 'block';
+            if (mouth) {
+              mouth.setAttribute('d', 'M84 136 Q120 184 156 136 Z');
+              mouth.setAttribute('fill', '#FF3F62');
             }
-            onEmbeddedGameVictory();
+            if (tooth) tooth.classList.add('super-sparkle');
+
+            onGameVictory("✨🦷👑🍎✨", "УРА! ЗУБИК ЧИСТЫЙ И СЫТЫЙ!", "Ты супер-молодец! Зубик сияет от счастья и говорит спасибо! 🎉");
           }
         };
         appleBtn.addEventListener('click', handler);
@@ -3116,244 +3692,269 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       }
     }
 
-    function onEmbeddedGameVictory() {
-      setTimeout(() => {
-        playGameSound('victory');
-        const crown = document.getElementById("dgGameToothCrown");
-        const mouth = document.getElementById("dgGameToothMouth");
-        const tooth = document.getElementById("dgGameToothChar");
-        const modal = document.getElementById("dgGameVictoryModal");
-        if (crown) crown.style.display = 'block';
-        if (mouth) {
-          mouth.setAttribute('d', 'M84 136 Q120 184 156 136 Z');
-          mouth.setAttribute('fill', '#FF3F62');
-        }
-        if (tooth) tooth.classList.add('super-sparkle');
-
-        const stage = document.getElementById("dgGameStage");
-        const stageRect = stage ? stage.getBoundingClientRect() : { width: 250, height: 250 };
-        for (let i = 0; i < 6; i++) {
-          setTimeout(() => {
-            triggerGameParticles(
-              stageRect.width * (0.15 + Math.random() * 0.7),
-              stageRect.height * (0.15 + Math.random() * 0.7),
-              22,
-              'confetti'
-            );
-          }, i * 140);
-        }
-
-        const vicIcon = document.getElementById("dgVictoryIcon");
-        const vicTitle = document.getElementById("dgVictoryTitle");
-        const vicSub = document.getElementById("dgVictorySub");
-        if (vicIcon) vicIcon.textContent = "✨🦷👑🍎✨";
-        if (vicTitle) vicTitle.textContent = "УРА! ЗУБИК ЧИСТЫЙ И СЫТЫЙ!";
-        if (vicSub) vicSub.textContent = "Ты супер-молодец! Зубик сияет и говорит спасибо! 🎉";
-
-        setTimeout(() => {
-          if (modal) modal.classList.add('active');
-        }, 800);
-      }, 300);
-    }
-
     // ==========================================
-    // 🧩 OLDER KIDS EDUCATIONAL GAMES (5-7 лет: Пазлы, Мемори, Сортировка)
+    // 2. 🎶 GAME: MUSICAL TEETH (1-7 лет)
     // ==========================================
-    const puzzlePiecesData = [
-      { id: "p1", slot: "s1", icon: "👑", label: "Корона", hint: "Верх слева" },
-      { id: "p2", slot: "s2", icon: "👓", label: "Глазки", hint: "Верх справа" },
-      { id: "p3", slot: "s3", icon: "💎", label: "Элайнеры", hint: "Низ слева" },
-      { id: "p4", slot: "s4", icon: "🛡️", label: "Защита", hint: "Низ справа" }
+    const MUSIC_NOTES = [
+      { id: "c", note: "До", freq: 261.63, color: "#ff6b6b", bg: "#ffe3e3" },
+      { id: "d", note: "Ре", freq: 293.66, color: "#f76707", bg: "#ffe8cc" },
+      { id: "e", note: "Ми", freq: 329.63, color: "#fcc419", bg: "#fff9db" },
+      { id: "f", note: "Фа", freq: 349.23, color: "#51cf66", bg: "#d3f9d8" },
+      { id: "g", note: "Соль", freq: 392.00, color: "#22b8cf", bg: "#c5f6fa" },
+      { id: "a", note: "Ля", freq: 440.00, color: "#845ef7", bg: "#eebefa" }
     ];
 
-    function startOlderStep1() {
-      gameStep = 1;
-      puzzlePiecesLeft = 4;
-      selectedPuzzlePiece = null;
-      highlightGameTool('puzzle');
+    function startMusicalTeethGame() {
+      musicIsAutoPlaying = false;
+      const stage = document.getElementById("dgDynamicGameStage");
+      const bottomBar = document.getElementById("dgBottomControlsBar");
 
-      const s1 = document.getElementById("dgGameStep1");
-      const s2 = document.getElementById("dgGameStep2");
-      const s3 = document.getElementById("dgGameStep3");
-      if (s1) { s1.className = 'step-pill active'; s1.innerHTML = '<span>🧩</span> <span>1. Пазл</span>'; }
-      if (s2) { s2.className = 'step-pill'; s2.innerHTML = '<span>🧠</span> <span>2. Мемори</span>'; }
-      if (s3) { s3.className = 'step-pill'; s3.innerHTML = '<span>🍎</span> <span>3. Сортировка</span>'; }
+      if (stage) {
+        let teethHtml = '<div class="music-container"><div class="music-teeth-row" id="dgMusicTeethRow">';
+        MUSIC_NOTES.forEach((n, idx) => {
+          teethHtml +=
+            '<button class="music-tooth-btn" id="dgNote_' + n.id + '" data-freq="' + n.freq + '" data-idx="' + idx + '" style="background: ' + n.bg + '; border-color: ' + n.color + ';" type="button">' +
+              '<span style="font-size: 26px; line-height: 1;">🦷</span>' +
+              '<span class="music-note-name" style="color: ' + n.color + ';">' + n.note + '</span>' +
+            '</button>';
+        });
+        teethHtml += '</div></div>';
+        stage.innerHTML = teethHtml;
 
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🧩';
-      if (text) text.textContent = '1. Собери кусочки пазла в рамочку! (Тапай на детальки)';
+        MUSIC_NOTES.forEach(n => {
+          const btn = document.getElementById("dgNote_" + n.id);
+          if (btn) {
+            const trigger = (e) => {
+              e.preventDefault();
+              playMusicalNote(n.freq);
+              btn.classList.remove('jumpNote');
+              void btn.offsetWidth;
+              btn.classList.add('jumpNote');
 
-      const singleTooth = document.getElementById("dgGameToothChar");
-      if (singleTooth) singleTooth.style.display = 'none';
-
-      const layer = document.getElementById("dgGameItemsLayer");
-      if (layer) layer.innerHTML = '';
-
-      const olderStage = document.getElementById("dgOlderEduStage");
-      if (!olderStage) return;
-      olderStage.style.display = 'flex';
-
-      // Render Puzzle Stage
-      olderStage.innerHTML =
-        '<div class="puzzle-container" id="dgPuzzleContainer">' +
-          '<div class="puzzle-board" id="dgPuzzleBoard">' +
-            '<div class="puzzle-slot" id="dgSlot_s1" data-slot="s1"><span class="puzzle-slot__label">👑 1. Корона</span></div>' +
-            '<div class="puzzle-slot" id="dgSlot_s2" data-slot="s2"><span class="puzzle-slot__label">👓 2. Глазки</span></div>' +
-            '<div class="puzzle-slot" id="dgSlot_s3" data-slot="s3"><span class="puzzle-slot__label">💎 3. Элайнеры</span></div>' +
-            '<div class="puzzle-slot" id="dgSlot_s4" data-slot="s4"><span class="puzzle-slot__label">🛡️ 4. Защита</span></div>' +
-          '</div>' +
-          '<div class="puzzle-tray" id="dgPuzzleTray"></div>' +
-        '</div>';
-
-      const tray = document.getElementById("dgPuzzleTray");
-      const shuffledPieces = [...puzzlePiecesData].sort(() => Math.random() - 0.5);
-
-      shuffledPieces.forEach(p => {
-        const btn = document.createElement("button");
-        btn.className = "puzzle-piece-btn";
-        btn.id = "dgPiece_" + p.id;
-        btn.dataset.pieceId = p.id;
-        btn.dataset.targetSlot = p.slot;
-        btn.textContent = p.icon;
-        btn.title = p.label;
-        btn.type = "button";
-
-        const clickHandler = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (btn.classList.contains("placed")) return;
-
-          playGameSound('card_flip');
-          document.querySelectorAll(".puzzle-piece-btn").forEach(b => b.classList.remove("selected"));
-          btn.classList.add("selected");
-          selectedPuzzlePiece = p;
-
-          // Highlight target slot
-          document.querySelectorAll(".puzzle-slot").forEach(s => s.classList.remove("highlight"));
-          const targetSlotEl = document.getElementById("dgSlot_" + p.slot);
-          if (targetSlotEl && !targetSlotEl.classList.contains("filled")) {
-            targetSlotEl.classList.add("highlight");
+              const rect = btn.getBoundingClientRect();
+              const s = document.getElementById("dgGameStage");
+              const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+              const lx = rect.left - sRect.left + 22;
+              const ly = rect.top - sRect.top - 10;
+              triggerGameParticles(lx, ly, 10, 'bubble');
+              showGameSparkleFloat(lx, ly, '🎵 ' + n.note);
+            };
+            btn.addEventListener('click', trigger);
+            btn.addEventListener('pointerdown', trigger);
           }
-        };
+        });
+      }
 
-        btn.addEventListener('click', clickHandler);
-        btn.addEventListener('pointerdown', clickHandler);
-        tray.appendChild(btn);
-      });
+      if (bottomBar) {
+        bottomBar.innerHTML =
+          '<div style="display: flex; gap: 8px; justify-content: center; width: 100%;">' +
+            '<button class="music-auto-play-btn" id="dgMusicMelodyBtn" type="button"><span>🎵</span> <span>Сыграть песенку улыбки</span></button>' +
+          '</div>';
 
-      // Slot Click Handler
-      document.querySelectorAll(".puzzle-slot").forEach(slotEl => {
-        const slotHandler = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (slotEl.classList.contains("filled")) return;
+        const melBtn = document.getElementById("dgMusicMelodyBtn");
+        if (melBtn) {
+          melBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (musicIsAutoPlaying) return;
+            musicIsAutoPlaying = true;
+            melBtn.textContent = '🎶 Играет мелодия...';
 
-          const slotId = slotEl.dataset.slot;
-          let pieceToPlace = selectedPuzzlePiece;
+            const melody = [
+              { id: "c", delay: 0 },
+              { id: "e", delay: 300 },
+              { id: "g", delay: 600 },
+              { id: "e", delay: 900 },
+              { id: "g", delay: 1200 },
+              { id: "a", delay: 1500 },
+              { id: "g", delay: 1800 },
+              { id: "e", delay: 2200 },
+              { id: "c", delay: 2600 }
+            ];
 
-          // If no piece selected yet, find the piece that belongs to this slot
-          if (!pieceToPlace || pieceToPlace.slot !== slotId) {
-            const match = puzzlePiecesData.find(p => p.slot === slotId);
-            const matchBtn = document.getElementById("dgPiece_" + match.id);
-            if (matchBtn && !matchBtn.classList.contains("placed")) {
-              pieceToPlace = match;
-            }
-          }
+            melody.forEach(m => {
+              setTimeout(() => {
+                const note = MUSIC_NOTES.find(x => x.id === m.id);
+                const btn = document.getElementById("dgNote_" + m.id);
+                if (note && btn) {
+                  playMusicalNote(note.freq);
+                  btn.classList.remove('jumpNote');
+                  void btn.offsetWidth;
+                  btn.classList.add('jumpNote');
+                  const rect = btn.getBoundingClientRect();
+                  const s = document.getElementById("dgGameStage");
+                  const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+                  showGameSparkleFloat(rect.left - sRect.left + 22, rect.top - sRect.top - 10, '✨🎵');
+                }
+              }, m.delay);
+            });
 
-          if (pieceToPlace && pieceToPlace.slot === slotId) {
-            const pieceBtn = document.getElementById("dgPiece_" + pieceToPlace.id);
-            if (pieceBtn) {
-              pieceBtn.classList.remove("selected");
-              pieceBtn.classList.add("placed");
-            }
-            slotEl.classList.remove("highlight");
-            slotEl.classList.add("filled");
-            slotEl.innerHTML = '<span style="font-size: 32px; line-height: 1;">' + pieceToPlace.icon + '</span><span class="puzzle-slot__label" style="color: #7048c4;">' + pieceToPlace.label + '</span>';
-
-            playGameSound('puzzle_snap');
-
-            const rect = slotEl.getBoundingClientRect();
-            const stage = document.getElementById("dgGameStage");
-            const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-            const lx = rect.left - sRect.left + (rect.width || 60) / 2;
-            const ly = rect.top - sRect.top + (rect.height || 60) / 2;
-
-            triggerGameParticles(lx, ly, 18, 'laser');
-            showGameSparkleFloat(lx, ly, '🧩✨');
-
-            selectedPuzzlePiece = null;
-            puzzlePiecesLeft--;
-
-            if (puzzlePiecesLeft <= 0) {
-              playGameSound('step_complete');
-              if (s1) {
-                s1.className = 'step-pill completed';
-                s1.innerHTML = '<span>✅</span> <span>1. Пазл собран!</span>';
-              }
-              setTimeout(() => { startOlderStep2(); }, 750);
-            }
-          }
-        };
-
-        slotEl.addEventListener('click', slotHandler);
-        slotEl.addEventListener('pointerdown', slotHandler);
-      });
+            setTimeout(() => {
+              musicIsAutoPlaying = false;
+              if (melBtn) melBtn.innerHTML = '<span>🎵</span> <span>Сыграть ещё раз!</span>';
+              onGameVictory("🎶✨🦷🎹🥇", "БРАВО, МАЭСТРО УЛЫБОК!", "Ты сыграл замечательную мелодию чистых и здоровых зубок! 🌟");
+            }, 3200);
+          });
+        }
+      }
     }
 
-    function startOlderStep2() {
-      gameStep = 2;
+    // ==========================================
+    // 3. 🧩 GAME: PUZZLE (5-7 лет)
+    // ==========================================
+    const PUZZLE_ITEMS = [
+      { id: "p1", slot: "s1", icon: "👑", label: "Корона" },
+      { id: "p2", slot: "s2", icon: "👓", label: "Глазки" },
+      { id: "p3", slot: "s3", icon: "💎", label: "Элайнеры" },
+      { id: "p4", slot: "s4", icon: "🛡️", label: "Защита" }
+    ];
+
+    function startPuzzleGame() {
+      puzzlePiecesLeft = 4;
+      selectedPuzzlePiece = null;
+
+      const stage = document.getElementById("dgDynamicGameStage");
+      const bottomBar = document.getElementById("dgBottomControlsBar");
+
+      if (stage) {
+        stage.innerHTML =
+          '<div class="puzzle-container" id="dgPuzzleContainer">' +
+            '<div class="puzzle-board" id="dgPuzzleBoard">' +
+              '<div class="puzzle-slot" id="dgSlot_s1" data-slot="s1"><span class="puzzle-slot__label">👑 1. Корона</span></div>' +
+              '<div class="puzzle-slot" id="dgSlot_s2" data-slot="s2"><span class="puzzle-slot__label">👓 2. Глазки</span></div>' +
+              '<div class="puzzle-slot" id="dgSlot_s3" data-slot="s3"><span class="puzzle-slot__label">💎 3. Элайнеры</span></div>' +
+              '<div class="puzzle-slot" id="dgSlot_s4" data-slot="s4"><span class="puzzle-slot__label">🛡️ 4. Защита</span></div>' +
+            '</div>' +
+            '<div class="puzzle-tray" id="dgPuzzleTray"></div>' +
+          '</div>';
+
+        const tray = document.getElementById("dgPuzzleTray");
+        const shuffled = [...PUZZLE_ITEMS].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach(p => {
+          const btn = document.createElement("button");
+          btn.className = "puzzle-piece-btn";
+          btn.id = "dgPiece_" + p.id;
+          btn.dataset.pieceId = p.id;
+          btn.dataset.targetSlot = p.slot;
+          btn.textContent = p.icon;
+          btn.title = p.label;
+          btn.type = "button";
+
+          const clickHandler = (e) => {
+            e.preventDefault();
+            if (btn.classList.contains("placed")) return;
+
+            playGameSound('card_flip');
+            document.querySelectorAll(".puzzle-piece-btn").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            selectedPuzzlePiece = p;
+
+            document.querySelectorAll(".puzzle-slot").forEach(s => s.classList.remove("highlight"));
+            const targetSlotEl = document.getElementById("dgSlot_" + p.slot);
+            if (targetSlotEl && !targetSlotEl.classList.contains("filled")) {
+              targetSlotEl.classList.add("highlight");
+            }
+          };
+
+          btn.addEventListener('click', clickHandler);
+          btn.addEventListener('pointerdown', clickHandler);
+          tray.appendChild(btn);
+        });
+
+        document.querySelectorAll(".puzzle-slot").forEach(slotEl => {
+          const slotHandler = (e) => {
+            e.preventDefault();
+            if (slotEl.classList.contains("filled")) return;
+
+            const slotId = slotEl.dataset.slot;
+            let pieceToPlace = selectedPuzzlePiece;
+
+            if (!pieceToPlace || pieceToPlace.slot !== slotId) {
+              const match = PUZZLE_ITEMS.find(p => p.slot === slotId);
+              const matchBtn = document.getElementById("dgPiece_" + match.id);
+              if (matchBtn && !matchBtn.classList.contains("placed")) {
+                pieceToPlace = match;
+              }
+            }
+
+            if (pieceToPlace && pieceToPlace.slot === slotId) {
+              const pieceBtn = document.getElementById("dgPiece_" + pieceToPlace.id);
+              if (pieceBtn) {
+                pieceBtn.classList.remove("selected");
+                pieceBtn.classList.add("placed");
+              }
+              slotEl.classList.remove("highlight");
+              slotEl.classList.add("filled");
+              slotEl.innerHTML = '<span style="font-size: 38px; line-height: 1;">' + pieceToPlace.icon + '</span><span class="puzzle-slot__label">' + pieceToPlace.label + '</span>';
+
+              playGameSound('puzzle_snap');
+
+              const rect = slotEl.getBoundingClientRect();
+              const s = document.getElementById("dgGameStage");
+              const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+              const lx = rect.left - sRect.left + (rect.width || 80) / 2;
+              const ly = rect.top - sRect.top + (rect.height || 80) / 2;
+
+              triggerGameParticles(lx, ly, 18, 'laser');
+              showGameSparkleFloat(lx, ly, '✨ ' + pieceToPlace.icon);
+
+              selectedPuzzlePiece = null;
+              puzzlePiecesLeft--;
+
+              if (puzzlePiecesLeft <= 0) {
+                onGameVictory("🧩✨👑💎🥇", "УРА! ПАЗЛ ПОЛНОСТЬЮ СОБРАН!", "Ты собрал супер-улыбку DENTAL GEN! Отличная логика и внимательность! 🌟");
+              }
+            } else {
+              playGameSound('wrong');
+            }
+          };
+
+          slotEl.addEventListener('click', slotHandler);
+          slotEl.addEventListener('pointerdown', slotHandler);
+        });
+      }
+    }
+
+    // ==========================================
+    // 4. 🧠 GAME: MEMORY MATCH (5-7 лет)
+    // ==========================================
+    const MEMORY_SYMBOLS = [
+      { sym: "tooth", icon: "🦷" },
+      { sym: "brush", icon: "🪥" },
+      { sym: "apple", icon: "🍎" },
+      { sym: "align", icon: "💎" }
+    ];
+
+    function startMemoryGame() {
       memoryFlippedCards = [];
       memoryMatchedPairs = 0;
       memoryIsLocked = false;
-      highlightGameTool('memory');
 
-      const s2 = document.getElementById("dgGameStep2");
-      const s3 = document.getElementById("dgGameStep3");
-      if (s2) s2.className = 'step-pill active';
-      if (s3) s3.className = 'step-pill';
+      const stage = document.getElementById("dgDynamicGameStage");
+      if (!stage) return;
 
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🧠';
-      if (text) text.textContent = '2. Мемори: найди все одинаковые пары карточек!';
+      const deck = [...MEMORY_SYMBOLS, ...MEMORY_SYMBOLS]
+        .map((item, idx) => ({ ...item, uniqueId: idx }))
+        .sort(() => Math.random() - 0.5);
 
-      const olderStage = document.getElementById("dgOlderEduStage");
-      if (!olderStage) return;
-
-      const memoryCards = [
-        { id: 1, sym: "tooth", icon: "🦷" },
-        { id: 2, sym: "tooth", icon: "🦷" },
-        { id: 3, sym: "brush", icon: "🪥" },
-        { id: 4, sym: "brush", icon: "🪥" },
-        { id: 5, sym: "apple", icon: "🍎" },
-        { id: 6, sym: "apple", icon: "🍎" },
-        { id: 7, sym: "align", icon: "💎" },
-        { id: 8, sym: "align", icon: "💎" }
-      ].sort(() => Math.random() - 0.5);
-
-      olderStage.innerHTML =
-        '<div class="memory-container" id="dgMemoryContainer">' +
-          '<div class="memory-grid" id="dgMemoryGrid"></div>' +
-        '</div>';
+      let gridHtml = '<div class="memory-container"><div class="memory-grid" id="dgMemoryGrid">';
+      deck.forEach(card => {
+        gridHtml +=
+          '<div class="memory-card" data-sym="' + card.sym + '" data-uid="' + card.uniqueId + '">' +
+            '<div class="memory-card__inner">' +
+              '<div class="memory-card__back">?</div>' +
+              '<div class="memory-card__front">' + card.icon + '</div>' +
+            '</div>' +
+          '</div>';
+      });
+      gridHtml += '</div></div>';
+      stage.innerHTML = gridHtml;
 
       const grid = document.getElementById("dgMemoryGrid");
-
-      memoryCards.forEach((c, idx) => {
-        const card = document.createElement("div");
-        card.className = "memory-card";
-        card.dataset.sym = c.sym;
-        card.innerHTML =
-          '<div class="memory-card__inner">' +
-            '<div class="memory-card__back">?</div>' +
-            '<div class="memory-card__front">' + c.icon + '</div>' +
-          '</div>';
-
+      grid.querySelectorAll(".memory-card").forEach(card => {
         const cardHandler = (e) => {
           e.preventDefault();
-          e.stopPropagation();
-          if (memoryIsLocked) return;
-          if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
+          if (memoryIsLocked || card.classList.contains("flipped") || card.classList.contains("matched")) return;
 
           card.classList.add("flipped");
           playGameSound('card_flip');
@@ -3363,36 +3964,26 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             memoryIsLocked = true;
             const [c1, c2] = memoryFlippedCards;
             if (c1.dataset.sym === c2.dataset.sym) {
-              // Match!
               setTimeout(() => {
                 c1.classList.add("matched");
                 c2.classList.add("matched");
                 playGameSound('match');
 
                 const rect = c2.getBoundingClientRect();
-                const stage = document.getElementById("dgGameStage");
-                const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-                const lx = rect.left - sRect.left + 20;
-                const ly = rect.top - sRect.top + 20;
-
-                triggerGameParticles(lx, ly, 16, 'laser');
-                showGameSparkleFloat(lx, ly, '⭐ ПАРА!');
+                const s = document.getElementById("dgGameStage");
+                const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+                triggerGameParticles(rect.left - sRect.left + 20, rect.top - sRect.top + 20, 16, 'laser');
+                showGameSparkleFloat(rect.left - sRect.left + 20, rect.top - sRect.top + 20, '⭐ ПАРА!');
 
                 memoryMatchedPairs++;
                 memoryFlippedCards = [];
                 memoryIsLocked = false;
 
                 if (memoryMatchedPairs === 4) {
-                  playGameSound('step_complete');
-                  if (s2) {
-                    s2.className = 'step-pill completed';
-                    s2.innerHTML = '<span>✅</span> <span>2. Память 100%</span>';
-                  }
-                  setTimeout(() => { startOlderStep3(); }, 850);
+                  onGameVictory("🧠✨💎🦷🥇", "СУПЕР-ПАМЯТЬ НА 100%!", "Ты нашёл все пары карточек без ошибок! Настоящий чемпион! 🌟");
                 }
               }, 250);
             } else {
-              // No match
               setTimeout(() => {
                 c1.classList.remove("flipped");
                 c2.classList.remove("flipped");
@@ -3403,38 +3994,30 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             }
           }
         };
-
         card.addEventListener('click', cardHandler);
         card.addEventListener('pointerdown', cardHandler);
-        grid.appendChild(card);
       });
     }
 
-    function startOlderStep3() {
-      gameStep = 3;
+    // ==========================================
+    // 5. 🍎 GAME: FOOD SORTER (5-7 лет)
+    // ==========================================
+    const SORTER_FOODS = [
+      { id: "f1", icon: "🧀", name: "Сыр (Кальций)", isHealthy: true },
+      { id: "f2", icon: "🍎", name: "Яблоко (Очищение)", isHealthy: true },
+      { id: "f3", icon: "🥕", name: "Морковь (Дёсны)", isHealthy: true },
+      { id: "f4", icon: "🍭", name: "Леденец (Сахар)", isHealthy: false, tip: "⚠️ Сахар вредит эмали!" },
+      { id: "f5", icon: "🥤", name: "Газировка (Кислота)", isHealthy: false, tip: "⚠️ Кислота разрушает зубки!" }
+    ];
+
+    function startSorterGame() {
       sorterHealthyCollected = 0;
-      highlightGameTool('sorter');
+      const stage = document.getElementById("dgDynamicGameStage");
+      if (!stage) return;
 
-      const s3 = document.getElementById("dgGameStep3");
-      if (s3) s3.className = 'step-pill active';
+      const foods = [...SORTER_FOODS].sort(() => Math.random() - 0.5);
 
-      const emoji = document.getElementById("dgGameHintEmoji");
-      const text = document.getElementById("dgGameHintText");
-      if (emoji) emoji.textContent = '🍎';
-      if (text) text.textContent = '3. Сортировка: собери 3 полезных продукта для крепких зубок!';
-
-      const olderStage = document.getElementById("dgOlderEduStage");
-      if (!olderStage) return;
-
-      const foods = [
-        { id: "f1", icon: "🧀", name: "Сыр (Кальций)", isHealthy: true },
-        { id: "f2", icon: "🍎", name: "Яблоко (Очищение)", isHealthy: true },
-        { id: "f3", icon: "🥕", name: "Морковь (Дёсны)", isHealthy: true },
-        { id: "f4", icon: "🍭", name: "Леденец (Сахар)", isHealthy: false, tip: "⚠️ Сахар вредит эмали!" },
-        { id: "f5", icon: "🥤", name: "Газировка (Кислота)", isHealthy: false, tip: "⚠️ Кислота разрушает зубки!" }
-      ].sort(() => Math.random() - 0.5);
-
-      olderStage.innerHTML =
+      stage.innerHTML =
         '<div class="sorter-container" id="dgSorterContainer">' +
           '<div class="sorter-basket" id="dgSorterBasket">' +
             '<span>🧺</span> <span id="dgBasketCount">Корзинка Здоровья: собрано 0 / 3</span>' +
@@ -3456,7 +4039,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
         const foodHandler = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           if (btn.classList.contains("collected")) return;
 
           if (f.isHealthy) {
@@ -3464,13 +4046,10 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             playGameSound('basket');
 
             const rect = btn.getBoundingClientRect();
-            const stage = document.getElementById("dgGameStage");
-            const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-            const lx = rect.left - sRect.left + 30;
-            const ly = rect.top - sRect.top + 20;
-
-            triggerGameParticles(lx, ly, 18, 'bubble');
-            showGameSparkleFloat(lx, ly, '🧺 ' + f.icon);
+            const s = document.getElementById("dgGameStage");
+            const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+            triggerGameParticles(rect.left - sRect.left + 30, rect.top - sRect.top + 20, 18, 'bubble');
+            showGameSparkleFloat(rect.left - sRect.left + 30, rect.top - sRect.top + 20, '🧺 ' + f.icon);
 
             sorterHealthyCollected++;
             if (basketCountEl) {
@@ -3478,11 +4057,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             }
 
             if (sorterHealthyCollected >= 3) {
-              if (s3) {
-                s3.className = 'step-pill completed';
-                s3.innerHTML = '<span>✅</span> <span>3. Эксперт!</span>';
-              }
-              onOlderGameVictory();
+              onGameVictory("🍎✨🧀🥕🥇", "ЭКСПЕРТ ЗДОРОВОГО ПИТАНИЯ!", "Ты собрал все самые полезные продукты для крепких зубов и эмали! 🌟");
             }
           } else {
             btn.classList.remove("bad-shake");
@@ -3491,12 +4066,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             playGameSound('wrong');
 
             const rect = btn.getBoundingClientRect();
-            const stage = document.getElementById("dgGameStage");
-            const sRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 300, height: 260 };
-            const lx = rect.left - sRect.left + 30;
-            const ly = rect.top - sRect.top + 10;
-
-            showGameSparkleFloat(lx, ly, f.tip);
+            const s = document.getElementById("dgGameStage");
+            const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+            showGameSparkleFloat(rect.left - sRect.left + 30, rect.top - sRect.top + 10, f.tip);
           }
         };
 
@@ -3506,86 +4078,270 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       });
     }
 
-    function onOlderGameVictory() {
-      setTimeout(() => {
-        playGameSound('victory_older');
-        const modal = document.getElementById("dgGameVictoryModal");
-        const stage = document.getElementById("dgGameStage");
-        const stageRect = stage ? stage.getBoundingClientRect() : { width: 300, height: 260 };
+    // ==========================================
+    // 6. ⚡ GAME: CARIES BLASTER ARCADE (4-7 лет)
+    // ==========================================
+    const BLASTER_MONSTERS = ['👾', '🦠', '🍭', '🍫', '🥤', '🍩'];
 
-        for (let i = 0; i < 7; i++) {
-          setTimeout(() => {
-            triggerGameParticles(
-              stageRect.width * (0.1 + Math.random() * 0.8),
-              stageRect.height * (0.1 + Math.random() * 0.8),
-              25,
-              'confetti'
-            );
-          }, i * 130);
+    function startBlasterGame() {
+      blasterScore = 0;
+      const stage = document.getElementById("dgDynamicGameStage");
+      if (!stage) return;
+
+      stage.innerHTML =
+        '<div class="blaster-container">' +
+          '<div class="blaster-hud" id="dgBlasterHud">⚡ Побеждено монстриков: 0 / ' + blasterTargetScore + '</div>' +
+          '<div class="blaster-stage-row" id="dgBlasterRow">' +
+            '<div class="blaster-tooth" id="dgBT1">🦷</div>' +
+            '<div class="blaster-tooth" id="dgBT2">🦷</div>' +
+            '<div class="blaster-tooth" id="dgBT3">🦷</div>' +
+            '<div class="blaster-tooth" id="dgBT4">🦷</div>' +
+          '</div>' +
+        '</div>';
+
+      function spawnMonster() {
+        if (currentGameId !== 'blaster') return;
+        const row = document.getElementById("dgBlasterRow");
+        if (!row) return;
+
+        const toothIdx = Math.floor(Math.random() * 4) + 1;
+        const toothEl = document.getElementById("dgBT" + toothIdx);
+        if (!toothEl || toothEl.querySelector(".blaster-monster-target")) {
+          setTimeout(spawnMonster, 300);
+          return;
         }
 
-        const vicIcon = document.getElementById("dgVictoryIcon");
-        const vicTitle = document.getElementById("dgVictoryTitle");
-        const vicSub = document.getElementById("dgVictorySub");
-        if (vicIcon) vicIcon.textContent = "🏆✨🎓🦷🥇";
-        if (vicTitle) vicTitle.textContent = "УРА! ТЫ — ЗНАТОК ЗДОРОВОЙ УЛЫБКИ!";
-        if (vicSub) vicSub.textContent = "Ты решил все головоломки, развил супер-память и логику! Твои зубки под 100% защитой! 🌟";
+        const monster = document.createElement("div");
+        monster.className = "blaster-monster-target";
+        monster.textContent = BLASTER_MONSTERS[Math.floor(Math.random() * BLASTER_MONSTERS.length)];
+
+        const zapHandler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (monster.classList.contains("defeated")) return;
+          monster.classList.add("defeated");
+          playGameSound('laser');
+
+          const rect = monster.getBoundingClientRect();
+          const s = document.getElementById("dgGameStage");
+          const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+          const lx = rect.left - sRect.left + 15;
+          const ly = rect.top - sRect.top + 15;
+
+          triggerGameParticles(lx, ly, 20, 'laser');
+          showGameSparkleFloat(lx, ly, '💥 -1 Кариес!');
+
+          blasterScore++;
+          const hud = document.getElementById("dgBlasterHud");
+          if (hud) hud.textContent = '⚡ Побеждено монстриков: ' + blasterScore + ' / ' + blasterTargetScore;
+
+          setTimeout(() => monster.remove(), 250);
+
+          if (blasterScore >= blasterTargetScore) {
+            onGameVictory("⚡🏆✨🦷🥇", "УРА! ТЫ — СУПЕР-ЗАЩИТНИК ЭМАЛИ!", "Все кариесные монстрики повержены! Зубки под 100% защитой бластера! 🌟");
+          } else {
+            setTimeout(spawnMonster, 600);
+          }
+        };
+
+        monster.addEventListener('click', zapHandler);
+        monster.addEventListener('pointerdown', zapHandler);
+        toothEl.appendChild(monster);
 
         setTimeout(() => {
-          if (modal) modal.classList.add('active');
-        }, 800);
-      }, 300);
+          if (monster.parentElement && !monster.classList.contains("defeated")) {
+            monster.remove();
+            if (blasterScore < blasterTargetScore) setTimeout(spawnMonster, 400);
+          }
+        }, 2200);
+      }
+
+      spawnMonster();
+      setTimeout(spawnMonster, 700);
+    }
+
+    // ==========================================
+    // 7. 🎨 GAME: SMILE STYLIST (3-7 лет)
+    // ==========================================
+    function startStylistGame() {
+      stylistCrown = '👑';
+      stylistGlasses = '🕶️';
+      stylistBraces = '⭐ ЗОЛОТЫЕ';
+
+      const stage = document.getElementById("dgDynamicGameStage");
+      const bottomBar = document.getElementById("dgBottomControlsBar");
+      if (!stage) return;
+
+      stage.innerHTML =
+        '<div class="stylist-container">' +
+          '<div class="stylist-avatar-wrap" id="dgStylistWrap">' +
+            '<div class="stylist-accessory-crown" id="dgStyleCrown">' + stylistCrown + '</div>' +
+            '<svg class="tooth-svg" id="dgStylistTooth" viewBox="0 0 240 260" fill="none" style="width: 100%; height: 100%;">' +
+              '<path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>' +
+              '<ellipse cx="62" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+              '<ellipse cx="178" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+              '<g id="dgStylistEyes">' +
+                '<ellipse cx="82" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+                '<circle cx="85" cy="111" r="4.5" fill="#FFFFFF"/>' +
+                '<ellipse cx="158" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+                '<circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>' +
+              '</g>' +
+              '<path d="M84 136 Q120 184 156 136 Z" fill="#FF3F62" stroke="#2F2076" stroke-width="5"/>' +
+            '</svg>' +
+            '<div class="stylist-accessory-glasses" id="dgStyleGlasses">' + stylistGlasses + '</div>' +
+            '<div class="stylist-accessory-braces" id="dgStyleBraces">' + stylistBraces + '</div>' +
+          '</div>' +
+        '</div>';
+
+      if (bottomBar) {
+        bottomBar.innerHTML =
+          '<div style="display: flex; flex-direction: column; gap: 6px; width: 100%; align-items: center;">' +
+            '<div class="stylist-categories">' +
+              '<button class="stylist-chip" data-type="hat" data-val="👑">👑 Корона</button>' +
+              '<button class="stylist-chip" data-type="hat" data-val="🎓">🎓 Шапочка</button>' +
+              '<button class="stylist-chip" data-type="hat" data-val="👨‍🚀">👨‍🚀 Шлем</button>' +
+              '<button class="stylist-chip" data-type="hat" data-val="🧢">🧢 Кепка</button>' +
+            '</div>' +
+            '<div class="stylist-categories">' +
+              '<button class="stylist-chip" data-type="glass" data-val="🕶️">🕶️ Крутые очки</button>' +
+              '<button class="stylist-chip" data-type="glass" data-val="👓">👓 Умные очки</button>' +
+              '<button class="stylist-chip" data-type="glass" data-val="🎀">🎀 Бантик</button>' +
+              '<button class="stylist-chip" data-type="glass" data-val="🪄">🪄 Палочка</button>' +
+            '</div>' +
+            '<div class="stylist-categories">' +
+              '<button class="stylist-chip" data-type="brace" data-val="⭐ ЗОЛОТЫЕ">⭐ Золотые</button>' +
+              '<button class="stylist-chip" data-type="brace" data-val="💎 АЛМАЗНЫЕ">💎 Алмазные</button>' +
+              '<button class="stylist-chip" data-type="brace" data-val="💜 СЕРДЕЧКИ">💜 Сердечки</button>' +
+              '<button class="stylist-chip" data-type="brace" data-val="🌈 НЕОН">🌈 Неон</button>' +
+            '</div>' +
+            '<button class="stylist-photo-btn" id="dgStylePhotoBtn" type="button"><span>📸</span> <span>Сохранить стильный образ!</span></button>' +
+          '</div>';
+
+        document.querySelectorAll(".stylist-chip").forEach(chip => {
+          chip.addEventListener('click', (e) => {
+            e.preventDefault();
+            playGameSound('puzzle_snap');
+            const type = chip.dataset.type;
+            const val = chip.dataset.val;
+
+            if (type === 'hat') {
+              const el = document.getElementById("dgStyleCrown");
+              if (el) el.textContent = val;
+            } else if (type === 'glass') {
+              const el = document.getElementById("dgStyleGlasses");
+              if (el) el.textContent = val;
+            } else if (type === 'brace') {
+              const el = document.getElementById("dgStyleBraces");
+              if (el) el.textContent = val;
+            }
+
+            const wrap = document.getElementById("dgStylistWrap");
+            const rect = wrap ? wrap.getBoundingClientRect() : { left: 0, top: 0, width: 150, height: 150 };
+            const s = document.getElementById("dgGameStage");
+            const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+            triggerGameParticles(rect.left - sRect.left + 75, rect.top - sRect.top + 75, 14, 'laser');
+          });
+        });
+
+        const photoBtn = document.getElementById("dgStylePhotoBtn");
+        if (photoBtn) {
+          photoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            playGameSound('match');
+            const wrap = document.getElementById("dgStylistWrap");
+            if (wrap) wrap.classList.add("super-sparkle");
+            onGameVictory("🎨✨👑💎🥇", "СУПЕР-СТИЛИСТ УЛЫБОК!", "Твой персональный Зубик выглядит невероятно стильно и ярко! 🌟");
+          });
+        }
+      }
+    }
+
+    // ==========================================
+    // 8. 🔍 GAME: MICROBES DETECTIVE (4-7 лет)
+    // ==========================================
+    function startDetectiveGame() {
+      detectiveFound = 0;
+      const stage = document.getElementById("dgDynamicGameStage");
+      if (!stage) return;
+
+      const spots = [
+        { id: "d1", icon: "👾", top: "22%", left: "18%" },
+        { id: "d2", icon: "🦠", top: "68%", left: "28%" },
+        { id: "d3", icon: "👾", top: "25%", left: "75%" },
+        { id: "d4", icon: "🦠", top: "70%", left: "80%" }
+      ];
+
+      stage.innerHTML =
+        '<div class="detective-container">' +
+          '<div class="blaster-hud" id="dgDetectiveHud">🔍 Найдено микробов: 0 / ' + detectiveTarget + '</div>' +
+          '<div class="detective-board" id="dgDetectiveBoard">' +
+            '<div style="font-size: 54px; opacity: 0.85; filter: drop-shadow(0 0 10px #7048c4);">🦷 🦷 🦷 🦷</div>' +
+            '<div id="dgDetectiveSpotsLayer"></div>' +
+          '</div>' +
+        '</div>';
+
+      const spotsLayer = document.getElementById("dgDetectiveSpotsLayer");
+      spots.forEach(sp => {
+        const spot = document.createElement("div");
+        spot.className = "detective-spot";
+        spot.id = "dgDetSpot_" + sp.id;
+        spot.style.top = sp.top;
+        spot.style.left = sp.left;
+        spot.textContent = sp.icon;
+
+        const findHandler = (e) => {
+          e.preventDefault();
+          if (spot.classList.contains("found")) return;
+          spot.classList.add("found");
+          playGameSound('card_flip');
+
+          const rect = spot.getBoundingClientRect();
+          const s = document.getElementById("dgGameStage");
+          const sRect = s ? s.getBoundingClientRect() : { left: 0, top: 0 };
+          triggerGameParticles(rect.left - sRect.left + 15, rect.top - sRect.top + 15, 18, 'bubble');
+          showGameSparkleFloat(rect.left - sRect.left + 15, rect.top - sRect.top + 15, '🔍 НАЙДЕН!');
+
+          detectiveFound++;
+          const hud = document.getElementById("dgDetectiveHud");
+          if (hud) hud.textContent = '🔍 Найдено микробов: ' + detectiveFound + ' / ' + detectiveTarget;
+
+          if (detectiveFound >= detectiveTarget) {
+            onGameVictory("🔍✨🏆🦷🥇", "ГЛАВНЫЙ ДЕТЕКТИВ ЗДОРОВЬЯ!", "Ты отыскал всех скрытых микробов! Теперь зубки в полной безопасности! 🌟");
+          }
+        };
+
+        spot.addEventListener('click', findHandler);
+        spot.addEventListener('pointerdown', findHandler);
+        spotsLayer.appendChild(spot);
+      });
     }
 
     function resetEmbeddedGame() {
-      initGameAudio();
-      playGameSound('step_complete');
-      const crown = document.getElementById("dgGameToothCrown");
-      const mouth = document.getElementById("dgGameToothMouth");
-      const tooth = document.getElementById("dgGameToothChar");
-      const modal = document.getElementById("dgGameVictoryModal");
-
-      if (modal) modal.classList.remove('active');
-      if (crown) crown.style.display = 'none';
-      if (mouth) {
-        mouth.setAttribute('d', 'M96 142 Q120 166 144 142');
-        mouth.setAttribute('fill', '#FF85A1');
-      }
-      if (tooth) {
-        tooth.classList.remove('super-sparkle');
-        tooth.classList.remove('chewing');
-        tooth.classList.remove('happy');
-      }
-
-      // Show matching tools palette
-      const toddlerTools = document.getElementById("dgToddlerToolsPalette");
-      const olderTools = document.getElementById("dgOlderToolsPalette");
-      if (currentGameMode === 'toddler') {
-        if (toddlerTools) toddlerTools.style.display = 'grid';
-        if (olderTools) olderTools.style.display = 'none';
-        startEmbeddedStep1();
-      } else {
-        if (toddlerTools) toddlerTools.style.display = 'none';
-        if (olderTools) olderTools.style.display = 'grid';
-        startOlderStep1();
-      }
+      if (currentGameId === 'hub') showGameHub();
+      else launchGame(currentGameId);
     }
 
-    window.openGameModal = (preferredMode) => {
+    window.openGameModal = (gameOrMode) => {
       let modal = document.getElementById("gameModal");
       if (!modal) {
         addKidsGame();
         modal = document.getElementById("gameModal");
       }
       if (!modal) return;
-      if (preferredMode) {
-        currentGameMode = preferredMode;
-      }
       modal.classList.add("is-open");
       document.body.classList.add("dg-modal-open");
+
       setTimeout(() => {
         resizeGameCanvas();
-        setGameMode(currentGameMode);
+        if (!gameOrMode || gameOrMode === 'hub') {
+          showGameHub('all');
+        } else if (gameOrMode === 'toddler') {
+          launchGame('toddler_spa');
+        } else if (gameOrMode === 'older') {
+          launchGame('puzzle');
+        } else {
+          launchGame(gameOrMode);
+        }
       }, 50);
     };
 
@@ -3626,15 +4382,22 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     if (!window.__dgEventsBound) {
       window.__dgEventsBound = true;
       document.addEventListener("click", (e) => {
-        // Mode switch tabs
-        const modeTab = e.target.closest(".mode-tab-btn");
-        if (modeTab && modeTab.dataset.mode) {
+        // Hub Filters
+        const filterBtn = e.target.closest(".hub-filter-btn");
+        if (filterBtn && filterBtn.dataset.filter) {
           e.preventDefault();
-          setGameMode(modeTab.dataset.mode);
+          showGameHub(filterBtn.dataset.filter);
           return;
         }
 
-        // Prev button
+        // Back to Hub Button
+        if (e.target.closest("#dgBackToHubBtn") || e.target.closest("#dgHubReturnBtn")) {
+          e.preventDefault();
+          showGameHub();
+          return;
+        }
+
+        // Prev slide button
         if (e.target.closest("#carouselPrevBtn") || e.target.closest(".framer-bayurr-container a")) {
           e.preventDefault();
           e.stopPropagation();
@@ -3867,22 +4630,22 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             '<div class="dg-game-teaser__card">' +
               '<div class="dg-game-teaser__left">' +
                 '<div class="dg-game-teaser__badges">' +
-                  '<span class="dg-game-teaser__badge">👶 1–4 ГОДА</span>' +
-                  '<span class="dg-game-teaser__badge dg-game-teaser__badge--older">🧩 5–7 ЛЕТ</span>' +
+                  '<span class="dg-game-teaser__badge">🎮 8 ИНТЕРАКТИВНЫХ ИГР</span>' +
+                  '<span class="dg-game-teaser__badge dg-game-teaser__badge--older">⭐ 1–7 ЛЕТ</span>' +
                 '</div>' +
-                '<h3>Развивающие игры для детей</h3>' +
-                '<p>Обучающие игры по возрасту: чистите зубик щёточкой для самых маленьких или собирайте развивающие пазлы, тренируйте память и изучайте полезные продукты для будущих школьников!</p>' +
+                '<h3>Детский Игровой Клуб DENTAL GEN</h3>' +
+                '<p>Коллекция развивающих игр: от спа-ухода за зубиком и музыкального ксилофона до пазлов, тренировки памяти, аркадного кариес-бластера и стилиста улыбок!</p>' +
                 '<div class="dg-game-teaser__buttons">' +
-                  '<button class="dg-game-teaser__btn dg-open-game-btn" data-game-mode="toddler" type="button"><span>👶</span> <span>1–4 года: Почисти зубик</span></button>' +
-                  '<button class="dg-game-teaser__btn dg-game-teaser__btn--older dg-open-game-btn" data-game-mode="older" type="button"><span>🧩</span> <span>5–7 лет: Пазлы и логика</span></button>' +
+                  '<button class="dg-game-teaser__btn dg-open-game-btn" data-game-mode="hub" type="button"><span>🎮</span> <span>Открыть каталог игр (8)</span></button>' +
+                  '<button class="dg-game-teaser__btn dg-game-teaser__btn--older dg-open-game-btn" data-game-mode="older" type="button"><span>🧩</span> <span>Пазлы и логика</span></button>' +
                 '</div>' +
               '</div>' +
-              '<div class="dg-game-teaser__right dg-open-game-btn" id="openGameModalPreview" data-game-mode="older" title="Нажмите, чтобы сыграть!">' +
+              '<div class="dg-game-teaser__right dg-open-game-btn" id="openGameModalPreview" data-game-mode="hub" title="Нажмите, чтобы сыграть!">' +
                 '<div class="dg-teaser-tooth-preview">' +
-                  '<span class="dg-teaser-crown">🧩</span>' +
+                  '<span class="dg-teaser-crown">👑</span>' +
                   '<span class="dg-teaser-tooth-icon">🦷</span>' +
                   '<span class="dg-teaser-sparkle">✨</span>' +
-                  '<div class="dg-teaser-braces-badge">🧠 5–7 ЛЕТ</div>' +
+                  '<div class="dg-teaser-braces-badge">🎮 8 ИГР</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
@@ -3904,69 +4667,41 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
             '<button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть">✕</button>' +
             '<div class="game-wrapper">' +
               '<header class="game-header">' +
-                '<div class="game-badge">🧩 РАЗВИВАЮЩИЕ ИГРЫ (5–7 ЛЕТ)</div>' +
-                '<h2 class="game-title">Умная Зубная Академия!</h2>' +
+                '<button class="game-back-btn" id="dgBackToHubBtn" style="display: none;"><span>⬅️</span> <span>Все игры</span></button>' +
+                '<div class="game-badge" id="dgGameBadge">🎮 ДЕТСКИЙ ИГРОВОЙ КЛУБ</div>' +
+                '<h2 class="game-title" id="dgGameTitle">Выбери развивающую игру!</h2>' +
                 '<button class="sound-toggle" id="dgSoundToggle" aria-label="Включить / выключить звук" title="Звук">🔊</button>' +
               '</header>' +
-              '<!-- Age Mode Tabs -->' +
-              '<div class="game-mode-tabs" role="tablist">' +
-                '<button class="mode-tab-btn" id="dgModeTabToddler" type="button" data-mode="toddler"><span>👶 1–4 года</span></button>' +
-                '<button class="mode-tab-btn active" id="dgModeTabOlder" type="button" data-mode="older"><span>🧩 5–7 лет (Пазлы)</span></button>' +
-              '</div>' +
-              '<div class="game-card">' +
-                '<div class="step-tracker" role="tablist">' +
-                  '<div class="step-pill active" id="dgGameStep1"><span>🧩</span> <span>1. Пазл</span></div>' +
-                  '<div class="step-pill" id="dgGameStep2"><span>🧠</span> <span>2. Мемори</span></div>' +
-                  '<div class="step-pill" id="dgGameStep3"><span>🍎</span> <span>3. Сортировка</span></div>' +
+              '<!-- 1. HUB VIEW (Каталог игр) -->' +
+              '<div class="game-hub-container" id="dgGameHubView">' +
+                '<div class="hub-filters">' +
+                  '<button class="hub-filter-btn active" data-filter="all"><span>🌟 Все игры (8)</span></button>' +
+                  '<button class="hub-filter-btn" data-filter="toddler"><span>👶 1–4 года</span></button>' +
+                  '<button class="hub-filter-btn" data-filter="older"><span>🧩 5–7 лет</span></button>' +
+                  '<button class="hub-filter-btn" data-filter="arcade"><span>🎨 Творчество & Аркады</span></button>' +
                 '</div>' +
+                '<div class="hub-grid" id="dgHubGrid"></div>' +
+              '</div>' +
+              '<!-- 2. ACTIVE GAME VIEW -->' +
+              '<div class="game-card" id="dgGameActiveView" style="display: none;">' +
                 '<div class="hint-banner" id="dgGameHintBanner">' +
-                  '<span id="dgGameHintEmoji">🧩</span> <span id="dgGameHintText">1. Собери кусочки пазла в рамочку!</span>' +
+                  '<span id="dgGameHintEmoji">🧩</span> <span id="dgGameHintText">Инструкция к игре</span>' +
                 '</div>' +
                 '<div class="stage" id="dgGameStage">' +
                   '<canvas class="particle-canvas" id="dgGameParticleCanvas"></canvas>' +
-                  '<!-- Toddler single tooth -->' +
-                  '<svg class="tooth-svg" id="dgGameToothChar" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">' +
-                    '<path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>' +
-                    '<path d="M60 48 C78 34, 104 30, 120 30 C136 30, 162 34, 180 48 C160 38, 132 34, 120 34 C108 34, 80 38, 60 48 Z" fill="#E3F4FF" opacity="0.9"/>' +
-                    '<ellipse cx="64" cy="74" rx="12" ry="24" transform="rotate(-25 64 74)" fill="#E3F4FF" opacity="0.8"/>' +
-                    '<ellipse cx="62" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
-                    '<ellipse cx="178" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
-                    '<g id="dgGameToothEyes">' +
-                      '<ellipse cx="82" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
-                      '<circle cx="85" cy="111" r="4.5" fill="#FFFFFF"/>' +
-                      '<ellipse cx="158" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
-                      '<circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>' +
-                    '</g>' +
-                    '<path id="dgGameToothMouth" d="M96 142 Q120 166 144 142" stroke="#2F2076" stroke-width="7" stroke-linecap="round" fill="#FF85A1"/>' +
-                    '<g id="dgGameToothCrown" style="display: none;">' +
-                      '<path d="M80 34 L96 6 L120 28 L144 6 L160 34 Z" fill="#FFE59A" stroke="#2F2076" stroke-width="6" stroke-linejoin="round"/>' +
-                      '<circle cx="96" cy="6" r="4" fill="#FF3F62"/>' +
-                      '<circle cx="120" cy="28" r="4" fill="#04B8D4"/>' +
-                      '<circle cx="144" cy="6" r="4" fill="#8C5CFF"/>' +
-                    '</g>' +
-                  '</svg>' +
-                  '<!-- Older Educational Stage (Puzzle, Memory, Sorter) -->' +
-                  '<div class="stage-older-edu" id="dgOlderEduStage"></div>' +
+                  '<div id="dgDynamicGameStage" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;"></div>' +
                   '<div id="dgGameItemsLayer"></div>' +
                 '</div>' +
-                '<!-- Toddler Tools Palette -->' +
-                '<div class="tools-palette" id="dgToddlerToolsPalette" role="toolbar" aria-label="Инструменты малышей" style="display: none;">' +
-                  '<button class="tool-btn brush-btn selected" id="dgToolBrush" aria-label="Зубная щётка"><span class="tool-icon">🪥</span><span class="tool-label">1. ЩЁТКА</span></button>' +
-                  '<button class="tool-btn water-btn" id="dgToolWater" aria-label="Водичка"><span class="tool-icon">💧</span><span class="tool-label">2. ВОДА</span></button>' +
-                  '<button class="tool-btn apple-btn" id="dgToolApple" aria-label="Яблочко"><span class="tool-icon">🍎</span><span class="tool-label">3. ЯБЛОКО</span></button>' +
-                '</div>' +
-                '<!-- Older Tools Palette -->' +
-                '<div class="tools-palette" id="dgOlderToolsPalette" role="toolbar" aria-label="Развивающие игры">' +
-                  '<button class="tool-btn puzzle-btn selected" id="dgToolPuzzle" aria-label="Пазл"><span class="tool-icon">🧩</span><span class="tool-label">1. ПАЗЛ</span></button>' +
-                  '<button class="tool-btn memory-btn" id="dgToolMemory" aria-label="Мемори"><span class="tool-icon">🧠</span><span class="tool-label">2. МЕМОРИ</span></button>' +
-                  '<button class="tool-btn sorter-btn" id="dgToolSorter" aria-label="Сортировка"><span class="tool-icon">🍎</span><span class="tool-label">3. СОРТИРОВКА</span></button>' +
-                '</div>' +
+                '<div id="dgBottomControlsBar" style="width: 100%; display: flex; justify-content: center; margin-top: 6px;"></div>' +
                 '<!-- Victory Overlay -->' +
                 '<div class="victory-overlay" id="dgGameVictoryModal">' +
                   '<div class="victory-tooth" id="dgVictoryIcon">🏆✨🎓🦷🥇</div>' +
-                  '<h3 class="victory-title" id="dgVictoryTitle">УРА! ТЫ — ЗНАТОК ЗДОРОВОЙ УЛЫБКИ!</h3>' +
-                  '<p class="victory-sub" id="dgVictorySub">Ты решил все головоломки, развил супер-память и логику! Твои зубки под 100% защитой! 🌟</p>' +
-                  '<button class="replay-btn" id="dgReplayBtn"><span class="replay-icon">🔄</span><span>ЕЩЁ РАЗ!</span></button>' +
+                  '<h3 class="victory-title" id="dgVictoryTitle">УРА! ТЫ — ПОБЕДИТЕЛЬ!</h3>' +
+                  '<p class="victory-sub" id="dgVictorySub">Твои зубки здоровые, крепкие и сияют на все 100%! 🌟</p>' +
+                  '<div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px;">' +
+                    '<button class="replay-btn" id="dgReplayBtn"><span class="replay-icon">🔄</span><span>ЕЩЁ РАЗ!</span></button>' +
+                    '<button class="replay-btn" id="dgHubReturnBtn" style="background: #ffe59a; border-color: #2f2076; color: #2f2076;"><span class="replay-icon">🎮</span><span>ВСЕ ИГРЫ</span></button>' +
+                  '</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
