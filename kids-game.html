@@ -44,6 +44,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      cursor: default;
     }
 
     .game-wrapper {
@@ -53,6 +54,7 @@
       flex-direction: column;
       align-items: center;
       position: relative;
+      z-index: 10;
     }
 
     /* Header & Badges */
@@ -107,6 +109,10 @@
       z-index: 10;
     }
 
+    .sound-toggle:hover {
+      transform: scale(1.05);
+    }
+
     .sound-toggle:active {
       transform: scale(0.92);
     }
@@ -124,6 +130,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
+      z-index: 10;
     }
 
     /* Visual Indicator / Progress */
@@ -195,6 +202,7 @@
       display: grid;
       place-items: center;
       touch-action: none;
+      cursor: pointer;
     }
 
     .tooth-svg {
@@ -202,6 +210,7 @@
       height: 100%;
       filter: drop-shadow(0 10px 18px rgba(47, 32, 118, 0.12));
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
     }
 
     .tooth-svg.happy {
@@ -226,19 +235,24 @@
     /* Germs / Dirty Spots */
     .germ {
       position: absolute;
-      width: clamp(52px, 14vw, 70px);
-      height: clamp(52px, 14vw, 70px);
+      width: clamp(54px, 14vw, 72px);
+      height: clamp(54px, 14vw, 72px);
       border-radius: 50%;
       display: grid;
       place-items: center;
       font-size: clamp(34px, 9vw, 46px);
       cursor: pointer;
-      z-index: 5;
+      z-index: 15;
       transform: translate(-50%, -50%) scale(1);
       transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
       animation: germFloat 2.5s infinite ease-in-out alternate;
       touch-action: none;
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      pointer-events: auto;
+    }
+
+    .germ:hover {
+      transform: translate(-50%, -50%) scale(1.1);
     }
 
     .germ:active {
@@ -289,6 +303,7 @@
       width: 100%;
       max-width: 520px;
       margin-top: 6px;
+      z-index: 10;
     }
 
     .tool-btn {
@@ -306,6 +321,7 @@
       cursor: pointer;
       transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
       touch-action: manipulation;
+      pointer-events: auto;
     }
 
     .tool-btn:hover {
@@ -331,6 +347,7 @@
       font-size: clamp(34px, 8vw, 46px);
       line-height: 1;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      pointer-events: none;
     }
 
     .tool-label {
@@ -338,6 +355,7 @@
       font-weight: 900;
       color: var(--brand-color);
       letter-spacing: -0.01em;
+      pointer-events: none;
     }
 
     /* Victory Celebration Modal / Overlay */
@@ -351,7 +369,7 @@
       align-items: center;
       justify-content: center;
       padding: 24px 16px;
-      z-index: 20;
+      z-index: 30;
       opacity: 0;
       pointer-events: none;
       transform: scale(0.9);
@@ -369,6 +387,7 @@
       line-height: 1;
       animation: victoryJump 1s infinite alternate cubic-bezier(0.34, 1.56, 0.64, 1);
       margin-bottom: 12px;
+      pointer-events: none;
     }
 
     @keyframes victoryJump {
@@ -383,6 +402,7 @@
       margin: 0 0 6px;
       text-align: center;
       line-height: 1.1;
+      pointer-events: none;
     }
 
     .victory-sub {
@@ -391,6 +411,7 @@
       color: var(--accent-purple);
       margin: 0 0 24px;
       text-align: center;
+      pointer-events: none;
     }
 
     .replay-btn {
@@ -409,6 +430,7 @@
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       touch-action: manipulation;
+      pointer-events: auto;
     }
 
     .replay-btn:hover {
@@ -437,7 +459,7 @@
       font-size: 28px;
       pointer-events: none;
       animation: floatUpFade 0.7s forwards ease-out;
-      z-index: 15;
+      z-index: 25;
     }
 
     @keyframes floatUpFade {
@@ -576,7 +598,7 @@
 
   <script>
     (() => {
-      // Audio Synthesizer via Web Audio API (Zero external assets, instant 0-latency)
+      // Audio Synthesizer via Web Audio API
       let audioCtx = null;
       let soundEnabled = true;
 
@@ -601,7 +623,6 @@
           const now = audioCtx.currentTime;
 
           if (type === 'pop') {
-            // Cute bubbly pop sound
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
@@ -614,7 +635,6 @@
             osc.start(now);
             osc.stop(now + 0.12);
           } else if (type === 'brush') {
-            // Squeaky clean brush sound
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'triangle';
@@ -628,7 +648,6 @@
             osc.start(now);
             osc.stop(now + 0.12);
           } else if (type === 'splash') {
-            // Water splash chord
             [520, 650, 780].forEach((freq, i) => {
               const osc = audioCtx.createOscillator();
               const gain = audioCtx.createGain();
@@ -643,7 +662,6 @@
               osc.stop(now + i * 0.03 + 0.2);
             });
           } else if (type === 'apple') {
-            // Munch crunch happy chime
             [587, 740, 880].forEach((freq, i) => {
               const osc = audioCtx.createOscillator();
               const gain = audioCtx.createGain();
@@ -657,7 +675,6 @@
               osc.stop(now + i * 0.06 + 0.25);
             });
           } else if (type === 'victory') {
-            // Happy victory fanfare
             const notes = [523.25, 659.25, 783.99, 1046.50];
             notes.forEach((note, i) => {
               const osc = audioCtx.createOscillator();
@@ -707,13 +724,12 @@
       const toolApple = document.getElementById('toolApple');
       const tools = [toolBrush, toolWater, toolApple];
 
-      let activeTool = 'brush'; // 'brush', 'water', 'apple'
+      let activeTool = 'brush';
       let cleanedCount = 0;
       const totalGerms = germs.length;
       let particles = [];
       let animFrame = null;
 
-      // Resize canvas to match stage
       function resizeCanvas() {
         const rect = stage.getBoundingClientRect();
         canvas.width = rect.width * (window.devicePixelRatio || 1);
@@ -723,10 +739,21 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
+      function bindAction(el, handler) {
+        let lastTime = 0;
+        const exec = (e) => {
+          const now = Date.now();
+          if (now - lastTime < 120) return;
+          lastTime = now;
+          initAudio();
+          handler(e);
+        };
+        el.addEventListener('click', exec);
+        el.addEventListener('pointerdown', exec);
+      }
+
       // Sound Toggle Handler
-      soundToggle.addEventListener('pointerdown', (e) => {
-        e.stopPropagation();
-        initAudio();
+      bindAction(soundToggle, (e) => {
         soundEnabled = !soundEnabled;
         soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
         if (soundEnabled) playSound('pop');
@@ -754,11 +781,11 @@
         }
       }
 
-      toolBrush.addEventListener('pointerdown', () => selectTool('brush'));
-      toolWater.addEventListener('pointerdown', () => selectTool('water'));
-      toolApple.addEventListener('pointerdown', () => selectTool('apple'));
+      bindAction(toolBrush, () => selectTool('brush'));
+      bindAction(toolWater, () => selectTool('water'));
+      bindAction(toolApple, () => selectTool('apple'));
 
-      // Particle System for Confetti, Suds, Stars & Bubbles
+      // Particle System
       function createParticles(x, y, count = 12, type = 'star') {
         const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#8338EC', '#3A86FF'];
         for (let i = 0; i < count; i++) {
@@ -786,7 +813,7 @@
           const p = particles[i];
           p.x += p.vx;
           p.y += p.vy;
-          p.vy += 0.12; // gravity
+          p.vy += 0.12;
           p.alpha -= p.decay;
 
           if (p.alpha <= 0) {
@@ -830,7 +857,6 @@
         }
       }
 
-      // Sparkle Emoji Floater
       function showSparkleFloat(x, y, emoji = '✨') {
         const span = document.createElement('span');
         span.className = 'sparkle-pop';
@@ -841,9 +867,8 @@
         setTimeout(() => span.remove(), 750);
       }
 
-      // Clean a Specific Germ
       function cleanGerm(germ, event) {
-        if (germ.classList.contains('cleaned')) return;
+        if (!germ || germ.classList.contains('cleaned')) return;
 
         initAudio();
         germ.classList.add('cleaned');
@@ -870,62 +895,46 @@
           showSparkleFloat(localX, localY, '🍎💖');
         }
 
-        // Update progress star
         const star = stars[cleanedCount - 1];
         if (star) {
           star.classList.add('active');
         }
 
-        // Tooth expression wiggle
         toothChar.classList.remove('happy');
         void toothChar.offsetWidth;
         toothChar.classList.add('happy');
 
-        // Check if all germs are cleaned
         if (cleanedCount >= totalGerms) {
           onGameWon();
         }
       }
 
-      // Handle direct tap/click on germs with touch/pointer support
       germs.forEach((germ) => {
-        const handleInteraction = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          cleanGerm(germ, e);
-        };
-        germ.addEventListener('pointerdown', handleInteraction, { passive: false });
+        bindAction(germ, (e) => cleanGerm(germ, e));
       });
 
-      // Also allow swiping / dragging finger over tooth to clean germs
-      let isPointerDown = false;
-      stage.addEventListener('pointerdown', (e) => {
-        initAudio();
-        isPointerDown = true;
-        checkHit(e);
-      });
-      stage.addEventListener('pointermove', (e) => {
-        if (isPointerDown) {
-          checkHit(e);
-        }
-      });
-      window.addEventListener('pointerup', () => { isPointerDown = false; });
-      window.addEventListener('pointercancel', () => { isPointerDown = false; });
-
-      function checkHit(e) {
-        const x = e.clientX;
-        const y = e.clientY;
+      let isDown = false;
+      function checkHit(x, y) {
         germs.forEach(germ => {
           if (germ.classList.contains('cleaned')) return;
           const r = germ.getBoundingClientRect();
-          // Expand hit area for little toddler fingers (60px buffer)
           if (x >= r.left - 25 && x <= r.right + 25 && y >= r.top - 25 && y <= r.bottom + 25) {
-            cleanGerm(germ, e);
+            cleanGerm(germ);
           }
         });
       }
 
-      // Victory Celebration Handler
+      stage.addEventListener('mousedown', (e) => { isDown = true; checkHit(e.clientX, e.clientY); });
+      stage.addEventListener('mousemove', (e) => { if (isDown) checkHit(e.clientX, e.clientY); });
+      window.addEventListener('mouseup', () => { isDown = false; });
+
+      stage.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) checkHit(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      stage.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) checkHit(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
       function onGameWon() {
         setTimeout(() => {
           playSound('victory');
@@ -934,7 +943,6 @@
           toothMouth.setAttribute('fill', '#FF3F62');
           toothChar.classList.add('super-sparkle');
 
-          // Burst confetti
           const stageRect = stage.getBoundingClientRect();
           for (let i = 0; i < 5; i++) {
             setTimeout(() => {
@@ -953,7 +961,6 @@
         }, 300);
       }
 
-      // Reset Game
       function resetGame() {
         initAudio();
         playSound('pop');
@@ -972,10 +979,7 @@
         resizeCanvas();
       }
 
-      replayBtn.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        resetGame();
-      });
+      bindAction(replayBtn, () => resetGame());
     })();
   </script>
 </body>

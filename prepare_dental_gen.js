@@ -127,7 +127,7 @@ const enhancement = String.raw`
   [data-framer-name="Intro"] img,
   [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
   [data-framer-name="CTA"],
-  [data-framer-name="Footer"] [data-framer-name="Bottom"] { visibility: hidden !important; pointer-events: none !important; }
+  [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Left"] { gap: clamp(40px, 3vw, 64px) !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Left"] > * + * { margin-left: clamp(18px, 1.5vw, 32px) !important; }
   [data-framer-name="Header Nav"] [data-framer-name="About"] { margin-left: clamp(48px, 4vw, 80px) !important; }
@@ -201,7 +201,8 @@ const enhancement = String.raw`
   .dg-story-spark--bottom { right: 2%; bottom: -34px; }
 
   .dg-kids-game {
-    position: relative;
+    position: relative !important;
+    z-index: 50 !important;
     width: 100%;
     padding: 20px 0 40px;
     box-sizing: border-box;
@@ -213,12 +214,15 @@ const enhancement = String.raw`
   .dg-kids-game__shell { width: min(1120px, 100%); margin: 0 auto; }
   .dg-kids-game__frame {
     display: block;
+    position: relative !important;
+    z-index: 51 !important;
     width: 100%;
     min-height: 720px;
     height: 760px;
     border: 0;
     background: #dff4ff;
     overflow: hidden;
+    pointer-events: auto !important;
   }
 
   .dg-simple-cta [data-framer-name="Button Shape"] {
@@ -241,7 +245,7 @@ const enhancement = String.raw`
   .dg-programs, .dg-contact {
     order: 10;
     position: relative;
-    z-index: 3;
+    z-index: 50;
     width: 100%;
     box-sizing: border-box;
     color: #2f2076;
@@ -637,21 +641,23 @@ const enhancement = String.raw`
     const addLandingSections = () => {
       const intro = document.querySelector('[data-framer-name="Intro"]');
       const footer = document.querySelector('[data-framer-name="Footer"]');
-      if (intro && footer && !document.querySelector(".dg-programs")) {
+      if (intro && !document.querySelector(".dg-programs")) {
         const section = document.createElement("section");
         section.className = "dg-programs";
         section.id = "programs";
         section.innerHTML = '<div class="dg-shell"><p class="dg-kicker">Растём с улыбкой</p><h2>Три программы — забота на каждом этапе</h2><div class="dg-grid"><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/first-teeth.jpg" alt="Программа Первые зубки"><div class="dg-card__body"><span class="dg-age">1–3 года</span><h3>Первые зубки</h3><p>Формируем полезные привычки и основу здоровья зубов.</p></div></article><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/protected-smile.jpg" alt="Программа Под защитой улыбки"><div class="dg-card__body"><span class="dg-age">3–5 лет</span><h3>Под защитой улыбки</h3><p>Вовремя лечим и сохраняем здоровые молочные зубы.</p></div></article><article class="dg-card"><img loading="lazy" decoding="async" src="assets/dental-gen/straight-smile.jpg" alt="Программа Ровная улыбка"><div class="dg-card__body"><span class="dg-age">5–7 лет</span><h3>Ровная улыбка</h3><p>Следим за развитием прикуса и формируем красивую улыбку.</p></div></article></div><div class="dg-checkup" id="checkup"><img loading="lazy" decoding="async" src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
-        footer.parentNode.insertBefore(section, footer);
+        if (footer) footer.parentNode.insertBefore(section, footer);
+        else document.body.appendChild(section);
       }
 
-      if (footer && !document.querySelector(".dg-contact")) {
+      if (!document.querySelector(".dg-contact")) {
         const section = document.createElement("section");
         section.className = "dg-contact";
         section.id = "contacts";
         section.setAttribute("aria-label", "Контакты DENTAL GEN");
         section.innerHTML = '<div class="dg-contact__inner"><div><h2>DENTAL GEN</h2><p>Детская стоматология</p><p>г. Иваново, ул. Профсоюзная, 4</p></div><div class="dg-contact__actions"><a href="tel:+79109900060">+7 (910) 990-00-60</a><a href="https://dentalgen.pro">dentalgen.pro</a></div></div>';
-        footer.parentNode.insertBefore(section, footer);
+        if (footer) footer.parentNode.insertBefore(section, footer);
+        else document.body.appendChild(section);
       }
     };
 
@@ -721,4 +727,4 @@ const enhancement = String.raw`
 
 html = html.replace("</body>", `${enhancement}</body>`);
 fs.writeFileSync(target, html);
-console.log("Successfully rebuilt index.html without mobile MAGGIE logo!");
+console.log("Successfully rebuilt index.html with unblocked desktop game clicks!");
