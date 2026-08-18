@@ -225,6 +225,227 @@ const enhancement = String.raw`
   .dg-story-spark--right { top: 6px; right: 4%; }
   .dg-story-spark--bottom { right: 2%; bottom: -34px; }
 
+  /* Interactive Programs Carousel */
+  [data-framer-name^="Feature"] {
+    position: relative !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--token-4e62a4ec-2401-4414-9211-46bb168422e7, #fff0a8) !important;
+  }
+  [data-framer-name^="Feature"] [data-framer-name="Active Card"],
+  [data-framer-name^="Feature"] [data-framer-name="Right Peek"],
+  [data-framer-name^="Feature"] [data-framer-name="Left Peek"],
+  [data-framer-name^="Feature"] [data-framer-name="Controls"],
+  [data-framer-name="App Cropped"] {
+    display: none !important;
+  }
+  
+  .dg-programs-carousel {
+    position: relative;
+    width: min(1120px, 94vw);
+    margin: 0 auto;
+    padding: clamp(20px, 3.5vw, 40px) 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Rubik", sans-serif;
+  }
+  .dg-carousel-cards-wrapper {
+    position: relative;
+    width: min(980px, 100%);
+    min-height: 530px;
+    display: grid;
+    place-items: center;
+  }
+  .dg-pcard {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #2f2076;
+    border-radius: clamp(32px, 5vw, 48px);
+    box-shadow: -8px 10px 0 #2f2076;
+    padding: clamp(28px, 4vw, 46px);
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.92) translateY(14px);
+    transition: opacity .32s ease, transform .32s cubic-bezier(0.34, 1.56, 0.64, 1), visibility .32s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .dg-pcard.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    z-index: 2;
+  }
+  .dg-pcard--1 { background: #ffe0ed; }
+  .dg-pcard--2 { background: #fff4bd; }
+  .dg-pcard--3 { background: #dff4ff; }
+
+  .dg-pcard__inner {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    height: 100%;
+  }
+  .dg-pcard__media {
+    display: grid;
+    place-items: center;
+    padding: 10px;
+  }
+  .dg-pcard__img {
+    width: 100%;
+    max-width: clamp(200px, 24vw, 290px);
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    filter: drop-shadow(-3px 5px 0 #2f2076);
+    animation: gentleBob 3s infinite ease-in-out alternate;
+  }
+  @keyframes gentleBob {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+  }
+
+  .dg-pcard__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #2f2076;
+  }
+  .dg-pcard__badge {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: #2f2076;
+    color: #fff;
+    font: 900 15px/1 "Montserrat", "Rubik", sans-serif;
+    letter-spacing: .04em;
+    margin-bottom: 14px;
+    box-shadow: -2px 3px 0 rgba(0,0,0,0.15);
+  }
+  .dg-pcard--2 .dg-pcard__badge { background: #7048c4; }
+  .dg-pcard--3 .dg-pcard__badge { background: #1c6aa6; }
+
+  .dg-pcard__title {
+    margin: 0 0 12px;
+    font: 900 clamp(32px, 4.2vw, 46px)/1.05 "Montserrat", "Rubik", sans-serif;
+    letter-spacing: -0.04em;
+    color: #2f2076;
+  }
+  .dg-pcard__lead {
+    margin: 0 0 18px;
+    font-size: clamp(16px, 1.7vw, 18.5px);
+    line-height: 1.45;
+    font-weight: 500;
+    color: #3b2d6a;
+  }
+  .dg-pcard__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dg-pcard__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: clamp(15px, 1.55vw, 17px);
+    line-height: 1.35;
+    color: #2f2076;
+  }
+  .dg-pcard__icon {
+    flex-shrink: 0;
+    font-size: 1.25em;
+    line-height: 1;
+    margin-top: 1px;
+  }
+  .dg-pcard__cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border: 2.5px solid #2f2076;
+    border-radius: 999px;
+    background: #ffe59a;
+    color: #2f2076;
+    box-shadow: -4px 4px 0 #2f2076;
+    font: 800 clamp(16px, 1.8vw, 18px)/1 "Rubik", sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .dg-pcard__cta:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: -6px 6px 0 #2f2076;
+  }
+  .dg-pcard__cta:active {
+    transform: translate(2px, 2px);
+    box-shadow: -2px 2px 0 #2f2076;
+  }
+
+  /* Carousel Arrows */
+  .dg-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: clamp(48px, 5.5vw, 64px);
+    height: clamp(48px, 5.5vw, 64px);
+    border-radius: 50%;
+    background: #ffe59a;
+    border: 3px solid #2f2076;
+    box-shadow: -4px 5px 0 #2f2076;
+    color: #2f2076;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .dg-carousel-arrow--prev { left: -24px; }
+  .dg-carousel-arrow--next { right: -24px; }
+  .dg-carousel-arrow:hover {
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: -5px 7px 0 #2f2076;
+    background: #fff;
+  }
+  .dg-carousel-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: -2px 2px 0 #2f2076;
+  }
+
+  /* Carousel Dots */
+  .dg-carousel-dots {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    z-index: 5;
+  }
+  .dg-carousel-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    border: 2px solid #2f2076;
+    background: #fff;
+    cursor: pointer;
+    transition: all .25s ease;
+    padding: 0;
+  }
+  .dg-carousel-dot.is-active {
+    width: 42px;
+    background: #2f2076;
+  }
+
   /* Game Teaser Section */
   .dg-game-teaser {
     position: relative;
@@ -617,6 +838,31 @@ const enhancement = String.raw`
     .dg-story-spark--left { left: 2px; }
     .dg-story-spark--right { right: 0; top: -38px; }
     .dg-story-spark--bottom { display: none; }
+    .dg-programs-carousel { padding: 10px 16px 36px; }
+    .dg-carousel-cards-wrapper { min-height: 610px; width: 100%; }
+    .dg-pcard { padding: 22px 26px 24px; border-radius: 28px; box-shadow: -5px 7px 0 #2f2076; }
+    .dg-pcard__inner { grid-template-columns: 1fr; gap: 12px; }
+    .dg-pcard__media { padding: 0; }
+    .dg-pcard__img { max-width: 115px; }
+    .dg-pcard__title { font-size: 26px; margin-bottom: 8px; }
+    .dg-pcard__lead { font-size: 14px; margin-bottom: 12px; line-height: 1.4; }
+    .dg-pcard__list { margin-bottom: 18px; gap: 8px; }
+    .dg-pcard__list li { font-size: 13.5px; }
+    .dg-pcard__cta { width: 100%; text-align: center; font-size: 16px; padding: 14px 20px; }
+    .dg-carousel-arrow {
+      width: 42px;
+      height: 42px;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      z-index: 20;
+      box-shadow: -3px 4px 0 #2f2076;
+    }
+    .dg-carousel-arrow--prev { left: -14px; }
+    .dg-carousel-arrow--next { right: -14px; }
+    .dg-carousel-arrow:hover { transform: translateY(-50%) scale(1.05); }
+    .dg-carousel-arrow:active { transform: translateY(-50%) scale(0.95); }
+    .dg-carousel-dots { margin-top: 18px; margin-bottom: 24px; }
     .dg-game-teaser { padding: 40px 16px; }
     .dg-game-teaser__card { grid-template-columns: 1fr; gap: 20px; padding: 24px 18px; border-radius: 26px; }
     .dg-game-teaser__right { order: -1; }
@@ -739,14 +985,6 @@ const enhancement = String.raw`
         target.scrollIntoView({ behavior: "auto", block: "start" });
       };
       window.addEventListener("click", followAnchor, true);
-      window.addEventListener("pointerdown", (event) => {
-        if (!event.target.closest?.("a.dg-safe-arrow")) return;
-        followAnchor(event);
-      }, true);
-      window.addEventListener("keydown", (event) => {
-        if (!event.target.closest?.("a.dg-safe-arrow")) return;
-        followAnchor(event);
-      }, true);
     };
 
     const simplifyControls = () => {
@@ -754,15 +992,6 @@ const enhancement = String.raw`
       document.documentElement.style.cursor = "auto";
       for (const element of document.querySelectorAll("[data-framer-cursor]")) {
         element.removeAttribute("data-framer-cursor");
-      }
-      for (const link of document.querySelectorAll("a")) {
-        const href = (link.getAttribute("href") || "").trim();
-        const isArrow = Boolean(link.querySelector('[data-framer-name="Icon"] svg'));
-        if (!isArrow || (href && href !== "." && href !== "./")) continue;
-        link.setAttribute("href", "#programs");
-        link.removeAttribute("target");
-        link.classList.add("dg-safe-arrow");
-        link.setAttribute("aria-label", "Перейти к программам");
       }
       for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
         const link = google.closest("a");
@@ -833,8 +1062,6 @@ const enhancement = String.raw`
       intro.classList.add("dg-parent-story-section");
       intro.id = "parent-story";
       intro.innerHTML = '<div class="dg-parent-story"><span class="dg-story-spark dg-story-spark--left" aria-hidden="true">⭐</span><span class="dg-story-spark dg-story-spark--right" aria-hidden="true">🪐</span><div class="dg-story-questions"><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></article></div><div class="dg-story-copy"><p>Вопросов у родителей всегда много. Ведь здоровье ребёнка начинается с внимания к мелочам, а здоровая улыбка — с самых первых зубов. Мы создали программы <strong>«Растём с улыбкой»</strong>, чтобы вы были уверены: развитие зубов проходит правильно, а рядом всегда есть детский стоматолог, готовый поддержать и ответить на любые вопросы.</p><p><span class="dg-story-heart" aria-hidden="true">♥</span>Мы покажем, как годовые программы сопровождения помогают семьям на разных этапах взросления ребёнка. История вымышленная, а ситуации — самые настоящие.</p><div class="dg-story-actions"><a href="tel:+79109900060">Задать вопрос доктору</a><button type="button" class="dg-story-game-btn" id="storyOpenGameBtn">🎮 Игра «Почисти зубик»</button><a href="#programs">Наши программы</a></div></div><span class="dg-story-spark dg-story-spark--bottom" aria-hidden="true">✨</span></div>';
-
-      document.getElementById("storyOpenGameBtn")?.addEventListener("click", () => window.openGameModal());
     };
 
     window.openGameModal = () => {
@@ -859,25 +1086,192 @@ const enhancement = String.raw`
       document.body.classList.remove("dg-modal-open");
     };
 
-    if (!window.__dgGameEventsBound) {
-      window.__dgGameEventsBound = true;
+    window.__dgCurrentSlide = 0;
+    window.setProgramSlide = (index) => {
+      const cards = document.querySelectorAll(".dg-pcard");
+      const dots = document.querySelectorAll(".dg-carousel-dot");
+      if (!cards.length) return;
+      const normalized = ((index % cards.length) + cards.length) % cards.length;
+      cards.forEach((card, i) => {
+        if (i === normalized) card.classList.add("is-active");
+        else card.classList.remove("is-active");
+      });
+      dots.forEach((dot, i) => {
+        if (i === normalized) dot.classList.add("is-active");
+        else dot.classList.remove("is-active");
+      });
+      window.__dgCurrentSlide = normalized;
+    };
+
+    window.nextProgramSlide = () => {
+      const current = window.__dgCurrentSlide || 0;
+      window.setProgramSlide(current + 1);
+    };
+
+    window.prevProgramSlide = () => {
+      const current = window.__dgCurrentSlide || 0;
+      window.setProgramSlide(current - 1);
+    };
+
+    if (!window.__dgEventsBound) {
+      window.__dgEventsBound = true;
       document.addEventListener("click", (e) => {
+        // Prev button
+        if (e.target.closest("#carouselPrevBtn") || e.target.closest(".framer-bayurr-container a")) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.prevProgramSlide();
+          return;
+        }
+        // Next button
+        if (e.target.closest("#carouselNextBtn") || e.target.closest(".framer-1kxwop3-container a")) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.nextProgramSlide();
+          return;
+        }
+        // Dots
+        const dot = e.target.closest(".dg-carousel-dot");
+        if (dot && dot.dataset.index !== undefined) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.setProgramSlide(parseInt(dot.dataset.index, 10));
+          return;
+        }
+        // Game Modal
         if (e.target.closest("#openGameModalBtn") || e.target.closest("#openGameModalPreview") || e.target.closest("#storyOpenGameBtn")) {
           e.preventDefault();
           window.openGameModal();
+          return;
         }
         if (e.target.closest("#closeGameModalBtn") || e.target.closest("#gameModalBackdrop")) {
           e.preventDefault();
           window.closeGameModal();
+          return;
         }
       }, true);
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+      document.addEventListener("touchstart", (e) => {
+        const wrapper = e.target.closest(".dg-carousel-cards-wrapper, [data-framer-name^='Feature']");
+        if (wrapper && e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      document.addEventListener("touchend", (e) => {
+        const wrapper = e.target.closest(".dg-carousel-cards-wrapper, [data-framer-name^='Feature']");
+        if (wrapper && e.changedTouches.length === 1) {
+          const deltaX = e.changedTouches[0].clientX - touchStartX;
+          const deltaY = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX < 0) window.nextProgramSlide();
+            else window.prevProgramSlide();
+          }
+        }
+      }, { passive: true });
 
       window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           window.closeGameModal();
         }
+        if (e.key === "ArrowLeft") {
+          window.prevProgramSlide();
+        }
+        if (e.key === "ArrowRight") {
+          window.nextProgramSlide();
+        }
       });
     }
+
+    const enhanceProgramsCarousel = () => {
+      const featureContainer = document.querySelector('[data-framer-name^="Feature"]');
+      if (!featureContainer || featureContainer.querySelector(".dg-programs-carousel")) return;
+
+      const carousel = document.createElement("div");
+      carousel.className = "dg-programs-carousel";
+      carousel.id = "programsCarousel";
+      carousel.innerHTML = '<div class="dg-carousel-cards-wrapper" id="carouselCardsWrapper">' +
+        '<!-- Card 1: 1-3 года -->' +
+        '<article class="dg-pcard dg-pcard--1 is-active" data-index="0">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-baby-tooth.svg" alt="Первые зубки (1-3 года)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">1–3 ГОДА</span>' +
+              '<h3 class="dg-pcard__title">«Первые зубки»</h3>' +
+              '<p class="dg-pcard__lead">Бережная забота и формирование правильных привычек с самого первого зубика. Адаптируем малыша к стоматологу без слёз и страха.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">✨</span><span><strong>Мягкая адаптация</strong> в игровой форме без стресса</span></li>' +
+                '<li><span class="dg-pcard__icon">🪥</span><span><strong>Обучение родителей</strong> правильной технике чистки</span></li>' +
+                '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль прорезывания</strong> и здоровья первых зубов</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+
+        '<!-- Card 2: 3-5 лет -->' +
+        '<article class="dg-pcard dg-pcard--2" data-index="1">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-protect-tooth.svg" alt="Под защитой улыбки (3-5 лет)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">3–5 ЛЕТ</span>' +
+              '<h3 class="dg-pcard__title">«Под защитой улыбки»</h3>' +
+              '<p class="dg-pcard__lead">Сохраняем молочные зубы крепкими и здоровыми. Профилактика кариеса, бережный уход и позитивный опыт визитов.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">🛡️</span><span><strong>Защита от кариеса</strong> и укрепление зубной эмали</span></li>' +
+                '<li><span class="dg-pcard__icon">🫧</span><span><strong>Бережная гигиена</strong> и полировка без боли</span></li>' +
+                '<li><span class="dg-pcard__icon">🧸</span><span><strong>Индивидуальный подбор</strong> детской щётки и пасты</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+
+        '<!-- Card 3: 5-7 лет -->' +
+        '<article class="dg-pcard dg-pcard--3" data-index="2">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-straight-tooth.svg" alt="Ровная улыбка (5-7 лет)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">5–7 ЛЕТ</span>' +
+              '<h3 class="dg-pcard__title">«Ровная улыбка»</h3>' +
+              '<p class="dg-pcard__lead">Следим за правильным развитием прикуса и естественной сменой зубов. Формируем здоровую и красивую улыбку к школе.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">📐</span><span><strong>Осмотр ортодонта</strong> и контроль развития челюстей</span></li>' +
+                '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль смены зубов</strong> на постоянные крепкие зубки</span></li>' +
+                '<li><span class="dg-pcard__icon">🌟</span><span><strong>ИИ-диагностика Diagnocat</strong> для точной оценки прикуса</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+      '</div>' +
+
+      '<!-- Arrow Controls -->' +
+      '<button class="dg-carousel-arrow dg-carousel-arrow--prev" id="carouselPrevBtn" type="button" aria-label="Предыдущая программа" title="Назад">' +
+        '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>' +
+      '</button>' +
+      '<button class="dg-carousel-arrow dg-carousel-arrow--next" id="carouselNextBtn" type="button" aria-label="Следующая программа" title="Вперед">' +
+        '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>' +
+      '</button>' +
+
+      '<!-- Dots indicators -->' +
+      '<div class="dg-carousel-dots" id="carouselDots">' +
+        '<button class="dg-carousel-dot is-active" data-index="0" type="button" aria-label="1–3 года: Первые зубки"></button>' +
+        '<button class="dg-carousel-dot" data-index="1" type="button" aria-label="3–5 лет: Под защитой улыбки"></button>' +
+        '<button class="dg-carousel-dot" data-index="2" type="button" aria-label="5–7 лет: Ровная улыбка"></button>' +
+      '</div>';
+
+      featureContainer.appendChild(carousel);
+    };
 
     const addKidsGame = () => {
       const intro = document.querySelector('[data-framer-name="Intro"]');
@@ -972,6 +1366,7 @@ const enhancement = String.raw`
       rewriteImages();
       rewriteLoader();
       replaceIntroStory();
+      enhanceProgramsCarousel();
       addKidsGame();
       addLandingSections();
       addFloatingActions();
@@ -995,4 +1390,4 @@ const enhancement = String.raw`
 
 html = html.replace("</body>", `${enhancement}</body>`);
 fs.writeFileSync(target, html);
-console.log("Successfully rebuilt index.html with game modal popup and teaser card!");
+console.log("Successfully rebuilt index.html with interactive 3-card programs carousel and custom vector teeth!");

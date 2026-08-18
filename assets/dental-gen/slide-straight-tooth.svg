@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="100%" height="100%">
+  <defs>
+    <filter id="toothShadow3" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="-3" dy="5" stdDeviation="0" flood-color="#2f2076" flood-opacity="1" />
+    </filter>
+  </defs>
+
+  <!-- Golden Crown on Head -->
+  <g transform="translate(112, 28) rotate(-6)" filter="url(#toothShadow3)">
+    <path d="M 5 28 L 12 8 L 28 22 L 44 8 L 51 28 Z" fill="#ffd23f" stroke="#2f2076" stroke-width="3.5" stroke-linejoin="round" />
+    <circle cx="12" cy="7" r="3" fill="#ff4d79" />
+    <circle cx="28" cy="20" r="3" fill="#04b8d4" />
+    <circle cx="44" cy="7" r="3" fill="#ff4d79" />
+  </g>
+
+  <!-- Straight Smile Magic Alignment Beam / Sparkles -->
+  <g fill="#ffe59a" stroke="#2f2076" stroke-width="2">
+    <path d="M 35 140 Q 35 155 20 155 Q 35 155 35 170 Q 35 155 50 155 Q 35 155 35 140 Z" />
+    <path d="M 235 120 Q 235 130 225 130 Q 235 130 235 140 Q 235 130 245 130 Q 235 130 235 120 Z" />
+    <path d="M 220 210 Q 220 220 210 220 Q 220 220 220 230 Q 220 220 230 220 Q 220 220 220 210 Z" />
+  </g>
+
+  <!-- Tooth Body with Thick Outline and Drop Shadow -->
+  <g filter="url(#toothShadow3)">
+    <path d="M 80 80 
+             C 80 45, 120 40, 140 55 
+             C 160 40, 200 45, 200 80 
+             C 205 125, 200 160, 185 200 
+             C 175 225, 155 225, 148 185 
+             C 145 170, 135 170, 132 185 
+             C 125 225, 105 225, 95 200 
+             C 80 160, 75 125, 80 80 Z" 
+          fill="#ffffff" stroke="#2f2076" stroke-width="4.5" stroke-linejoin="round" />
+  </g>
+
+  <!-- Pink Blush Cheeks -->
+  <ellipse cx="102" cy="132" rx="12" ry="7" fill="#ffb8d2" opacity="0.9" />
+  <ellipse cx="178" cy="132" rx="12" ry="7" fill="#ffb8d2" opacity="0.9" />
+
+  <!-- Big Sparkling Happy Eyes -->
+  <ellipse cx="112" cy="115" rx="7" ry="10" fill="#2f2076" />
+  <circle cx="110" cy="111" r="3.2" fill="#ffffff" />
+  <circle cx="114" cy="118" r="1.4" fill="#ffffff" />
+
+  <ellipse cx="168" cy="115" rx="7" ry="10" fill="#2f2076" />
+  <circle cx="166" cy="111" r="3.2" fill="#ffffff" />
+  <circle cx="170" cy="118" r="1.4" fill="#ffffff" />
+
+  <!-- Perfectly Straight Radiant Smile with Sparkle -->
+  <path d="M 124 128 Q 140 144 156 128" fill="none" stroke="#2f2076" stroke-width="4.5" stroke-linecap="round" />
+  
+  <!-- Tiny Sparkle on Smile -->
+  <g transform="translate(156, 122) scale(0.6)" fill="#ffffff" stroke="#2f2076" stroke-width="2">
+    <path d="M 10 0 Q 10 10 0 10 Q 10 10 10 20 Q 10 10 20 10 Q 10 10 10 0 Z" />
+  </g>
+</svg>

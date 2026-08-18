@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="100%" height="100%">
+  <defs>
+    <filter id="toothShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="-3" dy="5" stdDeviation="0" flood-color="#2f2076" flood-opacity="1" />
+    </filter>
+  </defs>
+  
+  <!-- Floating Sparkles -->
+  <g fill="#ffe59a" stroke="#2f2076" stroke-width="2">
+    <path d="M 40 50 Q 40 65 25 65 Q 40 65 40 80 Q 40 65 55 65 Q 40 65 40 50 Z" />
+    <path d="M 235 70 Q 235 80 225 80 Q 235 80 235 90 Q 235 80 245 80 Q 235 80 235 70 Z" />
+    <path d="M 220 180 Q 220 190 210 190 Q 220 190 220 200 Q 220 190 230 190 Q 220 190 220 180 Z" />
+  </g>
+
+  <!-- Baby Tooth Body with Thick Outline and Drop Shadow -->
+  <g filter="url(#toothShadow)">
+    <path d="M 80 80 
+             C 80 45, 120 40, 140 55 
+             C 160 40, 200 45, 200 80 
+             C 205 125, 200 160, 185 200 
+             C 175 225, 155 225, 148 185 
+             C 145 170, 135 170, 132 185 
+             C 125 225, 105 225, 95 200 
+             C 80 160, 75 125, 80 80 Z" 
+          fill="#ffffff" stroke="#2f2076" stroke-width="4.5" stroke-linejoin="round" />
+  </g>
+
+  <!-- Pink Blush Cheeks -->
+  <ellipse cx="102" cy="132" rx="12" ry="7" fill="#ffb8d2" opacity="0.9" />
+  <ellipse cx="178" cy="132" rx="12" ry="7" fill="#ffb8d2" opacity="0.9" />
+
+  <!-- Big Happy Anime Eyes -->
+  <ellipse cx="112" cy="115" rx="7" ry="10" fill="#2f2076" />
+  <circle cx="110" cy="111" r="3.2" fill="#ffffff" />
+  <circle cx="114" cy="118" r="1.4" fill="#ffffff" />
+
+  <ellipse cx="168" cy="115" rx="7" ry="10" fill="#2f2076" />
+  <circle cx="166" cy="111" r="3.2" fill="#ffffff" />
+  <circle cx="170" cy="118" r="1.4" fill="#ffffff" />
+
+  <!-- Sweet Smile -->
+  <path d="M 128 128 Q 140 142 152 128" fill="none" stroke="#2f2076" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Baby Toothbrush in Hand -->
+  <g transform="rotate(-25 50 160)">
+    <!-- Toothbrush Handle -->
+    <rect x="40" y="100" width="12" height="85" rx="6" fill="#04b8d4" stroke="#2f2076" stroke-width="3" />
+    <!-- Bristles head -->
+    <rect x="36" y="82" width="20" height="20" rx="4" fill="#ffffff" stroke="#2f2076" stroke-width="2.5" />
+    <!-- Foam on Brush -->
+    <circle cx="46" cy="80" r="8" fill="#e9dcff" stroke="#2f2076" stroke-width="2" />
+    <circle cx="53" cy="83" r="6" fill="#dff4ff" stroke="#2f2076" stroke-width="2" />
+  </g>
+</svg>
