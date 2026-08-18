@@ -4,30 +4,12 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    { "source": "/kids-game", "destination": "/kids-game.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/faqs", "destination": "/faqs.html" },
     { "source": "/forbusiness", "destination": "/forbusiness.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/android", "destination": "/android.html" },
     { "source": "/policies", "destination": "/policies.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    }
   ]
 }

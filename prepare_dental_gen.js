@@ -896,15 +896,19 @@ const enhancement = String.raw`
   .dg-game-modal__container {
     position: relative;
     z-index: 2;
-    width: min(860px, 100%);
-    height: min(780px, 92vh);
+    width: min(640px, 95vw);
+    max-height: min(780px, 94vh);
     background: #dff4ff;
     border: 3px solid #2f2076;
-    border-radius: clamp(24px, 4vw, 36px);
+    border-radius: clamp(22px, 4vw, 32px);
     box-shadow: -6px 10px 0 #2f2076;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: clamp(14px, 2.5vw, 24px) clamp(10px, 2vw, 20px);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
     transform: scale(0.92);
     transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -913,17 +917,17 @@ const enhancement = String.raw`
   }
   .dg-game-modal__close {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 10px;
+    right: 10px;
     z-index: 50;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #fff;
     border: 2.5px solid #2f2076;
-    box-shadow: -3px 3px 0 #2f2076;
+    box-shadow: -2px 2px 0 #2f2076;
     color: #2f2076;
-    font: 900 20px/1 "Rubik", sans-serif;
+    font: 900 18px/1 "Rubik", sans-serif;
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -936,12 +940,389 @@ const enhancement = String.raw`
   .dg-game-modal__close:active {
     transform: scale(0.92);
   }
-  .dg-game-modal__frame {
+
+  .game-wrapper {
+    width: min(560px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    font-family: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .game-header {
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+  }
+  .game-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #7048c4;
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: clamp(11.5px, 2.2vw, 13.5px);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(112, 72, 196, 0.25);
+    margin-bottom: 4px;
+  }
+  .game-title {
+    margin: 0;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #2f2076;
+  }
+  .sound-toggle {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid #2f2076;
+    box-shadow: -2px 3px 0 #2f2076;
+    font-size: 18px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    z-index: 20;
+  }
+  .sound-toggle:hover { transform: scale(1.06); }
+  .sound-toggle:active { transform: scale(0.92); }
+  .game-card {
+    width: 100%;
+    background: #fffdf5;
+    border: 3px solid #2f2076;
+    border-radius: clamp(18px, 4vw, 26px);
+    box-shadow: -4px 6px 0 #2f2076;
+    padding: clamp(12px, 2.5vw, 20px) clamp(10px, 2vw, 18px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+  .step-tracker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(6px, 1.8vw, 10px);
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 8px;
+  }
+  .step-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: clamp(6px, 1.5vw, 9px) 4px;
+    background: #fff;
+    border: 2px solid #d4cfef;
+    border-radius: 999px;
+    font-size: clamp(11.5px, 2.3vw, 13.5px);
+    font-weight: 800;
+    color: #928ca8;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .step-pill.active {
+    background: #ffe59a;
+    border-color: #2f2076;
+    color: #2f2076;
+    box-shadow: -2px 2px 0 #2f2076;
+    transform: scale(1.03);
+  }
+  .step-pill.completed {
+    background: #e6fcf5;
+    border-color: #37b24d;
+    color: #37b24d;
+  }
+  .hint-banner {
+    background: #fff;
+    border: 2px solid #2f2076;
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: clamp(13px, 2.6vw, 16px);
+    font-weight: 900;
+    color: #2f2076;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: -2px 2px 0 #2f2076;
+    margin-bottom: 6px;
+  }
+  .stage {
+    position: relative;
+    width: min(250px, 64vw);
+    height: min(250px, 64vw);
+    margin: 4px auto 8px;
+    display: grid;
+    place-items: center;
+    touch-action: none;
+    cursor: pointer;
+  }
+  .tooth-svg {
     width: 100%;
     height: 100%;
-    border: 0;
-    background: transparent;
-    overflow: hidden;
+    filter: drop-shadow(0 6px 14px rgba(47, 32, 118, 0.12));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .tooth-svg.happy { animation: toothWiggle 0.6s ease-in-out; }
+  .tooth-svg.super-sparkle { animation: toothDance 1.2s infinite alternate ease-in-out; }
+  .tooth-svg.chewing { animation: toothChew 0.4s 4 ease-in-out; }
+  @keyframes toothWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-6deg) scale(1.05); }
+    75% { transform: rotate(6deg) scale(1.05); }
+  }
+  @keyframes toothDance {
+    0% { transform: translateY(0) rotate(-4deg) scale(1.03); }
+    100% { transform: translateY(-10px) rotate(4deg) scale(1.08); }
+  }
+  @keyframes toothChew {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08, 0.92); }
+  }
+  .game-item {
+    position: absolute;
+    width: clamp(44px, 11vw, 62px);
+    height: clamp(44px, 11vw, 62px);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: clamp(28px, 7vw, 38px);
+    cursor: pointer;
+    z-index: 15;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+    touch-action: none;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
+    pointer-events: auto;
+  }
+  .game-item:hover { transform: translate(-50%, -50%) scale(1.12); }
+  .game-item:active { transform: translate(-50%, -50%) scale(0.88); }
+  .game-item.popped {
+    transform: translate(-50%, -50%) scale(0) rotate(180deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .item-bubble {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px dashed #7048c4;
+    animation: rotateBorder 4s linear infinite;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .foam-bubble {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid #4dabf7;
+    background: rgba(227, 244, 255, 0.6);
+    pointer-events: none;
+    animation: foamPulse 1.6s infinite alternate ease-in-out;
+  }
+  @keyframes rotateBorder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes foamPulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.08); opacity: 1; }
+  }
+  .feed-apple-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: appleBounce 1.4s infinite alternate ease-in-out;
+  }
+  .feed-apple {
+    font-size: clamp(58px, 14vw, 78px);
+    line-height: 1;
+    filter: drop-shadow(0 6px 12px rgba(255, 63, 98, 0.35));
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .feed-apple-wrapper:hover .feed-apple {
+    transform: scale(1.15) rotate(8deg);
+  }
+  .feed-apple-wrapper:active .feed-apple {
+    transform: scale(0.85);
+  }
+  .apple-tap-badge {
+    background: #ffe59a;
+    border: 2px solid #2f2076;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: clamp(11.5px, 2.4vw, 13.5px);
+    font-weight: 900;
+    color: #2f2076;
+    margin-top: 2px;
+    white-space: nowrap;
+    box-shadow: -2px 2px 0 #2f2076;
+  }
+  @keyframes appleBounce {
+    0% { transform: translate(-50%, -50%) translateY(0) scale(1); }
+    100% { transform: translate(-50%, -50%) translateY(-8px) scale(1.06); }
+  }
+  .particle-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 8;
+  }
+  .tools-palette {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(6px, 1.8vw, 12px);
+    width: 100%;
+    max-width: 480px;
+    margin-top: 4px;
+    z-index: 10;
+  }
+  .tool-btn {
+    position: relative;
+    min-height: clamp(64px, 14vw, 80px);
+    border: 2.5px solid #2f2076;
+    border-radius: clamp(14px, 3vw, 20px);
+    background: #fff;
+    box-shadow: -3px 4px 0 #2f2076;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    touch-action: manipulation;
+    pointer-events: auto;
+  }
+  .tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: -4px 6px 0 #2f2076;
+  }
+  .tool-btn:active, .tool-btn.selected {
+    transform: translateY(2px) translateX(-2px);
+    box-shadow: -1px 1.5px 0 #2f2076;
+  }
+  .tool-btn.brush-btn { background: #ffe9f2; }
+  .tool-btn.water-btn { background: #e3f4ff; }
+  .tool-btn.apple-btn { background: #e6fcf5; }
+  .tool-btn.brush-btn.selected { background: #ffc9db; border-color: #ff3f62; }
+  .tool-btn.water-btn.selected { background: #bfe7ff; border-color: #04b8d4; }
+  .tool-btn.apple-btn.selected { background: #b2f2bb; border-color: #37b24d; }
+  .tool-icon {
+    font-size: clamp(26px, 6vw, 34px);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .tool-label {
+    font-size: clamp(11px, 2.2vw, 13px);
+    font-weight: 900;
+    color: #2f2076;
+    letter-spacing: -0.01em;
+    pointer-events: none;
+  }
+  .victory-overlay {
+    position: absolute;
+    inset: 0;
+    background: #fffdf5 !important;
+    border: 3px solid #2f2076 !important;
+    border-radius: inherit !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 14px;
+    z-index: 60 !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(47, 32, 118, 0.2);
+  }
+  .victory-overlay.active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: scale(1) !important;
+  }
+  .victory-tooth {
+    font-size: clamp(58px, 14vw, 80px);
+    line-height: 1;
+    animation: victoryJump 1s infinite alternate cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-bottom: 8px;
+    pointer-events: none;
+  }
+  .victory-title {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 900;
+    color: #2f2076;
+    margin: 0 0 6px;
+    text-align: center;
+    line-height: 1.1;
+    pointer-events: none;
+  }
+  .victory-sub {
+    font-size: clamp(13px, 2.8vw, 16px);
+    font-weight: 700;
+    color: #7048c4;
+    margin: 0 0 16px;
+    text-align: center;
+    pointer-events: none;
+  }
+  .replay-btn {
+    min-width: clamp(160px, 46vw, 220px);
+    padding: clamp(12px, 2.6vw, 15px) 18px;
+    border: 2.5px solid #2f2076;
+    border-radius: 999px;
+    background: #ffe59a;
+    color: #2f2076;
+    box-shadow: -3px 4px 0 #2f2076;
+    font: 900 clamp(15px, 3.2vw, 18px)/1 "Rubik", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    touch-action: manipulation;
+    pointer-events: auto;
+  }
+  .replay-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: -4px 6px 0 #2f2076;
+  }
+  .replay-btn:active {
+    transform: translateY(2px);
+    box-shadow: -1px 2px 0 #2f2076;
+  }
+  .sparkle-pop {
+    position: absolute;
+    font-size: 22px;
+    pointer-events: none;
+    animation: floatUpFade 0.7s forwards ease-out;
+    z-index: 70;
   }
 
   .dg-simple-cta [data-framer-name="Button Shape"] {
@@ -1379,6 +1760,462 @@ const enhancement = String.raw`
       '</div>';
     };
 
+    // Embedded Game Audio & Particle Controller
+    let gameAudioCtx = null;
+    let gameSoundEnabled = true;
+    let gameStep = 1;
+    let gameStep1Left = 4;
+    let gameStep2Left = 4;
+    let gameAppleBites = 0;
+    let gameParticles = [];
+    let gameAnimFrame = null;
+
+    function initGameAudio() {
+      if (!gameAudioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) gameAudioCtx = new AudioContext();
+      }
+      if (gameAudioCtx && gameAudioCtx.state === 'suspended') {
+        gameAudioCtx.resume();
+      }
+    }
+
+    function playGameSound(type) {
+      if (!gameSoundEnabled) return;
+      try {
+        initGameAudio();
+        if (!gameAudioCtx) return;
+        const now = gameAudioCtx.currentTime;
+        if (type === 'brush') {
+          const osc = gameAudioCtx.createOscillator();
+          const gain = gameAudioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(550, now);
+          osc.frequency.linearRampToValueAtTime(750, now + 0.04);
+          osc.frequency.linearRampToValueAtTime(600, now + 0.09);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+          osc.connect(gain);
+          gain.connect(gameAudioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.1);
+        } else if (type === 'water') {
+          [520, 680, 840].forEach((freq, i) => {
+            const osc = gameAudioCtx.createOscillator();
+            const gain = gameAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + i * 0.03);
+            osc.frequency.exponentialRampToValueAtTime(freq * 1.6, now + i * 0.03 + 0.16);
+            gain.gain.setValueAtTime(0.22, now + i * 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.03 + 0.18);
+            osc.connect(gain);
+            gain.connect(gameAudioCtx.destination);
+            osc.start(now + i * 0.03);
+            osc.stop(now + i * 0.03 + 0.18);
+          });
+        } else if (type === 'crunch') {
+          const osc = gameAudioCtx.createOscillator();
+          const gain = gameAudioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(200, now + 0.12);
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.14);
+          osc.connect(gain);
+          gain.connect(gameAudioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.14);
+
+          const osc2 = gameAudioCtx.createOscillator();
+          const gain2 = gameAudioCtx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(950, now + 0.05);
+          osc2.frequency.exponentialRampToValueAtTime(450, now + 0.18);
+          gain2.gain.setValueAtTime(0.3, now + 0.05);
+          gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+          osc2.connect(gain2);
+          gain2.connect(gameAudioCtx.destination);
+          osc2.start(now + 0.05);
+          osc2.stop(now + 0.2);
+        } else if (type === 'step_complete') {
+          [587.33, 739.99, 880.00].forEach((note, i) => {
+            const osc = gameAudioCtx.createOscillator();
+            const gain = gameAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(note, now + i * 0.08);
+            gain.gain.setValueAtTime(0.28, now + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.22);
+            osc.connect(gain);
+            gain.connect(gameAudioCtx.destination);
+            osc.start(now + i * 0.08);
+            osc.stop(now + i * 0.08 + 0.22);
+          });
+        } else if (type === 'victory') {
+          [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((note, i) => {
+            const osc = gameAudioCtx.createOscillator();
+            const gain = gameAudioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(note, now + i * 0.11);
+            gain.gain.setValueAtTime(0.32, now + i * 0.11);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.11 + (i === 4 ? 0.7 : 0.22));
+            osc.connect(gain);
+            gain.connect(gameAudioCtx.destination);
+            osc.start(now + i * 0.11);
+            osc.stop(now + i * 0.11 + (i === 4 ? 0.7 : 0.22));
+          });
+        }
+      } catch (e) {
+        console.warn('Game audio error:', e);
+      }
+    }
+
+    function createGameParticles(x, y, count, type) {
+      const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#8338EC', '#3A86FF', '#FFB3C6'];
+      for (let i = 0; i < (count || 12); i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 6;
+        gameParticles.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1.5,
+          size: 4 + Math.random() * 7,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          decay: 0.02 + Math.random() * 0.03,
+          type: type || 'bubble'
+        });
+      }
+    }
+
+    function updateGameParticles() {
+      const canvas = document.getElementById("dgGameParticleCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = gameParticles.length - 1; i >= 0; i--) {
+        const p = gameParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.12;
+        p.alpha -= p.decay;
+        if (p.alpha <= 0) {
+          gameParticles.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        if (p.type === 'bubble') {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = '#E3F4FF';
+          ctx.fill();
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = '#3A86FF';
+          ctx.stroke();
+        } else if (p.type === 'water') {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.9, 0, Math.PI * 2);
+          ctx.fillStyle = '#04B8D4';
+          ctx.fill();
+        } else {
+          ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size * 1.5);
+        }
+        ctx.restore();
+      }
+      if (gameParticles.length > 0) gameAnimFrame = requestAnimationFrame(updateGameParticles);
+      else gameAnimFrame = null;
+    }
+
+    function triggerGameParticles(x, y, count, type) {
+      createGameParticles(x, y, count, type);
+      if (!gameAnimFrame) gameAnimFrame = requestAnimationFrame(updateGameParticles);
+    }
+
+    function showGameSparkleFloat(x, y, emoji) {
+      const stage = document.getElementById("dgGameStage");
+      if (!stage) return;
+      const span = document.createElement('span');
+      span.className = 'sparkle-pop';
+      span.textContent = emoji || '✨';
+      span.style.left = x + 'px';
+      span.style.top = y + 'px';
+      stage.appendChild(span);
+      setTimeout(() => span.remove(), 750);
+    }
+
+    function resizeGameCanvas() {
+      const stage = document.getElementById("dgGameStage");
+      const canvas = document.getElementById("dgGameParticleCanvas");
+      if (!stage || !canvas) return;
+      const rect = stage.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = (rect.width || 250) * dpr;
+      canvas.height = (rect.height || 250) * dpr;
+      const ctx = canvas.getContext("2d");
+      if (ctx) ctx.scale(dpr, dpr);
+    }
+
+    function highlightGameTool(name) {
+      const tools = document.querySelectorAll(".tool-btn");
+      tools.forEach(t => t.classList.remove('selected'));
+      const tool = document.getElementById(name === 'brush' ? 'dgToolBrush' : (name === 'water' ? 'dgToolWater' : 'dgToolApple'));
+      if (tool) tool.classList.add('selected');
+    }
+
+    function startEmbeddedStep1() {
+      gameStep = 1;
+      gameStep1Left = 4;
+      highlightGameTool('brush');
+
+      const s1 = document.getElementById("dgGameStep1");
+      const s2 = document.getElementById("dgGameStep2");
+      const s3 = document.getElementById("dgGameStep3");
+      if (s1) s1.className = 'step-pill active';
+      if (s2) s2.className = 'step-pill';
+      if (s3) s3.className = 'step-pill';
+
+      const emoji = document.getElementById("dgGameHintEmoji");
+      const text = document.getElementById("dgGameHintText");
+      if (emoji) emoji.textContent = '🪥';
+      if (text) text.textContent = '1. Почисти пятнышки щёточкой!';
+
+      const layer = document.getElementById("dgGameItemsLayer");
+      if (!layer) return;
+      layer.innerHTML =
+        '<div class="game-item" id="dgGerm1" style="top: 26%; left: 30%;"><div class="item-bubble"></div><span>👾</span></div>' +
+        '<div class="game-item" id="dgGerm2" style="top: 28%; left: 70%;"><div class="item-bubble"></div><span>🍭</span></div>' +
+        '<div class="game-item" id="dgGerm3" style="top: 66%; left: 34%;"><div class="item-bubble"></div><span>🍫</span></div>' +
+        '<div class="game-item" id="dgGerm4" style="top: 64%; left: 66%;"><div class="item-bubble"></div><span>🦠</span></div>';
+
+      layer.querySelectorAll('.game-item').forEach(germ => {
+        const handler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (germ.classList.contains('popped')) return;
+          germ.classList.add('popped');
+          playGameSound('brush');
+
+          const stage = document.getElementById("dgGameStage");
+          const tooth = document.getElementById("dgGameToothChar");
+          const rect = germ.getBoundingClientRect();
+          const stageRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 250, height: 250 };
+          const lx = rect.left - stageRect.left + (rect.width || 44) / 2;
+          const ly = rect.top - stageRect.top + (rect.height || 44) / 2;
+
+          triggerGameParticles(lx, ly, 16, 'bubble');
+          showGameSparkleFloat(lx, ly, '🫧🪥');
+
+          if (tooth) {
+            tooth.classList.remove('happy');
+            void tooth.offsetWidth;
+            tooth.classList.add('happy');
+          }
+
+          gameStep1Left--;
+          if (gameStep1Left <= 0) {
+            playGameSound('step_complete');
+            if (s1) {
+              s1.className = 'step-pill completed';
+              s1.innerHTML = '<span>✅</span> <span>1. Почистили</span>';
+            }
+            setTimeout(() => { startEmbeddedStep2(); }, 600);
+          }
+        };
+        germ.addEventListener('click', handler);
+        germ.addEventListener('pointerdown', handler);
+      });
+    }
+
+    function startEmbeddedStep2() {
+      gameStep = 2;
+      gameStep2Left = 4;
+      highlightGameTool('water');
+
+      const s2 = document.getElementById("dgGameStep2");
+      const s3 = document.getElementById("dgGameStep3");
+      if (s2) s2.className = 'step-pill active';
+      if (s3) s3.className = 'step-pill';
+
+      const emoji = document.getElementById("dgGameHintEmoji");
+      const text = document.getElementById("dgGameHintText");
+      if (emoji) emoji.textContent = '💧';
+      if (text) text.textContent = '2. Смой пенку водичкой!';
+
+      const layer = document.getElementById("dgGameItemsLayer");
+      if (!layer) return;
+      layer.innerHTML =
+        '<div class="game-item" id="dgFoam1" style="top: 28%; left: 32%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgFoam2" style="top: 26%; left: 68%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgFoam3" style="top: 64%; left: 36%;"><div class="foam-bubble"></div><span>🫧</span></div>' +
+        '<div class="game-item" id="dgFoam4" style="top: 66%; left: 64%;"><div class="foam-bubble"></div><span>🫧</span></div>';
+
+      layer.querySelectorAll('.game-item').forEach(foam => {
+        const handler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (foam.classList.contains('popped')) return;
+          foam.classList.add('popped');
+          playGameSound('water');
+
+          const stage = document.getElementById("dgGameStage");
+          const tooth = document.getElementById("dgGameToothChar");
+          const rect = foam.getBoundingClientRect();
+          const stageRect = stage ? stage.getBoundingClientRect() : { left: 0, top: 0, width: 250, height: 250 };
+          const lx = rect.left - stageRect.left + (rect.width || 44) / 2;
+          const ly = rect.top - stageRect.top + (rect.height || 44) / 2;
+
+          triggerGameParticles(lx, ly, 18, 'water');
+          showGameSparkleFloat(lx, ly, '💦✨');
+
+          if (tooth) {
+            tooth.classList.remove('happy');
+            void tooth.offsetWidth;
+            tooth.classList.add('happy');
+          }
+
+          gameStep2Left--;
+          if (gameStep2Left <= 0) {
+            playGameSound('step_complete');
+            if (s2) {
+              s2.className = 'step-pill completed';
+              s2.innerHTML = '<span>✅</span> <span>2. Смыли</span>';
+            }
+            setTimeout(() => { startEmbeddedStep3(); }, 600);
+          }
+        };
+        foam.addEventListener('click', handler);
+        foam.addEventListener('pointerdown', handler);
+      });
+    }
+
+    function startEmbeddedStep3() {
+      gameStep = 3;
+      gameAppleBites = 0;
+      highlightGameTool('apple');
+
+      const s3 = document.getElementById("dgGameStep3");
+      if (s3) s3.className = 'step-pill active';
+
+      const emoji = document.getElementById("dgGameHintEmoji");
+      const text = document.getElementById("dgGameHintText");
+      if (emoji) emoji.textContent = '🍎';
+      if (text) text.textContent = '3. Угости зубик яблочком! (Тапай на яблоко)';
+
+      const layer = document.getElementById("dgGameItemsLayer");
+      if (!layer) return;
+      layer.innerHTML =
+        '<div class="feed-apple-wrapper" id="dgFeedAppleBtn">' +
+          '<div class="feed-apple" id="dgAppleEmoji">🍎</div>' +
+          '<div class="apple-tap-badge" id="dgAppleBadge">👆 ХРУМ!</div>' +
+        '</div>';
+
+      const appleBtn = document.getElementById("dgFeedAppleBtn");
+      const appleEmoji = document.getElementById("dgAppleEmoji");
+      const appleBadge = document.getElementById("dgAppleBadge");
+      const tooth = document.getElementById("dgGameToothChar");
+
+      if (appleBtn) {
+        const handler = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          gameAppleBites++;
+          playGameSound('crunch');
+
+          const stage = document.getElementById("dgGameStage");
+          const stageRect = stage ? stage.getBoundingClientRect() : { width: 250, height: 250 };
+          const lx = stageRect.width / 2;
+          const ly = stageRect.height / 2 + 10;
+
+          triggerGameParticles(lx, ly, 18, 'confetti');
+          showGameSparkleFloat(lx, ly, '🍏💖');
+
+          if (tooth) {
+            tooth.classList.remove('chewing');
+            void tooth.offsetWidth;
+            tooth.classList.add('chewing');
+          }
+
+          if (gameAppleBites === 1) {
+            if (appleBadge) appleBadge.textContent = '👆 Ещё кусочек!';
+            if (appleEmoji) appleEmoji.textContent = '🍏';
+          } else if (gameAppleBites >= 2) {
+            appleBtn.style.display = 'none';
+            if (s3) {
+              s3.className = 'step-pill completed';
+              s3.innerHTML = '<span>✅</span> <span>3. Накормили</span>';
+            }
+            onEmbeddedGameVictory();
+          }
+        };
+        appleBtn.addEventListener('click', handler);
+        appleBtn.addEventListener('pointerdown', handler);
+      }
+    }
+
+    function onEmbeddedGameVictory() {
+      setTimeout(() => {
+        playGameSound('victory');
+        const crown = document.getElementById("dgGameToothCrown");
+        const mouth = document.getElementById("dgGameToothMouth");
+        const tooth = document.getElementById("dgGameToothChar");
+        const modal = document.getElementById("dgGameVictoryModal");
+        if (crown) crown.style.display = 'block';
+        if (mouth) {
+          mouth.setAttribute('d', 'M84 136 Q120 184 156 136 Z');
+          mouth.setAttribute('fill', '#FF3F62');
+        }
+        if (tooth) tooth.classList.add('super-sparkle');
+
+        const stage = document.getElementById("dgGameStage");
+        const stageRect = stage ? stage.getBoundingClientRect() : { width: 250, height: 250 };
+        for (let i = 0; i < 6; i++) {
+          setTimeout(() => {
+            triggerGameParticles(
+              stageRect.width * (0.15 + Math.random() * 0.7),
+              stageRect.height * (0.15 + Math.random() * 0.7),
+              22,
+              'confetti'
+            );
+          }, i * 140);
+        }
+
+        setTimeout(() => {
+          if (modal) modal.classList.add('active');
+        }, 800);
+      }, 300);
+    }
+
+    function resetEmbeddedGame() {
+      initGameAudio();
+      playGameSound('step_complete');
+      const crown = document.getElementById("dgGameToothCrown");
+      const mouth = document.getElementById("dgGameToothMouth");
+      const tooth = document.getElementById("dgGameToothChar");
+      const modal = document.getElementById("dgGameVictoryModal");
+      const s1 = document.getElementById("dgGameStep1");
+      const s2 = document.getElementById("dgGameStep2");
+      const s3 = document.getElementById("dgGameStep3");
+
+      if (modal) modal.classList.remove('active');
+      if (crown) crown.style.display = 'none';
+      if (mouth) {
+        mouth.setAttribute('d', 'M96 142 Q120 166 144 142');
+        mouth.setAttribute('fill', '#FF85A1');
+      }
+      if (tooth) {
+        tooth.classList.remove('super-sparkle');
+        tooth.classList.remove('chewing');
+        tooth.classList.remove('happy');
+      }
+      if (s1) s1.innerHTML = '<span>🪥</span> <span>1. Чистим</span>';
+      if (s2) s2.innerHTML = '<span>💧</span> <span>2. Моем</span>';
+      if (s3) s3.innerHTML = '<span>🍎</span> <span>3. Кормим</span>';
+
+      startEmbeddedStep1();
+    }
+
     window.openGameModal = () => {
       let modal = document.getElementById("gameModal");
       if (!modal) {
@@ -1388,10 +2225,10 @@ const enhancement = String.raw`
       if (!modal) return;
       modal.classList.add("is-open");
       document.body.classList.add("dg-modal-open");
-      const frame = modal.querySelector("#gameIframe");
-      if (frame && (!frame.src || frame.src.endsWith("about:blank") || !frame.src.includes("kids-game.html"))) {
-        frame.src = "kids-game.html";
-      }
+      setTimeout(() => {
+        resizeGameCanvas();
+        resetEmbeddedGame();
+      }, 50);
     };
 
     window.closeGameModal = () => {
@@ -1453,15 +2290,45 @@ const enhancement = String.raw`
           window.setProgramSlide(parseInt(dot.dataset.index, 10));
           return;
         }
-        // Game Modal
+        // Game Modal Open
         if (e.target.closest("#openGameModalBtn") || e.target.closest("#openGameModalPreview") || e.target.closest("#storyOpenGameBtn")) {
           e.preventDefault();
           window.openGameModal();
           return;
         }
+        // Game Modal Close
         if (e.target.closest("#closeGameModalBtn") || e.target.closest("#gameModalBackdrop")) {
           e.preventDefault();
           window.closeGameModal();
+          return;
+        }
+        // Embedded Game Controls
+        if (e.target.closest("#dgToolBrush")) {
+          e.preventDefault();
+          if (gameStep === 1) startEmbeddedStep1();
+          return;
+        }
+        if (e.target.closest("#dgToolWater")) {
+          e.preventDefault();
+          if (gameStep === 2) startEmbeddedStep2();
+          return;
+        }
+        if (e.target.closest("#dgToolApple")) {
+          e.preventDefault();
+          if (gameStep === 3) startEmbeddedStep3();
+          return;
+        }
+        if (e.target.closest("#dgSoundToggle")) {
+          e.preventDefault();
+          gameSoundEnabled = !gameSoundEnabled;
+          const btn = document.getElementById("dgSoundToggle");
+          if (btn) btn.textContent = gameSoundEnabled ? '🔊' : '🔇';
+          if (gameSoundEnabled) playGameSound('step_complete');
+          return;
+        }
+        if (e.target.closest("#dgReplayBtn")) {
+          e.preventDefault();
+          resetEmbeddedGame();
           return;
         }
       }, true);
@@ -1602,7 +2469,7 @@ const enhancement = String.raw`
         intro.insertAdjacentElement("afterend", teaser);
       }
 
-      // 2. Modal Overlay
+      // 2. Modal Overlay with Native Embedded Game (Zero iframe)
       if (!document.getElementById("gameModal")) {
         const modal = document.createElement("div");
         modal.className = "dg-game-modal";
@@ -1610,7 +2477,63 @@ const enhancement = String.raw`
         modal.setAttribute("role", "dialog");
         modal.setAttribute("aria-modal", "true");
         modal.setAttribute("aria-label", "Игра Почисти Зубик");
-        modal.innerHTML = '<div class="dg-game-modal__backdrop" id="gameModalBackdrop"></div><div class="dg-game-modal__container"><button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть">✕</button><iframe class="dg-game-modal__frame" id="gameIframe" title="Детская игра Почисти Зубик!" loading="lazy" src="kids-game.html"></iframe></div>';
+        modal.innerHTML =
+          '<div class="dg-game-modal__backdrop" id="gameModalBackdrop"></div>' +
+          '<div class="dg-game-modal__container">' +
+            '<button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть">✕</button>' +
+            '<div class="game-wrapper">' +
+              '<header class="game-header">' +
+                '<div class="game-badge">🌟 ИГРА ДЛЯ МАЛЫШЕЙ</div>' +
+                '<h2 class="game-title">Почисти Зубик!</h2>' +
+                '<button class="sound-toggle" id="dgSoundToggle" aria-label="Включить / выключить звук" title="Звук">🔊</button>' +
+              '</header>' +
+              '<div class="game-card">' +
+                '<div class="step-tracker" role="tablist">' +
+                  '<div class="step-pill active" id="dgGameStep1"><span>🪥</span> <span>1. Чистим</span></div>' +
+                  '<div class="step-pill" id="dgGameStep2"><span>💧</span> <span>2. Моем</span></div>' +
+                  '<div class="step-pill" id="dgGameStep3"><span>🍎</span> <span>3. Кормим</span></div>' +
+                '</div>' +
+                '<div class="hint-banner" id="dgGameHintBanner">' +
+                  '<span id="dgGameHintEmoji">🪥</span> <span id="dgGameHintText">1. Почисти пятнышки щёточкой!</span>' +
+                '</div>' +
+                '<div class="stage" id="dgGameStage">' +
+                  '<canvas class="particle-canvas" id="dgGameParticleCanvas"></canvas>' +
+                  '<svg class="tooth-svg" id="dgGameToothChar" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                    '<path d="M120 18 C175 18, 218 55, 212 118 C208 160, 192 238, 158 244 C136 248, 128 208, 120 208 C112 208, 104 248, 82 244 C48 238, 32 160, 28 118 C22 55, 65 18, 120 18 Z" fill="#FFFFFF" stroke="#2F2076" stroke-width="8" stroke-linejoin="round"/>' +
+                    '<path d="M60 48 C78 34, 104 30, 120 30 C136 30, 162 34, 180 48 C160 38, 132 34, 120 34 C108 34, 80 38, 60 48 Z" fill="#E3F4FF" opacity="0.9"/>' +
+                    '<ellipse cx="64" cy="74" rx="12" ry="24" transform="rotate(-25 64 74)" fill="#E3F4FF" opacity="0.8"/>' +
+                    '<ellipse cx="62" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+                    '<ellipse cx="178" cy="142" rx="14" ry="9" fill="#FFB3C6" opacity="0.75"/>' +
+                    '<g id="dgGameToothEyes">' +
+                      '<ellipse cx="82" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+                      '<circle cx="85" cy="111" r="4.5" fill="#FFFFFF"/>' +
+                      '<ellipse cx="158" cy="116" rx="10" ry="14" fill="#2F2076"/>' +
+                      '<circle cx="161" cy="111" r="4.5" fill="#FFFFFF"/>' +
+                    '</g>' +
+                    '<path id="dgGameToothMouth" d="M96 142 Q120 166 144 142" stroke="#2F2076" stroke-width="7" stroke-linecap="round" fill="#FF85A1"/>' +
+                    '<g id="dgGameToothCrown" style="display: none;">' +
+                      '<path d="M80 34 L96 6 L120 28 L144 6 L160 34 Z" fill="#FFE59A" stroke="#2F2076" stroke-width="6" stroke-linejoin="round"/>' +
+                      '<circle cx="96" cy="6" r="4" fill="#FF3F62"/>' +
+                      '<circle cx="120" cy="28" r="4" fill="#04B8D4"/>' +
+                      '<circle cx="144" cy="6" r="4" fill="#8C5CFF"/>' +
+                    '</g>' +
+                  '</svg>' +
+                  '<div id="dgGameItemsLayer"></div>' +
+                '</div>' +
+                '<div class="tools-palette" role="toolbar" aria-label="Инструменты">' +
+                  '<button class="tool-btn brush-btn selected" id="dgToolBrush" aria-label="Зубная щётка"><span class="tool-icon">🪥</span><span class="tool-label">1. ЩЁТКА</span></button>' +
+                  '<button class="tool-btn water-btn" id="dgToolWater" aria-label="Водичка"><span class="tool-icon">💧</span><span class="tool-label">2. ВОДА</span></button>' +
+                  '<button class="tool-btn apple-btn" id="dgToolApple" aria-label="Яблочко"><span class="tool-icon">🍎</span><span class="tool-label">3. ЯБЛОКО</span></button>' +
+                '</div>' +
+                '<div class="victory-overlay" id="dgGameVictoryModal">' +
+                  '<div class="victory-tooth">✨🦷👑🍎✨</div>' +
+                  '<h3 class="victory-title">УРА! ЗУБИК ЧИСТЫЙ И СЫТЫЙ!</h3>' +
+                  '<p class="victory-sub">Ты супер-молодец! Зубик сияет и говорит спасибо! 🎉</p>' +
+                  '<button class="replay-btn" id="dgReplayBtn"><span class="replay-icon">🔄</span><span>ЕЩЁ РАЗ!</span></button>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
         document.body.appendChild(modal);
       }
     };
