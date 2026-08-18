@@ -238,20 +238,27 @@ const enhancement = String.raw`
     margin: 0 auto;
     font-family: "BN Dime Display Regular", "Rubik", sans-serif;
   }
+  /* Header Nav (No white background bar, transparent/natural) */
   [data-framer-name="Header Nav"] {
-    background: #fffdf5 !important;
-    border-bottom: 2px solid rgba(47, 32, 118, 0.08) !important;
-    box-shadow: 0 4px 18px rgba(47, 32, 118, 0.06) !important;
-    z-index: 99999 !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
-  [data-framer-name="Our Story"],
-  [data-framer-name="Our Story"] * {
+
+  /* Compact Parent Questions Card in Our Story */
+  [data-framer-name="Our Story"] [data-framer-name="Photo"] {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 820px !important;
+    margin: 0 auto !important;
+    height: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  [data-framer-name="Our Story"] [data-framer-name="Photo"] [data-framer-name="Photo Frame"],
+  [data-framer-name="Our Story"] [data-framer-name="Photo"] img {
     display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
   }
 
   .dg-parent-questions-card {
@@ -515,28 +522,28 @@ const enhancement = String.raw`
     text-transform: uppercase;
     opacity: 0.9;
   }
-  [data-framer-name^="Feature"],
-  [data-framer-name="Mission Headline"],
-  [data-framer-name="Mission"],
-  [data-framer-name="Our Story"],
-  [data-framer-name="Our Story"] *,
-  [data-framer-name="5000 Activities"],
-  [data-framer-name="5000 Activities"] *,
-  [data-framer-name="Footer Frame"],
-  [data-framer-name="Hidden (L)"],
-  .framer-6mir23-container,
-  .framer-1ugzc8k-container {
+  /* Interactive Programs Carousel in Feature Container */
+  [data-framer-name^="Feature"] {
+    position: relative !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--token-4e62a4ec-2401-4414-9211-46bb168422e7, #fff0a8) !important;
+  }
+  [data-framer-name^="Feature"] [data-framer-name="Active Card"],
+  [data-framer-name^="Feature"] [data-framer-name="Right Peek"],
+  [data-framer-name^="Feature"] [data-framer-name="Left Peek"],
+  [data-framer-name^="Feature"] [data-framer-name="Controls"],
+  [data-framer-name="App Cropped"] {
     display: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    pointer-events: none !important;
   }
   
   .dg-programs-carousel {
     position: relative;
     width: min(1120px, 94vw);
     margin: 0 auto;
-    padding: 0;
+    padding: clamp(20px, 3.5vw, 40px) 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1713,6 +1720,14 @@ const enhancement = String.raw`
     };
 
     const rewriteLoader = () => {
+      setTimeout(() => {
+        const loader = document.querySelector('.framer-6mir23-container');
+        if (loader) {
+          loader.style.transition = 'opacity 0.4s ease';
+          loader.style.opacity = '0';
+          setTimeout(() => { loader.style.display = 'none'; }, 400);
+        }
+      }, 1400);
       const letters = ["letter-d.svg", "letter-e.svg", "letter-n.svg", "letter-t.svg", "letter-a.svg", "letter-l-gen.svg"];
       for (const logo of document.querySelectorAll('.framer-6mir23-container [data-framer-name="Logo"], [data-framer-name="Logo Mobile"], .framer-o5vylo')) {
         if (logo.getAttribute('data-framer-name') === 'Logo Mobile' || logo.classList.contains('framer-o5vylo')) {
@@ -1731,34 +1746,7 @@ const enhancement = String.raw`
       }
     };
 
-    const replaceIntroStory = () => {
-      const intro = document.querySelector('[data-framer-name="Intro"]');
-      if (!intro || intro.querySelector(".dg-parent-story")) return;
-      intro.classList.add("dg-parent-story-section");
-      intro.id = "parent-story";
-      intro.innerHTML = '<div class="dg-parent-story">' +
-        '<span class="dg-story-spark dg-story-spark--left" aria-hidden="true">⭐</span>' +
-        '<span class="dg-story-spark dg-story-spark--right" aria-hidden="true">🪐</span>' +
-        '<div class="dg-story-card-wrapper">' +
-          '<span class="dg-story-card-badge">💡 ЧАСТЫЕ ВОПРОСЫ РОДИТЕЛЕЙ</span>' +
-          '<div class="dg-story-questions">' +
-            '<article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></article>' +
-            '<article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></article>' +
-            '<article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></article>' +
-          '</div>' +
-        '</div>' +
-        '<div class="dg-story-copy">' +
-          '<p>Вопросов у родителей всегда много. Ведь здоровье ребёнка начинается с внимания к мелочам, а здоровая улыбка — с самых первых зубов. Мы создали программы <strong>«Растём с улыбкой»</strong>, чтобы вы были уверены: развитие зубов проходит правильно, а рядом всегда есть детский стоматолог, готовый поддержать и ответить на любые вопросы.</p>' +
-          '<p><span class="dg-story-heart" aria-hidden="true">♥</span>Мы покажем, как годовые программы сопровождения помогают семьям на разных этапах взросления ребёнка. История вымышленная, а ситуации — самые настоящие.</p>' +
-          '<div class="dg-story-actions">' +
-            '<a href="tel:+79109900060">Задать вопрос доктору</a>' +
-            '<button type="button" class="dg-story-game-btn" id="storyOpenGameBtn">🎮 Игра «Почисти зубик»</button>' +
-            '<a href="#programs">Наши программы</a>' +
-          '</div>' +
-        '</div>' +
-        '<span class="dg-story-spark dg-story-spark--bottom" aria-hidden="true">✨</span>' +
-      '</div>';
-    };
+
 
     // Embedded Game Audio & Particle Controller
     let gameAudioCtx = null;
@@ -2368,96 +2356,103 @@ const enhancement = String.raw`
       });
     }
 
+    const replaceOurStoryPhoto = () => {
+      const photoContainer = document.querySelector('[data-framer-name="Our Story"] [data-framer-name="Photo"]');
+      if (!photoContainer || photoContainer.querySelector(".dg-parent-questions-card")) return;
+
+      const card = document.createElement("div");
+      card.className = "dg-parent-questions-card";
+      card.innerHTML = '<span class="dg-pq-sparkle dg-pq-sparkle--1">⭐</span><span class="dg-pq-sparkle dg-pq-sparkle--2">🪐</span><div class="dg-pq-bubble dg-pq-bubble--1"><span class="dg-pq-qmark">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></div><div class="dg-pq-bubble dg-pq-bubble--2"><span class="dg-pq-qmark">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></div><div class="dg-pq-bubble dg-pq-bubble--3"><span class="dg-pq-qmark">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></div><span class="dg-pq-sparkle dg-pq-sparkle--3">✨</span>';
+
+      photoContainer.appendChild(card);
+    };
+
     const enhanceProgramsCarousel = () => {
-      if (document.querySelector(".dg-programs-carousel-section")) return;
-      const anchor = document.querySelector(".dg-game-teaser") || document.querySelector('[data-framer-name="Intro"]');
-      if (!anchor) return;
+      const featureContainer = document.querySelector('[data-framer-name^="Feature"]');
+      if (!featureContainer || featureContainer.querySelector(".dg-programs-carousel")) return;
 
-      const section = document.createElement("section");
-      section.className = "dg-programs-carousel-section";
-      section.id = "programs";
-      section.innerHTML = '<div class="dg-carousel-headline"><h3>3 ПРОГРАММЫ ПО ВОЗРАСТУ:</h3><p>ПОМОГАЮТ ВОВРЕМЯ ЗАБОТИТЬСЯ О ЗУБАХ И ПРИКУСЕ РЕБЁНКА</p></div>' +
-        '<div class="dg-programs-carousel" id="programsCarousel">' +
-          '<div class="dg-carousel-cards-wrapper" id="carouselCardsWrapper">' +
-            '<!-- Card 1: 1-3 года -->' +
-            '<article class="dg-pcard dg-pcard--1 is-active" data-index="0">' +
-              '<div class="dg-pcard__inner">' +
-                '<div class="dg-pcard__media">' +
-                  '<img src="assets/dental-gen/slide-baby-tooth.svg" alt="Первые зубки (1-3 года)" class="dg-pcard__img">' +
-                '</div>' +
-                '<div class="dg-pcard__body">' +
-                  '<span class="dg-pcard__badge">1–3 ГОДА</span>' +
-                  '<h3 class="dg-pcard__title">«Первые зубки»</h3>' +
-                  '<p class="dg-pcard__lead">Бережная забота и формирование правильных привычек с самого первого зубика. Адаптируем малыша к стоматологу без слёз и страха.</p>' +
-                  '<ul class="dg-pcard__list">' +
-                    '<li><span class="dg-pcard__icon">✨</span><span><strong>Мягкая адаптация</strong> в игровой форме без стресса</span></li>' +
-                    '<li><span class="dg-pcard__icon">🪥</span><span><strong>Обучение родителей</strong> правильной технике чистки</span></li>' +
-                    '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль прорезывания</strong> и здоровья первых зубов</span></li>' +
-                  '</ul>' +
-                  '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
-                '</div>' +
-              '</div>' +
-            '</article>' +
-            '<!-- Card 2: 3-5 лет -->' +
-            '<article class="dg-pcard dg-pcard--2" data-index="1">' +
-              '<div class="dg-pcard__inner">' +
-                '<div class="dg-pcard__media">' +
-                  '<img src="assets/dental-gen/slide-protect-tooth.svg" alt="Под защитой улыбки (3-5 лет)" class="dg-pcard__img">' +
-                '</div>' +
-                '<div class="dg-pcard__body">' +
-                  '<span class="dg-pcard__badge">3–5 ЛЕТ</span>' +
-                  '<h3 class="dg-pcard__title">«Под защитой улыбки»</h3>' +
-                  '<p class="dg-pcard__lead">Сохраняем молочные зубы крепкими и здоровыми. Профилактика кариеса, бережный уход и позитивный опыт визитов.</p>' +
-                  '<ul class="dg-pcard__list">' +
-                    '<li><span class="dg-pcard__icon">🛡️</span><span><strong>Защита от кариеса</strong> и укрепление зубной эмали</span></li>' +
-                    '<li><span class="dg-pcard__icon">🫧</span><span><strong>Бережная гигиена</strong> и полировка без боли</span></li>' +
-                    '<li><span class="dg-pcard__icon">🧸</span><span><strong>Индивидуальный подбор</strong> детской щётки и пасты</span></li>' +
-                  '</ul>' +
-                  '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
-                '</div>' +
-              '</div>' +
-            '</article>' +
-            '<!-- Card 3: 5-7 лет -->' +
-            '<article class="dg-pcard dg-pcard--3" data-index="2">' +
-              '<div class="dg-pcard__inner">' +
-                '<div class="dg-pcard__media">' +
-                  '<img src="assets/dental-gen/slide-straight-tooth.svg" alt="Ровная улыбка (5-7 лет)" class="dg-pcard__img">' +
-                '</div>' +
-                '<div class="dg-pcard__body">' +
-                  '<span class="dg-pcard__badge">5–7 ЛЕТ</span>' +
-                  '<h3 class="dg-pcard__title">«Ровная улыбка»</h3>' +
-                  '<p class="dg-pcard__lead">Следим за правильным развитием прикуса и естественной сменой зубов. Формируем здоровую и красивую улыбку к школе.</p>' +
-                  '<ul class="dg-pcard__list">' +
-                    '<li><span class="dg-pcard__icon">📐</span><span><strong>Осмотр ортодонта</strong> и контроль развития челюстей</span></li>' +
-                    '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль смены зубов</strong> на постоянные крепкие зубки</span></li>' +
-                    '<li><span class="dg-pcard__icon">🌟</span><span><strong>ИИ-диагностика Diagnocat</strong> для точной оценки прикуса</span></li>' +
-                  '</ul>' +
-                  '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
-                '</div>' +
-              '</div>' +
-            '</article>' +
+      const carousel = document.createElement("div");
+      carousel.className = "dg-programs-carousel";
+      carousel.id = "programsCarousel";
+      carousel.innerHTML = '<div class="dg-carousel-cards-wrapper" id="carouselCardsWrapper">' +
+        '<!-- Card 1: 1-3 года -->' +
+        '<article class="dg-pcard dg-pcard--1 is-active" data-index="0">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-baby-tooth.svg" alt="Первые зубки (1-3 года)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">1–3 ГОДА</span>' +
+              '<h3 class="dg-pcard__title">«Первые зубки»</h3>' +
+              '<p class="dg-pcard__lead">Бережная забота и формирование правильных привычек с самого первого зубика. Адаптируем малыша к стоматологу без слёз и страха.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">✨</span><span><strong>Мягкая адаптация</strong> в игровой форме без стресса</span></li>' +
+                '<li><span class="dg-pcard__icon">🪥</span><span><strong>Обучение родителей</strong> правильной технике чистки</span></li>' +
+                '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль прорезывания</strong> и здоровья первых зубов</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
           '</div>' +
-          '<!-- Arrow Controls -->' +
-          '<button class="dg-carousel-arrow dg-carousel-arrow--prev" id="carouselPrevBtn" type="button" aria-label="Предыдущая программа" title="Назад">' +
-            '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>' +
-          '</button>' +
-          '<button class="dg-carousel-arrow dg-carousel-arrow--next" id="carouselNextBtn" type="button" aria-label="Следующая программа" title="Вперед">' +
-            '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>' +
-          '</button>' +
-          '<!-- Dots indicators -->' +
-          '<div class="dg-carousel-dots" id="carouselDots">' +
-            '<button class="dg-carousel-dot is-active" data-index="0" type="button" aria-label="1–3 года: Первые зубки"></button>' +
-            '<button class="dg-carousel-dot" data-index="1" type="button" aria-label="3–5 лет: Под защитой улыбки"></button>' +
-            '<button class="dg-carousel-dot" data-index="2" type="button" aria-label="5–7 лет: Ровная улыбка"></button>' +
+        '</article>' +
+        '<!-- Card 2: 3-5 лет -->' +
+        '<article class="dg-pcard dg-pcard--2" data-index="1">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-protect-tooth.svg" alt="Под защитой улыбки (3-5 лет)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">3–5 ЛЕТ</span>' +
+              '<h3 class="dg-pcard__title">«Под защитой улыбки»</h3>' +
+              '<p class="dg-pcard__lead">Сохраняем молочные зубы крепкими и здоровыми. Профилактика кариеса, бережный уход и позитивный опыт визитов.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">🛡️</span><span><strong>Защита от кариеса</strong> и укрепление зубной эмали</span></li>' +
+                '<li><span class="dg-pcard__icon">🫧</span><span><strong>Бережная гигиена</strong> и полировка без боли</span></li>' +
+                '<li><span class="dg-pcard__icon">🧸</span><span><strong>Индивидуальный подбор</strong> детской щётки и пасты</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
           '</div>' +
-        '</div>';
+        '</article>' +
+        '<!-- Card 3: 5-7 лет -->' +
+        '<article class="dg-pcard dg-pcard--3" data-index="2">' +
+          '<div class="dg-pcard__inner">' +
+            '<div class="dg-pcard__media">' +
+              '<img src="assets/dental-gen/slide-straight-tooth.svg" alt="Ровная улыбка (5-7 лет)" class="dg-pcard__img">' +
+            '</div>' +
+            '<div class="dg-pcard__body">' +
+              '<span class="dg-pcard__badge">5–7 ЛЕТ</span>' +
+              '<h3 class="dg-pcard__title">«Ровная улыбка»</h3>' +
+              '<p class="dg-pcard__lead">Следим за правильным развитием прикуса и естественной сменой зубов. Формируем здоровую и красивую улыбку к школе.</p>' +
+              '<ul class="dg-pcard__list">' +
+                '<li><span class="dg-pcard__icon">📐</span><span><strong>Осмотр ортодонта</strong> и контроль развития челюстей</span></li>' +
+                '<li><span class="dg-pcard__icon">🦷</span><span><strong>Контроль смены зубов</strong> на постоянные крепкие зубки</span></li>' +
+                '<li><span class="dg-pcard__icon">🌟</span><span><strong>ИИ-диагностика Diagnocat</strong> для точной оценки прикуса</span></li>' +
+              '</ul>' +
+              '<a class="dg-pcard__cta" href="tel:+79109900060">Записаться на программу</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+      '</div>' +
+      '<!-- Arrow Controls -->' +
+      '<button class="dg-carousel-arrow dg-carousel-arrow--prev" id="carouselPrevBtn" type="button" aria-label="Предыдущая программа" title="Назад">' +
+        '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>' +
+      '</button>' +
+      '<button class="dg-carousel-arrow dg-carousel-arrow--next" id="carouselNextBtn" type="button" aria-label="Следующая программа" title="Вперед">' +
+        '<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>' +
+      '</button>' +
+      '<!-- Dots indicators -->' +
+      '<div class="dg-carousel-dots" id="carouselDots">' +
+        '<button class="dg-carousel-dot is-active" data-index="0" type="button" aria-label="1–3 года: Первые зубки"></button>' +
+        '<button class="dg-carousel-dot" data-index="1" type="button" aria-label="3–5 лет: Под защитой улыбки"></button>' +
+        '<button class="dg-carousel-dot" data-index="2" type="button" aria-label="5–7 лет: Ровная улыбка"></button>' +
+      '</div>';
 
-      anchor.insertAdjacentElement("afterend", section);
+      featureContainer.appendChild(carousel);
     };
 
     const addKidsGame = () => {
-      const intro = document.querySelector('[data-framer-name="Intro"]');
-      if (!intro) return;
+      const feature = document.querySelector('[data-framer-name^="Feature"]') || document.querySelector('[data-framer-name="Intro"]');
+      if (!feature) return;
 
       // 1. Teaser Section
       if (!document.querySelector(".dg-game-teaser")) {
@@ -2466,7 +2461,7 @@ const enhancement = String.raw`
         teaser.id = "game-teaser";
         teaser.setAttribute("aria-label", "Детская интерактивная игра Почисти Зубик!");
         teaser.innerHTML = '<div class="dg-shell"><div class="dg-game-teaser__card"><div class="dg-game-teaser__left"><span class="dg-game-teaser__badge">🌟 ДЛЯ МАЛЫШЕЙ</span><h3>Интерактивная игра «Почисти Зубик!»</h3><p>Почистите щёточкой, смойте пенку водичкой и угостите зубик хрустящим яблочком! Весёлая игра, развивающая полезные привычки у детей.</p><button class="dg-game-teaser__btn" id="openGameModalBtn" type="button"><span>🎮</span> <span>СЫГРАТЬ В ИГРУ</span></button></div><div class="dg-game-teaser__right" id="openGameModalPreview" title="Нажмите, чтобы сыграть!"><div class="dg-teaser-tooth-preview"><span class="dg-teaser-crown">👑</span><span class="dg-teaser-tooth-icon">🦷</span><span class="dg-teaser-sparkle">✨</span></div></div></div></div>';
-        intro.insertAdjacentElement("afterend", teaser);
+        feature.insertAdjacentElement("afterend", teaser);
       }
 
       // 2. Modal Overlay with Native Embedded Game (Zero iframe)
@@ -2539,15 +2534,15 @@ const enhancement = String.raw`
     };
 
     const addLandingSections = () => {
-      const programs = document.querySelector(".dg-programs-carousel-section") || document.querySelector(".dg-game-teaser");
-      if (!programs) return;
+      const teaser = document.querySelector(".dg-game-teaser");
+      if (!teaser) return;
 
       if (!document.querySelector(".dg-checkup-section")) {
         const section = document.createElement("section");
         section.className = "dg-checkup-section";
         section.id = "checkup";
         section.innerHTML = '<div class="dg-shell"><div class="dg-checkup"><img loading="lazy" decoding="async" src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
-        programs.insertAdjacentElement("afterend", section);
+        teaser.insertAdjacentElement("afterend", section);
       }
 
       const checkup = document.querySelector(".dg-checkup-section");
@@ -2603,7 +2598,7 @@ const enhancement = String.raw`
       wireAnchors();
       rewriteImages();
       rewriteLoader();
-      replaceIntroStory();
+      replaceOurStoryPhoto();
       enhanceProgramsCarousel();
       addKidsGame();
       addLandingSections();
