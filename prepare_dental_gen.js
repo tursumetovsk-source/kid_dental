@@ -24,6 +24,11 @@ const sourceReplacements = [
   ["https://framerusercontent.com/images/3qagTfcy987zODTJlMq8rgK2IO4.webp", "assets/dental-gen/programs.jpg"],
   ["https://framerusercontent.com/images/r2k4Pm177d1uTwd03VSiPwXuDc.jpg", "assets/dental-gen/straight-smile.jpg"],
   ["https://framerusercontent.com/images/zSolWhtGIr9vVEf34WY6vkVsOUY.jpg", "assets/dental-gen/about-family.jpg"],
+  [">FAQS<", ">ПРОГРАММЫ<"],
+  [">FAQ<", ">ПРОГРАММЫ<"],
+  [">ABOUT<", ">О КЛИНИКЕ<"],
+  [">CONTACT<", ">КОНТАКТЫ<"],
+  [">ADD VENUE<", ">ЧЕКАП<"],
 ];
 
 for (const [from, to] of sourceReplacements) html = html.split(from).join(to);
@@ -128,9 +133,29 @@ const enhancement = String.raw`
   [data-framer-name="Intro"] [data-framer-name^="Rectangle"] { display: none !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
-  [data-framer-name="Header Nav"] [data-framer-name="Left"] { gap: clamp(40px, 3vw, 64px) !important; }
-  [data-framer-name="Header Nav"] [data-framer-name="Left"] > * + * { margin-left: clamp(18px, 1.5vw, 32px) !important; }
-  [data-framer-name="Header Nav"] [data-framer-name="About"] { margin-left: clamp(48px, 4vw, 80px) !important; }
+  [data-framer-name="Header Nav"] [data-framer-name="Left"],
+  [data-framer-name="Header Nav"] [data-framer-name="Right"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  [data-framer-name="Header Nav"] [data-framer-name="Left"] > *,
+  [data-framer-name="Header Nav"] [data-framer-name="Right"] > * {
+    margin: 0 !important;
+  }
+  [data-framer-name="Header Nav"] [data-framer-name="About"] {
+    margin: 0 !important;
+  }
+  [data-framer-name="Header Nav"] a,
+  [data-framer-name="Header Nav"] [data-framer-name="Button Shape"],
+  [data-framer-name="Header Nav"] .framer-mabw1n-container,
+  [data-framer-name="Header Nav"] .framer-1h31bhu-container,
+  [data-framer-name="Header Nav"] .framer-1l11jz8-container,
+  [data-framer-name="Header Nav"] .framer-1yjcmra-container {
+    width: auto !important;
+    min-width: max-content !important;
+    white-space: nowrap !important;
+  }
   [data-framer-name="Intro"] *,
   [data-framer-name="Our Story"] *,
   [data-framer-name^="Feature"] * { will-change: auto !important; }
