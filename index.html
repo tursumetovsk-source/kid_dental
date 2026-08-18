@@ -433,6 +433,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
+
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -594,52 +597,235 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .dg-story-copy p + p { margin-top: 36px; }
   .dg-story-copy strong { color: #7048c4; font-weight: 900; }
   .dg-story-heart { display: inline-block; margin-right: 8px; color: #9a42e8; font-size: 1.4em; vertical-align: -.08em; }
-  .dg-story-actions { display: flex; justify-content: center; gap: 22px; margin-top: 56px; }
-  .dg-story-actions a {
-    min-width: 280px;
+  .dg-story-actions { display: flex; justify-content: center; gap: 20px; margin-top: 56px; flex-wrap: wrap; }
+  .dg-story-actions a, .dg-story-actions button {
+    min-width: 240px;
     padding: 22px 30px;
     border: 2px solid #e3e3f2;
     border-radius: 28px;
     background: #fff;
     color: #17184f;
     box-shadow: 0 18px 28px rgba(89, 54, 151, .14);
-    font-size: 22px;
-    font-weight: 800;
-    line-height: 1;
+    font: 800 21px/1 "BN Dime Display Regular", "Rubik", sans-serif;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
     transition: transform .18s ease, box-shadow .18s ease;
   }
   .dg-story-actions a:first-child { border-color: #7048c4; background: #7048c4; color: #fff; }
-  .dg-story-actions a:hover { transform: translateY(-2px); box-shadow: 0 20px 32px rgba(89, 54, 151, .2); }
+  .dg-story-game-btn { border-color: #2f2076 !important; background: #ffe59a !important; color: #2f2076 !important; }
+  .dg-story-actions a:hover, .dg-story-actions button:hover { transform: translateY(-2px); box-shadow: 0 20px 32px rgba(89, 54, 151, .2); }
   .dg-story-spark { position: absolute; z-index: 0; font-size: clamp(30px, 4vw, 52px); line-height: 1; pointer-events: none; }
   .dg-story-spark--left { top: -28px; left: -22px; }
   .dg-story-spark--right { top: 6px; right: 4%; }
   .dg-story-spark--bottom { right: 2%; bottom: -34px; }
 
-  .dg-kids-game {
-    position: relative !important;
-    z-index: 50 !important;
+  /* Game Teaser Section */
+  .dg-game-teaser {
+    position: relative;
+    z-index: 20;
     width: 100%;
-    padding: 20px 0 40px;
+    padding: clamp(48px, 6vw, 84px) 24px;
     box-sizing: border-box;
-    overflow: hidden;
     background: #dff4ff;
     color: #2f2076;
-    font-family: "BN Dime Display Regular", "Rubik", sans-serif;
+    font-family: "Rubik", sans-serif;
   }
-  .dg-kids-game__shell { width: min(1120px, 100%); margin: 0 auto; }
-  .dg-kids-game__frame {
-    display: block;
-    position: relative !important;
-    z-index: 51 !important;
-    width: 100%;
-    min-height: 720px;
-    height: 760px;
-    border: 0;
-    background: #dff4ff;
-    overflow: hidden;
+  .dg-game-teaser__card {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    background: #fffdf5;
+    border: 3px solid #2f2076;
+    border-radius: 36px;
+    box-shadow: -6px 8px 0 #2f2076;
+    padding: clamp(28px, 5vw, 48px);
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .dg-game-teaser__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #7048c4;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .dg-game-teaser h3 {
+    margin: 0 0 12px;
+    font: 900 clamp(28px, 4vw, 44px)/1.05 "Montserrat", "Rubik", sans-serif;
+    letter-spacing: -0.04em;
+    color: #2f2076;
+  }
+  .dg-game-teaser p {
+    margin: 0 0 24px;
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.45;
+    color: #4a3e7a;
+    max-width: 580px;
+  }
+  .dg-game-teaser__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 36px;
+    border: 3px solid #2f2076;
+    border-radius: 999px;
+    background: #ffe59a;
+    color: #2f2076;
+    box-shadow: -4px 5px 0 #2f2076;
+    font: 900 clamp(18px, 2.5vw, 22px)/1 "Rubik", sans-serif;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .dg-game-teaser__btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: -6px 7px 0 #2f2076;
+  }
+  .dg-game-teaser__btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: -2px 3px 0 #2f2076;
+  }
+  .dg-game-teaser__right {
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .dg-teaser-tooth-preview {
+    position: relative;
+    width: clamp(140px, 18vw, 190px);
+    height: clamp(140px, 18vw, 190px);
+    border-radius: 50%;
+    background: #e3f4ff;
+    border: 3px solid #2f2076;
+    box-shadow: -4px 5px 0 #2f2076;
+    display: grid;
+    place-items: center;
+    transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .dg-game-teaser__right:hover .dg-teaser-tooth-preview {
+    transform: scale(1.08) rotate(6deg);
+  }
+  .dg-teaser-tooth-icon {
+    font-size: clamp(64px, 9vw, 92px);
+    line-height: 1;
+  }
+  .dg-teaser-crown {
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    font-size: clamp(32px, 4.5vw, 44px);
+    animation: crownFloat 2s infinite alternate ease-in-out;
+  }
+  .dg-teaser-sparkle {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    font-size: clamp(24px, 3.5vw, 34px);
+    animation: sparkleSpin 3s infinite linear;
+  }
+  @keyframes crownFloat {
+    0% { transform: translateY(0) rotate(-6deg); }
+    100% { transform: translateY(-8px) rotate(6deg); }
+  }
+  @keyframes sparkleSpin {
+    0% { transform: scale(0.8) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+    100% { transform: scale(0.8) rotate(360deg); }
+  }
+
+  /* Game Modal Overlay */
+  .dg-game-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 2147483640 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: clamp(10px, 2.5vw, 24px) !important;
+    box-sizing: border-box !important;
+    isolation: isolate !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity .25s ease, visibility .25s ease !important;
+  }
+  .dg-game-modal.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
     pointer-events: auto !important;
+  }
+  body.dg-modal-open {
+    overflow: hidden !important;
+  }
+  .dg-game-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 24, 79, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .dg-game-modal__container {
+    position: relative;
+    z-index: 2;
+    width: min(860px, 100%);
+    height: min(780px, 92vh);
+    background: #dff4ff;
+    border: 3px solid #2f2076;
+    border-radius: clamp(24px, 4vw, 36px);
+    box-shadow: -6px 10px 0 #2f2076;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.92);
+    transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .dg-game-modal.is-open .dg-game-modal__container {
+    transform: scale(1);
+  }
+  .dg-game-modal__close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 50;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid #2f2076;
+    box-shadow: -3px 3px 0 #2f2076;
+    color: #2f2076;
+    font: 900 20px/1 "Rubik", sans-serif;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .dg-game-modal__close:hover {
+    transform: scale(1.1) rotate(90deg);
+    background: #ffe0ed;
+  }
+  .dg-game-modal__close:active {
+    transform: scale(0.92);
+  }
+  .dg-game-modal__frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
   }
 
   .dg-simple-cta [data-framer-name="Button Shape"] {
@@ -662,7 +848,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .dg-programs, .dg-contact {
     order: 10;
     position: relative;
-    z-index: 50;
+    z-index: 20;
     width: 100%;
     box-sizing: border-box;
     color: #2f2076;
@@ -822,12 +1008,15 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     .dg-story-copy p { font-size: 19px; line-height: 1.55; }
     .dg-story-copy p + p { margin-top: 26px; }
     .dg-story-actions { flex-direction: column; gap: 14px; margin-top: 38px; }
-    .dg-story-actions a { min-width: 0; padding: 19px 22px; border-radius: 22px; font-size: 18px; }
+    .dg-story-actions a, .dg-story-actions button { min-width: 0; padding: 19px 22px; border-radius: 22px; font-size: 18px; }
     .dg-story-spark--left { left: 2px; }
     .dg-story-spark--right { right: 0; top: -38px; }
     .dg-story-spark--bottom { display: none; }
-    .dg-kids-game { padding: 10px 0 60px; }
-    .dg-kids-game__frame { min-height: 640px; height: 680px; }
+    .dg-game-teaser { padding: 40px 16px; }
+    .dg-game-teaser__card { grid-template-columns: 1fr; gap: 20px; padding: 24px 18px; border-radius: 26px; }
+    .dg-game-teaser__right { order: -1; }
+    .dg-game-teaser__btn { width: 100%; font-size: 18px; padding: 16px 20px; }
+    .dg-game-modal__container { height: min(720px, 94vh); border-radius: 26px; }
   }
 </style>
 <script>
@@ -930,8 +1119,14 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       const followAnchor = (event) => {
         const link = event.target.closest?.('a[href^="#"]');
         if (!link) return;
+        const targetHref = link.getAttribute("href");
+        if (targetHref === "#game" || targetHref === "#kids-game") {
+          event.preventDefault();
+          window.openGameModal();
+          return;
+        }
         if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
-        const target = document.querySelector(link.getAttribute("href"));
+        const target = document.querySelector(targetHref);
         if (!target) return;
         event.preventDefault();
         event.stopPropagation();
@@ -1032,27 +1227,78 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       if (!intro || intro.querySelector(".dg-parent-story")) return;
       intro.classList.add("dg-parent-story-section");
       intro.id = "parent-story";
-      intro.innerHTML = '<div class="dg-parent-story"><span class="dg-story-spark dg-story-spark--left" aria-hidden="true">⭐</span><span class="dg-story-spark dg-story-spark--right" aria-hidden="true">🪐</span><div class="dg-story-questions"><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></article></div><div class="dg-story-copy"><p>Вопросов у родителей всегда много. Ведь здоровье ребёнка начинается с внимания к мелочам, а здоровая улыбка — с самых первых зубов. Мы создали программы <strong>«Растём с улыбкой»</strong>, чтобы вы были уверены: развитие зубов проходит правильно, а рядом всегда есть детский стоматолог, готовый поддержать и ответить на любые вопросы.</p><p><span class="dg-story-heart" aria-hidden="true">♥</span>Мы покажем, как годовые программы сопровождения помогают семьям на разных этапах взросления ребёнка. История вымышленная, а ситуации — самые настоящие.</p><div class="dg-story-actions"><a href="tel:+79109900060">Задать вопрос доктору</a><a href="#programs">Наши программы</a></div></div><span class="dg-story-spark dg-story-spark--bottom" aria-hidden="true">✨</span></div>';
+      intro.innerHTML = '<div class="dg-parent-story"><span class="dg-story-spark dg-story-spark--left" aria-hidden="true">⭐</span><span class="dg-story-spark dg-story-spark--right" aria-hidden="true">🪐</span><div class="dg-story-questions"><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></article><article class="dg-story-question"><span class="dg-story-question__mark" aria-hidden="true">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></article></div><div class="dg-story-copy"><p>Вопросов у родителей всегда много. Ведь здоровье ребёнка начинается с внимания к мелочам, а здоровая улыбка — с самых первых зубов. Мы создали программы <strong>«Растём с улыбкой»</strong>, чтобы вы были уверены: развитие зубов проходит правильно, а рядом всегда есть детский стоматолог, готовый поддержать и ответить на любые вопросы.</p><p><span class="dg-story-heart" aria-hidden="true">♥</span>Мы покажем, как годовые программы сопровождения помогают семьям на разных этапах взросления ребёнка. История вымышленная, а ситуации — самые настоящие.</p><div class="dg-story-actions"><a href="tel:+79109900060">Задать вопрос доктору</a><button type="button" class="dg-story-game-btn" id="storyOpenGameBtn">🎮 Игра «Почисти зубик»</button><a href="#programs">Наши программы</a></div></div><span class="dg-story-spark dg-story-spark--bottom" aria-hidden="true">✨</span></div>';
+
+      document.getElementById("storyOpenGameBtn")?.addEventListener("click", () => window.openGameModal());
     };
+
+    window.openGameModal = () => {
+      let modal = document.getElementById("gameModal");
+      if (!modal) {
+        addKidsGame();
+        modal = document.getElementById("gameModal");
+      }
+      if (!modal) return;
+      modal.classList.add("is-open");
+      document.body.classList.add("dg-modal-open");
+      const frame = modal.querySelector("#gameIframe");
+      if (frame && (!frame.src || frame.src === "about:blank")) {
+        frame.src = "kids-game.html";
+      }
+    };
+
+    window.closeGameModal = () => {
+      const modal = document.getElementById("gameModal");
+      if (!modal) return;
+      modal.classList.remove("is-open");
+      document.body.classList.remove("dg-modal-open");
+    };
+
+    if (!window.__dgGameEventsBound) {
+      window.__dgGameEventsBound = true;
+      document.addEventListener("click", (e) => {
+        if (e.target.closest("#openGameModalBtn") || e.target.closest("#openGameModalPreview") || e.target.closest("#storyOpenGameBtn")) {
+          e.preventDefault();
+          window.openGameModal();
+        }
+        if (e.target.closest("#closeGameModalBtn") || e.target.closest("#gameModalBackdrop")) {
+          e.preventDefault();
+          window.closeGameModal();
+        }
+      }, true);
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          window.closeGameModal();
+        }
+      });
+    }
 
     const addKidsGame = () => {
       const intro = document.querySelector('[data-framer-name="Intro"]');
-      if (!intro || document.querySelector(".dg-kids-game")) return;
-      const game = document.createElement("section");
-      game.className = "dg-kids-game";
-      game.id = "kids-game";
-      game.setAttribute("aria-label", "Детская интерактивная игра Почисти Зубик!");
-      game.innerHTML = '<iframe class="dg-kids-game__frame" title="Детская игра Почисти Зубик!" loading="lazy" src="kids-game.html"></iframe>';
-      intro.insertAdjacentElement("afterend", game);
-      const frame = game.querySelector(".dg-kids-game__frame");
-      fetch("/kids-game.html").then((response) => {
-        if (!response.ok) throw new Error("Game module is unavailable");
-        return response.text();
-      }).then((markup) => {
-        frame.srcdoc = markup;
-      }).catch(() => {
-        frame.src = "kids-game.html";
-      });
+      if (!intro) return;
+
+      // 1. Teaser Section
+      if (!document.querySelector(".dg-game-teaser")) {
+        const teaser = document.createElement("section");
+        teaser.className = "dg-game-teaser";
+        teaser.id = "game-teaser";
+        teaser.setAttribute("aria-label", "Детская интерактивная игра Почисти Зубик!");
+        teaser.innerHTML = '<div class="dg-shell"><div class="dg-game-teaser__card"><div class="dg-game-teaser__left"><span class="dg-game-teaser__badge">🌟 ДЛЯ МАЛЫШЕЙ</span><h3>Интерактивная игра «Почисти Зубик!»</h3><p>Почистите щёточкой, смойте пенку водичкой и угостите зубик хрустящим яблочком! Весёлая игра, развивающая полезные привычки у детей.</p><button class="dg-game-teaser__btn" id="openGameModalBtn" type="button"><span>🎮</span> <span>СЫГРАТЬ В ИГРУ</span></button></div><div class="dg-game-teaser__right" id="openGameModalPreview" title="Нажмите, чтобы сыграть!"><div class="dg-teaser-tooth-preview"><span class="dg-teaser-crown">👑</span><span class="dg-teaser-tooth-icon">🦷</span><span class="dg-teaser-sparkle">✨</span></div></div></div></div>';
+        intro.insertAdjacentElement("afterend", teaser);
+      }
+
+      // 2. Modal Overlay
+      if (!document.getElementById("gameModal")) {
+        const modal = document.createElement("div");
+        modal.className = "dg-game-modal";
+        modal.id = "gameModal";
+        modal.setAttribute("role", "dialog");
+        modal.setAttribute("aria-modal", "true");
+        modal.setAttribute("aria-label", "Игра Почисти Зубик");
+        modal.innerHTML = '<div class="dg-game-modal__backdrop" id="gameModalBackdrop"></div><div class="dg-game-modal__container"><button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть">✕</button><iframe class="dg-game-modal__frame" id="gameIframe" title="Детская игра Почисти Зубик!" loading="lazy" src="kids-game.html"></iframe></div>';
+        document.body.appendChild(modal);
+      }
     };
 
     const addLandingSections = () => {
