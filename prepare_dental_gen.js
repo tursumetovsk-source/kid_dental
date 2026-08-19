@@ -222,6 +222,15 @@ const enhancement = String.raw`
   [data-framer-name="Intro"] *,
   [data-framer-name="Our Story"] *,
   [data-framer-name^="Feature"] * { will-change: auto !important; }
+
+  /* Hide residual template feature sliders */
+  .framer-1ugzc8k-container,
+  .framer-1a733vd-container,
+  .framer-6mir23-container,
+  [data-framer-name^="Feature"] {
+    display: none !important;
+  }
+
   [data-framer-name="Intro"].dg-parent-story-section {
     width: 100% !important;
     height: auto !important;
@@ -2729,7 +2738,7 @@ const enhancement = String.raw`
       for (const element of document.querySelectorAll("[data-framer-cursor]")) {
         element.removeAttribute("data-framer-cursor");
       }
-      for (const el of document.querySelectorAll('[data-framer-name*="Sticker"], [data-framer-name="Breakfast"], [data-framer-name="Drinks"], [data-framer-name="Banana"], [data-framer-name="Dummy"], [data-framer-name="Dress"], [data-framer-name="Snaaacks"], .framer-1ymkmky, .framer-ymzrbp, .framer-dxh1mn, .framer-1pzn978, .framer-1gbadff')) {
+      for (const el of document.querySelectorAll('[data-framer-name*="Sticker"], [data-framer-name="Breakfast"], [data-framer-name="Drinks"], [data-framer-name="Banana"], [data-framer-name="Dummy"], [data-framer-name="Dress"], [data-framer-name="Snaaacks"], .framer-1ymkmky, .framer-ymzrbp, .framer-dxh1mn, .framer-1pzn978, .framer-1gbadff, .framer-1ugzc8k-container, .framer-1a733vd-container, .framer-6mir23-container, [data-framer-name^="Feature"]')) {
         el.remove();
       }
       for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
