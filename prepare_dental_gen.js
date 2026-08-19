@@ -26,11 +26,146 @@ const sourceReplacements = [
   ["https://framerusercontent.com/images/3qagTfcy987zODTJlMq8rgK2IO4.webp", "assets/dental-gen/programs.jpg"],
   ["https://framerusercontent.com/images/r2k4Pm177d1uTwd03VSiPwXuDc.jpg", "assets/dental-gen/straight-smile.jpg"],
   ["https://framerusercontent.com/images/zSolWhtGIr9vVEf34WY6vkVsOUY.jpg", "assets/dental-gen/about-family.jpg"],
+
+  // Header and Navigation
   [">FAQS<", ">ПРОГРАММЫ<"],
   [">FAQ<", ">ПРОГРАММЫ<"],
   [">ABOUT<", ">О КЛИНИКЕ<"],
+  [">About<", ">О клинике<"],
   [">CONTACT<", ">КОНТАКТЫ<"],
+  [">Contact<", ">Контакты<"],
   [">ADD VENUE<", ">ЧЕКАП<"],
+  [">Add venue<", ">Чекап<"],
+  [">POLICIES<", ">КОНТАКТЫ<"],
+  [">Policies<", ">Контакты<"],
+
+  // Hero & Sub-banner
+  ["meet maggie", "детская стоматология DENTAL GEN"],
+  ["Meet Maggie", "Детская стоматология DENTAL GEN"],
+  ["MEET MAGGIE", "ДЕТСКАЯ СТОМАТОЛОГИЯ DENTAL GEN"],
+  ["Your pocket guide to surviving parenthood, one activity at a time.", "Здоровая улыбка сегодня — уверенность на всю жизнь."],
+  ["YOUR POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.", "ЗДОРОВАЯ УЛЫБКА СЕГОДНЯ — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ."],
+  ["Your pocket", "Здоровая улыбка"],
+  ["guide to", "сегодня —"],
+  ["surviving", "уверенность"],
+  ["parenthood,", "и счастье"],
+  ["one activity", "на всю"],
+  ["at a time.", "жизнь!"],
+  ["YOUR POCKET", "ЗДОРОВАЯ УЛЫБКА"],
+  ["GUIDE TO", "СЕГОДНЯ —"],
+  ["SURVIVING", "УВЕРЕННОСТЬ"],
+  ["PARENTHOOD,", "И СЧАСТЬЕ"],
+  ["ONE ACTIVITY", "НА ВСЮ"],
+  ["AT A TIME.", "ЖИЗНЬ!"],
+  ["AT A TIME", "ЖИЗНЬ!"],
+  ["FIND FREE SANITY—SAVING ACTIVITIES FASTER THAN YOUR TODDLER CAN EMPTY THE TUPPERWARE DRAWER", "РАСТЁМ СО ЗДОРОВОЙ УЛЫБКОЙ БЫСТРЕЕ, ЧЕМ ВАШ МАЛЫШ ДОЙДЕТ ДО ШКОЛЬНОЙ СКАМЬИ!"],
+  ["FIND FREE SANITY-SAVING ACTIVITIES FASTER THAN YOUR TODDLER CAN EMPTY THE TUPPERWARE DRAWER", "РАСТЁМ СО ЗДОРОВОЙ УЛЫБКОЙ БЫСТРЕЕ, ЧЕМ ВАШ МАЛЫШ ДОЙДЕТ ДО ШКОЛЬНОЙ СКАМЬИ!"],
+  ["FIND FREE", "РАСТЁМ СО"],
+  ["SANITY—SAVING", "ЗДОРОВОЙ"],
+  ["SANITY-SAVING", "ЗДОРОВОЙ"],
+  ["ACTIVITIES", "УЛЫБКОЙ"],
+  ["FASTER THAN", "ОТ ПЕРВЫХ"],
+  ["YOUR TODDLER", "ЗУБОВ ДО"],
+  ["Can EMPTY THE", "ШКОЛЬНОЙ"],
+  ["CAN EMPTY THE", "ШКОЛЬНОЙ"],
+  ["EMPTY THE", "ШКОЛЬНОЙ"],
+  ["TUPPERWARE", "СКАМЬИ"],
+  ["DRAWER", "ВМЕСТЕ"],
+  ["Drawer", "Вместе"],
+  ["You're welcome !", "DENTAL GEN рядом!"],
+  ["You're welcome!", "DENTAL GEN рядом!"],
+
+  // Mission & Intro
+  ["WITH MAGGIE YOU CAN:", "3 ПРОГРАММЫ ПО ВОЗРАСТУ:"],
+  ["WITH MAGGIE", "3 ПРОГРАММЫ"],
+  ["YOU CAN:", "ПО ВОЗРАСТУ:"],
+  ["FIND ACTIVITIES IN YOUR LOCAL AREA", "3 ПРОГРАММЫ ПО ВОЗРАСТУ ДЛЯ ЗДОРОВЫХ ЗУБОК"],
+  ["FIND ACTIVITIES", "3 ПРОГРАММЫ"],
+  ["in your Local area", "по возрасту"],
+  ["IN YOUR LOCAL AREA", "ПО ВОЗРАСТУ"],
+  ["pack the drinks", "чистим зубки"],
+  ["pack the", "чистим"],
+  [">drinks<", ">зубки<"],
+  [">breakfast<", ">завтрак<"],
+  ["ballet class", "урок гигиены"],
+  [">ballet<", ">урок<"],
+  [">class<", ">гигиены<"],
+  ["Because making memories shouldn't be another thing on your to-do list.", "Три программы по возрасту помогают вовремя заботиться о зубах и прикусе ребёнка."],
+  ["snaaacks", "перекусы"],
+  ["pack the dummy", "взять соску"],
+  [">dummy<", ">соска<"],
+  ["mooore snacks", "полезные фрукты"],
+  [">mooore<", ">полезные<"],
+  [">snacks<", ">фрукты<"],
+
+  // Mission Headline Text Block (Mobile + Desktop)
+  ["OUR APP is oN", "DENTAL GEN"],
+  ["OUR APP IS ON", "DENTAL GEN"],
+  ["Our app is on", "DENTAL GEN"],
+  ["A mission to", "ПОМОГАЕТ"],
+  ["A MISSION TO", "ПОМОГАЕТ"],
+  ["a mission to", "помогает"],
+  ["help lighten", "РАСТИТЬ"],
+  ["HELP LIGHTEN", "РАСТИТЬ"],
+  ["parents'", "ЗДОРОВУЮ"],
+  ["PARENTS'", "ЗДОРОВУЮ"],
+  ["Mental load", "УЛЫБКУ"],
+  ["MENTAL LOAD", "УЛЫБКУ"],
+  ["mental load", "улыбку"],
+  ["OUR APP IS ON \nA MISSION TO \nHELP LIGHTEN \nPARENTS'\nMENTAL LOAD", "DENTAL GEN \nПОМОГАЕТ \nРАСТИТЬ \nЗДОРОВУЮ \nУЛЫБКУ"],
+  ["OUR APP IS ON A MISSION TO HELP LIGHTEN PARENTS' MENTAL LOAD", "DENTAL GEN ПОМОГАЕТ РАСТИТЬ ЗДОРОВУЮ УЛЫБКУ"],
+
+  // Our Story
+  ["Maggie started with two mums, a few wines, and one big idea:", "DENTAL GEN растёт вместе с вашим ребёнком:"],
+  ["MAGGIE STARTED WITH TWO MUMS, A FEW WINES, AND ONE BIG IDEA:", "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:"],
+  ["parenting should feel lighter", "забота о зубах с первого дня"],
+  ["PARENTING SHOULD FEEL LIGHTER", "ЗАБОТА О ЗУБАХ С ПЕРВОГО ДНЯ"],
+  ["parenting", "забота"],
+  ["should feel", "без"],
+  ["lighter", "страха"],
+  ["LIGHTER", "БЕЗ СТРАХА"],
+  ["Maggie is for every parent who has ever felt overwhelmed, isolated, or just out of ideas.", "Для каждого возраста — свой план профилактики, лечения и спокойного знакомства со стоматологом."],
+  ["Maggie is for every parent", "Для каждого возраста"],
+  ["who has ever felt overwhelmed, isolated, or just out of ideas.", "свой план заботы и лечения без слёз и страха."],
+  ["is for every", "для каждого"],
+  ["parent who", "родителя,"],
+  ["has ever felt", "кто заботится"],
+  ["overwhelmed,", "о здоровье"],
+  ["isolated, or", "и красивой"],
+  ["just out", "улыбке"],
+  ["of ideas.", "малыша."],
+  ["Learn more about our story", "Подберите программу для ребёнка"],
+  ["LEARN MORE ABOUT OUR STORY", "ПОДБЕРИТЕ ПРОГРАММУ ДЛЯ РЕБЁНКА"],
+  ["Learn more about", "Подберите программу"],
+  ["our story", "для ребёнка"],
+  ["READ MORE", "ВЫБРАТЬ ПРОГРАММУ"],
+  ["Read More", "Выбрать программу"],
+  ["Read more", "Выбрать программу"],
+
+  // 5000 Activities / Stats
+  ["MORE\nTHAN", "БОЛЕЕ"],
+  ["MORE THAN", "БОЛЕЕ"],
+  ["Free activities and kid-friendly parks across Australia.", "Причин улыбнуться — и у каждого ребёнка своя."],
+  ["FREE ACTIVITIES AND KID-FRIENDLY PARKS ACROSS AUSTRALIA.", "ПРИЧИН УЛЫБНУТЬСЯ — И У КАЖДОГО РЕБЁНКА СВОЯ."],
+  ["Maggie has you covered", "DENTAL GEN всегда рядом"],
+  ["Maggie has you covered.", "DENTAL GEN всегда рядом."],
+  ["MAGGIE HAS YOU COVERED", "DENTAL GEN ВСЕГДА РЯДОМ"],
+
+  // Footer & Download & Actions
+  ["turn chaos into chuckles with Maggie!", "Здоровая улыбка — уверенность на всю жизнь!"],
+  ["TURN CHAOS INTO CHUCKLES WITH MAGGIE!", "ЗДОРОВАЯ УЛЫБКА — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ!"],
+  ["turn chaos", "здоровая улыбка"],
+  ["into chuckles", "сегодня —"],
+  ["with Maggie!", "уверенность на всю жизнь!"],
+  ["TURN CHAOS", "ЗДОРОВАЯ УЛЫБКА"],
+  ["INTO CHUCKLES", "СЕГОДНЯ —"],
+  ["WITH MAGGIE!", "УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ!"],
+  ["Download on the", "ЗАПИСАТЬСЯ"],
+  ["Download on the ", "ЗАПИСАТЬСЯ "],
+  ["request", "ПОЗВОНИТЬ"],
+  ["REQUEST", "ПОЗВОНИТЬ"],
+  ["© 2025 Maggie", "© 2026 DENTAL GEN"],
+  ["© 2026 Maggie", "© 2026 DENTAL GEN"]
 ];
 
 for (const [from, to] of sourceReplacements) html = html.split(from).join(to);
@@ -2523,6 +2658,46 @@ const enhancement = String.raw`
 </style>
 <script>
   (() => {
+    const globalRussianMap = {
+      "OUR APP is oN": "DENTAL GEN", "OUR APP IS ON": "DENTAL GEN", "Our app is on": "DENTAL GEN", "our app is on": "dental gen",
+      "A mission to": "ПОМОГАЕТ", "A MISSION TO": "ПОМОГАЕТ", "a mission to": "помогает",
+      "help lighten": "РАСТИТЬ", "HELP LIGHTEN": "РАСТИТЬ",
+      "parents'": "ЗДОРОВУЮ", "PARENTS'": "ЗДОРОВУЮ", "Parents'": "Здоровую",
+      "Mental load": "УЛЫБКУ", "MENTAL LOAD": "УЛЫБКУ", "mental load": "улыбку",
+      "parenting": "забота", "should feel": "без", "lighter": "страха", "LIGHTER": "БЕЗ СТРАХА", "Lighter": "Без страха",
+      "pack the drinks": "чистим зубки", "pack the": "чистим", "drinks": "зубки",
+      "breakfast": "вкусный завтрак", "ballet class": "урок гигиены", "ballet": "урок", "class": "гигиены",
+      "snaaacks": "перекусы", "dummy": "соска", "mooore": "полезные", "snacks": "фрукты",
+      "meet maggie": "детская стоматология DENTAL GEN", "Meet Maggie": "Детская стоматология DENTAL GEN", "MEET MAGGIE": "ДЕТСКАЯ СТОМАТОЛОГИЯ DENTAL GEN",
+      "Your pocket": "Здоровая улыбка", "guide to": "сегодня —", "surviving": "уверенность", "parenthood,": "и счастье", "one activity": "на всю", "at a time.": "жизнь!",
+      "YOUR POCKET": "ЗДОРОВАЯ УЛЫБКА", "GUIDE TO": "СЕГОДНЯ —", "SURVIVING": "УВЕРЕННОСТЬ", "PARENTHOOD,": "И СЧАСТЬЕ", "ONE ACTIVITY": "НА ВСЮ", "AT A TIME.": "ЖИЗНЬ!",
+      "FIND FREE": "РАСТЁМ СО", "FIND": "РАСТЁМ", "FREE": "СО", "SANITY—SAVING": "ЗДОРОВОЙ", "SANITY-SAVING": "ЗДОРОВОЙ", "ACTIVITIES": "УЛЫБКОЙ",
+      "FASTER THAN": "ОТ ПЕРВЫХ", "FASTER": "ОТ", "THAN": "ПЕРВЫХ", "YOUR TODDLER": "ЗУБОВ ДО", "YOUR": "ЗУБОВ", "TODDLER": "ДО",
+      "Can EMPTY THE": "ШКОЛЬНОЙ", "CAN EMPTY THE": "ШКОЛЬНОЙ", "EMPTY": "ШКОЛЬНОЙ", "THE": "ВЕСЬ", "TUPPERWARE": "СКАМЬИ", "DRAWER": "ВМЕСТЕ", "Drawer": "Вместе",
+      "You're welcome !": "DENTAL GEN рядом!", "You're welcome!": "DENTAL GEN рядом!",
+      "WITH MAGGIE": "3 ПРОГРАММЫ", "YOU CAN:": "ПО ВОЗРАСТУ:", "FIND ACTIVITIES": "3 ПРОГРАММЫ", "in your Local area": "по возрасту", "IN YOUR LOCAL AREA": "ПО ВОЗРАСТУ",
+      "Maggie started with two mums, a few wines, and one big idea:": "DENTAL GEN растёт вместе с вашим ребёнком:",
+      "MAGGIE STARTED WITH TWO MUMS, A FEW WINES, AND ONE BIG IDEA:": "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:",
+      "Maggie is for every parent": "Для каждого возраста — свой план",
+      "who has ever felt overwhelmed, isolated, or just out of ideas.": "профилактики, лечения и спокойного знакомства со стоматологом.",
+      "is for every": "для каждого", "parent who": "родителя,", "has ever felt": "кто заботится", "overwhelmed,": "о здоровье", "isolated, or": "и красивой", "just out": "улыбке", "of ideas.": "малыша.",
+      "Learn more about our story": "Подберите программу для ребёнка", "LEARN MORE ABOUT OUR STORY": "ПОДБЕРИТЕ ПРОГРАММУ ДЛЯ РЕБЁНКА",
+      "Learn more about": "Подберите программу", "our story": "для ребёнка",
+      "READ MORE": "ВЫБРАТЬ ПРОГРАММУ", "Read More": "Выбрать программу", "Read more": "Выбрать программу",
+      "MORE THAN": "БОЛЕЕ", "MORE": "БОЛЕЕ", "THAN": "ПРИЧИН",
+      "Free activities and kid-friendly parks across Australia.": "Причин улыбнуться — и у каждого ребёнка своя.",
+      "FREE ACTIVITIES AND KID-FRIENDLY PARKS ACROSS AUSTRALIA.": "ПРИЧИН УЛЫБНУТЬСЯ — И У КАЖДОГО РЕБЁНКА СВОЯ.",
+      "Maggie has you covered": "DENTAL GEN всегда рядом", "Maggie has you covered.": "DENTAL GEN всегда рядом.", "MAGGIE HAS YOU COVERED": "DENTAL GEN ВСЕГДА РЯДОМ",
+      "turn chaos into chuckles with Maggie!": "Здоровая улыбка — уверенность на всю жизнь!",
+      "TURN CHAOS INTO CHUCKLES WITH MAGGIE!": "ЗДОРОВАЯ УЛЫБКА — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ!",
+      "turn chaos": "здоровая улыбка", "into chuckles": "сегодня —", "with Maggie!": "уверенность на всю жизнь!",
+      "TURN CHAOS": "ЗДОРОВАЯ УЛЫБКА", "INTO CHUCKLES": "СЕГОДНЯ —", "WITH MAGGIE!": "УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ!",
+      "Download on the": "ЗАПИСАТЬСЯ", "Download on the ": "ЗАПИСАТЬСЯ ", "request": "ПОЗВОНИТЬ", "REQUEST": "ПОЗВОНИТЬ",
+      "© 2025 Maggie": "© 2026 DENTAL GEN", "© 2026 Maggie": "© 2026 DENTAL GEN",
+      "POLICIES": "КОНТАКТЫ", "Policies": "Контакты",
+      "FAQS": "ПРОГРАММЫ", "FAQ": "ПРОГРАММЫ", "ABOUT": "О КЛИНИКЕ", "About": "О клинике", "ADD VENUE": "ЧЕКАП", "Add venue": "Чекап", "CONTACT": "КОНТАКТЫ", "Contact": "Контакты"
+    };
+
     const scopedText = {
       "Header Nav": {
         "FAQ": "ПРОГРАММЫ", "FAQS": "ПРОГРАММЫ", "О НАС": "О КЛИНИКЕ", "ABOUT": "О КЛИНИКЕ",
@@ -2546,16 +2721,21 @@ const enhancement = String.raw`
         "Всегда пожалуйста!": "DENTAL GEN рядом!", "You're welcome!": "DENTAL GEN рядом!"
       },
       "Mission Headline": {
-        "С MAGGIE": "3 ПРОГРАММЫ", "WITH MAGGIE": "3 ПРОГРАММЫ", "ВЫ МОЖЕТЕ:": "ПО ВОЗРАСТУ:", "YOU CAN:": "ПО ВОЗРАСТУ:"
+        "С MAGGIE": "3 ПРОГРАММЫ", "WITH MAGGIE": "3 ПРОГРАММЫ", "ВЫ МОЖЕТЕ:": "ПО ВОЗРАСТУ:", "YOU CAN:": "ПО ВОЗРАСТУ:",
+        "OUR APP is oN": "DENTAL GEN", "OUR APP IS ON": "DENTAL GEN", "A mission to": "ПОМОГАЕТ", "A MISSION TO": "ПОМОГАЕТ",
+        "help lighten": "РАСТИТЬ", "HELP LIGHTEN": "РАСТИТЬ", "parents'": "ЗДОРОВУЮ", "PARENTS'": "ЗДОРОВУЮ", "Mental load": "УЛЫБКУ", "MENTAL LOAD": "УЛЫБКУ"
       },
       "Mission": {
         "Создание воспоминаний не должно быть еще одной задачей в списке дел.": "Три программы по возрасту помогают вовремя заботиться о зубах и прикусе ребёнка.",
-        "Because making memories shouldn't be another thing on your to-do list.": "Три программы по возрасту помогают вовремя заботиться о зубах и прикусе ребёнка."
+        "Because making memories shouldn't be another thing on your to-do list.": "Три программы по возрасту помогают вовремя заботиться о зубах и прикусе ребёнка.",
+        "OUR APP is oN": "DENTAL GEN", "OUR APP IS ON": "DENTAL GEN", "A mission to": "ПОМОГАЕТ", "A MISSION TO": "ПОМОГАЕТ",
+        "help lighten": "РАСТИТЬ", "HELP LIGHTEN": "РАСТИТЬ", "parents'": "ЗДОРОВУЮ", "PARENTS'": "ЗДОРОВУЮ", "Mental load": "УЛЫБКУ", "MENTAL LOAD": "УЛЫБКУ",
+        "pack the drinks": "чистим зубки", "breakfast": "вкусный завтрак", "ballet class": "урок гигиены", "snaaacks": "перекусы"
       },
       "Our Story": {
         "MAGGIE НАЧАЛОСЬ С ДВУХ МАМ, БОКАЛА ЧАЯ И ОДНОЙ БОЛЬШОЙ ИДЕИ:": "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:",
         "MAGGIE STARTED WITH TWO MUMS, A FEW WINES, AND ONE BIG IDEA:": "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:",
-        "parenting": "забота", "should feel": "без", "lighter": "страха",
+        "parenting": "забота", "should feel": "без", "lighter": "страха", "LIGHTER": "БЕЗ СТРАХА",
         "MAGGIE —": "DENTAL GEN —", "ДЛЯ КАЖДОГО,": "ЗАБОТА,", "КТО КОГДА-ЛИБО": "КОТОРАЯ", "ЧУВСТВОВАЛ": "РАСТЁТ",
         "УСТАЛОСТЬ": "ВМЕСТЕ", "ИЛИ НЕ ЗНАЛ,": "С ВАШИМ", "ЧЕМ ЗАНЯТЬ": "РЕБЁНКОМ", "МАЛЫША.": "И ЕГО УЛЫБКОЙ.",
         "Maggie is for every parent": "Для каждого возраста — свой план", "who has ever felt overwhelmed, isolated, or just out of ideas.": "профилактики, лечения и спокойного знакомства со стоматологом.",
@@ -4628,19 +4808,34 @@ const enhancement = String.raw`
     const apply = () => {
       for (const [name, map] of Object.entries(scopedText)) replaceTextNodes(document.querySelector('[data-framer-name="' + name + '"]'), map);
 
-      replaceTextNodes(document.body, {
-        "НАХОДИТЬ ЗАНЯТИЯ": "«ПЕРВЫЕ ЗУБКИ»", "FIND ACTIVITIES": "«ПЕРВЫЕ ЗУБКИ»",
-        "В ВАШЕМ РАЙОНЕ": "1–3 ГОДА", "IN YOUR LOCAL AREA": "1–3 ГОДА",
-        "Скачать в": "ЗАПИСАТЬСЯ", "Download on the": "ЗАПИСАТЬСЯ",
-        "заявка": "ПОЗВОНИТЬ", "request": "ПОЗВОНИТЬ"
-      });
+      replaceTextNodes(document.body, globalRussianMap);
 
-      const missionHeadings = document.querySelectorAll('[data-framer-name="Mission"] h1');
+      const missionHeadings = document.querySelectorAll('[data-framer-name="Mission"] h1, [data-framer-name="Text Block"] h1');
       if (missionHeadings && missionHeadings.length >= 4) {
         setAnimatedWords(missionHeadings[0], ["DENTAL", "GEN", "", ""]);
         setAnimatedWords(missionHeadings[1], ["ПОМОГАЕТ", "", ""]);
         setAnimatedWords(missionHeadings[2], ["РАСТИТЬ", ""]);
         setAnimatedWords(missionHeadings[3], ["ЗДОРОВУЮ", "УЛЫБКУ", ""]);
+      }
+
+      // SVG foreignObjects (mobile and desktop rich texts)
+      for (const fo of document.querySelectorAll('foreignObject')) {
+        replaceTextNodes(fo, globalRussianMap);
+        const h1 = fo.querySelector('h1');
+        if (h1 && /OUR APP|mission|lighten|parents/i.test(h1.textContent)) {
+          h1.innerHTML = '<span class="framer-text">DENTAL GEN<br class="framer-text">ПОМОГАЕТ<br class="framer-text">РАСТИТЬ<br class="framer-text">ЗДОРОВУЮ<br class="framer-text">УЛЫБКУ</span>';
+        }
+      }
+
+      // Any remaining English phrases in elements
+      for (const el of document.querySelectorAll('h1, h2, h3, h4, span, p, a, button')) {
+        const t = el.textContent.trim();
+        if (/parenting\s+should\s+feel\s+lighter/i.test(t)) {
+          el.textContent = "ЗАБОТА О ЗУБАХ С ПЕРВОГО ДНЯ";
+        }
+        if (/our\s+app\s+is\s+on\s+a\s+mission/i.test(t)) {
+          el.innerHTML = 'DENTAL GEN<br>ПОМОГАЕТ<br>РАСТИТЬ<br>ЗДОРОВУЮ<br>УЛЫБКУ';
+        }
       }
 
       document.title = "DENTAL GEN | Детская стоматология в Иваново";
