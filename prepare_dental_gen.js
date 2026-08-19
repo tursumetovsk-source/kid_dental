@@ -118,6 +118,12 @@ const sourceReplacements = [
   // Our Story
   ["Maggie started with two mums, a few wines, and one big idea:", "DENTAL GEN растёт вместе с вашим ребёнком:"],
   ["MAGGIE STARTED WITH TWO MUMS, A FEW WINES, AND ONE BIG IDEA:", "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:"],
+  ["MAGGIE НАЧАЛОСЬ С ДВУХ МАМ, БОКАЛА ЧАЯ И ОДНОЙ БОЛЬШОЙ ИДЕИ:", "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:"],
+  ["MAGGIE НАЧАЛОСЬ С ДВУХ МАМ", "DENTAL GEN РАСТЁТ"],
+  ["БОКАЛА ЧАЯ И ОДНОЙ БОЛЬШОЙ ИДЕИ:", "ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:"],
+  ["БОКАЛА ЧАЯ И ОДНОЙ БОЛЬШОЙ ИДЕИ", "ВМЕСТЕ С ВАШИМ РЕБЁНКОМ"],
+  ["A FEW WINES, AND ONE BIG IDEA:", "ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:"],
+  ["A FEW WINES, AND ONE BIG IDEA", "ВМЕСТЕ С ВАШИМ РЕБЁНКОМ"],
   ["parenting should feel lighter", "забота о зубах с первого дня"],
   ["PARENTING SHOULD FEEL LIGHTER", "ЗАБОТА О ЗУБАХ С ПЕРВОГО ДНЯ"],
   ["parenting", "забота"],
@@ -390,40 +396,62 @@ const enhancement = String.raw`
   }
 
   /* Compact Parent Questions Card in Our Story */
-  [data-framer-name="Our Story"] [data-framer-name="Photo"] {
+  [data-framer-name="Our Story"],
+  .framer-i8ark0,
+  [data-framer-name="Our Story"] [data-framer-name="Photo"],
+  .framer-1w90jnq,
+  .framer-1vj2nrk,
+  .framer-1qol9e7,
+  .framer-u8d1dt,
+  .framer-135qynf {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    place-content: center !important;
+    align-items: center !important;
+  }
+
+  [data-framer-name="Our Story"] [data-framer-name="Photo"],
+  .framer-1w90jnq {
     position: relative !important;
     width: 100% !important;
-    max-width: 820px !important;
+    max-width: 860px !important;
     margin: 0 auto !important;
     height: auto !important;
+    padding: clamp(20px, 3.5vw, 44px) 16px !important;
+    box-sizing: border-box !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    overflow: visible !important;
   }
+
   [data-framer-name="Our Story"] [data-framer-name="Photo"] [data-framer-name="Photo Frame"],
   [data-framer-name="Our Story"] [data-framer-name="Photo"] img {
     display: none !important;
   }
 
   .dg-parent-questions-card {
-    position: relative;
-    width: 100%;
-    max-width: 780px;
-    margin: clamp(20px, 3vw, 40px) auto;
-    padding: clamp(28px, 4vw, 44px) clamp(20px, 4vw, 36px);
-    box-sizing: border-box;
-    background: #fffdf5;
-    border: 3px solid #2f2076;
-    border-radius: clamp(28px, 4vw, 40px);
-    box-shadow: -6px 8px 0 #2f2076;
-    transform: rotate(-1.5deg);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 2.5vw, 24px);
-    transition: transform .25s ease;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 780px !important;
+    margin: 0 auto !important;
+    padding: clamp(24px, 4vw, 42px) clamp(18px, 4vw, 34px) !important;
+    box-sizing: border-box !important;
+    background: #fffdf5 !important;
+    border: 3px solid #2f2076 !important;
+    border-radius: clamp(24px, 4vw, 36px) !important;
+    box-shadow: -5px 7px 0 #2f2076 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(14px, 2vw, 20px) !important;
+    overflow: visible !important;
+    transition: transform .25s ease !important;
   }
   .dg-parent-questions-card:hover {
-    transform: rotate(0deg) scale(1.01);
+    transform: translateY(-2px) !important;
   }
 
   .dg-pq-bubble {
@@ -4805,6 +4833,58 @@ const enhancement = String.raw`
       document.body.appendChild(actions);
     };
 
+    const syncThemeAndBackground = () => {
+      let metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (!metaTheme) {
+        metaTheme = document.createElement("meta");
+        metaTheme.name = "theme-color";
+        document.head.appendChild(metaTheme);
+      }
+
+      const sections = [
+        { selector: '[data-framer-name="Hero"]', color: "#fffae6" },
+        { selector: '[data-framer-name="Intro"].dg-parent-story-section, [data-framer-name="Intro"]', color: "#ffe9ed" },
+        { selector: '[data-framer-name="Mission"]', color: "#dff4ff" },
+        { selector: '.dg-programs-carousel-section', color: "#ffe59a" },
+        { selector: '[data-framer-name="Our Story"]', color: "#dff4ff" },
+        { selector: '.dg-game-teaser', color: "#f6ebff" },
+        { selector: '.dg-checkup-section', color: "#e8faf6" },
+        { selector: '.dg-contact', color: "#17184f" }
+      ];
+
+      const updateColor = () => {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const viewportMiddle = scrollY + 80;
+        let activeColor = "#fffae6";
+
+        for (const sec of sections) {
+          const el = document.querySelector(sec.selector);
+          if (el && el.offsetParent !== null) {
+            const rect = el.getBoundingClientRect();
+            const top = rect.top + scrollY;
+            const bottom = top + el.offsetHeight;
+            if (viewportMiddle >= top && viewportMiddle < bottom) {
+              activeColor = sec.color;
+              break;
+            }
+          }
+        }
+
+        if (document.documentElement.style.backgroundColor !== activeColor) {
+          document.documentElement.style.backgroundColor = activeColor;
+          document.body.style.backgroundColor = activeColor;
+          metaTheme.setAttribute("content", activeColor);
+        }
+      };
+
+      if (!window.__dgThemeSyncAttached) {
+        window.__dgThemeSyncAttached = true;
+        window.addEventListener("scroll", updateColor, { passive: true });
+        window.addEventListener("resize", updateColor, { passive: true });
+      }
+      updateColor();
+    };
+
     const apply = () => {
       for (const [name, map] of Object.entries(scopedText)) replaceTextNodes(document.querySelector('[data-framer-name="' + name + '"]'), map);
 
@@ -4858,6 +4938,7 @@ const enhancement = String.raw`
       addKidsGame();
       addLandingSections();
       addFloatingActions();
+      syncThemeAndBackground();
 
       if (!window.__dgNavObserverAttached) {
         window.__dgNavObserverAttached = true;
