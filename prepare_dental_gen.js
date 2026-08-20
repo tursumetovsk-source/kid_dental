@@ -56,6 +56,20 @@ const sourceReplacements = [
   ["meet maggie", "детская стоматология DENTAL GEN"],
   ["Meet Maggie", "Детская стоматология DENTAL GEN"],
   ["MEET MAGGIE", "ДЕТСКАЯ СТОМАТОЛОГИЯ DENTAL GEN"],
+  ["Ваш карманный гид по родительству: одно занятие за раз.", "Здоровая улыбка сегодня — уверенность и счастье на всю жизнь!"],
+  ["ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.", "ЗДОРОВАЯ УЛЫБКА СЕГОДНЯ — УВЕРЕННОСТЬ И СЧАСТЬЕ НА ВСЮ ЖИЗНЬ!"],
+  ["Ваш карманный", "Здоровая улыбка"],
+  ["ВАШ КАРМАННЫЙ", "ЗДОРОВАЯ УЛЫБКА"],
+  ["гид по родительству:", "сегодня — уверенность"],
+  ["ГИД ПО РОДИТЕЛЬСТВУ:", "СЕГОДНЯ — УВЕРЕННОСТЬ"],
+  ["гид по", "сегодня —"],
+  ["родительству:", "уверенность"],
+  ["одно занятие", "и счастье"],
+  ["ОДНО ЗАНЯТИЕ", "И СЧАСТЬЕ"],
+  ["за раз.", "на всю жизнь!"],
+  ["ЗА РАЗ.", "НА ВСЮ ЖИЗНЬ!"],
+  ["за раз", "на всю жизнь!"],
+  ["ЗА РАЗ", "НА ВСЮ ЖИЗНЬ!"],
   ["Your pocket guide to surviving parenthood, one activity at a time.", "Здоровая улыбка сегодня — уверенность на всю жизнь."],
   ["YOUR POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.", "ЗДОРОВАЯ УЛЫБКА СЕГОДНЯ — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ."],
   ["Your pocket", "Здоровая улыбка"],
@@ -352,14 +366,14 @@ const enhancement = String.raw`
   [data-framer-name="Hero"] {
     position: relative !important;
     width: 100% !important;
-    min-height: 88vh !important;
+    min-height: auto !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-start !important;
     background: #fff7d6 !important;
-    padding: clamp(52px, 6vw, 72px) 16px clamp(15px, 2.5vw, 30px) !important;
+    padding: clamp(24px, 3.2vw, 42px) 16px clamp(15px, 2vw, 25px) !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
@@ -388,56 +402,56 @@ const enhancement = String.raw`
     pointer-events: none;
   }
   .dg-doodle-star-tl {
-    top: 1%;
+    top: -10px;
     left: 3%;
     width: clamp(34px, 4.5vw, 50px);
     height: clamp(34px, 4.5vw, 50px);
     animation: dgFloatSlow 6s ease-in-out infinite alternate;
   }
   .dg-doodle-star-tc {
-    top: -15px;
+    top: -28px;
     left: 49%;
     width: clamp(26px, 3.5vw, 38px);
     height: clamp(26px, 3.5vw, 38px);
     animation: dgFloatSlow 5s ease-in-out infinite alternate-reverse;
   }
   .dg-doodle-star-tr {
-    top: 0%;
+    top: -12px;
     right: 7%;
     width: clamp(32px, 4vw, 46px);
     height: clamp(32px, 4vw, 46px);
     animation: dgFloatSlow 7s ease-in-out infinite alternate;
   }
   .dg-doodle-heart-tr {
-    top: 8%;
+    top: 2px;
     right: 3%;
     width: clamp(32px, 4.2vw, 46px);
     height: clamp(30px, 4vw, 42px);
     animation: dgFloatSlow 5.5s ease-in-out infinite alternate;
   }
   .dg-doodle-star-mr {
-    top: 38%;
+    top: 32%;
     right: 3%;
     width: clamp(30px, 3.8vw, 42px);
     height: clamp(30px, 3.8vw, 42px);
     animation: dgFloatSlow 6.5s ease-in-out infinite alternate-reverse;
   }
   .dg-doodle-planet {
-    top: 30%;
+    top: 26%;
     left: 0%;
     width: clamp(60px, 8vw, 95px);
     height: clamp(46px, 6.5vw, 75px);
     animation: dgFloatPlanet 8s ease-in-out infinite alternate;
   }
   .dg-doodle-trail {
-    top: 32%;
+    top: 28%;
     left: 8%;
     width: clamp(260px, 60vw, 680px);
     height: clamp(90px, 18vw, 200px);
     opacity: 0.85;
   }
   .dg-doodle-rocket {
-    top: 32%;
+    top: 28%;
     right: 12%;
     width: clamp(55px, 8vw, 85px);
     height: clamp(55px, 8vw, 85px);
@@ -462,8 +476,8 @@ const enhancement = String.raw`
     position: relative;
     z-index: 2;
     text-align: center;
-    margin-top: clamp(10px, 2vw, 30px);
-    margin-bottom: clamp(36px, 5vw, 64px);
+    margin-top: 0 !important;
+    margin-bottom: clamp(14px, 2vw, 26px) !important;
     max-width: 860px;
     width: 100%;
   }
@@ -476,9 +490,9 @@ const enhancement = String.raw`
     pointer-events: auto !important;
     margin: 0 auto !important;
     font-family: "Caveat", cursive, sans-serif !important;
-    font-size: clamp(40px, 6vw, 82px) !important;
+    font-size: clamp(36px, 5.2vw, 70px) !important;
     font-weight: 700 !important;
-    line-height: 1.18 !important;
+    line-height: 1.15 !important;
     color: #17184f !important;
     letter-spacing: -0.01em !important;
     text-shadow: 0 1px 0 rgba(255,255,255,0.6);
@@ -506,9 +520,10 @@ const enhancement = String.raw`
     max-width: 780px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: clamp(16px, 3vw, 36px);
+    gap: clamp(14px, 2.5vw, 28px);
     align-items: center;
-    padding: clamp(12px, 2vw, 24px) 10px;
+    padding: clamp(4px, 1vw, 10px) 10px;
+    margin-top: 0 !important;
     box-sizing: border-box;
   }
 
