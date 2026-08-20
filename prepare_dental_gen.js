@@ -733,6 +733,10 @@ const enhancement = String.raw`
   .framer-13x6f8b,
   .framer-12pk2gu,
   .framer-1i7tb2a-container,
+  .framer-1tqddnu,
+  [data-framer-name="Mission"] .framer-1tqddnu,
+  [data-framer-name="Mission"] h2,
+  [data-framer-name="Mission"] [data-framer-name*="While we can"],
   [data-framer-name="Our Story"],
   [data-framer-name="5000 Activities"],
   #our-story { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
@@ -5774,8 +5778,8 @@ const enhancement = String.raw`
         h1.innerHTML = '';
       }
 
-      // Intro, Mission Headline, Our Story & 5000 Activities - Cleared and removed as requested
-      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, [data-framer-name="Our Story"], [data-framer-name="5000 Activities"], #our-story, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
+      // Intro, Mission Headline, Mission Subtitles, Our Story & 5000 Activities - Cleared and removed as requested
+      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, .framer-1tqddnu, [data-framer-name="Mission"] .framer-1tqddnu, [data-framer-name="Mission"] h2, [data-framer-name="Mission"] [data-framer-name*="While we can"], [data-framer-name="Our Story"], [data-framer-name="5000 Activities"], #our-story, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
       for (const sec of introSections) {
         sec.innerHTML = '';
         sec.remove();
