@@ -352,14 +352,14 @@ const enhancement = String.raw`
   [data-framer-name="Hero"] {
     position: relative !important;
     width: 100% !important;
-    min-height: 100vh !important;
+    min-height: 88vh !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     background: #fff7d6 !important;
-    padding: clamp(90px, 12vw, 130px) 16px clamp(40px, 6vw, 70px) !important;
+    padding: clamp(52px, 6vw, 72px) 16px clamp(15px, 2.5vw, 30px) !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
@@ -371,7 +371,7 @@ const enhancement = String.raw`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     box-sizing: border-box;
     z-index: 10;
   }
@@ -379,7 +379,7 @@ const enhancement = String.raw`
   /* Surrounding Doodles */
   .dg-hero-doodles {
     position: absolute;
-    inset: -20px;
+    inset: -10px;
     pointer-events: none;
     z-index: 1;
   }
@@ -388,59 +388,59 @@ const enhancement = String.raw`
     pointer-events: none;
   }
   .dg-doodle-star-tl {
-    top: 5%;
-    left: 2%;
-    width: clamp(36px, 5vw, 54px);
-    height: clamp(36px, 5vw, 54px);
+    top: 1%;
+    left: 3%;
+    width: clamp(34px, 4.5vw, 50px);
+    height: clamp(34px, 4.5vw, 50px);
     animation: dgFloatSlow 6s ease-in-out infinite alternate;
   }
   .dg-doodle-star-tc {
-    top: 0%;
-    left: 48%;
-    width: clamp(28px, 4vw, 42px);
-    height: clamp(28px, 4vw, 42px);
+    top: -15px;
+    left: 49%;
+    width: clamp(26px, 3.5vw, 38px);
+    height: clamp(26px, 3.5vw, 38px);
     animation: dgFloatSlow 5s ease-in-out infinite alternate-reverse;
   }
   .dg-doodle-star-tr {
-    top: 3%;
-    right: 5%;
-    width: clamp(34px, 4.5vw, 48px);
-    height: clamp(34px, 4.5vw, 48px);
+    top: 0%;
+    right: 7%;
+    width: clamp(32px, 4vw, 46px);
+    height: clamp(32px, 4vw, 46px);
     animation: dgFloatSlow 7s ease-in-out infinite alternate;
   }
   .dg-doodle-heart-tr {
-    top: 15%;
-    right: 2%;
-    width: clamp(34px, 4.5vw, 50px);
-    height: clamp(32px, 4.2vw, 46px);
+    top: 8%;
+    right: 3%;
+    width: clamp(32px, 4.2vw, 46px);
+    height: clamp(30px, 4vw, 42px);
     animation: dgFloatSlow 5.5s ease-in-out infinite alternate;
   }
   .dg-doodle-star-mr {
-    top: 48%;
+    top: 38%;
     right: 3%;
-    width: clamp(32px, 4vw, 46px);
-    height: clamp(32px, 4vw, 46px);
+    width: clamp(30px, 3.8vw, 42px);
+    height: clamp(30px, 3.8vw, 42px);
     animation: dgFloatSlow 6.5s ease-in-out infinite alternate-reverse;
   }
   .dg-doodle-planet {
-    top: 42%;
+    top: 30%;
     left: 0%;
-    width: clamp(65px, 9vw, 105px);
-    height: clamp(50px, 7vw, 80px);
+    width: clamp(60px, 8vw, 95px);
+    height: clamp(46px, 6.5vw, 75px);
     animation: dgFloatPlanet 8s ease-in-out infinite alternate;
   }
   .dg-doodle-trail {
-    top: 46%;
+    top: 32%;
     left: 8%;
     width: clamp(260px, 60vw, 680px);
-    height: clamp(100px, 20vw, 220px);
+    height: clamp(90px, 18vw, 200px);
     opacity: 0.85;
   }
   .dg-doodle-rocket {
-    top: 45%;
-    right: 14%;
-    width: clamp(60px, 9vw, 95px);
-    height: clamp(60px, 9vw, 95px);
+    top: 32%;
+    right: 12%;
+    width: clamp(55px, 8vw, 85px);
+    height: clamp(55px, 8vw, 85px);
     animation: dgRocketHover 4s ease-in-out infinite alternate;
   }
 
@@ -3155,6 +3155,7 @@ const enhancement = String.raw`
       if (!root) return;
       const elements = [root, ...root.querySelectorAll("*")];
       for (const element of elements) {
+        if (element.closest(".dg-hero-custom-canvas")) continue;
         for (const node of element.childNodes) {
           if (node.nodeType !== 3 || !node.nodeValue) continue;
           const key = node.nodeValue.trim();
