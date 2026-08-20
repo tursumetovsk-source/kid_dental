@@ -361,14 +361,15 @@ const enhancement = String.raw`
   [data-framer-name="Hero"] {
     position: relative !important;
     width: 100% !important;
-    min-height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     background: #fff7d6 !important;
-    padding: clamp(8px, 1.2vw, 18px) 16px clamp(12px, 2vw, 24px) !important;
+    padding: clamp(70px, 9vh, 120px) 24px clamp(60px, 8vh, 100px) !important;
     margin-top: 0 !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
@@ -376,13 +377,13 @@ const enhancement = String.raw`
 
   .dg-hero-custom-canvas {
     position: relative;
-    width: min(920px, 100%);
-    margin: 0 auto !important;
+    width: min(960px, 100%);
+    margin: auto !important;
     padding-top: 0 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     box-sizing: border-box;
     z-index: 10;
   }
@@ -399,31 +400,31 @@ const enhancement = String.raw`
     pointer-events: none;
   }
   .dg-doodle-star-tl {
-    top: -10px;
-    left: 3%;
-    width: clamp(34px, 4.5vw, 50px);
-    height: clamp(34px, 4.5vw, 50px);
+    top: 5px;
+    left: 2%;
+    width: clamp(36px, 4.8vw, 56px);
+    height: clamp(36px, 4.8vw, 56px);
     animation: dgFloatSlow 6s ease-in-out infinite alternate;
   }
   .dg-doodle-star-tc {
-    top: -28px;
+    top: -15px;
     left: 49%;
-    width: clamp(26px, 3.5vw, 38px);
-    height: clamp(26px, 3.5vw, 38px);
+    width: clamp(28px, 3.8vw, 42px);
+    height: clamp(28px, 3.8vw, 42px);
     animation: dgFloatSlow 5s ease-in-out infinite alternate-reverse;
   }
   .dg-doodle-star-tr {
-    top: -12px;
-    right: 7%;
-    width: clamp(32px, 4vw, 46px);
-    height: clamp(32px, 4vw, 46px);
+    top: 5px;
+    right: 6%;
+    width: clamp(34px, 4.2vw, 50px);
+    height: clamp(34px, 4.2vw, 50px);
     animation: dgFloatSlow 7s ease-in-out infinite alternate;
   }
   .dg-doodle-heart-tr {
-    top: 2px;
-    right: 3%;
-    width: clamp(32px, 4.2vw, 46px);
-    height: clamp(30px, 4vw, 42px);
+    top: 20px;
+    right: 2%;
+    width: clamp(34px, 4.4vw, 50px);
+    height: clamp(32px, 4.2vw, 46px);
     animation: dgFloatSlow 5.5s ease-in-out infinite alternate;
   }
   .dg-doodle-star-mr {
@@ -530,16 +531,23 @@ const enhancement = String.raw`
     flex-direction: column;
     gap: clamp(14px, 2vw, 22px);
   }
-  .dg-hero-contact-item {
-    display: flex;
-    align-items: center;
-    gap: clamp(10px, 1.6vw, 16px);
-    text-decoration: none;
-    color: #17184f;
+  .dg-hero-contacts-col a,
+  .dg-hero-contacts-col a:visited,
+  .dg-hero-contacts-col a:link,
+  .dg-hero-contact-item,
+  a.dg-hero-contact-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: clamp(10px, 1.6vw, 16px) !important;
+    text-decoration: none !important;
+    color: #17184f !important;
+    border-bottom: none !important;
+    outline: none !important;
     transition: transform .2s ease;
   }
   a.dg-hero-contact-item:hover {
     transform: translateX(4px);
+    text-decoration: none !important;
   }
   .dg-hero-icon-badge {
     width: clamp(38px, 4.5vw, 48px);
@@ -555,13 +563,20 @@ const enhancement = String.raw`
     width: clamp(20px, 2.4vw, 26px);
     height: clamp(20px, 2.4vw, 26px);
   }
-  .dg-hero-contact-text {
+  .dg-hero-contact-text,
+  a.dg-hero-contact-item .dg-hero-contact-text {
     font-family: "Rubik", "Montserrat", sans-serif;
     font-size: clamp(15px, 1.8vw, 21px);
     font-weight: 700;
     line-height: 1.3;
-    color: #17184f;
+    color: #17184f !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
     letter-spacing: -0.01em;
+    transition: color .2s ease;
+  }
+  a.dg-hero-contact-item:hover .dg-hero-contact-text {
+    color: #7048c4 !important;
   }
 
   /* Divider */
