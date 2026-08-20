@@ -498,6 +498,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -1110,7 +1111,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     align-items: center !important;
     justify-content: center !important;
     background: #ffffff !important;
-    padding: clamp(40px, 6vw, 75px) 16px clamp(48px, 7vw, 90px) !important;
+    padding: clamp(24px, 3.5vw, 44px) 20px clamp(28px, 4vw, 52px) !important;
     box-sizing: border-box !important;
     z-index: 5 !important;
     overflow: hidden !important;
@@ -1118,7 +1119,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
   .dg-pq-container {
     position: relative;
-    width: min(720px, 100%);
+    width: min(1040px, 100%);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -1141,127 +1142,131 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .dg-pq-doodle-star-tl {
     top: 0%;
     left: -20px;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     animation: gentleFloat 3s infinite alternate ease-in-out;
   }
   .dg-pq-doodle-star-tr {
     top: 2%;
     right: 20px;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     animation: gentleFloat 3.5s infinite alternate-reverse ease-in-out;
   }
   .dg-pq-doodle-planet-tr {
     top: 10%;
     right: -25px;
-    width: 58px;
-    height: 42px;
+    width: 54px;
+    height: 40px;
   }
   .dg-pq-doodle-star-ml {
     top: 24%;
     left: -28px;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
   .dg-pq-doodle-heart-ml {
     top: 42%;
     left: -32px;
-    width: 36px;
-    height: 32px;
+    width: 34px;
+    height: 30px;
     animation: gentleFloat 4s infinite alternate ease-in-out;
   }
   .dg-pq-doodle-star-mr {
     top: 32%;
     right: -25px;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
   .dg-pq-doodle-star-ry {
     top: 38%;
     right: -10px;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
   .dg-pq-doodle-star-ll {
     top: 56%;
     left: -25px;
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
   .dg-pq-doodle-shooting-star {
     top: 58%;
     right: -20px;
-    width: 75px;
-    height: 55px;
+    width: 70px;
+    height: 50px;
   }
   .dg-pq-doodle-star-bl {
     bottom: -10px;
     left: -15px;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
   .dg-pq-doodle-moon-bc {
     bottom: -15px;
     left: 48%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
   }
   .dg-pq-doodle-star-br {
     bottom: -10px;
     right: -15px;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
-  /* 3 Speech Bubbles */
+  /* 3 Speech Bubbles - Checkerboard Staggered (Шахматный порядок) */
   .dg-pq-bubbles-list {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 2vw, 22px);
-    margin-bottom: clamp(24px, 3.5vw, 36px);
+    gap: clamp(10px, 1.4vw, 16px);
+    margin-bottom: clamp(18px, 2.5vw, 28px);
   }
   .dg-pq-speech-bubble {
     position: relative;
     background: #ffffff;
-    border-radius: 28px;
-    padding: clamp(14px, 2vw, 20px) clamp(16px, 2.5vw, 26px);
+    border-radius: 22px;
+    padding: clamp(10px, 1.2vw, 15px) clamp(16px, 2vw, 24px);
     display: flex;
     align-items: center;
-    gap: clamp(12px, 2vw, 20px);
+    gap: clamp(10px, 1.5vw, 18px);
     box-sizing: border-box;
     transition: transform .2s ease;
   }
   .dg-pq-speech-bubble:hover {
     transform: translateY(-2px);
   }
+  /* Card 1: Left */
   .dg-pq-speech-bubble--purple {
-    border: 2.5px solid #8e62d4;
-    border-bottom-left-radius: 6px;
+    border: 2.2px solid #8e62d4;
+    border-bottom-left-radius: 4px;
     align-self: flex-start;
-    width: min(580px, 100%);
-    box-shadow: 0 4px 14px rgba(142, 98, 212, 0.08);
+    width: min(640px, 86%);
+    box-shadow: 0 3px 12px rgba(142, 98, 212, 0.07);
   }
+  /* Card 2: Right */
   .dg-pq-speech-bubble--teal {
-    border: 2.5px solid #00b4a7;
-    border-bottom-left-radius: 6px;
+    border: 2.2px solid #00b4a7;
+    border-bottom-left-radius: 4px;
     align-self: flex-end;
-    width: min(540px, 100%);
-    box-shadow: 0 4px 14px rgba(0, 180, 167, 0.08);
+    width: min(640px, 86%);
+    box-shadow: 0 3px 12px rgba(0, 180, 167, 0.07);
   }
+  /* Card 3: Left / center offset */
   .dg-pq-speech-bubble--pink {
-    border: 2.5px solid #f04d6f;
-    border-bottom-left-radius: 6px;
+    border: 2.2px solid #f04d6f;
+    border-bottom-left-radius: 4px;
     align-self: flex-start;
-    width: min(580px, 100%);
-    box-shadow: 0 4px 14px rgba(240, 77, 111, 0.08);
+    margin-left: clamp(20px, 4.5vw, 64px);
+    width: min(640px, 86%);
+    box-shadow: 0 3px 12px rgba(240, 77, 111, 0.07);
   }
 
   .dg-pq-bubble-qmark {
     font-family: "Caveat", cursive, sans-serif;
-    font-size: clamp(38px, 5.5vw, 56px);
+    font-size: clamp(32px, 4vw, 46px);
     font-weight: 700;
     line-height: 0.8;
     flex-shrink: 0;
@@ -1272,9 +1277,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
   .dg-pq-bubble-text {
     font-family: "Rubik", "Montserrat", sans-serif;
-    font-size: clamp(15px, 1.8vw, 19px);
+    font-size: clamp(14px, 1.4vw, 17px);
     font-weight: 700;
-    line-height: 1.32;
+    line-height: 1.3;
     letter-spacing: -0.01em;
     color: #17184f;
   }
@@ -1282,19 +1287,20 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .dg-pq-speech-bubble--teal .dg-pq-bubble-text { color: #00796b; }
   .dg-pq-speech-bubble--pink .dg-pq-bubble-text { color: #c2185b; }
 
-  /* Body Text */
+  /* Body Text - Wide 2-column or clean wide grid */
   .dg-pq-text-body {
     width: 100%;
-    margin-bottom: clamp(24px, 3.5vw, 36px);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    margin-bottom: clamp(18px, 2.5vw, 28px);
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(14px, 2.5vw, 32px);
+    align-items: center;
   }
   .dg-pq-text-body p {
     margin: 0;
     font-family: "Rubik", sans-serif;
-    font-size: clamp(14px, 1.45vw, 16.5px);
-    line-height: 1.55;
+    font-size: clamp(13.5px, 1.3vw, 15.5px);
+    line-height: 1.5;
     color: #2d3436;
     text-align: left;
   }
@@ -1309,29 +1315,31 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: clamp(18px, 2.5vw, 26px);
+    margin-bottom: clamp(14px, 2vw, 20px);
   }
   .dg-pq-intro-pill {
     background: #e8ddfc;
     color: #4a2882;
     font-family: "Caveat", cursive, sans-serif;
-    font-size: clamp(28px, 3.5vw, 36px);
+    font-size: clamp(26px, 3.2vw, 34px);
     font-weight: 700;
-    padding: 3px 22px;
+    padding: 2px 20px;
     border-radius: 30px;
     line-height: 1.1;
   }
   .dg-pq-intro-arrow {
-    width: 52px;
-    height: 32px;
+    width: 48px;
+    height: 30px;
   }
 
   /* 4 Characters Grid */
   .dg-pq-characters-grid {
     width: 100%;
+    max-width: 840px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(8px, 2vw, 20px);
+    gap: clamp(10px, 2vw, 24px);
     align-items: flex-end;
   }
   .dg-pq-char-card {
@@ -1341,7 +1349,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   }
   .dg-pq-char-avatar-wrap {
     width: 100%;
-    max-width: 140px;
+    max-width: 125px;
     aspect-ratio: 1/1.18;
     display: flex;
     align-items: center;
@@ -1351,18 +1359,18 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.06));
   }
   .dg-pq-char-pill {
     width: 100%;
-    max-width: 130px;
-    padding: 6px 8px;
+    max-width: 125px;
+    padding: 5px 8px;
     border-radius: 20px;
     font-family: "Rubik", sans-serif;
-    font-size: clamp(11.5px, 1.3vw, 14.5px);
+    font-size: clamp(11px, 1.2vw, 13.5px);
     font-weight: 700;
     text-align: center;
-    margin-top: 8px;
+    margin-top: 6px;
     box-sizing: border-box;
     white-space: nowrap;
   }
@@ -1379,28 +1387,34 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     color: #17184f;
   }
 
-  @media (max-width: 600px) {
-    .dg-pq-speech-bubble--teal {
-      align-self: flex-start;
+  @media (max-width: 767px) {
+    .dg-pq-text-body {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .dg-pq-speech-bubble--pink {
       margin-left: 0;
     }
     .dg-pq-speech-bubble {
-      width: 100%;
-      border-radius: 20px;
+      width: 100% !important;
+      border-radius: 18px;
       border-bottom-left-radius: 4px;
-      padding: 12px 14px;
+      padding: 10px 14px;
       gap: 10px;
     }
     .dg-pq-bubble-qmark {
-      font-size: 34px;
+      font-size: 32px;
     }
     .dg-pq-bubble-text {
-      font-size: 14px;
+      font-size: 13.5px;
+    }
+    .dg-pq-characters-grid {
+      gap: 6px;
     }
     .dg-pq-char-pill {
-      font-size: 10px;
-      padding: 4px 2px;
-      border-radius: 12px;
+      font-size: 9.5px;
+      padding: 3px 2px;
+      border-radius: 10px;
     }
     .dg-pq-doodles {
       display: none;
