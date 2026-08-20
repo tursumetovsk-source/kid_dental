@@ -5514,13 +5514,12 @@ const enhancement = String.raw`
               '</div>' +
             '</div>' +
           '</div>';
-        const checkup = document.querySelector(".dg-checkup-section");
-        const ref = checkup || document.querySelector(".dg-programs-carousel-section");
-        if (ref && ref.parentNode) {
-          if (ref.nextSibling) {
-            ref.parentNode.insertBefore(teaser, ref.nextSibling);
+        const programs = document.querySelector(".dg-programs-carousel-section");
+        if (programs && programs.parentNode) {
+          if (programs.nextSibling) {
+            programs.parentNode.insertBefore(teaser, programs.nextSibling);
           } else {
-            ref.parentNode.appendChild(teaser);
+            programs.parentNode.appendChild(teaser);
           }
         } else {
           document.body.appendChild(teaser);
@@ -5648,12 +5647,13 @@ const enhancement = String.raw`
         section.className = "dg-checkup-section";
         section.id = "checkup";
         section.innerHTML = '<div class="dg-shell"><div class="dg-checkup"><img loading="lazy" decoding="async" src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
-        const programs = document.querySelector(".dg-programs-carousel-section");
-        if (programs && programs.parentNode) {
-          if (programs.nextSibling) {
-            programs.parentNode.insertBefore(section, programs.nextSibling);
+        const gameTeaser = document.querySelector(".dg-game-teaser");
+        const ref = gameTeaser || document.querySelector(".dg-programs-carousel-section");
+        if (ref && ref.parentNode) {
+          if (ref.nextSibling) {
+            ref.parentNode.insertBefore(section, ref.nextSibling);
           } else {
-            programs.parentNode.appendChild(section);
+            ref.parentNode.appendChild(section);
           }
         } else {
           document.body.appendChild(section);
@@ -5666,8 +5666,8 @@ const enhancement = String.raw`
         section.id = "contacts";
         section.setAttribute("aria-label", "Контакты DENTAL GEN");
         section.innerHTML = '<div class="dg-contact__inner"><div><h2>DENTAL GEN</h2><p>Детская стоматология</p><p>г. Иваново, ул. Профсоюзная, 4</p></div><div class="dg-contact__actions"><a href="tel:+79109900060">+7 (910) 990-00-60</a><a href="https://dentalgen.pro">dentalgen.pro</a></div></div>';
-        const gameTeaser = document.querySelector(".dg-game-teaser");
-        const ref = gameTeaser || document.querySelector(".dg-checkup-section") || document.querySelector(".dg-programs-carousel-section");
+        const checkup = document.querySelector(".dg-checkup-section");
+        const ref = checkup || document.querySelector(".dg-game-teaser") || document.querySelector(".dg-programs-carousel-section");
         if (ref && ref.parentNode) {
           if (ref.nextSibling) {
             ref.parentNode.insertBefore(section, ref.nextSibling);
@@ -5702,8 +5702,8 @@ const enhancement = String.raw`
         { selector: '.dg-parent-questions-section', color: "#ffe9ed" },
         { selector: '[data-framer-name="Mission"]', color: "#dff4ff" },
         { selector: '.dg-programs-carousel-section', color: "#ffe59a" },
-        { selector: '.dg-checkup-section', color: "#e8faf6" },
         { selector: '.dg-game-teaser', color: "#f6ebff" },
+        { selector: '.dg-checkup-section', color: "#e8faf6" },
         { selector: '.dg-contact', color: "#17184f" }
       ];
 
@@ -5824,8 +5824,8 @@ const enhancement = String.raw`
       buildCustomHeroSection();
       insertParentQuestionsSection();
       enhanceProgramsCarousel();
-      addLandingSections();
       addKidsGame();
+      addLandingSections();
       addFloatingActions();
       syncThemeAndBackground();
 
