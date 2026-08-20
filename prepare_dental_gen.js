@@ -3123,7 +3123,6 @@ const enhancement = String.raw`
   }
 
   .dg-programs, .dg-contact {
-    order: 10;
     position: relative;
     z-index: 20;
     width: 100%;
@@ -3747,7 +3746,6 @@ const enhancement = String.raw`
     .dg-carousel-dots { margin-top: 12px; margin-bottom: 18px; }
     .dg-game-teaser { padding: 24px 12px 32px !important; }
     .dg-game-teaser__card { grid-template-columns: 1fr !important; gap: 16px !important; padding: 20px 14px !important; border-radius: 24px !important; }
-    .dg-game-teaser__right { order: -1 !important; }
     .dg-interactive-mascot-cards {
       transform: scale(0.85) !important;
       transform-origin: center bottom !important;
@@ -6321,6 +6319,28 @@ const enhancement = String.raw`
       updateColor();
     };
 
+    const enforceSectionOrder = () => {
+      const hero = document.querySelector('[data-framer-name="Hero"]');
+      const questions = document.querySelector('.dg-parent-questions-section');
+      const mission = document.querySelector('[data-framer-name="Mission"], #mission, #mission-block');
+      const programs = document.querySelector('.dg-programs-carousel-section');
+      const checkup = document.querySelector('.dg-checkup-section');
+      const gameTeaser = document.querySelector('.dg-game-teaser');
+      const contacts = document.querySelector('.dg-contact');
+
+      if (!hero || !hero.parentNode) return;
+      const parent = hero.parentNode;
+
+      const ordered = [hero, questions, mission, programs, checkup, gameTeaser, contacts].filter(Boolean);
+      for (let i = 0; i < ordered.length - 1; i++) {
+        const curr = ordered[i];
+        const next = ordered[i + 1];
+        if (curr.nextSibling !== next) {
+          parent.insertBefore(next, curr.nextSibling);
+        }
+      }
+    };
+
     const apply = () => {
       for (const [name, map] of Object.entries(scopedText)) replaceTextNodes(document.querySelector('[data-framer-name="' + name + '"]'), map);
 
@@ -6401,6 +6421,7 @@ const enhancement = String.raw`
       enhanceProgramsCarousel();
       addKidsGame();
       addLandingSections();
+      enforceSectionOrder();
       addFloatingActions();
       syncThemeAndBackground();
 
