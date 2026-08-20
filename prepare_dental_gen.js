@@ -321,52 +321,15 @@ const enhancement = String.raw`
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
 
-  /* Desktop & Mobile Hero Typography */
-  [data-framer-name="Hero"] .framer-7h1n86 {
-    width: auto !important;
-    max-width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  [data-framer-name="Hero"] .framer-7h1n86 h3 {
-    font-family: "Rubik", "Montserrat", sans-serif !important;
-    font-size: clamp(15px, 1.8vw, 22px) !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.04em !important;
-    text-transform: uppercase !important;
-    color: #2f2076 !important;
-    white-space: nowrap !important;
-  }
-  [data-framer-name="Hero"] .framer-7h1n86 h3 span,
-  [data-framer-name="Hero"] .framer-7h1n86 h3 span span {
-    opacity: 1 !important;
-    transform: none !important;
-    display: inline !important;
-    white-space: normal !important;
-  }
+  /* Desktop & Mobile Hero Typography - Hidden as requested */
+  [data-framer-name="Hero"] .framer-7h1n86,
+  [data-framer-name="Hero"] h3,
   [data-framer-name="Hero"] [data-framer-name="Hero Text"],
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1 {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-  }
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1 {
-    font-family: "BN Dime Display Regular", "Rubik", "Arial Black", sans-serif !important;
-    font-size: clamp(48px, 7.8vw, 118px) !important;
-    font-weight: 900 !important;
-    line-height: 0.88 !important;
-    letter-spacing: -0.025em !important;
-    color: #2f2076 !important;
-    text-transform: uppercase !important;
-  }
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1 span,
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1 span span {
-    opacity: 1 !important;
-    transform: none !important;
-    display: inline !important;
-    white-space: normal !important;
+  [data-framer-name="Hero"] h1 {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
   [data-framer-name="Pointer"],
   [data-framer-name="Android"],
@@ -4963,16 +4926,15 @@ const enhancement = String.raw`
         }
       }
 
-      // Hero Badge (meet maggie -> ДЕТСКАЯ СТОМАТОЛОГИЯ DENTAL GEN)
-      const heroBadges = document.querySelectorAll('[data-framer-name="Hero"] .framer-7h1n86 h3, [data-framer-name="Hero"] h3');
+      // Hero Badge and Headline - cleared/hidden as requested
+      const heroBadges = document.querySelectorAll('[data-framer-name="Hero"] .framer-7h1n86, [data-framer-name="Hero"] h3');
       for (const b of heroBadges) {
-        b.innerHTML = '<span class="framer-text">ДЕТСКАЯ СТОМАТОЛОГИЯ DENTAL GEN</span>';
+        b.innerHTML = '';
       }
 
-      // Hero Headline (desktop & mobile)
-      const heroHeadlines = document.querySelectorAll('[data-framer-name="Hero"] [data-framer-name="Hero Text"] h1, [data-framer-name="Hero"] h1');
+      const heroHeadlines = document.querySelectorAll('[data-framer-name="Hero"] [data-framer-name="Hero Text"], [data-framer-name="Hero"] h1');
       for (const h1 of heroHeadlines) {
-        h1.innerHTML = '<span class="framer-text">ЗДОРОВАЯ УЛЫБКА<br class="framer-text">СЕГОДНЯ —<br class="framer-text">УВЕРЕННОСТЬ<br class="framer-text">И СЧАСТЬЕ<br class="framer-text">НА ВСЮ<br class="framer-text">ЖИЗНЬ!</span>';
+        h1.innerHTML = '';
       }
 
       // Intro Headline (desktop & mobile)
