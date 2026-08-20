@@ -509,6 +509,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -638,36 +639,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
 
-  /* Desktop & Mobile Old Template Hero Elements - Completely Hidden & Zero Height */
-  [data-framer-name="Hero"] > *:not(.dg-hero-custom-canvas) {
-    display: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    overflow: hidden !important;
-  }
-
-  /* Custom Hero Canvas matching the illustration */
+  /* Hero Section: restore interactive Hero elements */
   [data-framer-name="Hero"] {
     position: relative !important;
-    width: 100% !important;
-    min-height: auto !important;
-    height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    background: #fff7d6 !important;
-    padding: clamp(8px, 1.2vw, 18px) 16px clamp(12px, 2vw, 24px) !important;
-    margin-top: 0 !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
   }
 
   .dg-hero-custom-canvas {
@@ -996,10 +970,8 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   [data-framer-name="Mission Headline"],
   .framer-1j6imtw,
   [data-framer-name="Headline"],
-  [data-framer-name="Pointer"],
   [data-framer-name="Android"],
   .dg-remove-google,
-  [data-framer-name="Hero Screens"],
   [data-framer-name="Intro"] img,
   [data-framer-name="Intro"] [data-framer-name^="Rectangle"],
   [data-framer-name="Stickers L"],
@@ -3675,7 +3647,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       "help lighten": "РАСТИТЬ", "HELP LIGHTEN": "РАСТИТЬ",
       "parents'": "ЗДОРОВУЮ", "PARENTS'": "ЗДОРОВУЮ", "Parents'": "Здоровую",
       "Mental load": "УЛЫБКУ", "MENTAL LOAD": "УЛЫБКУ", "mental load": "улыбку",
-      "parenting": "забота", "should feel": "без", "lighter": "страха", "LIGHTER": "БЕЗ СТРАХА", "Lighter": "Без страха",
       "pack the drinks": "чистим зубки", "pack the": "чистим", "drinks": "зубки",
       "breakfast": "вкусный завтрак", "ballet class": "урок гигиены", "ballet": "урок", "class": "гигиены",
       "snaaacks": "перекусы", "dummy": "соска", "mooore": "полезные", "snacks": "фрукты",
@@ -3713,15 +3684,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       "Header Nav": {
         "FAQ": "ПРОГРАММЫ", "FAQS": "ПРОГРАММЫ", "О НАС": "О КЛИНИКЕ", "ABOUT": "О КЛИНИКЕ",
         "ДОБАВИТЬ": "ЧЕКАП", "ADD VENUE": "ЧЕКАП", "КОНТАКТЫ": "КОНТАКТЫ", "CONTACT": "КОНТАКТЫ"
-      },
-      "Hero": {
-        "знакомьтесь с maggie": "детская стоматология DENTAL GEN", "meet maggie": "детская стоматология DENTAL GEN",
-        "ВАШ КАРМАННЫЙ ГИД ПО РОДИТЕЛЬСТВУ: ОДНО ЗАНЯТИЕ ЗА РАЗ.": "ЗДОРОВАЯ УЛЫБКА СЕГОДНЯ — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ.",
-        "YOUR POCKET GUIDE TO SURVIVING PARENTHOOD, ONE ACTIVITY AT A TIME.": "ЗДОРОВАЯ УЛЫБКА СЕГОДНЯ — УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ.",
-        "ВАШ КАРМАННЫЙ": "ЗДОРОВАЯ УЛЫБКА", "YOUR POCKET": "ЗДОРОВАЯ УЛЫБКА",
-        "ГИД ПО": "СЕГОДНЯ —", "GUIDE TO": "СЕГОДНЯ —", "РОДИТЕЛЬСТВУ:": "УВЕРЕННОСТЬ", "SURVIVING": "УВЕРЕННОСТЬ",
-        "ОДНО ЗАНЯТИЕ": "И СЧАСТЬЕ", "PARENTHOOD,": "И СЧАСТЬЕ", "ЗА": "НА ВСЮ", "ONE ACTIVITY": "НА ВСЮ", "РАЗ.": "ЖИЗНЬ!", "AT A TIME.": "ЖИЗНЬ!",
-        "Скачать в": "ЗАПИСАТЬСЯ", "Download on the": "ЗАПИСАТЬСЯ", "заявка": "ПОЗВОНИТЬ", "request": "ПОЗВОНИТЬ"
       },
       "Intro": {
         "НАХОДИТЕ": "РАСТЁМ", "FIND": "РАСТЁМ", "БЕСПЛАТНЫЕ": "СО", "FREE": "СО",
@@ -6055,17 +6017,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         }
       }
 
-      // Hero Badge and Headline - cleared/hidden as requested
-      const heroBadges = document.querySelectorAll('[data-framer-name="Hero"] .framer-7h1n86, [data-framer-name="Hero"] h3');
-      for (const b of heroBadges) {
-        b.innerHTML = '';
-      }
-
-      const heroHeadlines = document.querySelectorAll('[data-framer-name="Hero"] [data-framer-name="Hero Text"], [data-framer-name="Hero"] h1');
-      for (const h1 of heroHeadlines) {
-        h1.innerHTML = '';
-      }
-
       // Intro, Mission Headline, Mission Subtitles, Our Story & 5000 Activities - Cleared and removed as requested
       const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, .framer-1tqddnu, [data-framer-name="Mission"] .framer-1tqddnu, [data-framer-name="Mission"] h2, [data-framer-name="Mission"] [data-framer-name*="While we can"], [data-framer-name="Our Story"], [data-framer-name="5000 Activities"], #our-story, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
       for (const sec of introSections) {
@@ -6076,9 +6027,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       // Any remaining English phrases in elements
       for (const el of document.querySelectorAll('h1, h2, h3, h4, span, p, a, button, [data-framer-name="App Store"], [data-framer-name="Button Shape"]')) {
         const t = el.textContent.trim();
-        if (/parenting\s+should\s+feel\s+lighter/i.test(t)) {
-          el.textContent = "ЗАБОТА О ЗУБАХ С ПЕРВОГО ДНЯ";
-        }
         if (/our\s+app\s+is\s+on\s+a\s+mission/i.test(t)) {
           el.innerHTML = 'DENTAL GEN<br>ПОМОГАЕТ<br>РАСТИТЬ<br>ЗДОРОВУЮ<br>УЛЫБКУ';
         }
@@ -6109,7 +6057,6 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       wireAnchors();
       rewriteImages();
       rewriteLoader();
-      buildCustomHeroSection();
       insertParentQuestionsSection();
       enhanceProgramsCarousel();
       addKidsGame();
