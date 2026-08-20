@@ -1889,15 +1889,15 @@ const enhancement = String.raw`
   .dg-game-modal__container {
     position: relative;
     z-index: 2;
-    width: min(640px, 95vw);
-    max-height: min(780px, 94vh);
+    width: min(920px, 95vw);
+    max-height: min(840px, 94vh);
     background: #dff4ff;
     border: 3px solid #2f2076;
-    border-radius: clamp(22px, 4vw, 32px);
-    box-shadow: -6px 10px 0 #2f2076;
+    border-radius: clamp(24px, 4vw, 36px);
+    box-shadow: -8px 12px 0 #2f2076;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: clamp(14px, 2.5vw, 24px) clamp(10px, 2vw, 20px);
+    padding: clamp(16px, 2.5vw, 26px) clamp(14px, 2vw, 24px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1909,7 +1909,8 @@ const enhancement = String.raw`
     transform: scale(1);
   }
   .game-wrapper {
-    width: min(560px, 100%);
+    width: 100%;
+    max-width: 860px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -1920,7 +1921,7 @@ const enhancement = String.raw`
   }
   .game-header {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     position: relative;
     width: 100%;
     padding: 0 4px;
@@ -1934,38 +1935,40 @@ const enhancement = String.raw`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    min-height: 42px;
-    margin-bottom: 6px;
+    min-height: 46px;
+    margin-bottom: 8px;
   }
   .game-header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     margin-left: auto;
   }
   .dg-game-modal__close {
     position: relative;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    padding: 0 16px;
+    min-height: 42px;
+    border-radius: 999px;
     background: #fff;
     border: 2px solid #2f2076;
-    box-shadow: -2px 2px 0 #2f2076;
+    box-shadow: -2px 3px 0 #2f2076;
     color: #2f2076;
-    font: 900 18px/1 "Rubik", sans-serif;
-    display: grid;
-    place-items: center;
+    font: 900 15px/1 "Rubik", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     cursor: pointer;
     transition: transform .15s ease, background .15s ease;
     z-index: 20;
     touch-action: manipulation;
   }
   .dg-game-modal__close:hover {
-    transform: scale(1.1) rotate(90deg);
+    transform: translateY(-2px);
     background: #ffe0ed;
   }
   .dg-game-modal__close:active {
-    transform: scale(0.92);
+    transform: scale(0.94);
   }
   .sound-toggle {
     position: relative;
@@ -3659,45 +3662,99 @@ const enhancement = String.raw`
     .dg-game-teaser__left p { font-size: 13.5px; line-height: 1.4; margin: 0 0 12px; }
     .dg-game-teaser__buttons { flex-direction: column; width: 100%; gap: 8px; }
     .dg-game-teaser__btn { width: 100%; font-size: 15px; padding: 12px 16px; min-height: 44px; }
-    .dg-game-modal { padding: 6px; }
-    .dg-game-modal__container { width: 100%; max-width: 100%; height: min(720px, 94vh); border-radius: 22px; padding: 10px 8px; }
-    .game-card { padding: 10px 8px; border-radius: 20px; }
-    .hint-banner { font-size: 12px; padding: 4px 10px; }
-    .stage { width: min(240px, 68vw); height: min(240px, 68vw); }
-    .hub-grid { grid-template-columns: 1fr; gap: 8px; max-height: 56vh; padding: 2px; }
+    .dg-game-modal {
+      padding: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+    }
+    .dg-game-modal__container {
+      width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: env(safe-area-inset-top, 14px) 14px env(safe-area-inset-bottom, 16px) !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .game-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex-grow: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .game-card {
+      padding: 14px 12px !important;
+      border-radius: 20px !important;
+      width: 100% !important;
+      flex-grow: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+    }
+    .hint-banner {
+      font-size: 14px !important;
+      padding: 6px 14px !important;
+      min-height: 38px !important;
+    }
+    .stage {
+      width: min(320px, 85vw) !important;
+      height: min(280px, 75vw) !important;
+    }
+    .hub-filters {
+      gap: 8px !important;
+      margin-bottom: 12px !important;
+      justify-content: center !important;
+    }
+    .hub-filter-btn {
+      font-size: 13px !important;
+      padding: 8px 14px !important;
+      min-height: 40px !important;
+      border-radius: 999px !important;
+    }
+    .hub-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+      max-height: none !important;
+      flex-grow: 1 !important;
+      overflow-y: auto !important;
+      padding: 4px 2px 24px !important;
+    }
     .hub-card {
-      display: grid;
-      grid-template-columns: 36px 1fr auto;
-      grid-template-rows: auto auto;
-      column-gap: 10px;
-      row-gap: 2px;
-      align-items: center;
-      padding: 8px 10px;
-      border-radius: 14px;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 8px !important;
+      padding: 14px 16px !important;
+      border-radius: 18px !important;
+      min-height: 100px !important;
     }
     .hub-card-top {
-      grid-column: 1;
-      grid-row: 1 / 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      margin-bottom: 2px !important;
     }
-    .hub-card-icon { font-size: 26px; }
-    .hub-card-age { display: inline-block; font-size: 8.5px; padding: 2px 4px; margin-top: 2px; }
-    .hub-card-title { grid-column: 2; grid-row: 1; font-size: 12.5px; margin: 0; }
-    .hub-card-desc { grid-column: 2; grid-row: 2; font-size: 10px; margin: 0; line-height: 1.2; }
-    .hub-card-btn { grid-column: 3; grid-row: 1 / 3; font-size: 10px; padding: 6px 9px; margin: 0; align-self: center; }
-    .music-teeth-row { gap: 4px; }
-    .music-tooth-btn { width: clamp(34px, 12vw, 44px); height: clamp(60px, 17vw, 76px); border-radius: 11px; }
-    .music-note-name { font-size: 10px; }
-    .blaster-stage-row { min-height: 140px; gap: 6px; }
-    .blaster-tooth { width: clamp(44px, 11vw, 56px); height: clamp(60px, 14vw, 76px); }
-    .blaster-monster-target { font-size: 26px; top: -18px; }
-    .stylist-avatar-wrap { width: min(140px, 40vw); height: min(140px, 40vw); }
-    .stylist-chip { padding: 4px 7px; font-size: 9.5px; }
-    .detective-board { width: 100%; max-width: 290px; height: 145px; }
+    .hub-card-icon { font-size: 32px !important; }
+    .hub-card-age { font-size: 11px !important; padding: 4px 8px !important; }
+    .hub-card-title { font-size: 16px !important; font-weight: 900 !important; margin: 2px 0 4px !important; }
+    .hub-card-desc { font-size: 13px !important; color: #6c6396 !important; margin-bottom: 6px !important; line-height: 1.35 !important; }
+    .hub-card-btn { width: 100% !important; font-size: 14.5px !important; font-weight: 900 !important; padding: 10px 16px !important; min-height: 42px !important; text-align: center !important; border-radius: 999px !important; }
+
+    .music-teeth-row { gap: 6px !important; width: 100% !important; justify-content: center !important; }
+    .music-tooth-btn { width: clamp(38px, 12.5vw, 50px) !important; height: clamp(90px, 24vw, 120px) !important; font-size: 14px !important; }
+    .music-note-name { font-size: 12px !important; }
+    .blaster-stage-row { min-height: 180px !important; gap: 8px !important; }
+    .blaster-tooth { width: clamp(52px, 14vw, 68px) !important; height: clamp(75px, 18vw, 95px) !important; }
+    .blaster-monster-target { font-size: 32px !important; top: -22px !important; }
+    .stylist-avatar-wrap { width: min(170px, 46vw) !important; height: min(170px, 46vw) !important; }
+    .stylist-chip { padding: 8px 12px !important; font-size: 13px !important; min-height: 38px !important; }
+    .detective-board { width: 100% !important; max-width: 320px !important; height: 180px !important; }
   }
 </style>
 <script>
@@ -5885,7 +5942,7 @@ const enhancement = String.raw`
                   '<button class="game-back-btn" id="dgBackToHubBtn" style="display: none;" type="button"><span>⬅️</span> <span>Все игры</span></button>' +
                   '<div class="game-header-actions">' +
                     '<button class="sound-toggle" id="dgSoundToggle" aria-label="Включить / выключить звук" title="Звук" type="button">🔊</button>' +
-                    '<button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру" title="Закрыть" type="button">✕</button>' +
+                    '<button class="dg-game-modal__close" id="closeGameModalBtn" aria-label="Закрыть игру и вернуться на сайт" title="Закрыть" type="button"><span>✕</span> <span>Выйти</span></button>' +
                   '</div>' +
                 '</div>' +
                 '<div class="game-badge" id="dgGameBadge">🎮 ДЕТСКИЙ ИГРОВОЙ КЛУБ</div>' +
