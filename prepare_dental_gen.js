@@ -3438,12 +3438,15 @@ const enhancement = String.raw`
       if (!root) return;
       const elements = [root, ...root.querySelectorAll("*")];
       for (const element of elements) {
-        if (element.closest(".dg-hero-custom-canvas")) continue;
+        if (element.tagName === "SCRIPT" || element.tagName === "STYLE") continue;
+        if (element.closest && (element.closest(".dg-hero-custom-canvas") || element.closest('[data-framer-name="Hero"]'))) continue;
         for (const node of element.childNodes) {
           if (node.nodeType !== 3 || !node.nodeValue) continue;
           const key = node.nodeValue.trim();
           if (!key || !map[key]) continue;
-          node.nodeValue = node.nodeValue.replace(key, map[key]);
+          if (node.nodeValue !== map[key]) {
+            node.nodeValue = node.nodeValue.replace(key, map[key]);
+          }
         }
       }
     };
@@ -5698,8 +5701,6 @@ const enhancement = String.raw`
     const apply = () => {
       for (const [name, map] of Object.entries(scopedText)) replaceTextNodes(document.querySelector('[data-framer-name="' + name + '"]'), map);
 
-      replaceTextNodes(document.body, globalRussianMap);
-
       const missionHeadings = document.querySelectorAll('[data-framer-name="Mission"] h1, [data-framer-name="Text Block"] h1');
       if (missionHeadings && missionHeadings.length >= 4) {
         setAnimatedWords(missionHeadings[0], ["DENTAL", "GEN", "", ""]);
@@ -5715,7 +5716,6 @@ const enhancement = String.raw`
 
       // SVG foreignObjects (mobile and desktop rich texts)
       for (const fo of document.querySelectorAll('foreignObject')) {
-        replaceTextNodes(fo, globalRussianMap);
         const h1 = fo.querySelector('h1');
         if (h1 && /OUR APP|mission|lighten|parents/i.test(h1.textContent)) {
           h1.innerHTML = '<span class="framer-text" style="line-height:0.98;display:block;">DENTAL GEN<br class="framer-text">ПОМОГАЕТ<br class="framer-text">РАСТИТЬ<br class="framer-text">ЗДОРОВУЮ<br class="framer-text">УЛЫБКУ</span>';
@@ -5773,11 +5773,15 @@ const enhancement = String.raw`
         window.__dgNavObserverAttached = true;
         const navEl = document.querySelector('[data-framer-name="Header Nav"], .framer-1qb073z');
         if (navEl) {
+          let isUpdating = false;
           const obs = new MutationObserver(() => {
+            if (isUpdating) return;
+            isUpdating = true;
             replaceTextNodes(navEl, scopedText["Header Nav"]);
             rewriteLinks();
+            setTimeout(() => { isUpdating = false; }, 300);
           });
-          obs.observe(navEl, { childList: true, subtree: true, characterData: true });
+          obs.observe(navEl, { childList: true, subtree: true });
         }
       }
     };
