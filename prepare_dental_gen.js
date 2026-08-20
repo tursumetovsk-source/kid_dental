@@ -730,7 +730,14 @@ const enhancement = String.raw`
   .framer-1pzn978,
   .framer-1gbadff,
   .framer-1250tq,
-  .framer-13x6f8b { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
+  .framer-13x6f8b,
+  .framer-12pk2gu,
+  .framer-1i7tb2a-container,
+  [data-framer-name="Our Story"] .framer-1i7tb2a-container,
+  [data-framer-name="Our Story"] a[href*="about"],
+  [data-framer-name="Our Story"] [data-framer-name="Contact"],
+  [data-framer-name="Our Story"] [data-framer-name="ABOUT"],
+  [data-framer-name="Our Story"] .framer-12pk2gu { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
   /* Mission & Big Headings - Compact spacing without letter overlap */
@@ -3633,7 +3640,7 @@ const enhancement = String.raw`
       for (const element of document.querySelectorAll("[data-framer-cursor]")) {
         element.removeAttribute("data-framer-cursor");
       }
-      for (const el of document.querySelectorAll('[data-framer-name*="Sticker"], [data-framer-name="Breakfast"], [data-framer-name="Drinks"], [data-framer-name="Banana"], [data-framer-name="Dummy"], [data-framer-name="Dress"], [data-framer-name="Snaaacks"], .framer-1ymkmky, .framer-ymzrbp, .framer-dxh1mn, .framer-1pzn978, .framer-1gbadff, .framer-1ugzc8k-container, .framer-1a733vd-container, .framer-6mir23-container, [data-framer-name^="Feature"]')) {
+      for (const el of document.querySelectorAll('[data-framer-name*="Sticker"], [data-framer-name="Breakfast"], [data-framer-name="Drinks"], [data-framer-name="Banana"], [data-framer-name="Dummy"], [data-framer-name="Dress"], [data-framer-name="Snaaacks"], .framer-1ymkmky, .framer-ymzrbp, .framer-dxh1mn, .framer-1pzn978, .framer-1gbadff, .framer-1ugzc8k-container, .framer-1a733vd-container, .framer-6mir23-container, [data-framer-name^="Feature"], .framer-12pk2gu, .framer-1i7tb2a-container, [data-framer-name="Our Story"] .framer-1i7tb2a-container, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]')) {
         el.remove();
       }
       for (const google of document.querySelectorAll('[data-framer-name="Google Play"]')) {
@@ -5732,8 +5739,8 @@ const enhancement = String.raw`
         h1.innerHTML = '';
       }
 
-      // Intro & Mission Headline - Cleared and removed as requested
-      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"]');
+      // Intro, Mission Headline & Our Story About Button - Cleared and removed as requested
+      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, [data-framer-name="Our Story"] .framer-1i7tb2a-container, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
       for (const sec of introSections) {
         sec.innerHTML = '';
         sec.remove();
