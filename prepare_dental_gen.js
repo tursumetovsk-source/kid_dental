@@ -697,6 +697,12 @@ const enhancement = String.raw`
       display: none;
     }
   }
+  /* Intro section / residual animated text - Hidden as requested */
+  [data-framer-name="Intro"],
+  #intro-block,
+  .framer-hhon,
+  [data-framer-name="Intro"] [data-framer-name="Content"],
+  [data-framer-name="Intro"] h1,
   [data-framer-name="Pointer"],
   [data-framer-name="Android"],
   .dg-remove-google,
@@ -719,7 +725,7 @@ const enhancement = String.raw`
   .framer-1pzn978,
   .framer-1gbadff,
   .framer-1250tq,
-  .framer-13x6f8b { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+  .framer-13x6f8b { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
   [data-framer-name="Header Nav"] [data-framer-name="Left"],
@@ -5358,12 +5364,11 @@ const enhancement = String.raw`
         h1.innerHTML = '';
       }
 
-      // Intro Headline (desktop & mobile)
-      const introHeadlines = document.querySelectorAll('[data-framer-name="Intro"] h1');
-      for (const h1 of introHeadlines) {
-        if (/FIND|SANITY|TUPPERWARE|DRAWER|КАРМАННЫЙ|SURVIVING/i.test(h1.textContent)) {
-          h1.innerHTML = '<span class="framer-text">РАСТЁМ СО ЗДОРОВОЙ УЛЫБКОЙ БЫСТРЕЕ, ЧЕМ ВАШ МАЛЫШ ДОЙДЕТ ДО ШКОЛЬНОЙ СКАМЬИ!</span>';
-        }
+      // Intro section - Cleared and removed as requested
+      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon');
+      for (const sec of introSections) {
+        sec.innerHTML = '';
+        sec.remove();
       }
 
       // Any remaining English phrases in elements
