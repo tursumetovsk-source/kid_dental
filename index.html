@@ -511,6 +511,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -638,11 +639,36 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
   .framer-6mir23-container:has([data-framer-name^="Hidden"])::after { opacity: 0; }
   [data-framer-name="App Store"] svg,
   [data-framer-name="Android"] svg { display: none !important; }
-  [data-framer-name="App Store"] { justify-content: center !important; }
+  /* Desktop & Mobile Old Template Hero Elements - Completely Hidden & Zero Height */
+  [data-framer-name="Hero"] > *:not(.dg-hero-custom-canvas) {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+  }
 
-  /* Hero Section: restore interactive Hero elements */
+  /* Custom Hero Canvas matching the illustration */
   [data-framer-name="Hero"] {
     position: relative !important;
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: #fff7d6 !important;
+    padding: clamp(8px, 1.2vw, 18px) 16px clamp(12px, 2vw, 24px) !important;
+    margin-top: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .dg-hero-custom-canvas {
@@ -6018,6 +6044,17 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
         }
       }
 
+      // Hero Badge and Headline - cleared/hidden as requested
+      const heroBadges = document.querySelectorAll('[data-framer-name="Hero"] .framer-7h1n86, [data-framer-name="Hero"] h3');
+      for (const b of heroBadges) {
+        b.innerHTML = '';
+      }
+
+      const heroHeadlines = document.querySelectorAll('[data-framer-name="Hero"] [data-framer-name="Hero Text"], [data-framer-name="Hero"] h1');
+      for (const h1 of heroHeadlines) {
+        h1.innerHTML = '';
+      }
+
       // Intro, Mission Headline, Mission Subtitles, Our Story & 5000 Activities - Cleared and removed as requested
       const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, .framer-1tqddnu, [data-framer-name="Mission"] .framer-1tqddnu, [data-framer-name="Mission"] h2, [data-framer-name="Mission"] [data-framer-name*="While we can"], [data-framer-name="Our Story"], [data-framer-name="5000 Activities"], #our-story, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
       for (const sec of introSections) {
@@ -6058,6 +6095,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       wireAnchors();
       rewriteImages();
       rewriteLoader();
+      buildCustomHeroSection();
       insertParentQuestionsSection();
       enhanceProgramsCarousel();
       addKidsGame();
