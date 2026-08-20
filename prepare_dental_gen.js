@@ -697,12 +697,15 @@ const enhancement = String.raw`
       display: none;
     }
   }
-  /* Intro section / residual animated text - Hidden as requested */
+  /* Intro & Mission Headline - Hidden as requested */
   [data-framer-name="Intro"],
   #intro-block,
   .framer-hhon,
   [data-framer-name="Intro"] [data-framer-name="Content"],
   [data-framer-name="Intro"] h1,
+  [data-framer-name="Mission Headline"],
+  .framer-1j6imtw,
+  [data-framer-name="Headline"],
   [data-framer-name="Pointer"],
   [data-framer-name="Android"],
   .dg-remove-google,
@@ -5664,8 +5667,8 @@ const enhancement = String.raw`
         h1.innerHTML = '';
       }
 
-      // Intro section - Cleared and removed as requested
-      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon');
+      // Intro & Mission Headline - Cleared and removed as requested
+      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"]');
       for (const sec of introSections) {
         sec.innerHTML = '';
         sec.remove();
