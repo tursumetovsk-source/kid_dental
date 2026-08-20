@@ -165,9 +165,17 @@ const sourceReplacements = [
   ["with Maggie!", "уверенность на всю жизнь!"],
   ["TURN CHAOS", "ЗДОРОВАЯ УЛЫБКА"],
   ["INTO CHUCKLES", "СЕГОДНЯ —"],
-  ["WITH MAGGIE!", "УВЕРЕННОСТЬ НА ВСЮ ЖИЗНЬ!"],
   ["Download on the", "ЗАПИСАТЬСЯ"],
   ["Download on the ", "ЗАПИСАТЬСЯ "],
+  ["Download on", "ЗАПИСАТЬСЯ"],
+  ["DOWNLOAD ON THE", "ЗАПИСАТЬСЯ"],
+  ["DOWNLOAD ON", "ЗАПИСАТЬСЯ"],
+  ["Скачать в", "ЗАПИСАТЬСЯ"],
+  ["скачать в", "записаться"],
+  ["СКАЧАТЬ В", "ЗАПИСАТЬСЯ"],
+  ["Скачать", "ЗАПИСАТЬСЯ"],
+  ["скачать", "записаться"],
+  ["СКАЧАТЬ", "ЗАПИСАТЬСЯ"],
   ["request", "ПОЗВОНИТЬ"],
   ["REQUEST", "ПОЗВОНИТЬ"],
   ["© 2025 Maggie", "© 2026 DENTAL GEN"],
@@ -4908,13 +4916,16 @@ const enhancement = String.raw`
       }
 
       // Any remaining English phrases in elements
-      for (const el of document.querySelectorAll('h1, h2, h3, h4, span, p, a, button')) {
+      for (const el of document.querySelectorAll('h1, h2, h3, h4, span, p, a, button, [data-framer-name="App Store"], [data-framer-name="Button Shape"]')) {
         const t = el.textContent.trim();
         if (/parenting\s+should\s+feel\s+lighter/i.test(t)) {
           el.textContent = "ЗАБОТА О ЗУБАХ С ПЕРВОГО ДНЯ";
         }
         if (/our\s+app\s+is\s+on\s+a\s+mission/i.test(t)) {
           el.innerHTML = 'DENTAL GEN<br>ПОМОГАЕТ<br>РАСТИТЬ<br>ЗДОРОВУЮ<br>УЛЫБКУ';
+        }
+        if (/^\s*(скачать\s+в|скачать|download\s+on\s+the|download\s+on)\s*$/i.test(t)) {
+          el.textContent = "ЗАПИСАТЬСЯ";
         }
       }
 
