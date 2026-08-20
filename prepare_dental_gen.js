@@ -1701,38 +1701,144 @@ const enhancement = String.raw`
     place-items: center;
     cursor: pointer;
   }
-  .dg-teaser-tooth-preview {
+
+  /* Interactive 4-Cards Fan & Mascot Component */
+  .dg-interactive-mascot-cards {
     position: relative;
-    width: clamp(140px, 18vw, 190px);
-    height: clamp(140px, 18vw, 190px);
-    border-radius: 50%;
-    background: #e3f4ff;
-    border: 3px solid #2f2076;
-    box-shadow: -4px 5px 0 #2f2076;
-    display: grid;
-    place-items: center;
-    transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: min(300px, 100%);
+    height: 250px;
+    margin: 0 auto;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    user-select: none;
   }
-  .dg-game-teaser__right:hover .dg-teaser-tooth-preview {
-    transform: scale(1.08) rotate(6deg);
-  }
-  .dg-teaser-tooth-icon {
-    font-size: clamp(64px, 9vw, 92px);
-    line-height: 1;
-  }
-  .dg-teaser-crown {
+
+  .dg-fan-card {
     position: absolute;
-    top: -12px;
+    width: 95px;
+    height: 95px;
+    border-radius: 22px;
+    border: 1.5px solid #03594d;
+    box-shadow: -3px 4px 0 #03594d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    will-change: transform;
+    bottom: 35px;
+  }
+  .dg-fan-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+  }
+
+  /* 4 Fan Cards default positions */
+  .dg-fan-card--tree {
+    background: #ff9124;
+    transform: translate(-55px, -12px) rotate(-17deg);
+    z-index: 1;
+  }
+  .dg-fan-card--ball {
+    background: #589af0;
+    transform: translate(-20px, -24px) rotate(-6deg);
+    z-index: 2;
+  }
+  .dg-fan-card--book {
+    background: #ff6b8b;
+    transform: translate(20px, -24px) rotate(6deg);
+    z-index: 2;
+  }
+  .dg-fan-card--drum {
+    background: #a288e3;
+    transform: translate(55px, -12px) rotate(17deg);
+    z-index: 1;
+  }
+
+  /* Hover Fan-out state */
+  .dg-interactive-mascot-cards:hover .dg-fan-card--tree,
+  .dg-game-teaser__card:hover .dg-fan-card--tree {
+    transform: translate(-105px, -45px) rotate(-28deg) scale(1.08);
+    box-shadow: -5px 6px 0 #03594d;
+  }
+  .dg-interactive-mascot-cards:hover .dg-fan-card--ball,
+  .dg-game-teaser__card:hover .dg-fan-card--ball {
+    transform: translate(-38px, -68px) rotate(-10deg) scale(1.08);
+    box-shadow: -5px 6px 0 #03594d;
+  }
+  .dg-interactive-mascot-cards:hover .dg-fan-card--book,
+  .dg-game-teaser__card:hover .dg-fan-card--book {
+    transform: translate(38px, -68px) rotate(10deg) scale(1.08);
+    box-shadow: -5px 6px 0 #03594d;
+  }
+  .dg-interactive-mascot-cards:hover .dg-fan-card--drum,
+  .dg-game-teaser__card:hover .dg-fan-card--drum {
+    transform: translate(105px, -45px) rotate(28deg) scale(1.08);
+    box-shadow: -5px 6px 0 #03594d;
+  }
+
+  /* Foreground Pink Mascot Card */
+  .dg-mascot-main-card {
+    position: relative;
+    z-index: 5;
+    width: 210px;
+    height: 155px;
+    background: #fccddc;
+    border: 2px solid #03594d;
+    border-radius: 44px 44px 22px 22px;
+    box-shadow: -4px 5px 0 #03594d;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0;
+    overflow: visible;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+  .dg-interactive-mascot-cards:hover .dg-mascot-main-card,
+  .dg-game-teaser__card:hover .dg-mascot-main-card {
+    transform: scale(1.03);
+    box-shadow: -6px 7px 0 #03594d;
+  }
+
+  /* Mascot SVG inside card */
+  .dg-mascot-svg-wrap {
+    width: 96px;
+    height: 130px;
+    position: relative;
+    bottom: -2px;
+    transition: transform 0.3s ease;
+  }
+  .dg-interactive-mascot-cards:hover .dg-mascot-svg-wrap,
+  .dg-game-teaser__card:hover .dg-mascot-svg-wrap {
+    transform: translateY(-5px);
+  }
+
+  /* Green Pointer */
+  .dg-mascot-pointer {
+    position: absolute;
+    top: 20px;
     right: 18px;
-    font-size: clamp(32px, 4.5vw, 44px);
-    animation: crownFloat 2s infinite alternate ease-in-out;
+    width: 34px;
+    height: 34px;
+    z-index: 6;
+    animation: dgPointerBounce 2.4s ease-in-out infinite;
+    filter: drop-shadow(-2px 3px 0 #03594d);
+    transition: transform 0.25s ease;
   }
-  .dg-teaser-sparkle {
-    position: absolute;
-    bottom: 8px;
-    left: 12px;
-    font-size: clamp(24px, 3.5vw, 34px);
-    animation: sparkleSpin 3s infinite linear;
+  .dg-interactive-mascot-cards:hover .dg-mascot-pointer,
+  .dg-game-teaser__card:hover .dg-mascot-pointer {
+    transform: scale(1.2) rotate(-8deg);
+  }
+
+  @keyframes dgPointerBounce {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(3px, -5px); }
   }
   @keyframes crownFloat {
     0% { transform: translateY(0) rotate(-6deg); }
@@ -5713,11 +5819,38 @@ const enhancement = String.raw`
                 '</div>' +
               '</div>' +
               '<div class="dg-game-teaser__right dg-open-game-btn" id="openGameModalPreview" data-game-mode="hub" title="Нажмите, чтобы сыграть!">' +
-                '<div class="dg-teaser-tooth-preview">' +
-                  '<span class="dg-teaser-crown">👑</span>' +
-                  '<span class="dg-teaser-tooth-icon">🦷</span>' +
-                  '<span class="dg-teaser-sparkle">✨</span>' +
-                  '<div class="dg-teaser-braces-badge">🎮 8 ИГР</div>' +
+                '<div class="dg-interactive-mascot-cards">' +
+                  '<!-- 4 Fan Cards -->' +
+                  '<div class="dg-fan-card dg-fan-card--tree">' +
+                    '<img src="https://framerusercontent.com/images/o4kG5r9VA6oLyrfl6ZxmYx10vOM.png" alt="Дерево">' +
+                  '</div>' +
+                  '<div class="dg-fan-card dg-fan-card--ball">' +
+                    '<img src="https://framerusercontent.com/images/ss65jCMb9knxIHcQfO5Dgn5k.png" alt="Мячик">' +
+                  '</div>' +
+                  '<div class="dg-fan-card dg-fan-card--book">' +
+                    '<img src="https://framerusercontent.com/images/gjrxncSvy18re4OiuiIFhp0epjM.png" alt="Книжка">' +
+                  '</div>' +
+                  '<div class="dg-fan-card dg-fan-card--drum">' +
+                    '<img src="https://framerusercontent.com/images/BUxkMnZKrNGcfulgLmLHgdGIFE.png" alt="Барабан">' +
+                  '</div>' +
+                  '<!-- Foreground Pink Card with Mascot & Pointer -->' +
+                  '<div class="dg-mascot-main-card">' +
+                    '<div class="dg-mascot-pointer">' +
+                      '<svg viewBox="0 0 36 36" fill="none">' +
+                        '<path d="M6 3 L30 15 L18 20 L13 32 Z" fill="#5fe3b3" stroke="#03594d" stroke-width="2.5" stroke-linejoin="round"/>' +
+                      '</svg>' +
+                    '</div>' +
+                    '<div class="dg-mascot-svg-wrap">' +
+                      '<svg viewBox="0 0 121 170" fill="none" style="width: 100%; height: 100%;">' +
+                        '<path d="M60.1709 0.0148926C27.0796 0.0148926 0.252441 27.2344 0.252441 60.8097V169.985H55.2744V103.962C55.2744 101.211 57.4723 98.9814 60.1831 98.9814C62.8939 98.9814 65.0918 101.211 65.0918 103.962V169.985H120.102V60.8097C120.102 27.2344 93.2744 0.0148926 60.1831 0.0148926H60.1709Z" fill="#03594d"/>' +
+                        '<circle cx="40.5" cy="55" r="7.5" fill="#fccddc"/>' +
+                        '<circle cx="79.5" cy="55" r="7.5" fill="#fccddc"/>' +
+                        '<circle cx="28" cy="72" r="6" fill="#ffb6c1" opacity="0.9"/>' +
+                        '<circle cx="92" cy="72" r="6" fill="#ffb6c1" opacity="0.9"/>' +
+                        '<path d="M52 70 Q60 82 68 70" stroke="#fccddc" stroke-width="4" stroke-linecap="round" fill="none"/>' +
+                      '</svg>' +
+                    '</div>' +
+                  '</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
