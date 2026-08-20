@@ -518,6 +518,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -992,15 +993,21 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       width: 100%;
     }
     .dg-hero-contacts-col {
-      width: 100%;
-      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 12px;
     }
     .dg-hero-contact-item {
-      gap: 10px;
+      gap: 12px;
+      justify-content: flex-start;
     }
     .dg-hero-contact-text {
       font-size: clamp(15px, 4.2vw, 18px) !important;
+      text-align: left;
     }
     .dg-hero-icon-badge {
       width: 36px;
@@ -6688,6 +6695,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
       // Any remaining English phrases in elements
       for (const el of document.querySelectorAll('h1, h2, h3, h4, span, p, a, button, [data-framer-name="App Store"], [data-framer-name="Button Shape"]')) {
+        if (el.closest && (el.closest('.dg-hero-custom-canvas') || el.closest('[data-framer-name="Hero"]'))) continue;
         const t = el.textContent.trim();
         if (/our\s+app\s+is\s+on\s+a\s+mission/i.test(t)) {
           el.innerHTML = 'DENTAL GEN<br>ПОМОГАЕТ<br>РАСТИТЬ<br>ЗДОРОВУЮ<br>УЛЫБКУ';
@@ -6702,6 +6710,18 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
                                      .replace(/with\s+maggie/gi, 'С DENTAL GEN')
                                      .replace(/maggie/gi, 'DENTAL GEN');
         }
+      }
+
+      const cursiveTitle = document.querySelector('.dg-hero-cursive-title');
+      if (cursiveTitle) {
+        const l1 = cursiveTitle.querySelector('.dg-hct-line-1');
+        const l2 = cursiveTitle.querySelector('.dg-hct-line-2');
+        const l3 = cursiveTitle.querySelector('.dg-hct-line-3');
+        const l4 = cursiveTitle.querySelector('.dg-hct-line-4');
+        if (l1) l1.textContent = "Здоровая улыбка";
+        if (l2) l2.textContent = "сегодня — уверенность";
+        if (l3) l3.textContent = "и счастье";
+        if (l4) l4.textContent = "на всю жизнь!";
       }
 
       document.title = "DENTAL GEN | Детская стоматология в Иваново";
