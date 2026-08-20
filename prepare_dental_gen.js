@@ -1,5 +1,18 @@
 const fs = require("fs");
 const path = require("path");
+const QRCode = require("qrcode");
+
+let qrCodeSvg = "";
+QRCode.toString("https://dentalgen.pro", {
+  type: "svg",
+  margin: 0,
+  color: {
+    dark: "#2f2076",
+    light: "#ffffff"
+  }
+}, (err, svg) => {
+  if (!err) qrCodeSvg = svg.replace(/[\r\n]+/g, "").trim();
+});
 
 const target = path.join(__dirname, "index.html");
 const kidsGamePath = path.join(__dirname, "kids-game.html");
@@ -322,6 +335,8 @@ const enhancement = String.raw`
   [data-framer-name="App Store"] { justify-content: center !important; }
 
   /* Desktop & Mobile Hero Typography - Hidden as requested */
+  [data-framer-name="Hero"] [data-framer-name="App Store"],
+  [data-framer-name="Hero"] .framer-1a4i4b,
   [data-framer-name="Hero"] .framer-7h1n86,
   [data-framer-name="Hero"] h3,
   [data-framer-name="Hero"] [data-framer-name="Hero Text"],
@@ -330,6 +345,326 @@ const enhancement = String.raw`
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+  }
+
+  /* Custom Hero Canvas matching the illustration */
+  [data-framer-name="Hero"] {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff7d6 !important;
+    padding: clamp(90px, 12vw, 130px) 16px clamp(40px, 6vw, 70px) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .dg-hero-custom-canvas {
+    position: relative;
+    width: min(920px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  /* Surrounding Doodles */
+  .dg-hero-doodles {
+    position: absolute;
+    inset: -20px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .dg-doodle {
+    position: absolute;
+    pointer-events: none;
+  }
+  .dg-doodle-star-tl {
+    top: 5%;
+    left: 2%;
+    width: clamp(36px, 5vw, 54px);
+    height: clamp(36px, 5vw, 54px);
+    animation: dgFloatSlow 6s ease-in-out infinite alternate;
+  }
+  .dg-doodle-star-tc {
+    top: 0%;
+    left: 48%;
+    width: clamp(28px, 4vw, 42px);
+    height: clamp(28px, 4vw, 42px);
+    animation: dgFloatSlow 5s ease-in-out infinite alternate-reverse;
+  }
+  .dg-doodle-star-tr {
+    top: 3%;
+    right: 5%;
+    width: clamp(34px, 4.5vw, 48px);
+    height: clamp(34px, 4.5vw, 48px);
+    animation: dgFloatSlow 7s ease-in-out infinite alternate;
+  }
+  .dg-doodle-heart-tr {
+    top: 15%;
+    right: 2%;
+    width: clamp(34px, 4.5vw, 50px);
+    height: clamp(32px, 4.2vw, 46px);
+    animation: dgFloatSlow 5.5s ease-in-out infinite alternate;
+  }
+  .dg-doodle-star-mr {
+    top: 48%;
+    right: 3%;
+    width: clamp(32px, 4vw, 46px);
+    height: clamp(32px, 4vw, 46px);
+    animation: dgFloatSlow 6.5s ease-in-out infinite alternate-reverse;
+  }
+  .dg-doodle-planet {
+    top: 42%;
+    left: 0%;
+    width: clamp(65px, 9vw, 105px);
+    height: clamp(50px, 7vw, 80px);
+    animation: dgFloatPlanet 8s ease-in-out infinite alternate;
+  }
+  .dg-doodle-trail {
+    top: 46%;
+    left: 8%;
+    width: clamp(260px, 60vw, 680px);
+    height: clamp(100px, 20vw, 220px);
+    opacity: 0.85;
+  }
+  .dg-doodle-rocket {
+    top: 45%;
+    right: 14%;
+    width: clamp(60px, 9vw, 95px);
+    height: clamp(60px, 9vw, 95px);
+    animation: dgRocketHover 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes dgFloatSlow {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-8px) rotate(6deg); }
+  }
+  @keyframes dgFloatPlanet {
+    0% { transform: translateY(0) rotate(-4deg); }
+    100% { transform: translateY(-10px) rotate(4deg); }
+  }
+  @keyframes dgRocketHover {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(6px, -8px) rotate(4deg); }
+  }
+
+  /* Main Handwritten Headline */
+  .dg-hero-headline-wrap {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: clamp(36px, 5vw, 64px);
+    max-width: 860px;
+  }
+  .dg-hero-cursive-title {
+    margin: 0;
+    font-family: "Caveat", cursive, sans-serif !important;
+    font-size: clamp(38px, 5.8vw, 76px) !important;
+    font-weight: 700 !important;
+    line-height: 1.18 !important;
+    color: #17184f !important;
+    letter-spacing: -0.01em !important;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dg-hct-line {
+    display: block;
+  }
+  .dg-hct-line-1 { font-size: 1.04em; }
+  .dg-hct-line-2 { font-size: 1em; }
+  .dg-hct-line-3 { font-size: 0.95em; }
+  .dg-hct-line-4 { font-size: 1.08em; }
+
+  /* Bottom Card */
+  .dg-hero-bottom-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 780px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: clamp(16px, 3vw, 36px);
+    align-items: center;
+    padding: clamp(12px, 2vw, 24px) 10px;
+    box-sizing: border-box;
+  }
+
+  /* Contacts Column */
+  .dg-hero-contacts-col {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 2vw, 22px);
+  }
+  .dg-hero-contact-item {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.6vw, 16px);
+    text-decoration: none;
+    color: #17184f;
+    transition: transform .2s ease;
+  }
+  a.dg-hero-contact-item:hover {
+    transform: translateX(4px);
+  }
+  .dg-hero-icon-badge {
+    width: clamp(38px, 4.5vw, 48px);
+    height: clamp(38px, 4.5vw, 48px);
+    min-width: clamp(38px, 4.5vw, 48px);
+    border-radius: 50%;
+    background: #ffdf70;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 3px 8px rgba(230, 126, 34, 0.15);
+  }
+  .dg-hero-icon-badge svg {
+    width: clamp(20px, 2.4vw, 26px);
+    height: clamp(20px, 2.4vw, 26px);
+  }
+  .dg-hero-contact-text {
+    font-family: "Rubik", "Montserrat", sans-serif;
+    font-size: clamp(15px, 1.8vw, 21px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #17184f;
+    letter-spacing: -0.01em;
+  }
+
+  /* Divider */
+  .dg-hero-divider {
+    position: relative;
+    width: 2px;
+    height: clamp(120px, 16vw, 180px);
+    background: #c5b5ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+  .dg-hero-divider-star {
+    background: #fff7d6;
+    color: #8e78db;
+    font-size: 16px;
+    padding: 4px 0;
+    display: block;
+  }
+
+  /* QR Column */
+  .dg-hero-qr-col {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(12px, 2vw, 22px);
+  }
+  .dg-hero-qr-caption-wrap {
+    position: relative;
+    text-align: right;
+  }
+  .dg-hero-qr-caption {
+    margin: 0;
+    font-family: "Caveat", cursive, sans-serif;
+    font-size: clamp(18px, 2.2vw, 25px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #6b52ae;
+  }
+  .dg-hero-qr-arrow {
+    position: absolute;
+    right: -14px;
+    bottom: -24px;
+    width: 38px;
+    height: 38px;
+    pointer-events: none;
+  }
+  .dg-hero-qr-box {
+    width: clamp(130px, 15vw, 170px);
+    height: clamp(130px, 15vw, 170px);
+    min-width: clamp(130px, 15vw, 170px);
+    border: 2.5px solid #8e78db;
+    border-radius: 24px;
+    background: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 20px rgba(142, 120, 219, 0.15);
+    transition: transform .25s ease, box-shadow .25s ease;
+    text-decoration: none;
+  }
+  .dg-hero-qr-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(142, 120, 219, 0.25);
+  }
+  .dg-hero-qr-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dg-hero-qr-img svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 767px) {
+    .dg-hero-bottom-card {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      justify-items: center;
+      padding: 10px;
+    }
+    .dg-hero-contacts-col {
+      width: 100%;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .dg-hero-divider {
+      width: 80%;
+      height: 2px;
+      margin: 4px 0;
+    }
+    .dg-hero-divider-star {
+      padding: 0 6px;
+    }
+    .dg-hero-qr-col {
+      width: 100%;
+      justify-content: center;
+      flex-direction: row;
+      gap: 18px;
+    }
+    .dg-hero-qr-caption-wrap {
+      text-align: left;
+    }
+    .dg-hero-qr-arrow {
+      right: -20px;
+      bottom: -15px;
+      transform: rotate(-10deg);
+    }
+    .dg-doodle-planet {
+      top: 36%;
+      left: -8px;
+      width: 58px;
+    }
+    .dg-doodle-rocket {
+      top: 38%;
+      right: 2%;
+      width: 52px;
+    }
+    .dg-doodle-trail {
+      display: none;
+    }
   }
   [data-framer-name="Pointer"],
   [data-framer-name="Android"],
@@ -4824,6 +5159,60 @@ const enhancement = String.raw`
       }
     };
 
+    const buildCustomHeroSection = () => {
+      const heroContainer = document.querySelector('[data-framer-name="Hero"]');
+      if (!heroContainer || heroContainer.querySelector(".dg-hero-custom-canvas")) return;
+
+      const canvas = document.createElement("div");
+      canvas.className = "dg-hero-custom-canvas";
+      canvas.innerHTML = '<div class="dg-hero-doodles" aria-hidden="true">' +
+        '<svg class="dg-doodle dg-doodle-star-tl" viewBox="0 0 50 50" fill="none"><path d="M 25 3 L 31 18 L 47 18 L 34 28 L 39 44 L 25 34 L 11 44 L 16 28 L 3 18 L 19 18 Z" stroke="#f5b82e" stroke-width="2.5" stroke-linejoin="round" fill="#fff3c4" fill-opacity="0.5"/></svg>' +
+        '<svg class="dg-doodle dg-doodle-star-tc" viewBox="0 0 40 40" fill="none"><path d="M 20 3 L 24 14 L 36 14 L 26 22 L 30 34 L 20 26 L 10 34 L 14 22 L 4 14 L 16 14 Z" stroke="#a288e3" stroke-width="2" stroke-linejoin="round"/></svg>' +
+        '<svg class="dg-doodle dg-doodle-star-tr" viewBox="0 0 44 44" fill="none"><path d="M 22 3 L 27 16 L 41 16 L 30 25 L 34 39 L 22 30 L 10 39 L 14 25 L 3 16 L 17 16 Z" stroke="#f5b82e" stroke-width="2.2" stroke-linejoin="round" fill="#fff3c4" fill-opacity="0.4"/></svg>' +
+        '<svg class="dg-doodle dg-doodle-heart-tr" viewBox="0 0 46 42" fill="none"><path d="M 23 38 C 23 38, 5 26, 5 13 C 5 6, 11 2, 17 2 C 21 2, 23 5, 23 5 C 23 5, 25 2, 29 2 C 35 2, 41 6, 41 13 C 41 26, 23 38, 23 38 Z" stroke="#a288e3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<div class="dg-doodle dg-doodle-planet"><svg viewBox="0 0 90 70" fill="none"><ellipse cx="45" cy="35" rx="22" ry="22" fill="#ede4ff" stroke="#8566cc" stroke-width="2.2"/><path d="M 32 28 Q 45 22 58 28" stroke="#8566cc" stroke-width="1.8" stroke-linecap="round"/><path d="M 28 38 Q 45 31 62 38" stroke="#8566cc" stroke-width="1.8" stroke-linecap="round"/><path d="M 33 46 Q 45 40 57 46" stroke="#8566cc" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="45" cy="35" rx="38" ry="11" stroke="#8566cc" stroke-width="2.4" transform="rotate(-16 45 35)"/></svg></div>' +
+        '<svg class="dg-doodle dg-doodle-star-mr" viewBox="0 0 44 44" fill="none"><path d="M 22 3 L 27 16 L 41 16 L 30 25 L 34 39 L 22 30 L 10 39 L 14 25 L 3 16 L 17 16 Z" stroke="#a288e3" stroke-width="2.2" stroke-linejoin="round"/></svg>' +
+        '<svg class="dg-doodle dg-doodle-trail" viewBox="0 0 600 240" fill="none" preserveAspectRatio="none"><path d="M 30 60 C 130 180, 240 210, 310 160 C 350 125, 345 65, 290 80 C 240 95, 255 170, 345 190 C 440 210, 520 160, 575 80" stroke="#a288e3" stroke-width="2.2" stroke-dasharray="7 7" stroke-linecap="round" fill="none"/></svg>' +
+        '<div class="dg-doodle dg-doodle-rocket"><svg viewBox="0 0 100 100" fill="none"><path d="M 26 72 Q 16 86 10 92 Q 22 87 28 98 Q 34 87 42 92 Q 35 81 33 70 Z" fill="#ffd13b" stroke="#f59e0b" stroke-width="1.8"/><path d="M 27 74 Q 22 83 20 86 Q 25 83 28 90 Q 31 83 36 86 Q 31 79 30 72 Z" fill="#ff7675"/><path d="M 30 52 L 14 65 Q 11 78 24 80 L 33 73 Z" fill="#8854d0" stroke="#5f27cd" stroke-width="2.2"/><path d="M 56 30 L 72 44 Q 75 58 61 60 L 53 53 Z" fill="#8854d0" stroke="#5f27cd" stroke-width="2.2"/><path d="M 33 73 Q 22 42 47 16 Q 73 38 52 73 Z" fill="#ffffff" stroke="#5f27cd" stroke-width="2.2"/><path d="M 47 16 Q 60 27 52 38 L 43 29 Z" fill="#a55eea" stroke="#5f27cd" stroke-width="2.2"/><circle cx="46" cy="44" r="8" fill="#e8eaf6" stroke="#5f27cd" stroke-width="2"/><circle cx="46" cy="44" r="4.5" fill="#2d3436"/><circle cx="44.5" cy="42.5" r="1.5" fill="#ffffff"/></svg></div>' +
+      '</div>' +
+      '<div class="dg-hero-headline-wrap">' +
+        '<h1 class="dg-hero-cursive-title">' +
+          '<span class="dg-hct-line dg-hct-line-1">Здоровая улыбка</span>' +
+          '<span class="dg-hct-line dg-hct-line-2">сегодня — уверенность</span>' +
+          '<span class="dg-hct-line dg-hct-line-3">и счастье</span>' +
+          '<span class="dg-hct-line dg-hct-line-4">на всю жизнь!</span>' +
+        '</h1>' +
+      '</div>' +
+      '<div class="dg-hero-bottom-card">' +
+        '<div class="dg-hero-contacts-col">' +
+          '<div class="dg-hero-contact-item">' +
+            '<div class="dg-hero-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#e67e22" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>' +
+            '<span class="dg-hero-contact-text">г. Иваново, ул. Профсоюзная, 4</span>' +
+          '</div>' +
+          '<a class="dg-hero-contact-item" href="tel:+79109900060">' +
+            '<div class="dg-hero-icon-badge"><svg viewBox="0 0 24 24" fill="#e67e22"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg></div>' +
+            '<span class="dg-hero-contact-text">+7 (910) 990-00-60</span>' +
+          '</a>' +
+          '<a class="dg-hero-contact-item" href="https://dentalgen.pro" target="_blank" rel="noopener">' +
+            '<div class="dg-hero-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#e67e22" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>' +
+            '<span class="dg-hero-contact-text">dentalgen.pro</span>' +
+          '</a>' +
+        '</div>' +
+        '<div class="dg-hero-divider" aria-hidden="true"><span class="dg-hero-divider-star">★</span></div>' +
+        '<div class="dg-hero-qr-col">' +
+          '<div class="dg-hero-qr-caption-wrap">' +
+            '<p class="dg-hero-qr-caption">Сканируйте QR-код,<br>чтобы записаться<br>на консультацию</p>' +
+            '<svg class="dg-hero-qr-arrow" viewBox="0 0 50 50" fill="none"><path d="M 10 8 Q 38 12 36 34 L 40 28 M 36 34 L 30 30" stroke="#a288e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '</div>' +
+          '<a class="dg-hero-qr-box" href="https://dentalgen.pro" target="_blank" rel="noopener" title="Записаться на консультацию">' +
+            '<div class="dg-hero-qr-img">__QR_CODE_SVG_RAW__</div>' +
+          '</a>' +
+        '</div>' +
+      '</div>';
+
+      heroContainer.appendChild(canvas);
+    };
+
     const addLandingSections = () => {
       if (!document.querySelector(".dg-checkup-section")) {
         const section = document.createElement("section");
@@ -4974,6 +5363,7 @@ const enhancement = String.raw`
       wireAnchors();
       rewriteImages();
       rewriteLoader();
+      buildCustomHeroSection();
       replaceOurStoryPhoto();
       enhanceProgramsCarousel();
       addKidsGame();
@@ -5011,5 +5401,6 @@ const enhancement = String.raw`
 `;
 
 html = html.replace("</body>", `${enhancement}</body>`);
+html = html.split("__QR_CODE_SVG_RAW__").join(qrCodeSvg);
 fs.writeFileSync(target, html);
 console.log("Successfully rebuilt index.html with interactive 3-card programs carousel and custom vector teeth!");
