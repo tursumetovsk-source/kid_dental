@@ -496,6 +496,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
 
 
+
 <!-- DENTAL_GEN_LANDING_BEGIN -->
 <style>
   :root, body, .framer-body {
@@ -1100,10 +1101,22 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
     display: none !important;
   }
 
+  .dg-parent-questions-section {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #ffe9ed !important;
+    padding: clamp(36px, 5vw, 64px) 16px clamp(40px, 6vw, 70px) !important;
+    box-sizing: border-box !important;
+    z-index: 5 !important;
+  }
+
   .dg-parent-questions-card {
     position: relative !important;
     width: 100% !important;
-    max-width: 780px !important;
+    max-width: 820px !important;
     margin: 0 auto !important;
     padding: clamp(24px, 4vw, 42px) clamp(18px, 4vw, 34px) !important;
     box-sizing: border-box !important;
@@ -5274,20 +5287,29 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       });
     }
 
-    const replaceOurStoryPhoto = () => {
-      const photoContainer = document.querySelector('[data-framer-name="Our Story"] [data-framer-name="Photo"]');
-      if (!photoContainer || photoContainer.querySelector(".dg-parent-questions-card")) return;
+    const insertParentQuestionsSection = () => {
+      if (document.querySelector(".dg-parent-questions-section")) return;
 
-      const card = document.createElement("div");
-      card.className = "dg-parent-questions-card";
-      card.innerHTML = '<span class="dg-pq-sparkle dg-pq-sparkle--1">⭐</span><span class="dg-pq-sparkle dg-pq-sparkle--2">🪐</span>' +
+      const hero = document.querySelector('[data-framer-name="Hero"]');
+      if (!hero) return;
+
+      const section = document.createElement("section");
+      section.className = "dg-parent-questions-section";
+      section.id = "parent-questions";
+      section.innerHTML = '<div class="dg-parent-questions-card">' +
+        '<span class="dg-pq-sparkle dg-pq-sparkle--1">⭐</span><span class="dg-pq-sparkle dg-pq-sparkle--2">🪐</span>' +
         '<div class="dg-pq-bubble dg-pq-bubble--1"><span class="dg-pq-qmark">?</span><p>Как стать уверенным родителем при появлении малыша и заботиться о его зубах?</p></div>' +
         '<div class="dg-pq-bubble dg-pq-bubble--2"><span class="dg-pq-qmark">?</span><p>Как не переживать, всё ли в порядке с зубками вашего ребёнка?</p></div>' +
         '<div class="dg-pq-bubble dg-pq-bubble--3"><span class="dg-pq-qmark">?</span><p>Правильно ли развивается его ротовая полость и как помочь, если возникают проблемы?</p></div>' +
         '<button class="dg-pq-game-btn dg-open-game-btn" id="storyOpenGameBtn" data-game-mode="older" type="button"><span>🎮</span> <span>Развивающие игры для детей «Пазлы & Мемори»</span></button>' +
-        '<span class="dg-pq-sparkle dg-pq-sparkle--3">✨</span>';
+        '<span class="dg-pq-sparkle dg-pq-sparkle--3">✨</span>' +
+      '</div>';
 
-      photoContainer.appendChild(card);
+      if (hero.nextSibling) {
+        hero.parentNode.insertBefore(section, hero.nextSibling);
+      } else {
+        hero.parentNode.appendChild(section);
+      }
     };
 
     const enhanceProgramsCarousel = () => {
@@ -5566,9 +5588,9 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
 
       const sections = [
         { selector: '[data-framer-name="Hero"]', color: "#fffae6" },
-        { selector: '[data-framer-name="Intro"].dg-parent-story-section, [data-framer-name="Intro"]', color: "#ffe9ed" },
-        { selector: '[data-framer-name="Mission"]', color: "#dff4ff" },
+        { selector: '.dg-parent-questions-section', color: "#ffe9ed" },
         { selector: '.dg-programs-carousel-section', color: "#ffe59a" },
+        { selector: '[data-framer-name="Mission"]', color: "#dff4ff" },
         { selector: '[data-framer-name="Our Story"]', color: "#dff4ff" },
         { selector: '.dg-game-teaser', color: "#f6ebff" },
         { selector: '.dg-checkup-section', color: "#e8faf6" },
@@ -5678,7 +5700,7 @@ h1, h2, h3, [data-framer-component-type="Text"] h1, [data-framer-component-type=
       rewriteImages();
       rewriteLoader();
       buildCustomHeroSection();
-      replaceOurStoryPhoto();
+      insertParentQuestionsSection();
       enhanceProgramsCarousel();
       addKidsGame();
       addLandingSections();
