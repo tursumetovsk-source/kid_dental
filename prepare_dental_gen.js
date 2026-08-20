@@ -348,18 +348,19 @@ const enhancement = String.raw`
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
 
-  /* Desktop & Mobile Old Template Hero Typography - Hidden */
-  [data-framer-name="Hero"] [data-framer-name="App Store"],
-  [data-framer-name="Hero"] .framer-1a4i4b,
-  [data-framer-name="Hero"] .framer-7h1n86,
-  [data-framer-name="Hero"] h3,
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"],
-  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1,
-  [data-framer-name="Hero"] > h1 {
+  /* Desktop & Mobile Old Template Hero Elements - Completely Hidden & Zero Height */
+  [data-framer-name="Hero"] > *:not(.dg-hero-custom-canvas) {
     display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    overflow: hidden !important;
   }
 
   /* Custom Hero Canvas matching the illustration */
@@ -373,7 +374,8 @@ const enhancement = String.raw`
     align-items: center !important;
     justify-content: flex-start !important;
     background: #fff7d6 !important;
-    padding: clamp(24px, 3.2vw, 42px) 16px clamp(15px, 2vw, 25px) !important;
+    padding: clamp(8px, 1.2vw, 18px) 16px clamp(12px, 2vw, 24px) !important;
+    margin-top: 0 !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
@@ -381,7 +383,8 @@ const enhancement = String.raw`
   .dg-hero-custom-canvas {
     position: relative;
     width: min(920px, 100%);
-    margin: 0 auto;
+    margin: 0 auto !important;
+    padding-top: 0 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
