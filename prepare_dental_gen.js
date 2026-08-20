@@ -733,13 +733,13 @@ const enhancement = String.raw`
   .framer-13x6f8b { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
-  /* Mission & Big Headings - Generous line-height and spacing so letters never collide or overlap */
+  /* Mission & Big Headings - Compact spacing without letter overlap */
   .framer-1ns25zk,
   [data-framer-name="Text Block"] [data-framer-name="Text"],
   [data-framer-name="Mission"] [data-framer-name="Text"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: clamp(14px, 2.2vw, 28px) !important;
+    gap: clamp(2px, 0.4vw, 6px) !important;
     overflow: visible !important;
   }
 
@@ -748,7 +748,7 @@ const enhancement = String.raw`
   [data-framer-name="Mission"] [data-framer-component-type="RichTextContainer"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: clamp(12px, 2vw, 24px) !important;
+    gap: clamp(2px, 0.4vw, 6px) !important;
     overflow: visible !important;
   }
 
@@ -761,11 +761,11 @@ const enhancement = String.raw`
   [data-framer-name="Mission"] h1,
   #mission-block h1,
   .framer-fit-text h1 {
-    --framer-line-height: 1.25 !important;
-    --framer-paragraph-spacing: 20px !important;
-    line-height: 1.25 !important;
-    margin-top: 6px !important;
-    margin-bottom: 12px !important;
+    --framer-line-height: 0.98 !important;
+    --framer-paragraph-spacing: 0px !important;
+    line-height: 0.98 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   /* SVG ForeignObject line height for mobile/desktop */
@@ -779,16 +779,16 @@ const enhancement = String.raw`
   svg foreignObject .framer-text,
   .framer-fit-text h1,
   .framer-fit-text .framer-text {
-    line-height: 1.28 !important;
-    --framer-line-height: 128% !important;
+    line-height: 0.98 !important;
+    --framer-line-height: 98% !important;
   }
 
   svg foreignObject h1 span,
   svg foreignObject .framer-text span {
-    line-height: 1.28 !important;
+    line-height: 0.98 !important;
     display: inline-block !important;
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   [data-framer-name="Header Nav"] [data-framer-name="Left"],
@@ -5706,9 +5706,9 @@ const enhancement = String.raw`
         setAnimatedWords(missionHeadings[2], ["РАСТИТЬ", ""]);
         setAnimatedWords(missionHeadings[3], ["ЗДОРОВУЮ", "УЛЫБКУ", ""]);
         for (const mh of missionHeadings) {
-          mh.style.setProperty("line-height", "1.25", "important");
-          mh.style.setProperty("margin-top", "6px", "important");
-          mh.style.setProperty("margin-bottom", "12px", "important");
+          mh.style.setProperty("line-height", "0.98", "important");
+          mh.style.setProperty("margin-top", "0", "important");
+          mh.style.setProperty("margin-bottom", "0", "important");
         }
       }
 
@@ -5717,7 +5717,7 @@ const enhancement = String.raw`
         replaceTextNodes(fo, globalRussianMap);
         const h1 = fo.querySelector('h1');
         if (h1 && /OUR APP|mission|lighten|parents/i.test(h1.textContent)) {
-          h1.innerHTML = '<span class="framer-text" style="line-height:1.28;display:block;">DENTAL GEN<br class="framer-text">ПОМОГАЕТ<br class="framer-text">РАСТИТЬ<br class="framer-text">ЗДОРОВУЮ<br class="framer-text">УЛЫБКУ</span>';
+          h1.innerHTML = '<span class="framer-text" style="line-height:0.98;display:block;">DENTAL GEN<br class="framer-text">ПОМОГАЕТ<br class="framer-text">РАСТИТЬ<br class="framer-text">ЗДОРОВУЮ<br class="framer-text">УЛЫБКУ</span>';
         }
       }
 
