@@ -334,13 +334,14 @@ const enhancement = String.raw`
   [data-framer-name="Android"] svg { display: none !important; }
   [data-framer-name="App Store"] { justify-content: center !important; }
 
-  /* Desktop & Mobile Hero Typography - Hidden as requested */
+  /* Desktop & Mobile Old Template Hero Typography - Hidden */
   [data-framer-name="Hero"] [data-framer-name="App Store"],
   [data-framer-name="Hero"] .framer-1a4i4b,
   [data-framer-name="Hero"] .framer-7h1n86,
   [data-framer-name="Hero"] h3,
   [data-framer-name="Hero"] [data-framer-name="Hero Text"],
-  [data-framer-name="Hero"] h1 {
+  [data-framer-name="Hero"] [data-framer-name="Hero Text"] h1,
+  [data-framer-name="Hero"] > h1 {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
@@ -461,29 +462,41 @@ const enhancement = String.raw`
     position: relative;
     z-index: 2;
     text-align: center;
+    margin-top: clamp(10px, 2vw, 30px);
     margin-bottom: clamp(36px, 5vw, 64px);
     max-width: 860px;
+    width: 100%;
   }
-  .dg-hero-cursive-title {
-    margin: 0;
+  .dg-hero-cursive-title,
+  h1.dg-hero-cursive-title,
+  div.dg-hero-cursive-title {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    margin: 0 auto !important;
     font-family: "Caveat", cursive, sans-serif !important;
-    font-size: clamp(38px, 5.8vw, 76px) !important;
+    font-size: clamp(40px, 6vw, 82px) !important;
     font-weight: 700 !important;
     line-height: 1.18 !important;
     color: #17184f !important;
     letter-spacing: -0.01em !important;
     text-shadow: 0 1px 0 rgba(255,255,255,0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
   }
-  .dg-hct-line {
-    display: block;
+  .dg-hero-cursive-title span,
+  .dg-hero-cursive-title .dg-hct-line {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #17184f !important;
   }
-  .dg-hct-line-1 { font-size: 1.04em; }
-  .dg-hct-line-2 { font-size: 1em; }
-  .dg-hct-line-3 { font-size: 0.95em; }
-  .dg-hct-line-4 { font-size: 1.08em; }
+  .dg-hct-line-1 { font-size: 1.04em !important; }
+  .dg-hct-line-2 { font-size: 1em !important; }
+  .dg-hct-line-3 { font-size: 0.95em !important; }
+  .dg-hct-line-4 { font-size: 1.08em !important; }
 
   /* Bottom Card */
   .dg-hero-bottom-card {
@@ -5176,12 +5189,12 @@ const enhancement = String.raw`
         '<div class="dg-doodle dg-doodle-rocket"><svg viewBox="0 0 100 100" fill="none"><path d="M 26 72 Q 16 86 10 92 Q 22 87 28 98 Q 34 87 42 92 Q 35 81 33 70 Z" fill="#ffd13b" stroke="#f59e0b" stroke-width="1.8"/><path d="M 27 74 Q 22 83 20 86 Q 25 83 28 90 Q 31 83 36 86 Q 31 79 30 72 Z" fill="#ff7675"/><path d="M 30 52 L 14 65 Q 11 78 24 80 L 33 73 Z" fill="#8854d0" stroke="#5f27cd" stroke-width="2.2"/><path d="M 56 30 L 72 44 Q 75 58 61 60 L 53 53 Z" fill="#8854d0" stroke="#5f27cd" stroke-width="2.2"/><path d="M 33 73 Q 22 42 47 16 Q 73 38 52 73 Z" fill="#ffffff" stroke="#5f27cd" stroke-width="2.2"/><path d="M 47 16 Q 60 27 52 38 L 43 29 Z" fill="#a55eea" stroke="#5f27cd" stroke-width="2.2"/><circle cx="46" cy="44" r="8" fill="#e8eaf6" stroke="#5f27cd" stroke-width="2"/><circle cx="46" cy="44" r="4.5" fill="#2d3436"/><circle cx="44.5" cy="42.5" r="1.5" fill="#ffffff"/></svg></div>' +
       '</div>' +
       '<div class="dg-hero-headline-wrap">' +
-        '<h1 class="dg-hero-cursive-title">' +
+        '<div class="dg-hero-cursive-title">' +
           '<span class="dg-hct-line dg-hct-line-1">Здоровая улыбка</span>' +
           '<span class="dg-hct-line dg-hct-line-2">сегодня — уверенность</span>' +
           '<span class="dg-hct-line dg-hct-line-3">и счастье</span>' +
           '<span class="dg-hct-line dg-hct-line-4">на всю жизнь!</span>' +
-        '</h1>' +
+        '</div>' +
       '</div>' +
       '<div class="dg-hero-bottom-card">' +
         '<div class="dg-hero-contacts-col">' +
