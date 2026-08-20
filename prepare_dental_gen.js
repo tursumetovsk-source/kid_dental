@@ -733,11 +733,9 @@ const enhancement = String.raw`
   .framer-13x6f8b,
   .framer-12pk2gu,
   .framer-1i7tb2a-container,
-  [data-framer-name="Our Story"] .framer-1i7tb2a-container,
-  [data-framer-name="Our Story"] a[href*="about"],
-  [data-framer-name="Our Story"] [data-framer-name="Contact"],
-  [data-framer-name="Our Story"] [data-framer-name="ABOUT"],
-  [data-framer-name="Our Story"] .framer-12pk2gu { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
+  [data-framer-name="Our Story"],
+  [data-framer-name="5000 Activities"],
+  #our-story { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; min-height: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
   [data-framer-name="CTA"],
   [data-framer-name="Footer"] { visibility: hidden !important; pointer-events: none !important; display: none !important; }
   /* Mission & Big Headings - Compact spacing without letter overlap */
@@ -5468,7 +5466,16 @@ const enhancement = String.raw`
           '</div>' +
         '</div>';
 
-      document.body.appendChild(section);
+      const mission = document.querySelector('[data-framer-name="Mission"], #mission, #mission-block');
+      if (mission && mission.parentNode) {
+        if (mission.nextSibling) {
+          mission.parentNode.insertBefore(section, mission.nextSibling);
+        } else {
+          mission.parentNode.appendChild(section);
+        }
+      } else {
+        document.body.appendChild(section);
+      }
     };
 
     const addKidsGame = () => {
@@ -5503,7 +5510,16 @@ const enhancement = String.raw`
               '</div>' +
             '</div>' +
           '</div>';
-        document.body.appendChild(teaser);
+        const programs = document.querySelector(".dg-programs-carousel-section");
+        if (programs && programs.parentNode) {
+          if (programs.nextSibling) {
+            programs.parentNode.insertBefore(teaser, programs.nextSibling);
+          } else {
+            programs.parentNode.appendChild(teaser);
+          }
+        } else {
+          document.body.appendChild(teaser);
+        }
       }
 
       // 2. Modal Overlay with Native Embedded Game (Zero iframe)
@@ -5627,7 +5643,17 @@ const enhancement = String.raw`
         section.className = "dg-checkup-section";
         section.id = "checkup";
         section.innerHTML = '<div class="dg-shell"><div class="dg-checkup"><img loading="lazy" decoding="async" src="assets/dental-gen/programs.jpg" alt="Три программы DENTAL GEN"><div><p class="dg-kicker">Детский чек-ап</p><h3>Проверьте здоровье зубов и прикуса</h3><p>Консультация детского стоматолога и ортодонта, компьютерная диагностика с анализом программы Diagnocat.</p><span class="dg-price">5 775 ₽</span><br><a href="tel:+79109900060">Записаться на консультацию</a></div></div></div>';
-        document.body.appendChild(section);
+        const gameTeaser = document.querySelector(".dg-game-teaser");
+        const ref = gameTeaser || document.querySelector(".dg-programs-carousel-section");
+        if (ref && ref.parentNode) {
+          if (ref.nextSibling) {
+            ref.parentNode.insertBefore(section, ref.nextSibling);
+          } else {
+            ref.parentNode.appendChild(section);
+          }
+        } else {
+          document.body.appendChild(section);
+        }
       }
 
       if (!document.querySelector(".dg-contact")) {
@@ -5636,7 +5662,17 @@ const enhancement = String.raw`
         section.id = "contacts";
         section.setAttribute("aria-label", "Контакты DENTAL GEN");
         section.innerHTML = '<div class="dg-contact__inner"><div><h2>DENTAL GEN</h2><p>Детская стоматология</p><p>г. Иваново, ул. Профсоюзная, 4</p></div><div class="dg-contact__actions"><a href="tel:+79109900060">+7 (910) 990-00-60</a><a href="https://dentalgen.pro">dentalgen.pro</a></div></div>';
-        document.body.appendChild(section);
+        const checkup = document.querySelector(".dg-checkup-section");
+        const ref = checkup || document.querySelector(".dg-game-teaser") || document.querySelector(".dg-programs-carousel-section");
+        if (ref && ref.parentNode) {
+          if (ref.nextSibling) {
+            ref.parentNode.insertBefore(section, ref.nextSibling);
+          } else {
+            ref.parentNode.appendChild(section);
+          }
+        } else {
+          document.body.appendChild(section);
+        }
       }
     };
 
@@ -5660,9 +5696,8 @@ const enhancement = String.raw`
       const sections = [
         { selector: '[data-framer-name="Hero"]', color: "#fffae6" },
         { selector: '.dg-parent-questions-section', color: "#ffe9ed" },
-        { selector: '.dg-programs-carousel-section', color: "#ffe59a" },
         { selector: '[data-framer-name="Mission"]', color: "#dff4ff" },
-        { selector: '[data-framer-name="Our Story"]', color: "#dff4ff" },
+        { selector: '.dg-programs-carousel-section', color: "#ffe59a" },
         { selector: '.dg-game-teaser', color: "#f6ebff" },
         { selector: '.dg-checkup-section', color: "#e8faf6" },
         { selector: '.dg-contact', color: "#17184f" }
@@ -5739,8 +5774,8 @@ const enhancement = String.raw`
         h1.innerHTML = '';
       }
 
-      // Intro, Mission Headline & Our Story About Button - Cleared and removed as requested
-      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, [data-framer-name="Our Story"] .framer-1i7tb2a-container, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
+      // Intro, Mission Headline, Our Story & 5000 Activities - Cleared and removed as requested
+      const introSections = document.querySelectorAll('[data-framer-name="Intro"], #intro-block, .framer-hhon, [data-framer-name="Mission Headline"], .framer-1j6imtw, [data-framer-name="Headline"], .framer-12pk2gu, .framer-1i7tb2a-container, [data-framer-name="Our Story"], [data-framer-name="5000 Activities"], #our-story, [data-framer-name="Our Story"] a[href*="about"], [data-framer-name="Our Story"] [data-framer-name="Contact"], [data-framer-name="Our Story"] [data-framer-name="ABOUT"]');
       for (const sec of introSections) {
         sec.innerHTML = '';
         sec.remove();
