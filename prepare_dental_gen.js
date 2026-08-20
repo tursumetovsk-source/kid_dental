@@ -103,9 +103,11 @@ const sourceReplacements = [
   ["You're welcome!", "DENTAL GEN рядом!"],
 
   // Mission & Intro
-  ["WITH MAGGIE YOU CAN:", "3 ПРОГРАММЫ ПО ВОЗРАСТУ:"],
-  ["WITH MAGGIE", "3 ПРОГРАММЫ"],
-  ["YOU CAN:", "ПО ВОЗРАСТУ:"],
+  ["С MAGGIE ВЫ МОЖЕТЕ:", "С DENTAL GEN ВЫ МОЖЕТЕ:"],
+  ["С MAGGIE", "С DENTAL GEN"],
+  ["WITH MAGGIE YOU CAN:", "С DENTAL GEN ВЫ МОЖЕТЕ:"],
+  ["WITH MAGGIE", "С DENTAL GEN"],
+  ["YOU CAN:", "ВЫ МОЖЕТЕ:"],
   ["FIND ACTIVITIES IN YOUR LOCAL AREA", "3 ПРОГРАММЫ ПО ВОЗРАСТУ ДЛЯ ЗДОРОВЫХ ЗУБОК"],
   ["FIND ACTIVITIES", "3 ПРОГРАММЫ"],
   ["in your Local area", "по возрасту"],
@@ -3387,7 +3389,7 @@ const enhancement = String.raw`
       "FASTER THAN": "ОТ ПЕРВЫХ", "FASTER": "ОТ", "THAN": "ПЕРВЫХ", "YOUR TODDLER": "ЗУБОВ ДО", "YOUR": "ЗУБОВ", "TODDLER": "ДО",
       "Can EMPTY THE": "ШКОЛЬНОЙ", "CAN EMPTY THE": "ШКОЛЬНОЙ", "EMPTY": "ШКОЛЬНОЙ", "THE": "ВЕСЬ", "TUPPERWARE": "СКАМЬИ", "DRAWER": "ВМЕСТЕ", "Drawer": "Вместе",
       "You're welcome !": "DENTAL GEN рядом!", "You're welcome!": "DENTAL GEN рядом!",
-      "WITH MAGGIE": "3 ПРОГРАММЫ", "YOU CAN:": "ПО ВОЗРАСТУ:", "FIND ACTIVITIES": "3 ПРОГРАММЫ", "in your Local area": "по возрасту", "IN YOUR LOCAL AREA": "ПО ВОЗРАСТУ",
+      "WITH MAGGIE": "С DENTAL GEN", "С MAGGIE": "С DENTAL GEN", "С MAGGIE ВЫ МОЖЕТЕ:": "С DENTAL GEN ВЫ МОЖЕТЕ:", "WITH MAGGIE YOU CAN:": "С DENTAL GEN ВЫ МОЖЕТЕ:", "YOU CAN:": "ВЫ МОЖЕТЕ:", "ВЫ МОЖЕТЕ:": "ВЫ МОЖЕТЕ:", "FIND ACTIVITIES": "3 ПРОГРАММЫ", "in your Local area": "по возрасту", "IN YOUR LOCAL AREA": "ПО ВОЗРАСТУ",
       "Maggie started with two mums, a few wines, and one big idea:": "DENTAL GEN растёт вместе с вашим ребёнком:",
       "MAGGIE STARTED WITH TWO MUMS, A FEW WINES, AND ONE BIG IDEA:": "DENTAL GEN РАСТЁТ ВМЕСТЕ С ВАШИМ РЕБЁНКОМ:",
       "Maggie is for every parent": "Для каждого возраста — свой план",
@@ -3433,7 +3435,7 @@ const enhancement = String.raw`
         "Всегда пожалуйста!": "DENTAL GEN рядом!", "You're welcome!": "DENTAL GEN рядом!"
       },
       "Mission Headline": {
-        "С MAGGIE": "3 ПРОГРАММЫ", "WITH MAGGIE": "3 ПРОГРАММЫ", "ВЫ МОЖЕТЕ:": "ПО ВОЗРАСТУ:", "YOU CAN:": "ПО ВОЗРАСТУ:",
+        "С MAGGIE": "С DENTAL GEN", "WITH MAGGIE": "С DENTAL GEN", "ВЫ МОЖЕТЕ:": "ВЫ МОЖЕТЕ:", "YOU CAN:": "ВЫ МОЖЕТЕ:",
         "OUR APP is oN": "DENTAL GEN", "OUR APP IS ON": "DENTAL GEN", "A mission to": "ПОМОГАЕТ", "A MISSION TO": "ПОМОГАЕТ",
         "help lighten": "РАСТИТЬ", "HELP LIGHTEN": "РАСТИТЬ", "parents'": "ЗДОРОВУЮ", "PARENTS'": "ЗДОРОВУЮ", "Mental load": "УЛЫБКУ", "MENTAL LOAD": "УЛЫБКУ"
       },
@@ -5380,7 +5382,7 @@ const enhancement = String.raw`
       const section = document.createElement("section");
       section.className = "dg-programs-carousel-section";
       section.id = "programs";
-      section.innerHTML = '<div class="dg-carousel-headline"><h3>3 ПРОГРАММЫ ПО ВОЗРАСТУ:</h3><p>ПОМОГАЮТ ВОВРЕМЯ ЗАБОТИТЬСЯ О ЗУБАХ И ПРИКУСЕ РЕБЁНКА</p></div>' +
+      section.innerHTML = '<div class="dg-carousel-headline"><h3>С DENTAL GEN ВЫ МОЖЕТЕ:</h3><p>ПОМОГАЮТ ВОВРЕМЯ ЗАБОТИТЬСЯ О ЗУБАХ И ПРИКУСЕ РЕБЁНКА</p></div>' +
         '<div class="dg-programs-carousel" id="programsCarousel">' +
           '<div class="dg-carousel-cards-wrapper" id="carouselCardsWrapper">' +
             '<!-- Card 1: 1-3 года -->' +
@@ -5748,6 +5750,13 @@ const enhancement = String.raw`
         }
         if (/^\s*(скачать\s+в|скачать|download\s+on\s+the|download\s+on)\s*$/i.test(t)) {
           el.textContent = "ЗАПИСАТЬСЯ";
+        }
+        if (/maggie/i.test(t)) {
+          el.innerHTML = el.innerHTML.replace(/с\s+maggie\s+вы\s+можете:/gi, 'С DENTAL GEN ВЫ МОЖЕТЕ:')
+                                     .replace(/с\s+maggie/gi, 'С DENTAL GEN')
+                                     .replace(/with\s+maggie\s+you\s+can:/gi, 'С DENTAL GEN ВЫ МОЖЕТЕ:')
+                                     .replace(/with\s+maggie/gi, 'С DENTAL GEN')
+                                     .replace(/maggie/gi, 'DENTAL GEN');
         }
       }
 
